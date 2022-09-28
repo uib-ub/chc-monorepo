@@ -1,0 +1,16 @@
+{
+    "idStructure": "delimiter",
+    "referenceBehavior": "strong",
+    "base": "en",
+    "languages": [
+        {
+            "id": "en",
+            "title": "English",
+            "isDefault": true
+        },
+        {
+            "id": "no",
+            "title": "Bokmål"
+        }
+    ]
+}

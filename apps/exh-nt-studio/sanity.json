@@ -1,0 +1,61 @@
+{
+  "root": true,
+  "project": {
+    "name": "neverending-and-temporary",
+    "basePath": "/studio"
+  },
+  "api": {
+    "projectId": "wl375vze",
+    "dataset": "production"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/default-layout",
+    "@sanity/dashboard",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "@sanity/code-input",
+    "@sanity/vision",
+    "table",
+    "iframe-pane",
+    "dashboard-widget-document-list",
+    "documents-pane",
+    "@sanity/document-internationalization",
+    "@sanity/language-filter",
+    "@sanity/hierarchical-document-list",
+    "@seidhr/sanity-plugin-muna-schemas",
+    "@seidhr/sanity-plugin-timespan-input",
+    "import-tool",
+    "media",
+    "@sanity/production-preview",
+    "vercel-deploy",
+    "@sanity/color-input"
+  ],
+  "env": {
+    "development": {
+      "plugins": []
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./src/dashboardConfig.js"
+    },
+    {
+      "implements": "part:@sanity/desk-tool/structure",
+      "path": "./src/deskStructure"
+    },
+    {
+      "name": "part:@sanity/language-filter/config",
+      "path": "./src/languageFilterConfig.js"
+    },
+    {
+      "implements": "part:@sanity/production-preview/resolve-production-url",
+      "path": "./src/resolveProductionUrl.js"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.4.6",
+    "@changesets/cli": "^2.24.4",
+    "eslint": "7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "pnpm": "^7.12.2",
+    "prettier": "^2.5.1",
+    "turbo": "latest"
+  }
+}
