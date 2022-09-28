@@ -1,16 +1,20 @@
-# Turborepo starter with pnpm
+# Cultural Heritage Collections @ UiB-UB
 
-This is an official starter Turborepo.
+This is a monorepo containing the web exhibitions published by UiB-UB.
 
 ## What's inside?
 
 This Turborepo uses [pnpm](https://pnpm.io) as a packages manager. It includes the following packages/apps:
 
-### Apps and Packages
+### Apps
 
 - `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
+- `exh-nt`: the exhibition _Neverending and temporary_, a [Next.js](https://nextjs.org) app
+- `exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio
+
+### Packages
+
+- `ui`: a stub React component library shared by both the `apps` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
@@ -26,14 +30,9 @@ This Turborepo has some additional tools already setup for you:
 
 ## Setup
 
-This repository can be used by running `npx create-turbo@latest`, and selecting `pnpm` in the terminal prompt,
-or you can also download this folder like all the other examples with:
-
 ```sh
-npx degit vercel/turborepo/examples/with-pnpm with-pnpm
-cd with-pnpm
-pnpm install
-git init . && git add . && git commit -m "Init"
+git clone ...
+cd choc-monorepo
 ```
 
 ### Build
@@ -41,7 +40,6 @@ git init . && git add . && git commit -m "Init"
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
 pnpm run build
 ```
 
@@ -50,7 +48,6 @@ pnpm run build
 To develop all apps and packages, run the following command:
 
 ```
-cd my-turborepo
 pnpm run dev
 ```
 
@@ -58,13 +55,30 @@ pnpm run dev
 
 Examples here use `pnpm`, but this is easy to fudge up. It is recomended to create an alias: `alias pn:"pnpm"`.
 
+* pnpm add -Wd <package> – Add package to root (mainly for devDependencies)
 * pnpm add <package> --filter <workspace> – Add package to workspace
+* pnpm remove <package> --filter <workspace> – Remove package to workspace
+* pnpm update <package> --filter <workspace> – Update package to workspace
 * pnpm install
 * pnpm build - Build all packages and apps
 * pnpm dev - Develop all packages and apps
 * pnpm lint - Lint all packages
 * pnpm changeset - Generate a changeset
 * pnpm clean - Clean up all node_modules and dist folders (runs each package's clean script)
+
+### Changesets
+
+```sh
+# Create feature branch
+# Commit change(s)
+# Merge
+pnpm run changeset
+# Answer the questions
+git add . && git commit -m "<message>"
+git push
+# New PR should have been created by Github Action
+git fetch && git reset --hard origin/main
+```
 
 ### Remote Caching
 
