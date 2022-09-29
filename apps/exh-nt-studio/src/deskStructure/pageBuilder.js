@@ -17,7 +17,7 @@ const linguisticDocument = Structure.getFilteredDocumentTypeListItems().find(({ 
   return id === 'LinguisticDocument';
 }) */
 
-export default S.listItem()
+const pageBuilder = S.listItem()
   .title('Formidling')
   .icon(FaSitemap)
   .child(
@@ -112,3 +112,5 @@ export default S.listItem()
           ),
       ]),
   )
+
+export default pageBuilder
