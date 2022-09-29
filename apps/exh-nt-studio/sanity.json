@@ -1,12 +1,12 @@
 {
   "root": true,
-  "project": {
-    "name": "neverending-and-temporary",
-    "basePath": "/studio"
-  },
   "api": {
-    "projectId": "wl375vze",
+    "projectId": "uq1i6n3f",
     "dataset": "production"
+  },
+  "project": {
+    "name": "Never-ending and temporary",
+    "basePath": "/studio"
   },
   "plugins": [
     "@sanity/base",
