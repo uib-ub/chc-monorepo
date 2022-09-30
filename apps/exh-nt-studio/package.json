@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "sanity start",
     "build": "sanity build",
-    "start": "sanity start"
+    "start": "sanity start",
+    "clean": "rm -rf node_modules && rm -rf dist"
   },
   "keywords": [
     "sanity"
