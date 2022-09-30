@@ -1,9 +1,6 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
-  "globalEnv": [
-    "NODE_ENV",
-    "NEXT_PUBLIC_STUDIO_URL"
-  ],
+  "schema": "https://turborepo.org/schema.json",
+  "globalEnv": [],
   "pipeline": {
     "build": {
       "outputs": [
@@ -12,6 +9,18 @@
       ],
       "dependsOn": [
         "^build"
+      ]
+    },
+    "build#exh-nt": {
+      "outputs": [
+        ".next/**"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_STUDIO_URL"
       ]
     },
     "test": {
@@ -24,7 +33,20 @@
       "outputs": []
     },
     "dev": {
-      "cache": false
+      "cache": false,
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "dev#exh-nt": {
+      "cache": false,
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "NODE_ENV",
+        "NEXT_PUBLIC_STUDIO_URL"
+      ]
     },
     "clean": {
       "cache": false
