@@ -23,6 +23,14 @@
         "NEXT_PUBLIC_STUDIO_URL"
       ]
     },
+    "build#exh-nt-studio": {
+      "outputs": [
+        "dist/**"
+      ],
+      "dependsOn": [
+        "build"
+      ]
+    },
     "test": {
       "outputs": [
         "coverage/**"
