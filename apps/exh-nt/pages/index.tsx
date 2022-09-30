@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -24,7 +25,11 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
-        <p>Under development by the University of Bergen Library</p>
+        <p>
+          Under development by the University of Bergen Library
+          <br />
+          <Link href={`/studio`}>Studio</Link>
+        </p>
       </footer>
     </div>
   )

@@ -1,0 +1,10 @@
+{
+  "eslint.workingDirectories": [
+    "./apps",
+    "./packages"
+  ],
+  "conventionalCommits.scopes": [
+    "exh-nt",
+    "exh-nt-studio"
+  ],
+}

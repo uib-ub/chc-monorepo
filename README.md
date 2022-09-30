@@ -4,19 +4,19 @@ This is a monorepo containing the web exhibitions published by UiB-UB.
 
 ## What's inside?
 
-This Turborepo uses [pnpm](https://pnpm.io) as a packages manager. It includes the following packages/apps:
+This Turborepo uses [yarn](https://yarnpkg.com) as a packages manager. It includes the following packages/apps:
 
 ### Apps
 
-- `docs`: a [Next.js](https://nextjs.org) app
 - `exh-nt`: the exhibition _Neverending and temporary_, a [Next.js](https://nextjs.org) app
 - `exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio
 
 ### Packages
 
-- `ui`: a stub React component library shared by both the `apps` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- @uibub/core: core React components
+- @uibub/utils: shared React utilities
+- @uibub/tsconfig: shared tsconfig.jsons used throughout the monorepo
+- eslint-preset-uibub: ESLint preset
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -40,7 +40,7 @@ cd choc-monorepo
 To build all apps and packages, run the following command:
 
 ```
-pnpm run build
+yarn build
 ```
 
 ### Develop
@@ -48,23 +48,23 @@ pnpm run build
 To develop all apps and packages, run the following command:
 
 ```
-pnpm run dev
+yarn dev
 ```
 
 ### Useful commands
 
 Examples here use `pnpm`, but this is easy to fudge up. It is recomended to create an alias: `alias pn:"pnpm"`.
 
-* pnpm add -Wd <package> – Add package to root (mainly for devDependencies)
-* pnpm add <package> --filter <workspace> – Add package to workspace
-* pnpm remove <package> --filter <workspace> – Remove package to workspace
-* pnpm update <package> --filter <workspace> – Update package to workspace
-* pnpm install
-* pnpm build - Build all packages and apps
-* pnpm dev - Develop all packages and apps
-* pnpm lint - Lint all packages
-* pnpm changeset - Generate a changeset
-* pnpm clean - Clean up all node_modules and dist folders (runs each package's clean script)
+* yarn add -Wd <package> – Add package to root (mainly for devDependencies)
+* yarn add <package> --filter <workspace> – Add package to workspace
+* yarn remove <package> --filter <workspace> – Remove package to workspace
+* yarn update <package> --filter <workspace> – Update package to workspace
+* yarn install
+* yarn build - Build all packages and apps
+* yarn dev - Develop all packages and apps
+* yarn lint - Lint all packages
+* yarn changeset - Generate a changeset
+* yarn clean - Clean up all node_modules and dist folders (runs each package's clean script)
 
 ### Changesets
 
@@ -72,7 +72,7 @@ Examples here use `pnpm`, but this is easy to fudge up. It is recomended to crea
 # Create feature branch
 # Commit change(s)
 # Merge
-pnpm run changeset
+yarn changeset
 # Answer the questions
 git add . && git commit -m "<message>"
 git push

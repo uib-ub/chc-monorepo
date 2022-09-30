@@ -1,4 +1,4 @@
-const withTM = require("next-transpile-modules")(["ui"]);
+// const withTM = require("next-transpile-modules")(["ui"]);
 
 const { NEXT_PUBLIC_STUDIO_URL, NODE_ENV } = process.env
 
@@ -19,7 +19,7 @@ const STUDIO_REWRITE = [
   }
 ]
 
-module.exports = withTM({
+module.exports = {
   swcMinify: true,
   async rewrites() {
     return [
@@ -31,4 +31,4 @@ module.exports = withTM({
     ]
   },
   reactStrictMode: true,
-});
+};
