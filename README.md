@@ -53,7 +53,7 @@ yarn dev
 
 ### Useful commands
 
-Examples here use `pnpm`, but this is easy to fudge up. It is recomended to create an alias: `alias pn:"pnpm"`.
+Examples here use `yarn`, but this is easy to fudge up.
 
 * yarn add -Wd <package> – Add package to root (mainly for devDependencies)
 * yarn add <package> --filter <workspace> – Add package to workspace
