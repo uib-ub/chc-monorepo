@@ -28,7 +28,7 @@ const Home: NextPage = () => {
         <p>
           Under development by the University of Bergen Library.
           <br />
-          <Link href={`/studio`}>Studio</Link>
+          <a href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`} target='_blank' rel='noreferrer'>Studio</a>
         </p>
       </footer>
     </div>
