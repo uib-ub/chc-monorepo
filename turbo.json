@@ -26,9 +26,6 @@
     "build#exh-nt-studio": {
       "outputs": [
         "dist/**"
-      ],
-      "dependsOn": [
-        "build"
       ]
     },
     "test": {
