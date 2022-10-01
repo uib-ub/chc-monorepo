@@ -26,7 +26,7 @@ const Home: NextPage = () => {
 
       <footer className={styles.footer}>
         <p>
-          Under development by the University of Bergen Library
+          Under development by the University of Bergen Library.
           <br />
           <Link href={`/studio`}>Studio</Link>
         </p>
