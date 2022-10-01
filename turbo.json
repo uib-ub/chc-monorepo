@@ -53,6 +53,10 @@
         "NEXT_PUBLIC_STUDIO_URL"
       ]
     },
+    "deploy": {
+      "cache": false,
+      "dependsOn": []
+    },
     "clean": {
       "cache": false
     }

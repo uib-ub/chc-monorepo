@@ -10,6 +10,7 @@
     "dev": "sanity start",
     "build": "sanity build",
     "start": "sanity start",
+    "deploy": "sanity deploy",
     "clean": "rm -rf node_modules && rm -rf dist"
   },
   "keywords": [
