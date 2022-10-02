@@ -5802,9 +5802,9 @@ echarts@^5.3.3:
     tslib "2.3.0"
     zrender "5.4.0"
 
-"edtf@git+https://github.com/SylvainBigonneau/browser-edtf.js.git":
+"edtf@https://github.com/SylvainBigonneau/browser-edtf.js":
   version "2.7.1"
-  resolved "git+https://github.com/SylvainBigonneau/browser-edtf.js.git#7e535a1a736a07ba9d93760c9115f517401d32e5"
+  resolved "https://github.com/SylvainBigonneau/browser-edtf.js#7e535a1a736a07ba9d93760c9115f517401d32e5"
   dependencies:
     nearley "^2.19.0"
     randexp "^0.5.3"
