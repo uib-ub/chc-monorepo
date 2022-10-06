@@ -4,7 +4,7 @@ This is a monorepo containing the web exhibitions published by UiB-UB.
 
 ## What's inside?
 
-This Turborepo uses [yarn](https://yarnpkg.com) as a packages manager. It includes the following packages/apps:
+This Turborepo uses [npm](https://npmjs.com) as a packages manager. It includes the following packages/apps:
 
 ### Apps
 
@@ -13,10 +13,9 @@ This Turborepo uses [yarn](https://yarnpkg.com) as a packages manager. It includ
 
 ### Packages
 
-- @uibub/core: core React components
-- @uibub/utils: shared React utilities
-- @uibub/tsconfig: shared tsconfig.jsons used throughout the monorepo
-- eslint-preset-uibub: ESLint preset
+- ui: core React components
+- tsconfig: shared tsconfig.jsons used throughout the monorepo
+- eslint-preset-custom: ESLint preset
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -55,16 +54,16 @@ yarn dev
 
 Examples here use `yarn`, but this is easy to fudge up.
 
-* yarn add -Wd <package> – Add package to root (mainly for devDependencies)
-* yarn add <package> --filter <workspace> – Add package to workspace
-* yarn remove <package> --filter <workspace> – Remove package to workspace
-* yarn update <package> --filter <workspace> – Update package to workspace
-* yarn install
-* yarn build - Build all packages and apps
-* yarn dev - Develop all packages and apps
-* yarn lint - Lint all packages
-* yarn changeset - Generate a changeset
-* yarn clean - Clean up all node_modules and dist folders (runs each package's clean script)
+* npm install <package> – Add package to root (mainly for devDependencies)
+* npm install <package> --workspace=<workspace>
+* npm uninstall <package> --workspace=<workspace>
+* npm update <package> --workspace=<workspace>
+* npm install
+* npm run build - Build all packages and apps
+* npm run dev - Develop all packages and apps
+* npm run lint - Lint all packages
+* npm run changeset - Generate a changeset
+* npm run clean - Clean up all node_modules and dist folders (runs each package's clean script)
 
 ### Changesets
 

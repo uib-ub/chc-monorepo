@@ -1,25 +1,30 @@
 {
+  "name": "my-turborepo",
+  "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --no-cache --parallel --continue",
-    "deploy": "turbo run deploy",
+    "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "turbo run clean && rm -rf node_modules",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=docs^... && changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.22.0",
-    "eslint": "^7.32.0",
-    "eslint-config-uibub": "*",
-    "prettier": "^2.5.1",
+    "@changesets/cli": "^2.25.0",
+    "eslint-config-custom": "*",
+    "prettier": "latest",
     "turbo": "latest"
-  }
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "packageManager": "npm@8.15.0"
 }
