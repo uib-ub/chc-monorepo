@@ -1,16 +1,91 @@
 import { nanoid } from 'nanoid'
-import { parse } from 'date-fns'
+// import { parse } from 'date-fns'
 import { mapLicenses } from '../../shared/mapLicenses'
 import { mapOwner } from '../../shared/mapOwner'
 import { mapTypes } from '../../shared/mapTypes'
 import { getTimespan } from '../../shared/getTimespan'
+import { convertToBlock } from '../../shared/htmlUtils'
+import Schema from '@sanity/schema'
+
+const def = Schema.compile({
+  name: 'myBlog',
+  types: [
+    {
+      type: 'object',
+      name: 'blogPost',
+      fields: [
+        {
+          title: 'Title',
+          type: 'string',
+          name: 'title'
+        },
+        {
+          title: 'Body',
+          name: 'body',
+          type: 'array',
+          of: [
+            {
+              title: 'Block',
+              type: 'block',
+              styles: [
+                { title: 'Normal', value: 'normal' },
+                { title: 'H1', value: 'h1' },
+                { title: 'H2', value: 'h2' },
+                { title: 'H3', value: 'h3' },
+                { title: 'Quote', value: 'blockquote' },
+              ],
+              lists: [
+                { title: 'Numbered', value: 'number' },
+                { title: 'Bulleted', value: 'bullet' },
+              ],
+              marks: {
+                annotations: [
+                  {
+                    name: 'link',
+                    type: 'object',
+                    title: 'External link',
+                    fields: [
+                      {
+                        name: 'href',
+                        type: 'url',
+                        title: 'URL',
+                        validation: Rule => Rule.uri({
+                          scheme: ['http', 'https', 'mailto', 'tel']
+                        })
+                      },
+                      {
+                        title: 'Open in new tab',
+                        name: 'blank',
+                        description: 'Read https://css-tricks.com/use-target_blank/',
+                        type: 'boolean',
+                        initialValue: true
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+        }
+      ]
+    }
+  ]
+})
+
+const blockContentType = def.get('blogPost')
+  .fields.find(field => field.name === 'body').type
 
 export default function getDocument(item, assetID) {
   // Map type to Sanity types
   const types = mapTypes(Array.isArray(item.type) ? item.type : [item.type])
 
   const description = item.description ? Array.isArray(item.description) ? item.description : [item.description] : null
+  // console.log('Description: ', description[0])
+  //const pt = convertToBlock(blockContentType, description[0], true)
+  //console.log('PT: ', pt)
+
   const date = getTimespan(item.created?.value, item.madeAfter?.value, item.madeBefore?.value)
+
   const subject = item.subject
     ? [
       ...item.subject.map((s) => {
@@ -143,7 +218,8 @@ export default function getDocument(item, assetID) {
             _type: 'LinguisticObject',
             accessState: 'open',
             editorialState: 'published',
-            body: [
+            body: convertToBlock(blockContentType, d, true),
+            /*  body: [
               {
                 _type: 'block',
                 _key: nanoid(),
@@ -158,7 +234,7 @@ export default function getDocument(item, assetID) {
                   },
                 ],
               },
-            ],
+            ], */
             hasType: [
               {
                 _key: nanoid(),
@@ -191,7 +267,7 @@ export default function getDocument(item, assetID) {
           }),
         ],
       }),
-      // hasCurrentOwner: mapOwner(item.identifier),
+      hasCurrentOwner: mapOwner(item.identifier),
       ...(types.length > 0 && { hasType: types }),
       wasOutputOf: {
         _type: 'DataTransferEvent',

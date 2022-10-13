@@ -2,6 +2,7 @@ import config from 'config:@sanity/document-internationalization';
 
 const supportedLanguages = config.languages.map(({ id, title }) => ({ id, title }))
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   supportedLanguages,
   // Select Norwegian (Bokmål) by default
