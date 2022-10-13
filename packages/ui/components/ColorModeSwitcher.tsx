@@ -1,6 +1,6 @@
 import { Button, useColorMode } from '@chakra-ui/react'
 
-const ColorModeSwither = () => {
+const ColorModeSwitcher = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
@@ -10,4 +10,4 @@ const ColorModeSwither = () => {
   )
 }
 
-export default ColorModeSwither
+export default ColorModeSwitcher

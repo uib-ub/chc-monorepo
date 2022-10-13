@@ -1,2 +1,2 @@
 export { default as theme } from "./theme";
-export { default as ColorModeSwither } from './components/ColorModeSwitcher';
+export { default as ColorModeSwitcher } from './components/ColorModeSwitcher';
