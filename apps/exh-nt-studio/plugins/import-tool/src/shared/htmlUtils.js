@@ -24,6 +24,7 @@ export const isValidHTML = (html) => {
       withoutAmpersand,
       doc.innerHTML === withoutAmpersand
     );
+    // BUG: Returns false when there are escaped æøå. Why? Element not having meta tag set to utf8?
     return doc.innerHTML === withoutAmpersand;
   }
   return false;
