@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "docs",
     "ui",
-    "exhibitions"
+    "exhibitions",
+    "studios"
   ]
 }
