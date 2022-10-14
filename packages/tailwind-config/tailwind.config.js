@@ -5,10 +5,13 @@ module.exports = {
     // app content
     `src/**/*.{js,ts,jsx,tsx}`,
     // include packages if not transpiling
-    // "../../packages/**/*.{js,ts,jsx,tsx}",
+    "../../packages/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Merriweather Sans', 'sans-serif']
+      },
       colors: {
         brandblue: colors.blue[500],
         brandred: colors.red[500],
