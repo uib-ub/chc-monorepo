@@ -79,26 +79,54 @@ export default function getDocument(item, assetID) {
   // Map type to Sanity types
   const types = mapTypes(Array.isArray(item.type) ? item.type : [item.type])
 
-  const description = item.description ? Array.isArray(item.description) ? item.description : [item.description] : null
-  // console.log('Description: ', description[0])
-  //const pt = convertToBlock(blockContentType, description[0], true)
-  //console.log('PT: ', pt)
+  // Handle description RDF to Sanity Portable Text
+  const descriptions = item.description ? Array.isArray(item.description) ? item.description : [item.description] : null
+  const descriptionBlocks = descriptions.map(description => convertToBlock(blockContentType, description, true))
 
+  // Get the EDTF object
   const date = getTimespan(item.created?.value, item.madeAfter?.value, item.madeBefore?.value)
 
   const subject = item.subject
     ? [
       ...item.subject.map((s) => {
+        // Handle labels that could be string, array with both objects and strings :-(
+        const nomalizedLabel = (dirtyLabel) => {
+          // If we only get a string, assume that it is in norwegian
+          if (dirtyLabel === 'string') {
+            return {
+              _type: 'LocalizedString',
+              no: dirtyLabel
+            }
+          }
+          // If it os an array, we hace multiple labels. It could be two strings and then 
+          // we assume they are in norwegian. If we get objects we need to map the language.
+          // We could get an array with both strings and objects :-(!!!!
+          if (Array.isArray(dirtyLabel)) {
+            return {
+              _type: 'LocalizedString',
+              ...dirtyLabel.map(i => {
+                if (i === string) {
+                  return {
+                    no: dirtyLabel
+                  }
+                }
+                if (typeof i === 'object' && i !== null) {
+                  return {
+                    [i['@language']]: i.value
+                  }
+                }
+              })
+            }
+          }
+        }
+
         return {
           _type: 'Concept',
           _id: s.identifier,
           _rev: nanoid(),
           accessState: 'open',
           editorialState: 'published',
-          label: {
-            _type: 'LocalizedString',
-            no: Array.isArray(s.prefLabel) === false ? s.prefLabel : s.prefLabel[0],
-          },
+          label: nomalizedLabel(s.prefLabel),
         }
       }),
     ]
@@ -183,7 +211,8 @@ export default function getDocument(item, assetID) {
       editorialState: 'published',
       label: {
         _type: "LocalizedString",
-        no: item.title
+        no: item.title,
+        en: item.title,
       },
       preferredIdentifier: item.identifier,
       homepage: item.homepage.id,
@@ -211,30 +240,14 @@ export default function getDocument(item, assetID) {
       ...(Object.keys(activityStream[0]).length > 2 && {
         activityStream,
       }),
-      ...(description && description.length > 0 && {
+      ...(descriptionBlocks && descriptionBlocks.length > 0 && {
         referredToBy: [
-          ...description.map(d => ({
+          ...descriptionBlocks.map(block => ({
             _key: nanoid(),
             _type: 'LinguisticObject',
             accessState: 'open',
             editorialState: 'published',
-            body: convertToBlock(blockContentType, d, true),
-            /*  body: [
-              {
-                _type: 'block',
-                _key: nanoid(),
-                style: 'normal',
-                markDefs: [],
-                children: [
-                  {
-                    _type: 'span',
-                    _key: nanoid(),
-                    text: d,
-                    marks: [],
-                  },
-                ],
-              },
-            ], */
+            body: block,
             hasType: [
               {
                 _key: nanoid(),

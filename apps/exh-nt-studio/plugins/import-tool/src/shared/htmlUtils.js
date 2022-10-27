@@ -38,6 +38,7 @@ export function convertToBlock(
   if (isValidHTML(inputValue) || withoutValidation) {
     // sanitize html
     const cleanHtmlString = sanitizeHtml(inputValue);
+    console.log('Cleaned: ', cleanHtmlString)
     // replace U+00A0
     const NON_BREAKING_SPACE = /U\+00A0/g;
     const withoutSpecialChars = cleanHtmlString.replace(
@@ -54,6 +55,7 @@ export function convertToBlock(
       cleanHtmlStringWithoutBackslash,
       blockContentType
     );
+    console.log('Blocks: ', blocks)
     return blocks;
   } else {
     return null;
@@ -61,5 +63,7 @@ export function convertToBlock(
 }
 
 function sanitizeHtml(html) {
-  return DOMPurify.sanitize(html, { USE_PROFILES: { html: true } });
+  const pure = DOMPurify.sanitize(html, { ALLOWED_TAGS: ['br', 'b', 'i', 'p', 'h1', 'h2', 'h3', 'blockquote', 'ol', 'ul', 'li', 'a'], ALLOWED_ATTR: ['href'] });
+  console.log(pure)
+  return pure
 }
