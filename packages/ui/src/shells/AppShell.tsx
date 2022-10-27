@@ -1,8 +1,12 @@
 import * as React from "react";
 
-export const AppShell: React.FC = ({ children }) => {
+type Props = {
+  className?: string
+}
+
+export const AppShell: React.FC<Props> = ({ className = '', children }) => {
   return (
-    <div className="flex flex-col justify-center h-screen bg-red-200 p-5">
+    <div className={`${className}`}>
       {children}
     </div>
   );

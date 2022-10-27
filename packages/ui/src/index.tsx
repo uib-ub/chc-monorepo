@@ -1,3 +1,10 @@
 import * as React from "react";
 export * from "./Button";
+export * from "./Select";
+export * from "./LocaleSwitch";
 export * from "./shells/AppShell";
+export * from "./shells/HeaderShell";
+export * from "./shells/NavigationShell";
+export * from "./icons/GlobeAltIcon";
+export * from "./icons/MoonIcon";
+export * from "./icons/SunIcon";
