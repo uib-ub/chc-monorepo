@@ -21,7 +21,9 @@
       ],
       "env": [
         "NODE_ENV",
-        "NEXT_PUBLIC_STUDIO_URL"
+        "NEXT_PUBLIC_STUDIO_URL",
+        "NEXT_PUBLIC_SANITY_DATASET",
+        "NEXT_PUBLIC_SANITY_PROJECT_ID"
       ]
     },
     "build#exh-nt-studio": {
@@ -51,7 +53,10 @@
       ],
       "env": [
         "NODE_ENV",
-        "NEXT_PUBLIC_STUDIO_URL"
+        "NEXT_PUBLIC_STUDIO_URL",
+        "NEXT_PUBLIC_STUDIO_URL",
+        "NEXT_PUBLIC_SANITY_DATASET",
+        "NEXT_PUBLIC_SANITY_PROJECT_ID"
       ]
     },
     "deploy": {

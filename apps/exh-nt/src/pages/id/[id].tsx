@@ -47,10 +47,10 @@ const typeQuery = groq`
 `
 
 export const getStaticProps: GetStaticProps = async ({ params, locale, preview = false }) => {
-  console.log('Params: ', params)
+  //console.log('Params: ', params)
   const ID = typeof params?.id === 'string' ? params.id : params.id.pop()
   const { _type: type, notFound = false } = await getClient(preview).fetch(typeQuery, { id: ID })
-  console.log('Type: ', type)
+  //console.log('Type: ', type)
 
   if (notFound === true) return { notFound }
 
@@ -87,7 +87,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale, preview =
 
 export async function getStaticPaths() {
   const results = await getClient().fetch(idsQuery, { publicDocumentTypes })
-  console.log('Results: ', results)
+  //console.log('Results: ', results)
   return {
     paths: [
       ...results?.map((item: any) => ({
@@ -120,8 +120,8 @@ const Home: NextPage = ({ data, preview }: any) => {
     enabled: preview,
   })
 
-  console.log('Is fallback?: ', isFallback)
-  console.log('Page data: ', JSON.stringify(data, null, 2))
+  //console.log('Is fallback?: ', isFallback)
+  //console.log('Page data: ', JSON.stringify(data, null, 2))
 
   // This includes setting the noindex header because static files always return a status 200 but the rendered not found page page should obviously not be indexed
   if (!isFallback && !data?.page?.item[0]?._id) {
