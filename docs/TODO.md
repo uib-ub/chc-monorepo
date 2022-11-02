@@ -9,3 +9,4 @@
 * [ ] [Fallback in NexImage](https://vercel.com/templates/next.js/image-fallback)
 * [ ] Add [ladle.js](https://ladle.dev/) as [app](https://github.com/ryokryok/ladle-tailwindcss-example/blob/main/package.json)
 * [ ] Move to v3 Sanity Studio in Next.js apps and remove separate Sanity apps
+* [ ] Use tailwind and headless-ui, to future proof css and server-side React

@@ -1,4 +1,6 @@
-const withTM = require("next-transpile-modules")(["ui"]);
+//const withTM = require("next-transpile-modules")(["ui"]);
+
+const { redirect } = require('next/dist/server/api-utils');
 
 const { NEXT_PUBLIC_STUDIO_URL, NODE_ENV } = process.env
 
@@ -19,9 +21,31 @@ const STUDIO_REWRITE = [
   }
 ]
 
-module.exports = withTM({
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
+  i18n: {
+    locales: ['en', 'no'],
+    defaultLocale: 'en',
+    localeDetection: true,
+  },
+  images: {
+    domains: ['cdn.sanity.io']
+  },
+  async headers() {
+    return [
+      {
+        // matching all API routes
+        source: "/api/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
+          { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
+        ]
+      }
+    ]
+  },
   async rewrites() {
     return [
       {
@@ -31,5 +55,17 @@ module.exports = withTM({
       ...STUDIO_REWRITE,
     ]
   },
+  async redirects() {
+    if (process.env.NODE_ENV === 'production') {
+      return [
+        {
+          source: '/',
+          destination: '/coming-soon',
+          permanent: false
+        }
+      ]
+    }
+    return []
+  },
   reactStrictMode: true,
-});
+};

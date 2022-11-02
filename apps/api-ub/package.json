@@ -1,0 +1,26 @@
+{
+  "name": "api-ub",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3009",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.7",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
+    "eslint-config-custom": "*",
+    "typescript": "4.8.4"
+  },
+  "dependencies": {
+    "jsonld": "^8.1.0",
+    "lodash": "^4.17.21",
+    "next": "^13.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ui": "*"
+  }
+}

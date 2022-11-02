@@ -18,11 +18,14 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
+    "eslint": "^7.32.0",
     "eslint-config-custom": "*",
     "prettier": "latest",
+    "prettier-plugin-tailwindcss": "^0.1.11",
     "turbo": "latest"
   },
   "engines": {
+    "npm": ">=8.15.0",
     "node": ">=14.0.0"
   },
   "dependencies": {},

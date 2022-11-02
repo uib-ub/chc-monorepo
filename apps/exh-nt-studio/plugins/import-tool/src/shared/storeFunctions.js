@@ -68,13 +68,16 @@ export const createDoc = async (docs) => {
   const transaction = client.transaction()
   const { doc, subject, maker, depicts, skaAsOwner = [] } = docs
 
-  transaction.createIfNotExists(doc)
+  //transaction.createIfNotExists(doc)
+  transaction.createOrReplace(doc)
 
   const rest = [
     ...subject,
     ...maker,
     ...depicts,
-    ...skaAsOwner]
+    ...skaAsOwner
+  ]
+
   rest.forEach((arr) => {
     transaction.createIfNotExists(arr)
   })

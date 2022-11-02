@@ -51,6 +51,13 @@ export const chooseItem = async (uri) => {
     const cleanJSON = omit(framed, ['@context'])
     console.log(cleanJSON)
 
+    const imageResonse = await getImageBlob(cleanJSON.image)
+    const asset = await uploadImageBlob(imageResonse, cleanJSON.identifier)
+
+    // Get the Sanity document
+    const doc = getDocument(cleanJSON, asset._id)
+    await createDoc(doc)
+
     const assetMeta = {
       source: {
         // The source this image is from
@@ -60,17 +67,10 @@ export const chooseItem = async (uri) => {
         // In this example the URL is the closest thing we have as an actual ID.
         id: cleanJSON.identifier,
       },
-      description: cleanJSON.title,
+      description: doc?.label?.[0].value,
       creditLine: 'From sparql.ub.uib.no',
     }
-
-    const imageResonse = await getImageBlob(cleanJSON.image)
-    const asset = await uploadImageBlob(imageResonse, cleanJSON.identifier)
     await patchAssetMeta(asset._id, assetMeta)
-
-    // Get the Sanity document
-    const doc = getDocument(cleanJSON, asset._id)
-    await createDoc(doc)
 
     return {
       success: true,
