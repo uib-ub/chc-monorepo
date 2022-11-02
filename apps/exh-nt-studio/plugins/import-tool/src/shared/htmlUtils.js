@@ -38,7 +38,8 @@ export function convertToBlock(
   if (isValidHTML(inputValue) || withoutValidation) {
     // sanitize html
     const cleanHtmlString = sanitizeHtml(inputValue);
-    console.log('Cleaned: ', cleanHtmlString)
+    const cleanHtmlWithoutTrailingNewline = cleanHtmlString.replace(/^\<br>+|\<br>+$/g, '')
+    console.log('Cleaned: ', cleanHtmlWithoutTrailingNewline)
     // replace U+00A0
     const NON_BREAKING_SPACE = /U\+00A0/g;
     const withoutSpecialChars = cleanHtmlString.replace(

@@ -72,6 +72,33 @@ const def = Schema.compile({
   ]
 })
 
+const nomalizedLabel = (dirtyLabel) => {
+  // If we only get a string, assume that it is in norwegian
+  if (typeof dirtyLabel === 'string') {
+    return {
+      _type: 'LocalizedString',
+      no: dirtyLabel
+    }
+  }
+  // If it is an array, we have multiple labels. It could be two strings and then 
+  // we assume they are in norwegian. If we get objects we need to map the language.
+  // We could get an array with both strings and objects :-(!!!!
+  if (Array.isArray(dirtyLabel)) {
+    const labels = {
+      _type: 'LocalizedString',
+    }
+    dirtyLabel.map((i) => {
+      if (i && typeof i === 'object') {
+        Object.assign(labels, { [i['@language']]: i.value })
+      }
+      if (i && typeof i === 'string') {
+        Object.assign(labels, { no: i })
+      }
+    })
+    return labels
+  }
+}
+
 const blockContentType = def.get('blogPost')
   .fields.find(field => field.name === 'body').type
 
@@ -89,37 +116,6 @@ export default function getDocument(item, assetID) {
   const subject = item.subject
     ? [
       ...item.subject.map((s) => {
-        // Handle labels that could be string, array with both objects and strings :-(
-        const nomalizedLabel = (dirtyLabel) => {
-          // If we only get a string, assume that it is in norwegian
-          if (dirtyLabel === 'string') {
-            return {
-              _type: 'LocalizedString',
-              no: dirtyLabel
-            }
-          }
-          // If it os an array, we hace multiple labels. It could be two strings and then 
-          // we assume they are in norwegian. If we get objects we need to map the language.
-          // We could get an array with both strings and objects :-(!!!!
-          if (Array.isArray(dirtyLabel)) {
-            return {
-              _type: 'LocalizedString',
-              ...dirtyLabel.map(i => {
-                if (i === string) {
-                  return {
-                    no: dirtyLabel
-                  }
-                }
-                if (typeof i === 'object' && i !== null) {
-                  return {
-                    [i['@language']]: i.value
-                  }
-                }
-              })
-            }
-          }
-        }
-
         return {
           _type: 'Concept',
           _id: s.identifier,
@@ -209,11 +205,7 @@ export default function getDocument(item, assetID) {
       _id: `${item.identifier}`,
       accessState: 'open',
       editorialState: 'published',
-      label: {
-        _type: "LocalizedString",
-        no: item.title,
-        en: item.title,
-      },
+      label: nomalizedLabel(item.title),
       preferredIdentifier: item.identifier,
       homepage: item.homepage.id,
       subjectOfManifest: `https://ub-iiif.vercel.app/api/manifest/marcus/${item.identifier}`,
