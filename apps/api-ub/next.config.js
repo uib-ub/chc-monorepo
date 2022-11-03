@@ -4,6 +4,7 @@ const nextConfig = {
     appDir: true,
     // FIX: replaces node-fetch which has a bug maxes the payload to 15k for some reason
     enableUndici: true,
+    transpilePackages: ['ui'],
   },
   async headers() {
     return [

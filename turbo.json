@@ -11,9 +11,21 @@
         "^build"
       ]
     },
+    "build#api-ub": {
+      "outputs": [
+        ".next/**"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "SKA_API",
+        "MARCUS_API",
+        "MANIFEST_BASE"
+      ]
+    },
     "build#exh-nt": {
       "outputs": [
-        "dist/**",
         ".next/**"
       ],
       "dependsOn": [
@@ -23,7 +35,11 @@
         "NODE_ENV",
         "NEXT_PUBLIC_STUDIO_URL",
         "NEXT_PUBLIC_SANITY_DATASET",
-        "NEXT_PUBLIC_SANITY_PROJECT_ID"
+        "NEXT_PUBLIC_SANITY_PROJECT_ID",
+        "NEXT_PUBLIC_BASE_PATH",
+        "SANITY_API_TOKEN",
+        "SANITY_PREVIEW_SECRET",
+        "VERCEL_URL"
       ]
     },
     "build#exh-nt-studio": {

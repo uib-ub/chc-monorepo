@@ -8,6 +8,7 @@ This Turborepo uses [npm](https://npmjs.com) as a packages manager. It includes 
 
 ### Apps
 
+- `api-ub`: apis for the cultural heritage collections at the University of Bergen Library, a [Next.js v13](https://beta.nextjs.org) app
 - `exh-nt`: the exhibition _Neverending and temporary_, a [Next.js](https://nextjs.org) app
 - `exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio
 
@@ -86,7 +87,7 @@ Turborepo can use a technique known as [Remote Caching](https://turborepo.org/do
 By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
 
 ```
-cd my-turborepo
+cd chc-monorepo
 npx turbo login
 ```
 

@@ -14,25 +14,23 @@ import SanityImage from '../../components/SanityImage';
 import { MainNav } from '../../components/Header/MainNav';
 import ErrorPage from 'next/error'
 
+interface IData {
+  item: any[]
+  siteSettings: any[]
+  mainNav: any[]
+}
+
 /**
 * Helper function to return the correct version of the document
 * If we're in "preview mode" and have multiple documents, return the draft
 */
-function filterDataToSingleItem(data: any, preview: boolean) {
+function filterDataToSingleItem(data: IData, preview: boolean) {
   if (!Array.isArray(data)) return data
 
   return data.item.length > 1 && preview
     ? data.item.filter((item) => item._id.startsWith(`drafts.`)).slice(-1)[0]
     : data.item.slice(-1)[0]
 }
-
-const itemQuery = groq`
-  {
-    ${siteSettings},
-    ${mainNav},
-    ${item}
-  }
-`
 
 const idsQuery = groq`
   *[_type in $publicDocumentTypes] {
@@ -48,7 +46,7 @@ const typeQuery = groq`
 
 export const getStaticProps: GetStaticProps = async ({ params, locale, preview = false }) => {
   //console.log('Params: ', params)
-  const ID = typeof params?.id === 'string' ? params.id : params.id.pop()
+  const ID = typeof params?.id === 'string' ? params.id : params?.id?.pop()
   const { _type: type, notFound = false } = await getClient(preview).fetch(typeQuery, { id: ID })
   //console.log('Type: ', type)
 
@@ -143,7 +141,7 @@ const Home: NextPage = ({ data, preview }: any) => {
   // of data existing when Editors are creating new documents.
   // It'll be completely blank when they start!
 
-  const { siteSettings: { label }, item } = page
+  const { siteSettings: { label }, item, mainNav } = page
 
   return (
     <>
@@ -185,7 +183,7 @@ const Home: NextPage = ({ data, preview }: any) => {
         <div className='p-5'>
           <h1>{item[0].label[locale || '']}</h1>
           <pre className=''>
-            {JSON.stringify(item, null, 2)}
+            {JSON.stringify(item[0], null, 2)}
           </pre>
         </div>
 

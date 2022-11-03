@@ -1,5 +1,4 @@
 //const withTM = require("next-transpile-modules")(["ui"]);
-
 const { NEXT_PUBLIC_STUDIO_URL, NODE_ENV } = process.env
 
 const STUDIO_REWRITE = [
@@ -52,6 +51,18 @@ module.exports = {
       },
       ...STUDIO_REWRITE,
     ]
+  },
+  async redirects() {
+    if (process.env.NODE_ENV === 'production') {
+      return [
+        {
+          source: '/',
+          destination: '/coming-soon',
+          permanent: false
+        }
+      ]
+    }
+    return []
   },
   reactStrictMode: true,
 };

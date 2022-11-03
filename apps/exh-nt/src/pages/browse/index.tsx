@@ -21,7 +21,7 @@ const itemsQuery = groq`
 
 export const getStaticProps: GetStaticProps = async ({ locale, preview = false }) => {
   const data = await getClient(preview).fetch(itemsQuery, { language: locale })
-  console.log(JSON.stringify(data, null, 2))
+  //console.log(JSON.stringify(data, null, 2))
   return {
     props: {
       data,
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, preview = false }
   }
 }
 
-const Home: NextPage = ({ data, preview }: any) => {
+const Browse: NextPage = ({ data, preview }: any) => {
   const { locale, locales, asPath, defaultLocale }: NextRouter = useRouter()
   const { mainNav, siteSettings: { label }, items } = data
 
@@ -75,7 +75,7 @@ const Home: NextPage = ({ data, preview }: any) => {
 
         <div className='flex justify-center items-center gap-5 w-full p-5'>
           {items && items.map((item: any) => (
-            <div key={item.id} className="flex justify-center">
+            <div key={item._id} className="flex justify-center">
               <div className="rounded-lg shadow-lg max-w-sm">
                 <a href={`/id/${item._id}`}>
                   <SanityImage
@@ -102,4 +102,4 @@ const Home: NextPage = ({ data, preview }: any) => {
   );
 };
 
-export default Home;
+export default Browse;
