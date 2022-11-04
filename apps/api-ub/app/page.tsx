@@ -22,21 +22,22 @@ export default function Home() {
         <p className={styles.description}>
           <strong>Marcus:</strong>
           <br />
-          <a href="/manifest/marcus/ubb-ms-0003">/manifest/marcus/ubb-ms-0003</a>
+          <a href="/v1/items/ubb-ms-0003">/v1/items/ubb-ms-0003</a>
+          {process.env.NODE_ENV === 'production' && (<a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}}/v1/items/ubb-ms-0003`}>in Mirador</a>)}
           <br />
-          <a href="/manifest/marcus/ubb-ms-0185-j-a-007">/manifest/marcus/ubb-ms-0185-j-a-007</a>
+          <a href="/v1/items/ubb-ms-0185-j-a-007">/v1/items/ubb-ms-0185-j-a-007</a>
           <br />
-          <a href="/manifest/marcus/ubb-wil-f-208">/manifest/marcus/ubb-wil-f-208</a>
+          <a href="/v1/items/ubb-wil-f-208">/v1/items/ubb-wil-f-208</a>
         </p>
 
         <p className={styles.description}>
           <strong>Skeivt arkiv:</strong>
           <br />
-          <a href="/manifest/skeivtarkiv/ubb-ska-0001-f-01-01-02">/manifest/skeivtarkiv/ubb-ska-0001-f-01-01-02</a>
+          <a href="/v1/items/ubb-ska-0001-f-01-01-02">/v1/items/ubb-ska-0001-f-01-01-02</a>
           <br />
-          <a href="/manifest/skeivtarkiv/ubb-ska-a0009-u-457">/manifest/skeivtarkiv/ubb-ska-a0009-u-457</a>
+          <a href="/v1/items/ubb-ska-a0009-u-457">/v1/items/ubb-ska-a0009-u-457</a>
           <br />
-          <a href="/manifest/skeivtarkiv/ubb-ska-a0033-u-0002">/manifest/skeivtarkiv/ubb-ska-a0033-u-0002</a>
+          <a href="/v1/items/ubb-ska-a0033-u-0002">/v1/items/ubb-ska-a0033-u-0002</a>
         </p>
 
         <p className={styles.description}>
