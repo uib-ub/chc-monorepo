@@ -148,3 +148,12 @@
     filter: invert(1);
   }
 }
+
+.table {
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.5em 1em
+}
