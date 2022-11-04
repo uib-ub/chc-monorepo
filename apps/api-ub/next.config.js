@@ -9,7 +9,7 @@ const nextConfig = {
     return [
       {
         // mathching all API routes
-        source: "/v1/:path*",
+        source: "/api/:path*",
         headers: [
           { key: "Content-Type", value: "application/ld+json" },
           { key: "Access-Control-Allow-Credentials", value: "true" },
