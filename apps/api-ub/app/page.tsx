@@ -23,7 +23,7 @@ export default function Home() {
           <strong>Marcus:</strong>
           <br />
           <a href="/v1/items/ubb-ms-0003">/v1/items/ubb-ms-0003</a>
-          {process.env.NODE_ENV === 'production' && (<a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}}/v1/items/ubb-ms-0003`}>in Mirador</a>)}
+          {process.env.NODE_ENV === 'production' && (<a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}/v1/items/ubb-ms-0003`}>in Mirador</a>)}
           <br />
           <a href="/v1/items/ubb-ms-0185-j-a-007">/v1/items/ubb-ms-0185-j-a-007</a>
           <br />
