@@ -1,5 +1,7 @@
 //const withTM = require("next-transpile-modules")(["ui"]);
 
+const { redirect } = require('next/dist/server/api-utils');
+
 const { NEXT_PUBLIC_STUDIO_URL, NODE_ENV } = process.env
 
 const STUDIO_REWRITE = [

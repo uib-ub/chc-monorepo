@@ -32,14 +32,6 @@ function filterDataToSingleItem(data: IData, preview: boolean) {
     : data.item.slice(-1)[0]
 }
 
-const itemQuery = groq`
-  {
-    ${siteSettings},
-    ${mainNav},
-    ${item}
-  }
-`
-
 const idsQuery = groq`
   *[_type in $publicDocumentTypes] {
     _id
