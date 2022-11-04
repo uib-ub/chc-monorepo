@@ -1,9 +1,36 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
+import { groq } from 'next-sanity';
 import Head from "next/head";
+import { NextRouter, useRouter } from 'next/router';
 import React from "react";
-import { Button, AppShell } from "ui";
+import { Button, AppShell, LocaleSwitch } from "ui";
+import { ThemeSwitch } from '../components/ThemeSwitch';
+import { siteSettings } from '../lib/queries/fragments';
+import { getClient } from '../lib/sanity.server';
 
-const Placeholder: NextPage = () => {
+const frontpageQuery = groq`
+  {
+    ${siteSettings},
+  }
+`
+
+export const getStaticProps: GetStaticProps = async ({ locale, preview = false }) => {
+  const data = await getClient(preview).fetch(frontpageQuery, { language: locale })
+  console.log(JSON.stringify(data, null, 2))
+  return {
+    props: {
+      data,
+      locale,
+      preview,
+      //messages: (await import(`../messages/${locale}.json`)).default
+    },
+  }
+}
+
+const Placeholder: NextPage = ({ data, preview }: any) => {
+  const { locale, locales, asPath, defaultLocale }: NextRouter = useRouter()
+  const { siteSettings: { label } } = data
+
   return (
     <>
       <Head>
@@ -15,19 +42,32 @@ const Placeholder: NextPage = () => {
       <AppShell>
         <div className={`bg-[url('https://data.ub.uib.no/files/bs/ubb/ubb-jg/ubb-jg-k/ubb-jg-k-0276/jpg/ubb-jg-k-0276_md.jpg')] bg-center bg-cover bg-no-repeat h-screen`}>
           <div className={`flex flex-col justify-center items-center h-screen p-5`}>
-            <div className="p-5 bg-white/70 flex flex-col gap-3">
+            <div className="p-5 bg-white/70 dark:bg-black/70 flex flex-col gap-3">
 
-              <h1 className="text-6xl text-center font-bold font-sans">Never-ending and temporary</h1>
+              <h1 className="text-6xl text-center font-bold font-sans">{label[locale || '']}</h1>
 
               <p className='text-xl text-center font-light'>
-                New exhibition by the University of Bergen Special collections,
-                coming in the beginning of 2023.
+                {locale == 'en' && 'New exhibition by the University of Bergen Special collections, coming in the beginning of 2023.'}
+                {locale == 'no' && 'Ny utstilling fra Spesialsamlingene ved Universitetsbiblioteket i Bergen lanseres i starten av 2023.'}
               </p>
             </div>
           </div>
         </div>
 
-        <footer>
+        <footer className='flex gap-5 items-center'>
+          <div className='grow'>&nbsp;</div>
+          <LocaleSwitch
+            locales={locales || []}
+            locale={locale || ''}
+            defaultLocale={defaultLocale || ''}
+            asPath={asPath}
+            labels={{
+              no: 'Norsk',
+              en: 'English'
+            }}
+          />
+
+          <ThemeSwitch />
           <Button>
             <a
               href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}

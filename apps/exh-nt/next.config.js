@@ -21,6 +21,12 @@ const STUDIO_REWRITE = [
   }
 ]
 
+const COMING_SOON_REDIRECT = [{
+  source: '/',
+  destination: '/coming-soon',
+  permanent: false
+}]
+
 module.exports = {
   reactStrictMode: true,
   swcMinify: true,
@@ -56,13 +62,9 @@ module.exports = {
     ]
   },
   async redirects() {
-    if (process.env.NODE_ENV === 'production') {
+    if (NODE_ENV == 'production') {
       return [
-        {
-          source: '/',
-          destination: '/coming-soon',
-          permanent: false
-        }
+        ...COMING_SOON_REDIRECT
       ]
     }
     return []

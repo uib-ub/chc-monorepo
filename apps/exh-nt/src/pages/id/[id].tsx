@@ -15,9 +15,9 @@ import { MainNav } from '../../components/Header/MainNav';
 import ErrorPage from 'next/error'
 
 interface IData {
-  item: any[]
-  siteSettings: any[]
-  mainNav: any[]
+  item: any
+  siteSettings: any
+  mainNav: any
 }
 
 /**
@@ -28,7 +28,7 @@ function filterDataToSingleItem(data: IData, preview: boolean) {
   if (!Array.isArray(data)) return data
 
   return data.item.length > 1 && preview
-    ? data.item.filter((item) => item._id.startsWith(`drafts.`)).slice(-1)[0]
+    ? data.item.filter((item: any) => item._id.startsWith(`drafts.`)).slice(-1)[0]
     : data.item.slice(-1)[0]
 }
 

@@ -20,8 +20,8 @@
         "^build"
       ],
       "env": [
-        "SKA_API",
         "MARCUS_API",
+        "SKA_API",
         "MANIFEST_BASE"
       ]
     },
@@ -35,6 +35,9 @@
       ],
       "env": [
         "NODE_ENV",
+        "VERCEL_URL",
+        "SANITY_API_TOKEN",
+        "NEXT_PUBLIC_BASE_PATH",
         "NEXT_PUBLIC_STUDIO_URL",
         "NEXT_PUBLIC_SANITY_DATASET",
         "NEXT_PUBLIC_SANITY_PROJECT_ID",
@@ -47,6 +50,9 @@
     "build#exh-nt-studio": {
       "outputs": [
         "dist/**"
+      ],
+      "env": [
+        "SANITY_PREVIEW_SECRET"
       ]
     },
     "test": {

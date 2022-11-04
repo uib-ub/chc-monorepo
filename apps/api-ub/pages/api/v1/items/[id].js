@@ -3,17 +3,45 @@ import { omit, sortBy } from 'lodash'
 import { getObject } from '../../../../lib/api/getObject'
 import { constructManifest } from '../../../../lib/getManifest/constructManifest'
 import { defaultFrame } from '../../../../lib/getManifest/defaultFrame'
+import Cors from 'cors'
 
 const FRAME = defaultFrame
 
 // Must be better way
 const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3009' : `https://${process.env.VERCEL_URL}`
 
+// Initializing the cors middleware
+// You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
+const cors = Cors({
+  methods: ['POST', 'GET', 'HEAD'],
+})
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(
+  req,
+  res,
+  fn
+) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+
+      return resolve(result)
+    })
+  })
+}
+
+
 export default async function handler(req, res) {
   const {
     query: { id },
     method,
   } = req
+
+  await runMiddleware(req, res, cors)
 
   switch (method) {
     case 'GET':
