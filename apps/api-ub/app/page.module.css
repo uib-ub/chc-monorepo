@@ -124,7 +124,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
+    /* text-fill-color: transparent; */
   }
 
   .title a {
@@ -132,7 +132,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-fill-color: transparent;
+    /* text-fill-color: transparent; */
   }
 
   .card,
@@ -155,5 +155,5 @@
 
 .table th,
 .table td {
-  padding: 0.5em 1em
+  padding: 0.25em 1.5em;
 }

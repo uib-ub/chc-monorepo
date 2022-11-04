@@ -2,6 +2,8 @@ import Link from 'next/link'
 
 import styles from './page.module.css'
 
+const IS_PROD = process.env.NODE_ENV == 'production' ? true : false
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -34,57 +36,53 @@ export default function Home() {
               <td>Marcus</td>
               <td><a href="/v1/items/ubb-ms-0003">/v1/items/ubb-ms-0003</a></td>
               <td>
-                {process.env.NODE_ENV === 'production' && (
-                  <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}/v1/items/ubb-ms-0003`} target="_blank" rel='noreferrer'>open in new window</a>
+                {IS_PROD && (
+                  <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL || ''}/v1/items/ubb-ms-0003`} target="_blank" rel='noreferrer'>open in new window</a>
                 )}
-                {process.env.NODE_ENV != 'production' && ('-')}
+                {!IS_PROD && ('-')}
               </td>
             </tr>
             <tr>
               <td>Marcus</td>
               <td><a href="/v1/items/ubb-ms-0185-j-a-007">/v1/items/ubb-ms-0185-j-a-007</a></td>
-              <td>{process.env.NODE_ENV === 'production' && (
-                <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}/v1/items/ubb-ms-0185-j-a-007`} target="_blank" rel='noreferrer'>open in new window</a>
+              <td>{IS_PROD && (
+                <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL || ''}/v1/items/ubb-ms-0185-j-a-007`} target="_blank" rel='noreferrer'>open in new window</a>
               )}
-                {process.env.NODE_ENV != 'production' && ('-')}</td>
+                {!IS_PROD && ('-')}</td>
             </tr>
             <tr>
               <td>Marcus</td>
               <td><a href="/v1/items/ubb-wil-f-208">/v1/items/ubb-wil-f-208</a></td>
-              <td>{process.env.NODE_ENV === 'production' && (
-                <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}/v1/items/ubb-wil-f-208`} target="_blank" rel='noreferrer'>open in new window</a>
+              <td>{IS_PROD && (
+                <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL || ''}/v1/items/ubb-wil-f-208`} target="_blank" rel='noreferrer'>open in new window</a>
               )}
-                {process.env.NODE_ENV != 'production' && ('-')}</td>
+                {!IS_PROD && ('-')}</td>
             </tr>
-
-
-
-
             <tr>
               <td>Skeivt arkiv</td>
               <td><a href="/v1/items/ubb-ska-0001-f-01-01-02">/v1/items/ubb-ska-0001-f-01-01-02</a></td>
               <td>
-                {process.env.NODE_ENV === 'production' && (
-                  <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}/v1/items/ubb-ska-0001-f-01-01-02`} target="_blank" rel='noreferrer'>open in new window</a>
+                {IS_PROD && (
+                  <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL || ''}/v1/items/ubb-ska-0001-f-01-01-02`} target="_blank" rel='noreferrer'>open in new window</a>
                 )}
-                {process.env.NODE_ENV != 'production' && ('-')}
+                {!IS_PROD && ('-')}
               </td>
             </tr>
             <tr>
               <td>Skeivt arkiv</td>
               <td><a href="/v1/items/ubb-ska-a0009-u-457">/v1/items/ubb-ska-a0009-u-457</a></td>
-              <td>{process.env.NODE_ENV === 'production' && (
-                <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}/v1/items/ubb-ska-a0009-u-457`} target="_blank" rel='noreferrer'>open in new window</a>
+              <td>{IS_PROD && (
+                <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL || ''}/v1/items/ubb-ska-a0009-u-457`} target="_blank" rel='noreferrer'>open in new window</a>
               )}
-                {process.env.NODE_ENV != 'production' && ('-')}</td>
+                {!IS_PROD && ('-')}</td>
             </tr>
             <tr>
               <td>Skeivt arkiv</td>
               <td><a href="/v1/items/ubb-ska-a0033-u-0002">/v1/items/ubb-ska-a0033-u-0002</a></td>
-              <td>{process.env.NODE_ENV === 'production' && (
-                <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL}/v1/items/ubb-ska-a0033-u-0002`} target="_blank" rel='noreferrer'>open in new window</a>
+              <td>{IS_PROD && (
+                <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL || ''}/v1/items/ubb-ska-a0033-u-0002`} target="_blank" rel='noreferrer'>open in new window</a>
               )}
-                {process.env.NODE_ENV != 'production' && ('-')}</td>
+                {!IS_PROD && ('-')}</td>
             </tr>
           </tbody>
         </table>
