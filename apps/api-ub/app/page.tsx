@@ -21,6 +21,13 @@ export default function Home() {
           Any valid id or <i>signature</i> from these datasets will be resolved. Test some example manifests!
         </p>
 
+        <h2>
+          <Link href={`/spec`}>
+            OpenAPI Spec
+          </Link>
+        </h2>
+
+
         <h2>Examples</h2>
 
         <table className={styles.table}>
