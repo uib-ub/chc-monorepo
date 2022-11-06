@@ -73,7 +73,7 @@ const Home: NextPage = ({ data, preview }: any) => {
         </div>
 
 
-        <div className='flex justify-center items-center gap-5 w-full p-5'>
+        <div className='flex flex-wrap justify-center items-center gap-5 w-full p-5'>
           {items && items.map((item: any) => (
             <div key={item.id} className="flex justify-center">
               <div className="rounded-lg shadow-lg max-w-sm">
@@ -81,9 +81,10 @@ const Home: NextPage = ({ data, preview }: any) => {
                   <SanityImage
                     image={item.image}
                     alt={''}
-                  />              </a>
+                  />
+                </a>
                 <div className="p-6">
-                  <h5 className="text-xl font-medium mb-2">{item.label[locale || '']}</h5>
+                  <h5 className="text-xl font-medium mb-2">{item.label[locale || ''] || 'Missing title'}</h5>
                   <p className="text-base mb-4">
                     {item.referredToBy?.[locale || '']}
                   </p>
