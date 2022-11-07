@@ -1,6 +1,5 @@
 import * as jsonld from 'jsonld'
 import { omit } from 'lodash'
-import getDocument from '../../../../../lib/getDocument'
 import getFrame from '../../../../../lib/getDocument/getFrame'
 import getQuery from '../../../../../lib/getDocument/getQuery'
 import Cors from 'cors'
@@ -84,8 +83,6 @@ export default async function handler(req, res) {
 
         // Remove json-ld context
         const framedJSON = omit(framed, ['@context'])
-        const data = getDocument(framedJSON)
-
 
         res.status(200).json(framedJSON)
       } else {
