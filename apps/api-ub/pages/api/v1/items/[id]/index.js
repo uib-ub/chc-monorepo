@@ -81,10 +81,7 @@ export default async function handler(req, res) {
           framed.maker = [framed.maker]
         }
 
-        // Remove json-ld context
-        const framedJSON = omit(framed, ['@context'])
-
-        res.status(200).json(framedJSON)
+        res.status(200).json(framed)
       } else {
         // Handle errors
         console.log(response.status, response.statusText);

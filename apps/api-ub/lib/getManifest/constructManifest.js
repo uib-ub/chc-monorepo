@@ -1,13 +1,13 @@
+import normalizedString from '../normalizedString'
+
 export async function constructManifest(data, API) {
   let manifest = {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     id: data.id,
     type: data.type,
-    label: { no: [data.label] },
+    label: normalizedString(data.label),
     ...(data.description && {
-      summary: {
-        none: [data.description]
-      }
+      summary: normalizedString([data.description])
     }),
     thumbnail: [
       {
@@ -23,8 +23,8 @@ export async function constructManifest(data, API) {
         id: data.homepage,
         type: "Text",
         label: {
-          en: [`Home page for ${data.label}`],
-          no: [`Nettside for ${data.label}`]
+          en: normalizedString(data.label).en ? [`Home page for ${normalizedString(data.label).en}`] : undefined,
+          no: normalizedString(data.label).no ? [`Home page for ${normalizedString(data.label).no}`] : undefined,
         },
         format: "text/html"
       }
@@ -35,7 +35,7 @@ export async function constructManifest(data, API) {
         type: "Dataset",
         label: {
           en: ["Object Description in RDF"],
-          en: ["Objekt beskrivelse i RDF"]
+          no: ["Objekt beskrivelse i RDF"]
         },
         format: "application/rdf+xml"
       }
