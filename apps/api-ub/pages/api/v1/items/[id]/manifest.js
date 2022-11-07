@@ -1,8 +1,8 @@
 import * as jsonld from 'jsonld'
 import { omit, sortBy } from 'lodash'
-import { getObject } from '../../../../lib/api/getObject'
-import { constructManifest } from '../../../../lib/getManifest/constructManifest'
-import { defaultFrame } from '../../../../lib/getManifest/defaultFrame'
+import { getObject } from '../../../../../lib/api/getObject'
+import { constructManifest } from '../../../../../lib/getManifest/constructManifest'
+import { defaultFrame } from '../../../../../lib/getManifest/defaultFrame'
 import Cors from 'cors'
 
 const FRAME = defaultFrame
@@ -18,11 +18,7 @@ const cors = Cors({
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
-function runMiddleware(
-  req,
-  res,
-  fn
-) {
+function runMiddleware(req, res, fn) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result) => {
       if (result instanceof Error) {
@@ -33,7 +29,6 @@ function runMiddleware(
     })
   })
 }
-
 
 export default async function handler(req, res) {
   const {

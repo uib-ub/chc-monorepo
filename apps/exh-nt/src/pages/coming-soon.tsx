@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, preview = false }
   }
 }
 
-const Placeholder: NextPage = ({ data, preview }: any) => {
+const ComingSoon: NextPage = ({ data, preview }: any) => {
   const { locale, locales, asPath, defaultLocale }: NextRouter = useRouter()
   const { siteSettings: { label } } = data
 
@@ -84,4 +84,4 @@ const Placeholder: NextPage = ({ data, preview }: any) => {
   );
 };
 
-export default Placeholder;
+export default ComingSoon;

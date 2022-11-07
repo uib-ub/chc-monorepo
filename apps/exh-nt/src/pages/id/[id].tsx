@@ -141,7 +141,7 @@ const Home: NextPage = ({ data, preview }: any) => {
   // of data existing when Editors are creating new documents.
   // It'll be completely blank when they start!
 
-  const { siteSettings: { label }, item } = page
+  const { siteSettings: { label }, mainNav, item } = page
 
   return (
     <>
@@ -181,7 +181,13 @@ const Home: NextPage = ({ data, preview }: any) => {
 
 
         <div className='p-5'>
-          <h1>{item[0].label[locale || '']}</h1>
+          <h1 className='text-6xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
+          <div className='py-5'>
+            <SanityImage
+              image={item[0].image}
+              alt={''}
+            />
+          </div>
           <pre className=''>
             {JSON.stringify(item, null, 2)}
           </pre>

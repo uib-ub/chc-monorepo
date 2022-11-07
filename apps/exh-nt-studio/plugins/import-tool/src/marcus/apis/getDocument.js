@@ -77,7 +77,8 @@ const nomalizedLabel = (dirtyLabel) => {
   if (typeof dirtyLabel === 'string') {
     return {
       _type: 'LocalizedString',
-      no: dirtyLabel
+      no: dirtyLabel,
+      en: dirtyLabel
     }
   }
   // If it is an array, we have multiple labels. It could be two strings and then 
