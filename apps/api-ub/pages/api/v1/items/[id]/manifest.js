@@ -1,8 +1,8 @@
 import * as jsonld from 'jsonld'
 import { omit, sortBy } from 'lodash'
-import { getObject } from '../../../../lib/api/getObject'
-import { constructManifest } from '../../../../lib/getManifest/constructManifest'
-import { defaultFrame } from '../../../../lib/getManifest/defaultFrame'
+import { getObject } from '../../../../../lib/api/getObject'
+import { constructManifest } from '../../../../../lib/getManifest/constructManifest'
+import { defaultFrame } from '../../../../../lib/getManifest/defaultFrame'
 import Cors from 'cors'
 
 const FRAME = defaultFrame
