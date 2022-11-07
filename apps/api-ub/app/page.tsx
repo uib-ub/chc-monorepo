@@ -77,7 +77,7 @@ export default function Home() {
             <tr>
               <td className='border border-slate-700 p-2'>Skeivt arkiv</td>
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-0001-f-01-01-02">/v1/items/ubb-ska-0001-f-01-01-02</a></td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-0001-f-01-01-02/manifests">/v1/items/ubb-ska-0001-f-01-01-02/manifest</a></td>
+              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-0001-f-01-01-02/manifest">/v1/items/ubb-ska-0001-f-01-01-02/manifest</a></td>
               <td className='border border-slate-700 p-2'>
                 {IS_PROD && (
                   <a href={`https://projectmirador.org/embed/?manifest=https://${process.env.VERCEL_URL || ''}/v1/items/ubb-ska-0001-f-01-01-02/manifest`} target="_blank" rel='noreferrer'>open in new window</a>

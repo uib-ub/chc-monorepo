@@ -66,7 +66,7 @@ export const getItemManifestQuery = (id, manifestBase) => {
             }
             BIND(iri(?image) AS ?imgUrl)
             BIND(iri(?singleImage) AS ?singleImageUrl)
-            BIND(iri(concat("${manifestBase}", ?partLabel)) AS ?manifestURL)
+            BIND(iri(concat("${manifestBase}", ?partLabel, "/manifest")) AS ?manifestURL)
             BIND(iri(concat("http://data.ub.uib.no/instance/manuscript/", ?id, "/manifest/range/1")) AS ?rangeURL)
             BIND(iri(concat("http://data.ub.uib.no/instance/page/", ?id, "_p1")) AS ?singleCanvas)
             BIND(iri(replace(str(?s), "data.ub.uib.no", "marcus.uib.no", "i")) AS ?homepage)
