@@ -1,11 +1,9 @@
 import * as jsonld from 'jsonld'
-import { omit, sortBy } from 'lodash'
+import { omit } from 'lodash'
 import getDocument from '../../../../../lib/getDocument'
 import getFrame from '../../../../../lib/getDocument/getFrame'
 import getQuery from '../../../../../lib/getDocument/getQuery'
 import Cors from 'cors'
-
-
 
 // Must be better way
 const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3009' : `https://${process.env.VERCEL_URL}`
