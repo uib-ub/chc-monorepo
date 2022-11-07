@@ -105,10 +105,6 @@ export default function Home() {
             </tr>
           </tbody>
         </table>
-
-        <p className='my-5 text-center'>
-          <Link href="https://github.com/uib-ub/chc-monorepo">Github</Link>
-        </p>
       </main>
 
       {/* <footer>
