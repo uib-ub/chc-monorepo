@@ -3,6 +3,7 @@
     "@version": 1.1,
     "crm": "http://www.cidoc-crm.org/cidoc-crm/",
     "ecrm": "http://erlangen-crm.org/current/",
+    "ubbont": "http://data.ub.uib.no/ontology/",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "dbo": "http://dbpedia.org/ontology/",
@@ -13,1447 +14,1457 @@
     "foaf": "http://xmlns.com/foaf/0.1/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "bibo": "http://purl.org/ontology/bibo/",
-    "mo": "<http://purl.org/ontology/mo/",
+    "mo": "http://purl.org/ontology/mo/",
     "geo-deling": "http://vocab.lenka.no/geo-deling#",
     "wgs": "http://www.w3.org/2003/01/geo/wgs84_pos#",
     "dcmitype": "http://purl.org/dc/dcmitype/",
+    "event": "http://purl.org/NET/c4dm/event.owl#",
+    "geonames": "http://www.geonames.org/ontology#",
+    "exif": "http://www.w3.org/2003/12/exif/ns#",
+    "edm": "http://www.europeana.eu/schemas/edm/",
+    "org": "http://www.w3.org/ns/org#",
+    "bio": "http://purl.org/vocab/bio/0.1/",
+    "frbr": "http://vocab.org/frbr/core#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "ore": "http://www.openarchives.org/ore/terms/",
+    "nie": "http://www.semanticdesktop.org/ontologies/nie/#",
+    "locah": "http://data.archiveshub.ac.uk/def/",
+    "lexvo": "http://lexvo.org/ontology#",
+    "cc": "http://creativecommons.org/ns#",
     "id": "@id",
     "type": "@type",
     "value": "@value",
     "none": "@none",
     "spatial": {
-      "@id": "http://purl.org/dc/terms/spatial",
+      "@id": "dct:spatial",
       "@type": "@id",
       "@container": "@set"
     },
     "birthName": {
-      "@id": "http://dbpedia.org/ontology/birthName",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "dbo:birthName",
+      "@type": "xsd:string"
     },
     "dateAccepted": {
-      "@id": "http://purl.org/dc/terms/dateAccepted"
+      "@id": "dct:dateAccepted"
     },
     "physicalDescription": {
-      "@id": "http://data.ub.uib.no/ontology/physicalDescription",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:physicalDescription",
+      "@type": "xsd:string"
     },
     "hasSMView": {
-      "@id": "http://data.ub.uib.no/ontology/hasSMView"
+      "@id": "ubbont:hasSMView"
     },
     "abstract": {
-      "@id": "http://purl.org/dc/terms/abstract",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "dct:abstract",
+      "@type": "xsd:string"
     },
     "clause": {
-      "@id": "http://data.ub.uib.no/ontology/clause",
-      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+      "@id": "ubbont:clause",
+      "@type": "xsd:boolean"
     },
     "utm33": {
-      "@id": "http://data.ub.uib.no/ontology/utm33",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:utm33",
+      "@type": "xsd:string"
     },
     "MultiVolumeBook": {
-      "@id": "http://purl.org/ontology/bibo/MultiVolumeBook"
+      "@id": "bibo:MultiVolumeBook"
     },
     "scopeNote": {
-      "@id": "http://www.w3.org/2004/02/skos/core#scopeNote",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "skos:scopeNote",
+      "@type": "xsd:string"
     },
     "techniqueOf": {
-      "@id": "http://data.ub.uib.no/ontology/techniqueOf",
+      "@id": "ubbont:techniqueOf",
       "@type": "@id"
     },
     "hasURI": {
-      "@id": "http://data.ub.uib.no/ontology/hasURI",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:hasURI",
+      "@type": "xsd:string"
     },
     "Attachment": {
-      "@id": "http://data.ub.uib.no/ontology/Attachment"
+      "@id": "ubbont:Attachment"
     },
     "Magazine": {
-      "@id": "http://purl.org/ontology/bibo/Magazine"
+      "@id": "bibo:Magazine"
     },
     "shutterSpeedValue": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#shutterSpeedValue"
+      "@id": "exif:shutterSpeedValue"
     },
     "apertureValue": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#apertureValue",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "exif:apertureValue",
+      "@type": "xsd:int"
     },
     "Furniture": {
-      "@id": "http://data.ub.uib.no/ontology/Furniture"
+      "@id": "ubbont:Furniture"
     },
     "Copy": {
-      "@id": "http://data.ub.uib.no/ontology/Copy"
+      "@id": "ubbont:Copy"
     },
     "owner": {
-      "@id": "http://purl.org/ontology/bibo/owner",
+      "@id": "bibo:owner",
       "@type": "@id"
     },
     "Clause": {
-      "@id": "http://data.ub.uib.no/ontology/Clause"
+      "@id": "ubbont:Clause"
     },
     "mergeWith": {
-      "@id": "http://data.ub.uib.no/ontology/mergeWith",
+      "@id": "ubbont:mergeWith",
       "@type": "@id"
     },
     "Telegram": {
-      "@id": "http://data.ub.uib.no/ontology/Telegram"
+      "@id": "ubbont:Telegram"
     },
     "created": {
-      "@id": "http://purl.org/dc/terms/created"
+      "@id": "dct:created"
     },
     "EditedBook": {
-      "@id": "http://purl.org/ontology/bibo/EditedBook"
+      "@id": "bibo:EditedBook"
     },
     "yResolution": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#yResolution",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "exif:yResolution",
+      "@type": "xsd:int"
     },
     "Painting": {
-      "@id": "http://data.ub.uib.no/ontology/Painting"
+      "@id": "ubbont:Painting"
     },
     "pageStart": {
-      "@id": "http://purl.org/ontology/bibo/pageStart",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "bibo:pageStart",
+      "@type": "xsd:int"
     },
     "begin": {
-      "@id": "http://data.ub.uib.no/ontology/begin"
+      "@id": "ubbont:begin"
     },
     "E9_Move": {
-      "@id": "http://erlangen-crm.org/current/E9_Move"
+      "@id": "ecrm:E9_Move"
     },
     "ShareCertificate": {
-      "@id": "http://data.ub.uib.no/ontology/ShareCertificate"
+      "@id": "ubbont:ShareCertificate"
     },
     "isNextInSequence": {
-      "@id": "http://www.europeana.eu/schemas/edm/isNextInSequence",
+      "@id": "edm:isNextInSequence",
       "@type": "@id"
     },
     "profession": {
-      "@id": "http://dbpedia.org/ontology/profession",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "dbo:profession",
+      "@type": "xsd:string"
     },
     "CopyBook": {
-      "@id": "http://data.ub.uib.no/ontology/CopyBook"
+      "@id": "ubbont:CopyBook"
     },
     "width": {
-      "@id": "http://data.ub.uib.no/ontology/width"
+      "@id": "ubbont:width"
     },
     "P27_moved_from": {
-      "@id": "http://erlangen-crm.org/current/P27_moved_from",
+      "@id": "ecrm:P27_moved_from",
       "@type": "@id"
     },
     "nextPage": {
-      "@id": "http://data.ub.uib.no/ontology/nextPage",
+      "@id": "ubbont:nextPage",
       "@type": "@id"
     },
     "CircularLetter": {
-      "@id": "http://data.ub.uib.no/ontology/CircularLetter"
+      "@id": "ubbont:CircularLetter"
     },
     "hiddenLabel": {
-      "@id": "http://www.w3.org/2004/02/skos/core#hiddenLabel",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "skos:hiddenLabel",
+      "@type": "xsd:string"
     },
     "license": {
-      "@id": "http://purl.org/dc/terms/license",
+      "@id": "dct:license",
       "@type": "@id"
     },
     "locationFor": {
-      "@id": "http://data.ub.uib.no/ontology/locationFor",
+      "@id": "ubbont:locationFor",
       "@type": "@id"
     },
     "hasPermantentLocation": {
-      "@id": "http://data.ub.uib.no/ontology/hasPermantentLocation",
+      "@id": "ubbont:hasPermantentLocation",
       "@type": "@id"
     },
     "WebResource": {
-      "@id": "http://www.europeana.eu/schemas/edm/WebResource"
+      "@id": "edm:WebResource"
     },
     "ProvenanceStatement": {
-      "@id": "http://purl.org/dc/terms/ProvenanceStatement"
+      "@id": "dct:ProvenanceStatement"
     },
     "FurnitureSubSubSection": {
-      "@id": "http://data.ub.uib.no/ontology/FurnitureSubSubSection"
+      "@id": "ubbont:FurnitureSubSubSection"
     },
     "made": {
-      "@id": "http://xmlns.com/foaf/0.1/made",
+      "@id": "foaf:made",
       "@type": "@id"
     },
     "commissionedBy": {
-      "@id": "http://data.ub.uib.no/ontology/commissionedBy",
+      "@id": "ubbont:commissionedBy",
       "@type": "@id"
     },
     "priority": {
-      "@id": "http://data.ub.uib.no/ontology/workflow/priority"
+      "@id": "ubbont:workflow/priority"
     },
     "img": {
-      "@id": "http://xmlns.com/foaf/0.1/img",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "foaf:img",
+      "@type": "xsd:string"
     },
     "Vidisse": {
-      "@id": "http://data.ub.uib.no/ontology/Vidisse"
+      "@id": "ubbont:Vidisse"
     },
     "Country": {
-      "@id": "http://schema.org/Country"
+      "@id": "schema:Country"
     },
     "relatedTo": {
-      "@id": "http://schema.org/relatedTo",
+      "@id": "schema:relatedTo",
       "@type": "@id"
     },
     "Vessel": {
-      "@id": "http://data.ub.uib.no/ontology/Vessel"
+      "@id": "ubbont:Vessel"
     },
     "pageEnd": {
-      "@id": "http://purl.org/ontology/bibo/pageEnd",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "bibo:pageEnd",
+      "@type": "xsd:int"
     },
     "originalCreatorOf": {
-      "@id": "http://data.ub.uib.no/ontology/originalCreatorOf",
+      "@id": "ubbont:originalCreatorOf",
       "@type": "@id"
     },
     "Translation": {
-      "@id": "http://data.ub.uib.no/ontology/Translation"
+      "@id": "ubbont:Translation"
     },
     "biography": {
-      "@id": "http://purl.org/vocab/bio/0.1/biography",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "bio:biography",
+      "@type": "xsd:string"
     },
     "model": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#model",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "exif:model",
+      "@type": "xsd:string"
     },
     "Organization": {
-      "@id": "http://xmlns.com/foaf/0.1/Organization"
+      "@id": "foaf:Organization"
     },
     "issued": {
-      "@id": "http://purl.org/dc/terms/issued"
+      "@id": "dct:issued"
     },
     "secondarySupport": {
-      "@id": "http://data.ub.uib.no/ontology/secondarySupport",
+      "@id": "ubbont:secondarySupport",
       "@type": "@id"
     },
     "Button": {
-      "@id": "http://data.ub.uib.no/ontology/Button"
+      "@id": "ubbont:Button"
     },
     "MortageDeed": {
-      "@id": "http://data.ub.uib.no/ontology/MortageDeed"
+      "@id": "ubbont:MortageDeed"
     },
     "temporaryLocationOf": {
-      "@id": "http://data.ub.uib.no/ontology/temporaryLocationOf",
+      "@id": "ubbont:temporaryLocationOf",
       "@type": "@id"
     },
     "issue": {
-      "@id": "http://purl.org/ontology/bibo/issue",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "bibo:issue",
+      "@type": "xsd:int"
     },
     "cataloguer": {
-      "@id": "http://data.ub.uib.no/ontology/cataloguer",
+      "@id": "ubbont:cataloguer",
       "@type": "@id"
     },
     "references": {
-      "@id": "http://purl.org/dc/terms/references",
+      "@id": "dct:references",
       "@type": "@id"
     },
     "Room": {
-      "@id": "http://data.ub.uib.no/ontology/Room"
+      "@id": "ubbont:Room"
     },
     "Proceedings": {
-      "@id": "http://purl.org/ontology/bibo/Proceedings"
+      "@id": "bibo:Proceedings"
     },
     "isReplacedBy": {
-      "@id": "http://purl.org/dc/terms/isReplacedBy",
+      "@id": "dct:isReplacedBy",
       "@type": "@id"
     },
     "Speech": {
-      "@id": "http://data.ub.uib.no/ontology/Speech"
+      "@id": "ubbont:Speech"
     },
     "isSubjectOf": {
-      "@id": "http://data.ub.uib.no/ontology/isSubjectOf",
+      "@id": "ubbont:isSubjectOf",
       "@type": "@id"
     },
     "height": {
-      "@id": "http://data.ub.uib.no/ontology/height"
+      "@id": "ubbont:height"
     },
     "Note": {
-      "@id": "http://purl.org/ontology/bibo/Note"
+      "@id": "bibo:Note"
     },
     "receivedFrom": {
-      "@id": "http://data.ub.uib.no/ontology/receivedFrom",
+      "@id": "ubbont:receivedFrom",
       "@type": "@id"
     },
     "hasBeenMergedWith": {
-      "@id": "http://data.ub.uib.no/ontology/hasBeenMergedWith",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:hasBeenMergedWith",
+      "@type": "xsd:string"
     },
     "pages": {
-      "@id": "http://purl.org/ontology/bibo/pages",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "bibo:pages",
+      "@type": "xsd:int"
     },
     "place": {
-      "@id": "http://purl.org/NET/c4dm/event.owl#place",
+      "@id": "event:place",
       "@type": "@id",
       "@container": "@set"
     },
     "isShownAt": {
-      "@id": "http://www.europeana.eu/schemas/edm/isShownAt",
+      "@id": "edm:isShownAt",
       "@type": "@id"
     },
     "SaleDeed": {
-      "@id": "http://data.ub.uib.no/ontology/SaleDeed"
+      "@id": "ubbont:SaleDeed"
     },
     "Publisher": {
-      "@id": "http://data.ub.uib.no/ontology/Publisher"
+      "@id": "ubbont:Publisher"
     },
     "Trash": {
-      "@id": "http://data.ub.uib.no/ontology/Trash"
+      "@id": "ubbont:Trash"
     },
     "Workshop": {
-      "@id": "http://purl.org/ontology/bibo/Workshop"
+      "@id": "bibo:Workshop"
     },
     "viafID": {
-      "@id": "http://data.ub.uib.no/ontology/viafID"
+      "@id": "ubbont:viafID"
     },
     "hasVersion": {
-      "@id": "http://purl.org/dc/terms/hasVersion",
+      "@id": "dct:hasVersion",
       "@type": "@id"
     },
     "Grunneiendom": {
-      "@id": "http://vocab.lenka.no/geo-deling#Grunneiendom"
+      "@id": "geo-deling:Grunneiendom"
     },
     "Memorandum": {
-      "@id": "http://data.ub.uib.no/ontology/Memorandum"
+      "@id": "ubbont:Memorandum"
     },
     "formerOwnerOf": {
-      "@id": "http://data.ub.uib.no/ontology/formerOwnerOf",
+      "@id": "ubbont:formerOwnerOf",
       "@type": "@id"
     },
     "depiction": {
-      "@id": "http://xmlns.com/foaf/0.1/depiction",
+      "@id": "foaf:depiction",
       "@type": "@id"
     },
     "Object": {
-      "@id": "http://data.ub.uib.no/ontology/Object"
+      "@id": "ubbont:Object"
     },
     "Map": {
-      "@id": "http://purl.org/ontology/bibo/Map"
+      "@id": "bibo:Map"
     },
     "Deed": {
-      "@id": "http://data.ub.uib.no/ontology/Deed"
+      "@id": "ubbont:Deed"
     },
     "Album": {
-      "@id": "http://data.ub.uib.no/ontology/Album"
+      "@id": "ubbont:Album"
     },
     "Monument": {
-      "@id": "http://data.ub.uib.no/ontology/Monument"
+      "@id": "ubbont:Monument"
     },
     "whiteBalance": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#whiteBalance"
+      "@id": "exif:whiteBalance"
     },
     "maker": {
-      "@id": "http://xmlns.com/foaf/0.1/maker",
+      "@id": "foaf:maker",
       "@type": "@id",
       "@container": "@set"
     },
     "P25_moved": {
-      "@id": "http://erlangen-crm.org/current/P25_moved",
+      "@id": "ecrm:P25_moved",
       "@type": "@id"
     },
     "honorificPrefix": {
-      "@id": "http://schema.org/honorificPrefix",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "schema:honorificPrefix",
+      "@type": "xsd:string"
     },
     "deathPlace": {
-      "@id": "http://dbpedia.org/ontology/deathPlace",
+      "@id": "dbo:deathPlace",
       "@type": "@id"
     },
     "displayLabel": {
-      "@id": "http://data.ub.uib.no/ontology/displayLabel"
+      "@id": "ubbont:displayLabel"
     },
     "parentADM1": {
-      "@id": "http://www.geonames.org/ontology#parentADM1",
+      "@id": "geonames:parentADM1",
       "@type": "@id"
     },
     "Supplication": {
-      "@id": "http://data.ub.uib.no/ontology/Supplication"
+      "@id": "ubbont:Supplication"
     },
     "long": {
-      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#long",
-      "@type": "http://www.w3.org/2001/XMLSchema#double"
+      "@id": "wgs:long",
+      "@type": "xsd:double"
     },
     "UserGenereatedContent": {
-      "@id": "http://data.ub.uib.no/ontology/UserGenereatedContent"
+      "@id": "ubbont:UserGenereatedContent"
     },
     "deathDate": {
-      "@id": "http://dbpedia.org/ontology/deathDate"
+      "@id": "dbo:deathDate"
     },
     "altLabel": {
-      "@id": "http://www.w3.org/2004/02/skos/core#altLabel",
+      "@id": "skos:altLabel",
       "@container": "@language"
     },
     "Parish": {
-      "@id": "http://data.ub.uib.no/ontology/Parish"
+      "@id": "ubbont:Parish"
     },
     "label": {
-      "@id": "http://www.w3.org/2000/01/rdf-schema#label",
+      "@id": "rdfs:label",
       "@container": "@language"
     },
     "PressClipping": {
-      "@id": "http://data.ub.uib.no/ontology/PressClipping"
+      "@id": "ubbont:PressClipping"
     },
     "CatalogueCard": {
-      "@id": "http://data.ub.uib.no/ontology/CatalogueCard"
+      "@id": "ubbont:CatalogueCard"
     },
     "contains": {
-      "@id": "http://data.ub.uib.no/ontology/contains",
+      "@id": "ubbont:contains",
       "@type": "@id"
     },
     "Receipt": {
-      "@id": "http://data.ub.uib.no/ontology/Receipt"
+      "@id": "ubbont:Receipt"
     },
     "narrower": {
-      "@id": "http://www.w3.org/2004/02/skos/core#narrower",
+      "@id": "skos:narrower",
       "@type": "@id"
     },
     "Kommune": {
-      "@id": "http://vocab.lenka.no/geo-deling#Kommune"
+      "@id": "geo-deling:Kommune"
     },
     "subOrganizationOf": {
-      "@id": "http://www.w3.org/ns/org#subOrganizationOf",
+      "@id": "org:subOrganizationOf",
       "@type": "@id"
     },
     "isPartOf": {
-      "@id": "http://purl.org/dc/terms/isPartOf",
+      "@id": "dct:isPartOf",
       "@type": "@id"
     },
     "P27i_was_origin_of": {
-      "@id": "http://erlangen-crm.org/current/P27i_was_origin_of",
+      "@id": "ecrm:P27i_was_origin_of",
       "@type": "@id"
     },
     "editorOf": {
-      "@id": "http://data.ub.uib.no/ontology/editorOf",
+      "@id": "ubbont:editorOf",
       "@type": "@id"
     },
     "parent": {
-      "@id": "http://schema.org/parent",
+      "@id": "schema:parent",
       "@type": "@id"
     },
     "DoctoralThesis": {
-      "@id": "http://data.ub.uib.no/ontology/DoctoralThesis"
+      "@id": "ubbont:DoctoralThesis"
     },
     "children": {
-      "@id": "http://schema.org/children",
+      "@id": "schema:children",
       "@type": "@id"
     },
     "mbox": {
-      "@id": "http://xmlns.com/foaf/0.1/mbox",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "foaf:mbox",
+      "@type": "xsd:string"
     },
     "BookOfMinutes": {
-      "@id": "http://data.ub.uib.no/ontology/BookOfMinutes"
+      "@id": "ubbont:BookOfMinutes"
     },
     "hasPart": {
-      "@id": "http://purl.org/dc/terms/hasPart",
+      "@id": "dct:hasPart",
       "@type": "@id"
     },
     "Concept": {
-      "@id": "http://www.w3.org/2004/02/skos/core#Concept"
+      "@id": "skos:Concept"
     },
     "recipient": {
-      "@id": "http://purl.org/ontology/bibo/recipient",
+      "@id": "bibo:recipient",
       "@type": "@id"
     },
     "focus": {
-      "@id": "http://xmlns.com/foaf/0.1/focus",
+      "@id": "foaf:focus",
       "@type": "@id"
     },
     "Bill": {
-      "@id": "http://data.ub.uib.no/ontology/Bill"
+      "@id": "ubbont:Bill"
     },
     "Contract": {
-      "@id": "http://data.ub.uib.no/ontology/Contract"
+      "@id": "ubbont:Contract"
     },
     "related": {
-      "@id": "http://www.w3.org/2004/02/skos/core#related",
+      "@id": "skos:related",
       "@type": "@id"
     },
     "familyName": {
-      "@id": "http://xmlns.com/foaf/0.1/familyName",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "foaf:familyName",
+      "@type": "xsd:string"
     },
     "measurement": {
-      "@id": "http://data.ub.uib.no/ontology/measurement",
+      "@id": "ubbont:measurement",
       "@type": "@id"
     },
     "sibling": {
-      "@id": "http://schema.org/sibling",
+      "@id": "schema:sibling",
       "@type": "@id"
     },
     "superEvent": {
-      "@id": "http://schema.org/superEvent",
+      "@id": "schema:superEvent",
       "@type": "@id",
       "@container": "@set"
     },
     "subEvent": {
-      "@id": "http://schema.org/subEvent",
+      "@id": "schema:subEvent",
       "@type": "@id",
       "@container": "@set"
     },
     "StorageUnit": {
-      "@id": "http://data.ub.uib.no/ontology/StorageUnit"
+      "@id": "ubbont:StorageUnit"
     },
     "Measurement": {
-      "@id": "http://data.ub.uib.no/ontology/Measurement"
+      "@id": "ubbont:Measurement"
     },
     "permantentLocationOf": {
-      "@id": "http://data.ub.uib.no/ontology/permantentLocationOf",
+      "@id": "ubbont:permantentLocationOf",
       "@type": "@id"
     },
     "Location": {
-      "@id": "http://data.ub.uib.no/ontology/Location"
+      "@id": "ubbont:Location"
     },
     "LivingImage": {
-      "@id": "http://purl.org/dc/dcmitype/LivingImage"
+      "@id": "dcmitype:LivingImage"
     },
     "containedIn": {
-      "@id": "http://data.ub.uib.no/ontology/containedIn",
+      "@id": "ubbont:containedIn",
       "@type": "@id"
     },
     "tertiarySupport": {
-      "@id": "http://data.ub.uib.no/ontology/tertiarySupport",
+      "@id": "ubbont:tertiarySupport",
       "@type": "@id"
     },
     "acquired": {
-      "@id": "http://data.ub.uib.no/ontology/acquired",
+      "@id": "ubbont:acquired",
       "@type": "@id"
     },
     "transcriptOf": {
-      "@id": "http://purl.org/ontology/bibo/transcriptOf",
+      "@id": "bibo:transcriptOf",
       "@type": "@id"
     },
     "invertedName": {
-      "@id": "http://data.ub.uib.no/ontology/invertedName",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:invertedName",
+      "@type": "xsd:string"
     },
     "P55i_currently_holds": {
-      "@id": "http://erlangen-crm.org/current/P55i_currently_holds",
+      "@id": "ecrm:P55i_currently_holds",
       "@type": "@id"
     },
     "Fragment": {
-      "@id": "http://data.ub.uib.no/ontology/Fragment"
+      "@id": "ubbont:Fragment"
     },
     "sourceFile": {
-      "@id": "http://data.ub.uib.no/ontology/sourceFile"
+      "@id": "ubbont:sourceFile"
     },
     "currentPermanentLocation": {
-      "@id": "http://data.ub.uib.no/ontology/currentPermanentLocation",
+      "@id": "ubbont:currentPermanentLocation",
       "@type": "@id"
     },
     "createdYear": {
-      "@id": "http://data.ub.uib.no/ontology/createdYear"
+      "@id": "ubbont:createdYear"
     },
     "FinancialStatement": {
-      "@id": "http://data.ub.uib.no/ontology/FinancialStatement"
+      "@id": "ubbont:FinancialStatement"
     },
     "AcademicArticle": {
-      "@id": "http://purl.org/ontology/bibo/AcademicArticle"
+      "@id": "bibo:AcademicArticle"
     },
     "gender": {
-      "@id": "http://xmlns.com/foaf/0.1/gender"
+      "@id": "foaf:gender"
     },
     "homepage": {
-      "@id": "http://xmlns.com/foaf/0.1/homepage",
+      "@id": "foaf:homepage",
       "@type": "@id",
       "@container": "@set"
     },
     "CashBook": {
-      "@id": "http://data.ub.uib.no/ontology/CashBook"
+      "@id": "ubbont:CashBook"
     },
     "email": {
-      "@id": "http://schema.org/email"
+      "@id": "schema:email"
     },
     "Event": {
-      "@id": "http://purl.org/NET/c4dm/event.owl#Event"
+      "@id": "event:Event"
     },
     "Ship": {
-      "@id": "http://data.ub.uib.no/ontology/Ship"
+      "@id": "ubbont:Ship"
     },
     "exactMatch": {
-      "@id": "http://www.w3.org/2004/02/skos/core#exactMatch",
+      "@id": "skos:exactMatch",
       "@type": "@id"
     },
     "parentADM2": {
-      "@id": "http://www.geonames.org/ontology#parentADM2",
+      "@id": "geonames:parentADM2",
       "@type": "@id"
     },
     "parentCountry": {
-      "@id": "http://www.geonames.org/ontology#parentCountry",
+      "@id": "geonames:parentCountry",
       "@type": "@id"
     },
     "sequenceNr": {
-      "@id": "http://data.ub.uib.no/ontology/sequenceNr",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "ubbont:sequenceNr",
+      "@type": "xsd:int"
     },
     "hasTranslation": {
-      "@id": "http://data.ub.uib.no/ontology/hasTranslation",
+      "@id": "ubbont:hasTranslation",
       "@type": "@id"
     },
     "Transcription": {
-      "@id": "http://data.ub.uib.no/ontology/Transcription"
+      "@id": "ubbont:Transcription"
     },
     "fylkenr": {
-      "@id": "http://vocab.lenka.no/geo-deling#fylkenr",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "geo-deling:fylkenr",
+      "@type": "xsd:int"
     },
     "Person": {
-      "@id": "http://xmlns.com/foaf/0.1/Person"
+      "@id": "foaf:Person"
     },
     "based_near": {
-      "@id": "http://xmlns.com/foaf/0.1/based_near",
+      "@id": "foaf:based_near",
       "@type": "@id"
     },
     "Priority": {
-      "@id": "http://data.ub.uib.no/ontology/workflow/Priority"
+      "@id": "ubbont:workflow/Priority"
     },
     "Advertisement": {
-      "@id": "http://data.ub.uib.no/ontology/Advertisement"
+      "@id": "ubbont:Advertisement"
     },
     "note": {
-      "@id": "http://www.w3.org/2004/02/skos/core#note",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "skos:note",
+      "@type": "xsd:string"
     },
     "rightsHolder": {
-      "@id": "http://purl.org/dc/terms/rightsHolder",
+      "@id": "dct:rightsHolder",
       "@type": "@id"
     },
     "placeDelivery": {
-      "@id": "http://data.ub.uib.no/ontology/placeDelivery",
+      "@id": "ubbont:placeDelivery",
       "@type": "@id"
     },
     "pseudonym": {
-      "@id": "http://dbpedia.org/ontology/pseudonym",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "dbo:pseudonym",
+      "@type": "xsd:string"
     },
     "formLabel": {
-      "@id": "http://data.ub.uib.no/ontology/formLabel",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:formLabel",
+      "@type": "xsd:string"
     },
     "P55_has_current_location": {
-      "@id": "http://erlangen-crm.org/current/P55_has_current_location",
+      "@id": "ecrm:P55_has_current_location",
       "@type": "@id"
     },
     "Cantata": {
-      "@id": "http://data.ub.uib.no/ontology/Cantata"
+      "@id": "ubbont:Cantata"
     },
     "MusicalWork": {
-      "@id": "http://dbpedia.org/ontology/MusicalWork"
+      "@id": "dbo:MusicalWork"
     },
     "producedIn": {
-      "@id": "http://purl.org/NET/c4dm/event.owl#producedIn",
+      "@id": "event:producedIn",
       "@type": "@id"
     },
     "notation": {
-      "@id": "http://www.w3.org/2004/02/skos/core#notation"
+      "@id": "skos:notation"
     },
     "hasPage": {
-      "@id": "http://data.ub.uib.no/ontology/hasPage",
+      "@id": "ubbont:hasPage",
       "@type": "@id"
     },
     "Report": {
-      "@id": "http://purl.org/ontology/bibo/Report"
-    },
-    "MapSet": {
-      "@id": "http://data.ub.uib.no/MapSet"
+      "@id": "bibo:Report"
     },
     "hasRepresentation": {
-      "@id": "http://data.ub.uib.no/ontology/hasRepresentation",
+      "@id": "ubbont:hasRepresentation",
       "@type": "@id"
     },
     "product": {
-      "@id": "http://purl.org/NET/c4dm/event.owl#product",
+      "@id": "event:product",
       "@type": "@id",
       "@container": "@set"
     },
     "Book": {
-      "@id": "http://purl.org/ontology/bibo/Book"
+      "@id": "bibo:Book"
     },
     "ownedBy": {
-      "@id": "http://data.ub.uib.no/ontology/ownedBy",
+      "@id": "ubbont:ownedBy",
       "@type": "@id",
       "@container": "@set"
     },
     "Agent": {
-      "@id": "http://xmlns.com/foaf/0.1/Agent"
+      "@id": "foaf:Agent"
     },
     "Ticket": {
-      "@id": "http://data.ub.uib.no/ontology/Ticket"
+      "@id": "ubbont:Ticket"
     },
     "P26_moved_to": {
-      "@id": "http://erlangen-crm.org/current/P26_moved_to",
+      "@id": "ecrm:P26_moved_to",
       "@type": "@id"
     },
     "Box": {
-      "@id": "http://data.ub.uib.no/ontology/Box"
+      "@id": "ubbont:Box"
     },
     "madeAfter": {
-      "@id": "http://data.ub.uib.no/ontology/madeAfter"
+      "@id": "ubbont:madeAfter"
     },
     "hasSource": {
-      "@id": "http://data.ub.uib.no/ontology/hasSource",
+      "@id": "ubbont:hasSource",
       "@type": "@id"
     },
     "name": {
-      "@id": "http://xmlns.com/foaf/0.1/name",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "foaf:name",
+      "@type": "xsd:string"
     },
     "postalCode": {
-      "@id": "http://schema.org/postalCode",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "schema:postalCode",
+      "@type": "xsd:int"
     },
     "Technique": {
-      "@id": "http://data.ub.uib.no/ontology/Technique"
+      "@id": "ubbont:Technique"
     },
     "acquiredIn": {
-      "@id": "http://data.ub.uib.no/ontology/acquiredIn",
+      "@id": "ubbont:acquiredIn",
       "@type": "@id"
     },
     "Drawing": {
-      "@id": "http://data.ub.uib.no/ontology/Drawing"
+      "@id": "ubbont:Drawing"
     },
     "T-Shirt": {
-      "@id": "http://data.ub.uib.no/ontology/T-Shirt"
+      "@id": "ubbont:T-Shirt"
     },
     "Building": {
-      "@id": "http://data.ub.uib.no/ontology/Building"
+      "@id": "ubbont:Building"
     },
     "uuid": {
-      "@id": "http://data.ub.uib.no/ontology/uuid"
+      "@id": "ubbont:uuid"
     },
     "Article": {
-      "@id": "http://purl.org/ontology/bibo/Article"
+      "@id": "bibo:Article"
     },
     "Mark": {
-      "@id": "http://data.ub.uib.no/ontology/Mark"
+      "@id": "ubbont:Mark"
     },
     "Circulaire": {
-      "@id": "http://data.ub.uib.no/ontology/Circulaire"
+      "@id": "ubbont:Circulaire"
     },
     "published": {
-      "@id": "http://data.ub.uib.no/ontology/published",
+      "@id": "ubbont:published",
       "@type": "@id"
     },
     "hasMember": {
-      "@id": "http://www.w3.org/ns/org#hasMember",
+      "@id": "org:hasMember",
       "@type": "@id"
     },
     "Manuscript": {
-      "@id": "http://purl.org/ontology/bibo/Manuscript"
+      "@id": "bibo:Manuscript"
     },
     "userDate": {
-      "@id": "http://data.ub.uib.no/ontology/userDate"
+      "@id": "ubbont:userDate"
     },
     "showWeb": {
-      "@id": "http://data.ub.uib.no/ontology/showWeb",
-      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+      "@id": "ubbont:showWeb",
+      "@type": "xsd:boolean"
     },
     "location": {
-      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#location",
+      "@id": "wgs:location",
       "@type": "@id"
     },
     "isSourceOf": {
-      "@id": "http://data.ub.uib.no/ontology/isSourceOf",
+      "@id": "ubbont:isSourceOf",
       "@type": "@id"
     },
     "Postcard": {
-      "@id": "http://data.ub.uib.no/ontology/Postcard"
+      "@id": "ubbont:Postcard"
     },
     "Issue": {
-      "@id": "http://purl.org/ontology/bibo/Issue"
+      "@id": "bibo:Issue"
     },
     "Booklet": {
-      "@id": "http://data.ub.uib.no/ontology/Booklet"
+      "@id": "ubbont:Booklet"
     },
     "typeOfDamage": {
-      "@id": "http://data.ub.uib.no/ontology/typeOfDamage"
+      "@id": "ubbont:typeOfDamage"
     },
     "originalCreator": {
-      "@id": "http://data.ub.uib.no/ontology/originalCreator",
+      "@id": "ubbont:originalCreator",
       "@type": "@id"
     },
     "madeBefore": {
-      "@id": "http://data.ub.uib.no/ontology/madeBefore"
+      "@id": "ubbont:madeBefore"
     },
     "MasterThesis": {
-      "@id": "http://data.ub.uib.no/ontology/MasterThesis"
+      "@id": "ubbont:MasterThesis"
     },
     "Form": {
-      "@id": "http://data.ub.uib.no/ontology/Form"
+      "@id": "ubbont:Form"
     },
     "rights": {
-      "@id": "http://purl.org/dc/terms/rights",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "dct:rights",
+      "@type": "xsd:string"
     },
     "birthYear": {
-      "@id": "http://dbpedia.org/ontology/birthYear",
-      "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+      "@id": "dbo:birthYear",
+      "@type": "xsd:gYear"
     },
     "technique": {
-      "@id": "http://data.ub.uib.no/ontology/technique",
+      "@id": "ubbont:technique",
       "@type": "@id"
     },
     "Family": {
-      "@id": "http://data.ub.uib.no/ontology/Family"
+      "@id": "ubbont:Family"
     },
     "PrayerBook": {
-      "@id": "http://data.ub.uib.no/ontology/PrayerBook"
+      "@id": "ubbont:PrayerBook"
     },
     "PhotographicTechnique": {
-      "@id": "http://data.ub.uib.no/ontology/PhotographicTechnique"
+      "@id": "ubbont:PhotographicTechnique"
     },
     "Work": {
-      "@id": "http://vocab.org/frbr/core#Work"
+      "@id": "frbr:Work"
     },
     "deathYear": {
-      "@id": "http://dbpedia.org/ontology/deathYear",
-      "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+      "@id": "dbo:deathYear",
+      "@type": "xsd:gYear"
     },
     "firstName": {
-      "@id": "http://xmlns.com/foaf/0.1/firstName",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "foaf:firstName",
+      "@type": "xsd:string"
     },
     "alt": {
-      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#alt"
+      "@id": "wgs:alt"
     },
     "clauseFor": {
-      "@id": "http://data.ub.uib.no/ontology/clauseFor",
+      "@id": "ubbont:clauseFor",
       "@type": "@id"
     },
     "rodeNr": {
-      "@id": "http://data.ub.uib.no/ontology/rodeNr"
+      "@id": "ubbont:rodeNr"
     },
     "identifier": {
-      "@id": "http://purl.org/dc/terms/identifier",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "dct:identifier",
+      "@type": "xsd:string"
     },
     "Protocol": {
-      "@id": "http://data.ub.uib.no/ontology/Protocol"
+      "@id": "ubbont:Protocol"
     },
     "Poster": {
-      "@id": "http://data.ub.uib.no/ontology/Poster"
+      "@id": "ubbont:Poster"
     },
     "Company": {
-      "@id": "http://dbpedia.org/ontology/Company"
+      "@id": "dbo:Company"
     },
     "gnr": {
-      "@id": "http://vocab.lenka.no/geo-deling#gnr",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "geo-deling:gnr",
+      "@type": "xsd:int"
     },
     "deprecated": {
-      "@id": "http://www.w3.org/2002/07/owl#deprecated"
+      "@id": "owl:deprecated"
     },
     "Photograph": {
-      "@id": "http://data.ub.uib.no/ontology/Photograph"
+      "@id": "ubbont:Photograph"
     },
     "subject": {
-      "@id": "http://purl.org/dc/terms/subject",
+      "@id": "dct:subject",
       "@type": "@id",
       "@container": "@set"
     },
     "Page": {
-      "@id": "http://data.ub.uib.no/ontology/Page"
+      "@id": "ubbont:Page"
     },
     "commissioned": {
-      "@id": "http://data.ub.uib.no/ontology/commissioned",
+      "@id": "ubbont:commissioned",
       "@type": "@id",
       "@container": "@set"
     },
     "internalLocation": {
-      "@id": "http://data.ub.uib.no/ontology/internalLocation",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:internalLocation",
+      "@type": "xsd:string"
     },
     "depicts": {
-      "@id": "http://xmlns.com/foaf/0.1/depicts",
+      "@id": "foaf:depicts",
       "@type": "@id",
       "@container": "@set"
     },
     "locationType": {
-      "@id": "http://data.ub.uib.no/ontology/locationType"
+      "@id": "ubbont:locationType"
     },
     "birthPlace": {
-      "@id": "http://dbpedia.org/ontology/birthPlace",
+      "@id": "dbo:birthPlace",
       "@type": "@id"
     },
     "hasMDView": {
-      "@id": "http://data.ub.uib.no/ontology/hasMDView"
+      "@id": "ubbont:hasMDView"
     },
     "spouse": {
-      "@id": "http://schema.org/spouse",
+      "@id": "schema:spouse",
       "@type": "@id"
     },
     "hasTimeline": {
-      "@id": "http://data.ub.uib.no/ontology/hasTimeline",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:hasTimeline",
+      "@type": "xsd:string"
     },
     "Aggregation": {
-      "@id": "http://www.openarchives.org/ore/terms/Aggregation"
+      "@id": "ore:Aggregation"
     },
     "dateOfAcquisition": {
-      "@id": "http://data.ub.uib.no/ontology/dateOfAcquisition"
+      "@id": "ubbont:dateOfAcquisition"
     },
     "Point": {
-      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#Point"
+      "@id": "wgs:Point"
     },
     "definition": {
-      "@id": "http://www.w3.org/2004/02/skos/core#definition",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "skos:definition",
+      "@type": "xsd:string"
     },
     "knows": {
-      "@id": "http://schema.org/knows",
+      "@id": "schema:knows",
       "@type": "@id"
     },
     "editorialNote": {
-      "@id": "http://www.w3.org/2004/02/skos/core#editorialNote",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "skos:editorialNote",
+      "@type": "xsd:string"
     },
     "Workflow": {
-      "@id": "http://data.ub.uib.no/ontology/workflow/Workflow"
+      "@id": "ubbont:workflow/Workflow"
     },
     "honorificSuffix": {
-      "@id": "http://schema.org/honorificSuffix",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "schema:honorificSuffix",
+      "@type": "xsd:string"
     },
     "isLocationFor": {
-      "@id": "http://data.ub.uib.no/ontology/isLocationFor",
+      "@id": "ubbont:isLocationFor",
       "@type": "@id"
     },
     "P25i_moved_by": {
-      "@id": "http://erlangen-crm.org/current/P25i_moved_by",
+      "@id": "ecrm:P25i_moved_by",
       "@type": "@id"
     },
     "Cataloguer": {
-      "@id": "http://data.ub.uib.no/ontology/Cataloguer"
+      "@id": "ubbont:Cataloguer"
     },
     "Minutes": {
-      "@id": "http://data.ub.uib.no/ontology/Minutes"
+      "@id": "ubbont:Minutes"
     },
     "hasTHView": {
-      "@id": "http://data.ub.uib.no/ontology/hasTHView"
+      "@id": "ubbont:hasTHView"
     },
     "stores": {
-      "@id": "http://data.ub.uib.no/ontology/stores",
+      "@id": "ubbont:stores",
       "@type": "@id"
     },
     "ConceptScheme": {
-      "@id": "http://www.w3.org/2004/02/skos/core#ConceptScheme"
+      "@id": "skos:ConceptScheme"
     },
     "ResourceType": {
-      "@id": "http://data.ub.uib.no/ontology/ResourceType"
+      "@id": "ubbont:ResourceType"
     },
     "Flyer": {
-      "@id": "http://data.ub.uib.no/ontology/Flyer"
+      "@id": "ubbont:Flyer"
     },
     "ProxyCollection": {
-      "@id": "http://data.ub.uib.no/ontology/ProxyCollection"
+      "@id": "ubbont:ProxyCollection"
     },
     "primarySupport": {
-      "@id": "http://data.ub.uib.no/ontology/primarySupport",
+      "@id": "ubbont:primarySupport",
       "@type": "@id"
     },
     "ShipsLog": {
-      "@id": "http://data.ub.uib.no/ontology/ShipsLog"
+      "@id": "ubbont:ShipsLog"
     },
     "reference": {
-      "@id": "http://data.ub.uib.no/ontology/reference",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:reference",
+      "@type": "xsd:string"
     },
     "GraphicArt": {
-      "@id": "http://data.ub.uib.no/ontology/GraphicArt"
+      "@id": "ubbont:GraphicArt"
     },
     "featured": {
-      "@id": "http://data.ub.uib.no/ontology/featured",
-      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+      "@id": "ubbont:featured",
+      "@type": "xsd:boolean"
     },
     "gabNr": {
-      "@id": "http://data.ub.uib.no/ontology/gabNr"
+      "@id": "ubbont:gabNr"
     },
     "streetAddress": {
-      "@id": "http://schema.org/streetAddress",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "schema:streetAddress",
+      "@type": "xsd:string"
     },
     "title": {
-      "@id": "http://purl.org/dc/terms/title",
+      "@id": "dct:title",
       "@container": "@language"
     },
     "Bestallingsbrev": {
-      "@id": "http://data.ub.uib.no/ontology/Bestallingsbrev"
+      "@id": "ubbont:Bestallingsbrev"
     },
     "issn": {
-      "@id": "http://purl.org/ontology/bibo/issn"
+      "@id": "bibo:issn"
     },
     "FurnitureSubSection": {
-      "@id": "http://data.ub.uib.no/ontology/FurnitureSubSection"
+      "@id": "ubbont:FurnitureSubSection"
     },
     "dateSubmitted": {
-      "@id": "http://purl.org/dc/terms/dateSubmitted"
+      "@id": "dct:dateSubmitted"
     },
     "polygon": {
-      "@id": "http://data.ub.uib.no/ontology/polygon",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:polygon",
+      "@type": "xsd:string"
     },
     "Passport": {
-      "@id": "http://data.ub.uib.no/ontology/Passport"
+      "@id": "ubbont:Passport"
     },
     "transcriptionOf": {
-      "@id": "http://data.ub.uib.no/ontology/transcriptionOf",
+      "@id": "ubbont:transcriptionOf",
       "@type": "@id"
     },
     "xResolution": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#xResolution",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "exif:xResolution",
+      "@type": "xsd:int"
     },
     "placeOfPublication": {
-      "@id": "http://data.ub.uib.no/ontology/placeOfPublication",
+      "@id": "ubbont:placeOfPublication",
       "@type": "@id"
     },
     "birthDate": {
-      "@id": "http://dbpedia.org/ontology/birthDate"
+      "@id": "dbo:birthDate"
     },
     "publisher": {
-      "@id": "http://purl.org/dc/terms/publisher",
+      "@id": "dct:publisher",
       "@type": "@id"
     },
     "userPoint": {
-      "@id": "http://data.ub.uib.no/ontology/userPoint"
+      "@id": "ubbont:userPoint"
     },
     "DegreeCertificate": {
-      "@id": "http://data.ub.uib.no/ontology/DegreeCertificate"
+      "@id": "ubbont:DegreeCertificate"
     },
     "kulturnavId": {
-      "@id": "http://data.ub.uib.no/ontology/kulturnavId"
+      "@id": "ubbont:kulturnavId"
     },
     "lat": {
-      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
-      "@type": "http://www.w3.org/2001/XMLSchema#double"
+      "@id": "wgs:lat",
+      "@type": "xsd:double"
     },
     "originPlace": {
-      "@id": "http://data.ub.uib.no/ontology/originPlace",
+      "@id": "ubbont:originPlace",
       "@type": "@id"
     },
     "relatedWebPage": {
-      "@id": "http://data.ub.uib.no/ontology/relatedWebPage",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:relatedWebPage",
+      "@type": "xsd:string"
     },
     "previousPage": {
-      "@id": "http://data.ub.uib.no/ontology/previousPage",
+      "@id": "ubbont:previousPage",
       "@type": "@id"
     },
     "FurnitureSection": {
-      "@id": "http://data.ub.uib.no/ontology/FurnitureSection"
+      "@id": "ubbont:FurnitureSection"
     },
     "Exhibition": {
-      "@id": "http://data.ub.uib.no/ontology/Exhibition"
+      "@id": "ubbont:Exhibition"
     },
     "hasThumbnail": {
-      "@id": "http://data.ub.uib.no/ontology/hasThumbnail",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:hasThumbnail",
+      "@type": "xsd:string"
     },
     "catalogueStatus": {
-      "@id": "http://data.ub.uib.no/ontology/catalogueStatus"
+      "@id": "ubbont:catalogueStatus"
     },
     "modified": {
-      "@id": "http://purl.org/dc/terms/modified",
-      "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+      "@id": "dct:modified",
+      "@type": "xsd:dateTime"
     },
     "provenance": {
-      "@id": "http://purl.org/dc/terms/provenance",
+      "@id": "dct:provenance",
       "@type": "@id"
     },
     "Thesis": {
-      "@id": "http://data.ub.uib.no/ontology/Thesis"
+      "@id": "ubbont:Thesis"
     },
     "publishedYear": {
-      "@id": "http://data.ub.uib.no/ontology/publishedYear",
-      "@type": "http://www.w3.org/2001/XMLSchema#gYear"
+      "@id": "ubbont:publishedYear",
+      "@type": "xsd:gYear"
     },
     "accessProvidedBy": {
-      "@id": "http://data.archiveshub.ac.uk/def/accessProvidedBy",
+      "@id": "locah:accessProvidedBy",
       "@type": "@id"
     },
     "PhysicalDescription": {
-      "@id": "http://data.ub.uib.no/ontology/PhysicalDescription"
+      "@id": "ubbont:PhysicalDescription"
     },
     "mainImage": {
-      "@id": "http://data.ub.uib.no/ontology/mainImage",
-      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+      "@id": "ubbont:mainImage",
+      "@type": "xsd:boolean"
     },
     "volume": {
-      "@id": "http://purl.org/ontology/bibo/volume",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "bibo:volume",
+      "@type": "xsd:int"
     },
     "Fylke": {
-      "@id": "http://vocab.lenka.no/geo-deling#Fylke"
+      "@id": "geo-deling:Fylke"
     },
     "topConceptOf": {
-      "@id": "http://www.w3.org/2004/02/skos/core#topConceptOf",
+      "@id": "skos:topConceptOf",
       "@type": "@id"
     },
     "userTag": {
-      "@id": "http://data.ub.uib.no/ontology/userTag"
+      "@id": "ubbont:userTag"
     },
     "isReferencedBy": {
-      "@id": "http://purl.org/dc/terms/isReferencedBy",
+      "@id": "dct:isReferencedBy",
       "@type": "@id"
     },
     "isRightsHolderOf": {
-      "@id": "http://data.ub.uib.no/ontology/isRightsHolderOf",
+      "@id": "ubbont:isRightsHolderOf",
       "@type": "@id"
     },
     "logo": {
-      "@id": "http://xmlns.com/foaf/0.1/logo",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "foaf:logo",
+      "@type": "xsd:string"
     },
     "MotifType": {
-      "@id": "http://data.ub.uib.no/ontology/MotifType"
+      "@id": "ubbont:MotifType"
     },
     "DigitalResource": {
-      "@id": "http://data.ub.uib.no/ontology/DigitalResource"
+      "@id": "ubbont:DigitalResource"
     },
     "date": {
-      "@id": "http://purl.org/dc/terms/date"
+      "@id": "dct:date"
     },
     "Series": {
-      "@id": "http://purl.org/ontology/bibo/Series"
+      "@id": "bibo:Series"
     },
     "motifTypeOf": {
-      "@id": "http://data.ub.uib.no/ontology/motifTypeOf",
+      "@id": "ubbont:motifTypeOf",
       "@type": "@id"
     },
     "WrittenWork": {
-      "@id": "http://data.ub.uib.no/ontology/WrittenWork"
+      "@id": "ubbont:WrittenWork"
     },
     "replaces": {
-      "@id": "http://purl.org/dc/terms/replaces",
+      "@id": "dct:replaces",
       "@type": "@id"
     },
     "Periodical": {
-      "@id": "http://purl.org/ontology/bibo/Periodical"
+      "@id": "bibo:Periodical"
     },
     "Newspaper": {
-      "@id": "http://purl.org/ontology/bibo/Newspaper"
+      "@id": "bibo:Newspaper"
     },
     "WorkList": {
-      "@id": "http://data.ub.uib.no/ontology/WorkList"
+      "@id": "ubbont:WorkList"
     },
     "Language": {
-      "@id": "http://lexvo.org/ontology#Language"
+      "@id": "lexvo:Language"
     },
     "broader": {
-      "@id": "http://www.w3.org/2004/02/skos/core#broader",
+      "@id": "skos:broader",
       "@type": "@id"
     },
     "flash": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#flash",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "exif:flash",
+      "@type": "xsd:int"
     },
     "bibsysID": {
-      "@id": "http://data.ub.uib.no/ontology/bibsysID",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:bibsysID",
+      "@type": "xsd:string"
     },
     "internalNote": {
-      "@id": "http://data.ub.uib.no/ontology/internalNote",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:internalNote",
+      "@type": "xsd:string"
     },
     "Programme": {
-      "@id": "http://data.ub.uib.no/ontology/Programme"
+      "@id": "ubbont:Programme"
     },
     "fileSize": {
-      "@id": "http://schema.org/fileSize"
+      "@id": "schema:fileSize"
     },
     "formerOwner": {
-      "@id": "http://data.ub.uib.no/ontology/formerOwner",
+      "@id": "ubbont:formerOwner",
       "@type": "@id"
     },
     "Will": {
-      "@id": "http://data.ub.uib.no/ontology/Will"
+      "@id": "ubbont:Will"
     },
     "translationOf": {
-      "@id": "http://data.ub.uib.no/ontology/translationOf",
+      "@id": "ubbont:translationOf",
       "@type": "@id"
     },
     "LandSurvey": {
-      "@id": "http://data.ub.uib.no/ontology/LandSurvey"
+      "@id": "ubbont:LandSurvey"
     },
     "Diary": {
-      "@id": "http://data.ub.uib.no/ontology/Diary"
+      "@id": "ubbont:Diary"
     },
     "JourneyLog": {
-      "@id": "http://data.ub.uib.no/ontology/JourneyLog"
+      "@id": "ubbont:JourneyLog"
     },
     "hasSubOrganization": {
-      "@id": "http://www.w3.org/ns/org#hasSubOrganization",
+      "@id": "org:hasSubOrganization",
       "@type": "@id"
     },
     "Acquisition": {
-      "@id": "http://data.ub.uib.no/ontology/Acquisition"
+      "@id": "ubbont:Acquisition"
     },
     "mimeType": {
-      "@id": "http://www.semanticdesktop.org/ontologies/nie/#mimeType",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "nie:mimeType",
+      "@type": "xsd:string"
     },
     "addressLocality": {
-      "@id": "http://schema.org/addressLocality",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "schema:addressLocality",
+      "@type": "xsd:string"
     },
     "SpatialThing": {
-      "@id": "http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"
+      "@id": "wgs:SpatialThing"
     },
     "Brochure": {
-      "@id": "http://data.ub.uib.no/ontology/Brochure"
+      "@id": "ubbont:Brochure"
     },
     "extinctionYear": {
-      "@id": "http://dbpedia.org/ontology/extinctionYear"
+      "@id": "dbo:extinctionYear"
     },
     "Seal": {
-      "@id": "http://data.ub.uib.no/ontology/Seal"
+      "@id": "ubbont:Seal"
     },
     "kommunenr": {
-      "@id": "http://vocab.lenka.no/geo-deling#kommunenr",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "geo-deling:kommunenr",
+      "@type": "xsd:int"
     },
     "WindowDisplay": {
-      "@id": "http://data.ub.uib.no/ontology/WindowDisplay"
+      "@id": "ubbont:WindowDisplay"
     },
     "memberOf": {
-      "@id": "http://www.w3.org/ns/org#memberOf",
+      "@id": "org:memberOf",
       "@type": "@id"
     },
     "extinctionDate": {
-      "@id": "http://dbpedia.org/ontology/extinctionDate",
-      "@type": "http://www.w3.org/2001/XMLSchema#date"
+      "@id": "dbo:extinctionDate",
+      "@type": "xsd:date"
     },
     "ExLibris": {
-      "@id": "http://data.ub.uib.no/ontology/ExLibris"
+      "@id": "ubbont:ExLibris"
     },
     "comment": {
-      "@id": "http://www.w3.org/2000/01/rdf-schema#comment"
+      "@id": "rdfs:comment"
     },
     "hasClause": {
-      "@id": "http://data.ub.uib.no/ontology/hasClause",
+      "@id": "ubbont:hasClause",
       "@type": "@id"
     },
     "isShownBy": {
-      "@id": "http://data.ub.uib.no/ontology/isShownBy",
+      "@id": "ubbont:isShownBy",
       "@type": "@id"
     },
     "Image": {
-      "@id": "http://purl.org/dc/terms/Image"
+      "@id": "dct:Image"
     },
     "Document": {
-      "@id": "http://purl.org/ontology/bibo/Document"
+      "@id": "bibo:Document"
     },
     "resourceType": {
-      "@id": "http://data.ub.uib.no/ontology/resourceType",
+      "@id": "ubbont:resourceType",
       "@type": "@id"
     },
     "License": {
-      "@id": "http://creativecommons.org/ns#License"
+      "@id": "cc:License"
     },
     "language": {
-      "@id": "http://purl.org/dc/terms/language",
+      "@id": "dct:language",
       "@type": "@id"
     },
     "quality": {
-      "@id": "http://data.ub.uib.no/ontology/quality"
+      "@id": "ubbont:quality"
     },
     "reproduced": {
-      "@id": "http://data.ub.uib.no/ontology/reproduced",
+      "@id": "ubbont:reproduced",
       "@type": "@id"
     },
     "focalLength": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#focalLength"
+      "@id": "exif:focalLength"
     },
     "Lyrics": {
-      "@id": "http://purl.org/ontology/mo/Lyrics"
+      "@id": "mo:Lyrics"
     },
     "page": {
-      "@id": "http://xmlns.com/foaf/0.1/page",
+      "@id": "foaf:page",
       "@type": "@id"
     },
     "hasXLView": {
-      "@id": "http://data.ub.uib.no/ontology/hasXLView"
+      "@id": "ubbont:hasXLView"
     },
     "reproducedBy": {
-      "@id": "http://data.ub.uib.no/ontology/reproducedBy",
+      "@id": "ubbont:reproducedBy",
       "@type": "@id"
     },
     "sender": {
-      "@id": "http://data.ub.uib.no/ontology/sender",
+      "@id": "ubbont:sender",
       "@type": "@id"
     },
     "formationYear": {
-      "@id": "http://dbpedia.org/ontology/formationYear"
+      "@id": "dbo:formationYear"
     },
     "isoSpeedRatings": {
-      "@id": "http://www.w3.org/2003/12/exif/ns#isoSpeedRatings"
+      "@id": "exif:isoSpeedRatings"
     },
     "currentTemporaryLocation": {
-      "@id": "http://data.ub.uib.no/ontology/currentTemporaryLocation",
+      "@id": "ubbont:currentTemporaryLocation",
       "@type": "@id"
     },
     "storedAt": {
-      "@id": "http://data.ub.uib.no/ontology/storedAt",
+      "@id": "ubbont:storedAt",
       "@type": "@id"
     },
     "isRepresentationOf": {
-      "@id": "http://data.ub.uib.no/ontology/isRepresentationOf",
+      "@id": "ubbont:isRepresentationOf",
       "@type": "@id"
     },
     "hasTemporaryLocation": {
-      "@id": "http://data.ub.uib.no/ontology/hasTemporaryLocation",
+      "@id": "ubbont:hasTemporaryLocation",
       "@type": "@id"
     },
     "hasView": {
-      "@id": "http://data.ub.uib.no/ontology/hasView"
+      "@id": "ubbont:hasView"
     },
     "available": {
-      "@id": "http://purl.org/dc/terms/available"
+      "@id": "dct:available"
     },
     "userPlace": {
-      "@id": "http://data.ub.uib.no/ontology/userPlace"
+      "@id": "ubbont:userPlace"
     },
     "hasLGView": {
-      "@id": "http://data.ub.uib.no/ontology/hasLGView"
+      "@id": "ubbont:hasLGView"
     },
     "previousIdentifier": {
-      "@id": "http://data.ub.uib.no/ontology/previousIdentifier"
+      "@id": "ubbont:previousIdentifier"
     },
     "motifType": {
-      "@id": "http://data.ub.uib.no/ontology/motifType",
+      "@id": "ubbont:motifType",
       "@type": "@id"
     },
     "extent": {
-      "@id": "http://purl.org/dc/terms/extent"
+      "@id": "dct:extent"
     },
     "alternative": {
-      "@id": "http://purl.org/dc/terms/alternative",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "dct:alternative",
+      "@type": "xsd:string"
     },
     "Conference": {
-      "@id": "http://purl.org/ontology/bibo/Conference"
+      "@id": "bibo:Conference"
     },
     "Journal": {
-      "@id": "http://data.ub.uib.no/ontology/Journal"
+      "@id": "ubbont:Journal"
     },
     "hasLocation": {
-      "@id": "http://data.ub.uib.no/ontology/hasLocation",
+      "@id": "ubbont:hasLocation",
       "@type": "@id"
     },
     "Reference": {
-      "@id": "http://data.ub.uib.no/ontology/Reference"
+      "@id": "ubbont:Reference"
     },
     "bruksnavn": {
-      "@id": "http://data.ub.uib.no/ontology/bruksnavn",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "ubbont:bruksnavn",
+      "@type": "xsd:string"
     },
     "acqusitionType": {
-      "@id": "http://data.ub.uib.no/ontology/acqusitionType"
+      "@id": "ubbont:acqusitionType"
     },
     "parentFeature": {
-      "@id": "http://www.geonames.org/ontology#parentFeature",
+      "@id": "geonames:parentFeature",
       "@type": "@id"
     },
     "Sigil": {
-      "@id": "http://data.ub.uib.no/ontology/Sigil"
+      "@id": "ubbont:Sigil"
     },
     "end": {
-      "@id": "http://data.ub.uib.no/ontology/end"
+      "@id": "ubbont:end"
     },
     "hasTranscript": {
-      "@id": "http://data.ub.uib.no/ontology/hasTranscript",
+      "@id": "ubbont:hasTranscript",
       "@type": "@id"
     },
     "hasTopConcept": {
-      "@id": "http://www.w3.org/2004/02/skos/core#hasTopConcept",
+      "@id": "skos:hasTopConcept",
       "@type": "@id"
     },
     "prefLabel": {
-      "@id": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "@id": "skos:prefLabel",
       "@container": "@language"
     },
     "formationDate": {
-      "@id": "http://dbpedia.org/ontology/formationDate",
-      "@type": "http://www.w3.org/2001/XMLSchema#date"
+      "@id": "dbo:formationDate",
+      "@type": "xsd:date"
     },
     "isbn": {
-      "@id": "http://purl.org/ontology/bibo/isbn",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "bibo:isbn",
+      "@type": "xsd:string"
     },
     "inScheme": {
-      "@id": "http://www.w3.org/2004/02/skos/core#inScheme",
+      "@id": "skos:inScheme",
       "@type": "@id",
       "@container": "@set"
     },
     "description": {
-      "@id": "http://purl.org/dc/terms/description",
+      "@id": "dct:description",
       "@container": "@language"
     },
     "hasTranscription": {
-      "@id": "http://data.ub.uib.no/ontology/hasTranscription",
+      "@id": "ubbont:hasTranscription",
       "@type": "@id"
     },
     "pageIn": {
-      "@id": "http://data.ub.uib.no/ontology/pageIn",
+      "@id": "ubbont:pageIn",
       "@type": "@id"
     },
     "hasDZIView": {
-      "@id": "http://data.ub.uib.no/ontology/hasDZIView"
+      "@id": "ubbont:hasDZIView"
     },
     "format": {
-      "@id": "http://purl.org/dc/terms/format",
-      "@type": "http://www.w3.org/2001/XMLSchema#string"
+      "@id": "dct:format",
+      "@type": "xsd:string"
     },
     "relation": {
-      "@id": "http://purl.org/dc/elements/1.1/relation"
+      "@id": "dc:relation"
     },
     "temporal": {
-      "@id": "http://purl.org/dc/terms/temporal"
+      "@id": "dct:temporal"
     },
     "P26i_was_destination_of": {
-      "@id": "http://erlangen-crm.org/current/P26i_was_destination_of",
+      "@id": "ecrm:P26i_was_destination_of",
       "@type": "@id"
     },
     "Charter": {
-      "@id": "http://data.ub.uib.no/ontology/Charter"
+      "@id": "ubbont:Charter"
     },
     "physicalCondition": {
-      "@id": "http://data.ub.uib.no/ontology/physicalCondition"
+      "@id": "ubbont:physicalCondition"
     },
     "Collection": {
-      "@id": "http://purl.org/ontology/bibo/Collection"
+      "@id": "bibo:Collection"
     },
     "clauseStatus": {
-      "@id": "http://data.ub.uib.no/ontology/clauseStatus"
+      "@id": "ubbont:clauseStatus"
     },
     "workflowAction": {
-      "@id": "http://data.ub.uib.no/ontology/workflow/workflowAction",
+      "@id": "ubbont:workflow/workflowAction",
       "@type": "@id"
     },
     "estimatedCollectionSize": {
-      "@id": "http://data.ub.uib.no/ontology/estimatedCollectionSize",
-      "@type": "http://www.w3.org/2001/XMLSchema#int"
+      "@id": "ubbont:estimatedCollectionSize",
+      "@type": "xsd:int"
     },
     "BachelorThesis": {
-      "@id": "http://data.ub.uib.no/ontology/BachelorThesis"
+      "@id": "ubbont:BachelorThesis"
     },
     "editor": {
-      "@id": "http://purl.org/ontology/bibo/editor",
+      "@id": "bibo:editor",
       "@type": "@id"
     },
     "Letter": {
-      "@id": "http://purl.org/ontology/bibo/Letter"
+      "@id": "bibo:Letter"
     },
     "BookbindingDescription": {
-      "@id": "http://data.ub.uib.no/ontology/BookbindingDescription"
+      "@id": "ubbont:BookbindingDescription"
     }
   }
 }
