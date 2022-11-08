@@ -1,8 +1,10 @@
 import * as jsonld from 'jsonld'
-import getFrame from '../../../../../lib/getDocument/getFrame'
-import getQuery from '../../../../../lib/getDocument/getQuery'
+import getFrame from '../../../../lib/getDocument/getFrame'
+import { getTimespan } from '../../../../lib/getDocument/getTimespan'
+import getQuery from './getQuery'
 import Cors from 'cors'
-import { API_URL } from '../../../../../lib/config'
+import { API_URL } from '../../../../lib/config'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -12,9 +14,9 @@ const cors = Cors({
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
-function runMiddleware(req, res, fn) {
+function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: Function) {
   return new Promise((resolve, reject) => {
-    fn(req, res, (result) => {
+    fn(req, res, (result: any) => {
       if (result instanceof Error) {
         return reject(result)
       }
@@ -24,20 +26,20 @@ function runMiddleware(req, res, fn) {
   })
 }
 
-async function getObject(id, url) {
+async function getObject(id: string | string[] | undefined, url: string): Promise<any> {
   if (!id) {
     throw Error
   }
   // eslint-disable-next-line no-undef
   const results = await fetch(
     `${url}${encodeURIComponent(
-      getQuery(id),
+      getQuery(id as string),
     )}&output=json`,
   )
   return results
 }
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
     query: { id },
     method,
@@ -61,8 +63,12 @@ export default async function handler(req, res) {
         const result = await response.json()
 
         // Frame the result for nested json
-        const awaitFramed = jsonld.frame(result, await getFrame(result, id))
-        const framed = await awaitFramed
+        const awaitFramed = jsonld.frame(result, await getFrame(result, id as string))
+        let framed = await awaitFramed
+        framed.timespan = getTimespan(undefined, framed?.beginOfTheBegin, framed?.endOfTheEnd)
+        //delete framed?.beginOfTheBegin
+        //delete framed?.endOfTheEnd
+
 
         res.status(200).json(framed)
       } else {

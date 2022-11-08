@@ -19,7 +19,8 @@ export const defaultFrame = {
       "@type": "@id"
     },
     "label": {
-      "@id": "http://www.w3.org/2000/01/rdf-schema#label"
+      "@id": "http://www.w3.org/2000/01/rdf-schema#label",
+      "@container": "@language"
     },
     "seeAlso": {
       "@id": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
@@ -45,7 +46,8 @@ export const defaultFrame = {
       "@id": "http://iiif.io/api/presentation/3#thumbnail",
     },
     "description": {
-      "@id": "http://purl.org/dc/elements/1.1/description"
+      "@id": "http://purl.org/dc/elements/1.1/description",
+      "@container": "@language"
     },
     "identifier": {
       "@id": "http://purl.org/dc/terms/identifier"
