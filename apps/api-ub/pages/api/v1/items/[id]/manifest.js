@@ -205,6 +205,7 @@ export default async function handler(req, res) {
       // Find the service that contains data on this item
       const checkedServices = await fetch(`${API_URL}/v1/resolver/${id}`).then(res => res.json())
       const url = await checkedServices.url
+
       // No URL means no service found, but this is horrible error handeling
       if (!url) return res.status(404).json({ message: 'ID not found' })
 
@@ -229,7 +230,7 @@ export default async function handler(req, res) {
           return res.status(404).json({ message: 'Not found' })
         }
 
-        // When madeObject is a single page we convert to an array of one
+        // When madeObject is a single page we convert items and structures.items to an array of one
         if (Array.isArray(framed.items) == false) {
           framed.items = [framed.items]
         }
@@ -237,9 +238,8 @@ export default async function handler(req, res) {
           framed.structures.items = [framed.structures.items]
         }
 
-
-        // Sort nested arrays
-        //framed.items = sortBy(framed.items, o => o.label['@none'][0])
+        // Sort nested arrays before we send the objects to be manifestified
+        framed.items = sortBy(framed.items, o => o.label['@none'][0])
         framed.structures.items = sortBy(framed.structures.items, i => parseInt(i.split("_p")[1]))
 
         // Create the manifest
