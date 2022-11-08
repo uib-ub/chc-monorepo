@@ -111,7 +111,7 @@ export default async function handler(req, res) {
         const frameClass = result['@graph'][0]['@type']
 
         const awaitFramed = jsonld.frame(result, {
-          '@context': ['http://localhost:3009/ns/ubbont/context.json'],
+          '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
           '@type': frameClass.split(':')[1],
           '@embed': '@always',
         })
