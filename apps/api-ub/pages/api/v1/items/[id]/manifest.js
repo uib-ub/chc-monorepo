@@ -25,10 +25,6 @@ const manifestFrame = {
       "@id": "http://iiif.io/api/presentation/3#homepage",
       "@type": "@id"
     },
-    "label": {
-      "@id": "http://www.w3.org/2000/01/rdf-schema#label",
-      "@container": "@language"
-    },
     "seeAlso": {
       "@id": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
       "@type": "@id"
@@ -59,13 +55,40 @@ const manifestFrame = {
     "identifier": {
       "@id": "http://purl.org/dc/terms/identifier"
     },
+    "label": {
+      "@id": "rdfs:label",
+      "@container": [
+        "@language",
+        "@set"
+      ],
+    },
+    "value": {
+      "@id": "rdf:value",
+      "@container": [
+        "@language",
+        "@set"
+      ],
+    },
+    "metadata": {
+      "@type": "@id",
+      "@id": "sc:metadataEntries",
+      "@container": "@list"
+    },
+    "summary": {
+      "@id": "as:summary",
+      "@container": [
+        "@language",
+        "@set"
+      ],
+    },
     "sc": "http://iiif.io/api/presentation/3#",
     "oa": "http://www.w3.org/ns/oa#",
     "dct": "http://purl.org/dc/terms/",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "ubbont": "http://data.ub.uib.no/ontology/",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "dc": "http://purl.org/dc/elements/1.1/"
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "as": "http://www.w3.org/ns/activitystreams#",
   }
 }
 
@@ -182,6 +205,7 @@ export default async function handler(req, res) {
       // Find the service that contains data on this item
       const checkedServices = await fetch(`${API_URL}/v1/resolver/${id}`).then(res => res.json())
       const url = await checkedServices.url
+
       // No URL means no service found, but this is horrible error handeling
       if (!url) return res.status(404).json({ message: 'ID not found' })
 
@@ -197,6 +221,7 @@ export default async function handler(req, res) {
           '@type': 'Manifest'
         });
         let framed = await awaitFramed
+        console.log(JSON.stringify(framed, null, 2))
 
         // Remove json-ld context 
         framed = omit(framed, ["@context"])
@@ -205,7 +230,7 @@ export default async function handler(req, res) {
           return res.status(404).json({ message: 'Not found' })
         }
 
-        // When madeObject is a single page we convert to an array of one
+        // When madeObject is a single page we convert items and structures.items to an array of one
         if (Array.isArray(framed.items) == false) {
           framed.items = [framed.items]
         }
@@ -213,8 +238,8 @@ export default async function handler(req, res) {
           framed.structures.items = [framed.structures.items]
         }
 
-        // Sort nested arrays
-        framed.items = sortBy(framed.items, o => o.label['@none'])
+        // Sort nested arrays before we send the objects to be manifestified
+        framed.items = sortBy(framed.items, o => o.label['@none'][0])
         framed.structures.items = sortBy(framed.structures.items, i => parseInt(i.split("_p")[1]))
 
         // Create the manifest

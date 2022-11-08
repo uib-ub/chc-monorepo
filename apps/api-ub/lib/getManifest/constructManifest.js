@@ -19,8 +19,8 @@ export async function constructManifest(data, API) {
         id: data.homepage,
         type: "Text",
         label: {
-          no: 'Hjemmeside til objektet',
-          en: 'Homepage for the object',
+          no: ['Hjemmeside til objektet'],
+          en: ['Homepage for the object'],
         },
         format: "text/html"
       }
