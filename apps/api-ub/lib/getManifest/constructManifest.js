@@ -82,7 +82,7 @@ export async function constructManifest(data, API) {
         return {
           id: canvas.id,
           type: canvas.type,
-          label: { none: [`${canvas.label}`] },
+          label: canvas.label,
           width: 1024,
           height: 1024,
           thumbnail: [

@@ -29,4 +29,6 @@ PREFIX nie: <http://www.semanticdesktop.org/ontologies/nie/#>
 PREFIX locah: <http://data.archiveshub.ac.uk/def/>
 PREFIX lexvo: <http://lexvo.org/ontology#>
 PREFIX cc: <http://creativecommons.org/ns#>
+PREFIX sc: <http://iiif.io/api/presentation/3#>
+PREFIX oa: <http://www.w3.org/ns/oa#>
 `
