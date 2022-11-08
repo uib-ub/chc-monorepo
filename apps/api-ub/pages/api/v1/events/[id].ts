@@ -1,10 +1,9 @@
-import * as jsonld from 'jsonld'
-import getFrame from '../../../../lib/getDocument/getFrame'
-import { getTimespan } from '../../../../lib/getDocument/getTimespan'
-import getQuery from './getQuery'
-import Cors from 'cors'
-import { API_URL } from '../../../../lib/config'
 import { NextApiRequest, NextApiResponse } from 'next'
+import Cors from 'cors'
+import * as jsonld from 'jsonld'
+import { getTimespan } from '../../../../lib/getDocument/getTimespan'
+import { API_URL } from '../../../../lib/config'
+import { SPARQL_PREFIXES } from '../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -30,10 +29,27 @@ async function getObject(id: string | string[] | undefined, url: string): Promis
   if (!id) {
     throw Error
   }
-  // eslint-disable-next-line no-undef
+  const query = `
+    ${SPARQL_PREFIXES}
+    CONSTRUCT {
+      ?apiuri a ?type ;
+        ?p ?o ;
+        ubbont:homepage ?homepage .
+    } WHERE { 
+      GRAPH ?g {
+        VALUES ?id {"${id}"}
+        ?uri dct:identifier ?id ;
+          ?p ?o .
+        #FILTER(?p != event:product && ?p != ubbont:showWeb && ?p != ubbont:cataloguer && ?p != dc:relation && ?p != dct:relation && ?p != dct:hasPart)
+        BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no","https://marcus.uib.no","i")) as ?homepage) .
+        BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no/instance/event/","https://api-ub.vercel.app/v1/events/","i")) as ?apiuri) .
+      } 
+    }
+  `
+
   const results = await fetch(
     `${url}${encodeURIComponent(
-      getQuery(id as string),
+      query,
     )}&output=json`,
   )
   return results
@@ -61,14 +77,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
+        console.log(result)
 
         // Frame the result for nested json
-        const awaitFramed = jsonld.frame(result, await getFrame(result, id as string))
+        const awaitFramed = jsonld.frame(result, {
+          '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
+          '@type': 'Event',
+          '@embed': '@always',
+        })
+
         let framed = await awaitFramed
         framed.timespan = getTimespan(undefined, framed?.beginOfTheBegin, framed?.endOfTheEnd)
         //delete framed?.beginOfTheBegin
         //delete framed?.endOfTheEnd
-
 
         res.status(200).json(framed)
       } else {
