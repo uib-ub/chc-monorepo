@@ -4,11 +4,9 @@ import { getObject } from '../../../../../lib/api/getObject'
 import { constructManifest } from '../../../../../lib/getManifest/constructManifest'
 import { defaultFrame } from '../../../../../lib/getManifest/defaultFrame'
 import Cors from 'cors'
+import { API_URL } from '../../../../../lib/config'
 
 const FRAME = defaultFrame
-
-// Must be better way
-const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3009' : `https://${process.env.VERCEL_URL}`
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options

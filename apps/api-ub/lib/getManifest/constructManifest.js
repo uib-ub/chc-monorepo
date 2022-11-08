@@ -1,14 +1,10 @@
-import normalizedString from '../normalizedString'
-
 export async function constructManifest(data, API) {
   let manifest = {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     id: data.id,
     type: data.type,
-    label: normalizedString(data.label),
-    ...(data.description && {
-      summary: normalizedString([data.description])
-    }),
+    label: data.label,
+    summary: data.description,
     thumbnail: [
       {
         id: data.thumbnail.value,
@@ -23,8 +19,8 @@ export async function constructManifest(data, API) {
         id: data.homepage,
         type: "Text",
         label: {
-          en: normalizedString(data.label).en ? [`Home page for ${normalizedString(data.label).en}`] : undefined,
-          no: normalizedString(data.label).no ? [`Home page for ${normalizedString(data.label).no}`] : undefined,
+          no: 'Hjemmeside til objektet',
+          en: 'Homepage for the object',
         },
         format: "text/html"
       }

@@ -129,6 +129,25 @@ export const getStaticProps: GetStaticProps = async () => {
               }
             },
           }
+        },
+        "/events": {
+          "get": {
+            "tags": [
+              "events"
+            ],
+            "summary": "A list of all events",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "$ref": "#/components/responses/EventsSuccess"
+              },
+              "404": {
+                "$ref": "#/components/responses/NotFound"
+              }
+            },
+          }
         }
       },
       "components": {
@@ -318,6 +337,376 @@ export const getStaticProps: GetStaticProps = async () => {
                 "type": "string",
                 "example": "Jardarskrá stadarins at Munklifi"
               }
+            },
+            "Events": {
+              "@graph": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "@id": {
+                      "type": "string",
+                      "example": "http://data.ub.uib.no/instance/event/032d1396b83bd33053ef6f7adfd4e79fb4833336"
+                    },
+                    "@type": {
+                      "type": "string",
+                      "example": "event:Event"
+                    },
+                    "begin": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "1901-05-17"
+                    },
+                    "end": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "1901-05-17"
+                    },
+                    "previousIdentifier": {
+                      "type": "string",
+                      "example": "EM_Teller:2685"
+                    },
+                    "identifier": {
+                      "type": "string",
+                      "example": "032d1396b83bd33053ef6f7adfd4e79fb4833336"
+                    },
+                    "prefLabel": {
+                      "type": "string",
+                      "example": "1901 Avdukingen av Ole Bull-statuen 17. mai"
+                    },
+                    "homepage": {
+                      "type": "string",
+                      "example": "https://marcus.uib.no/instance/event/032d1396b83bd33053ef6f7adfd4e79fb4833336"
+                    }
+                  }
+                }
+              },
+              "@context": {
+                "type": "object",
+                "properties": {
+                  "end": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://data.ub.uib.no/ontology/end"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "http://www.w3.org/2001/XMLSchema#date"
+                      }
+                    }
+                  },
+                  "begin": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://data.ub.uib.no/ontology/begin"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "http://www.w3.org/2001/XMLSchema#date"
+                      }
+                    }
+                  },
+                  "previousIdentifier": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://data.ub.uib.no/ontology/previousIdentifier"
+                      }
+                    }
+                  },
+                  "prefLabel": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://www.w3.org/2004/02/skos/core#prefLabel"
+                      }
+                    }
+                  },
+                  "homepage": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://xmlns.com/foaf/0.1/homepage"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "@id"
+                      }
+                    }
+                  },
+                  "identifier": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://purl.org/dc/terms/identifier"
+                      }
+                    }
+                  },
+                  "place": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://purl.org/NET/c4dm/event.owl#place"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "@id"
+                      }
+                    }
+                  },
+                  "inScheme": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://www.w3.org/2004/02/skos/core#inScheme"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "@id"
+                      }
+                    }
+                  },
+                  "page": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://xmlns.com/foaf/0.1/page"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "@id"
+                      }
+                    }
+                  },
+                  "modified": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://purl.org/dc/terms/modified"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "http://www.w3.org/2001/XMLSchema#dateTime"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://purl.org/dc/terms/description"
+                      }
+                    }
+                  },
+                  "relation": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://purl.org/dc/terms/relation"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "@id"
+                      }
+                    }
+                  },
+                  "logo": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://xmlns.com/foaf/0.1/logo"
+                      }
+                    }
+                  },
+                  "superEvent": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://schema.org/superEvent"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "@id"
+                      }
+                    }
+                  },
+                  "subEvent": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://schema.org/subEvent"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "@id"
+                      }
+                    }
+                  },
+                  "hasPart": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string",
+                        "example": "http://purl.org/dc/terms/hasPart"
+                      },
+                      "@type": {
+                        "type": "string",
+                        "example": "@id"
+                      }
+                    }
+                  },
+                  "wgs": {
+                    "type": "string",
+                    "example": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+                  },
+                  "skos": {
+                    "type": "string",
+                    "example": "http://www.w3.org/2004/02/skos/core#"
+                  },
+                  "rdfs": {
+                    "type": "string",
+                    "example": "http://www.w3.org/2000/01/rdf-schema#"
+                  },
+                  "dct": {
+                    "type": "string",
+                    "example": "http://purl.org/dc/terms/"
+                  },
+                  "rdf": {
+                    "type": "string",
+                    "example": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                  },
+                  "ubbont": {
+                    "type": "string",
+                    "example": "http://data.ub.uib.no/ontology/"
+                  },
+                  "bibo": {
+                    "type": "string",
+                    "example": "http://purl.org/ontology/bibo/"
+                  },
+                  "event": {
+                    "type": "string",
+                    "example": "http://purl.org/NET/c4dm/event.owl#"
+                  },
+                  "foaf": {
+                    "type": "string",
+                    "example": "http://xmlns.com/foaf/0.1/"
+                  },
+                  "dc": {
+                    "type": "string",
+                    "example": "http://purl.org/dc/elements/1.1/"
+                  }
+                }
+              }
+            }
+          },
+          "Events": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "http://data.ub.uib.no/instance/event/352916f6-2db5-4995-bbf8-c5689716051a"
+              },
+              "type": {
+                "type": "string",
+                "example": "Event"
+              },
+              "begin": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "http://www.w3.org/2001/XMLSchema#date"
+                  },
+                  "value": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "1956-10-29"
+                  }
+                }
+              },
+              "end": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "http://www.w3.org/2001/XMLSchema#date"
+                  },
+                  "value": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "1956-11-06"
+                  }
+                }
+              },
+              "homepage": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "https://marcus.uib.no/instance/event/352916f6-2db5-4995-bbf8-c5689716051a"
+                  }
+                }
+              },
+              "identifier": {
+                "type": "string",
+                "example": "352916f6-2db5-4995-bbf8-c5689716051a"
+              },
+              "modified": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "http://www.w3.org/2001/XMLSchema#dateTime"
+                  },
+                  "value": {
+                    "type": "string",
+                    "example": "2021-11-23T14:42:15"
+                  }
+                }
+              },
+              "inScheme": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "http://data.ub.uib.no/conceptscheme/billedsamlingens-emneord"
+                  }
+                }
+              },
+              "prefLabel": {
+                "type": "string",
+                "example": "1956 Suezkrisen"
+              },
+              "logo": {
+                "type": "string",
+                "example": "http://data.ub.uib.no/files/bs/ubb/ubb-jg/ubb-jg-k/ubb-jg-k-0085/ubb-jg-k-0085-02detalj/jpg/ubb-jg-k-0085-02detalj_th.jpg"
+              },
+              "page": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "http://data.ub.uib.no/instance/webresource/44b79a9b-e73b-4c9c-ab7c-03b66c2cc29d"
+                  }
+                }
+              }
             }
           }
         },
@@ -348,6 +737,16 @@ export const getStaticProps: GetStaticProps = async () => {
               "application/ld+json": {
                 "schema": {
                   "$ref": "#/components/schemas/HumanMadeObject"
+                }
+              },
+            }
+          },
+          "EventsSuccess": {
+            "description": "Request for events was successful",
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Events"
                 }
               },
             }

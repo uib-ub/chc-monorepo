@@ -1,0 +1,1 @@
+export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3009' : `https://${process.env.VERCEL_URL}`
