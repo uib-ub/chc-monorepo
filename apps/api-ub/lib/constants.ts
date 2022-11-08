@@ -34,9 +34,9 @@ PREFIX oa: <http://www.w3.org/ns/oa#>
 `
 
 export const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production")
-    return "https://your-production.url";
-  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "preview")
+  if (process.env.VERCEL_ENV === "production")
+    return "https://api-ub.vercel.app";
+  if (process.env.VERCEL_ENV === "preview")
     return `https://${process.env.VERCEL_URL}`;
   return "http://localhost:3009";
 };

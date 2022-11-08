@@ -45,6 +45,7 @@
         "SANITY_API_TOKEN",
         "NEXT_PUBLIC_VERCEL_ENV",
         "SANITY_PREVIEW_SECRET",
+        "VERCEL_ENV",
         "VERCEL_URL"
       ]
     },
