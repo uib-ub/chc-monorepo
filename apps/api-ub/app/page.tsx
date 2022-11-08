@@ -50,7 +50,7 @@ export default function Home() {
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ms-0003">/v1/items/ubb-ms-0003</a></td>
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ms-0003/manifest">/v1/items/ubb-ms-0003/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=https://${API_URL || ''}/v1/items/ubb-ms-0003/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ms-0003/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
@@ -58,7 +58,7 @@ export default function Home() {
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ms-0185-j-a-007">/v1/items/ubb-ms-0185-j-a-007</a></td>
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ms-0185-j-a-007/manifest">/v1/items/ubb-ms-0185-j-a-007/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=https://${API_URL || ''}/v1/items/ubb-ms-0185-j-a-007/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ms-0185-j-a-007/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
@@ -66,7 +66,7 @@ export default function Home() {
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-wil-f-208">/v1/items/ubb-wil-f-208</a></td>
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-wil-f-208/manifest">/v1/items/ubb-wil-f-208/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=https://${API_URL || ''}/v1/items/ubb-wil-f-208/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-wil-f-208/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
@@ -74,7 +74,7 @@ export default function Home() {
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-0001-f-01-01-02">/v1/items/ubb-ska-0001-f-01-01-02</a></td>
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-0001-f-01-01-02/manifest">/v1/items/ubb-ska-0001-f-01-01-02/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=https://${API_URL || ''}/v1/items/ubb-ska-0001-f-01-01-02/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ska-0001-f-01-01-02/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
@@ -82,7 +82,7 @@ export default function Home() {
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-a0009-u-457">/v1/items/ubb-ska-a0009-u-457</a></td>
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-a0009-u-457/manifest">/v1/items/ubb-ska-a0009-u-457/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=https://${API_URL || ''}/v1/items/ubb-ska-a0009-u-457/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ska-a0009-u-457/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
@@ -90,7 +90,7 @@ export default function Home() {
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-a0033-u-0002">/v1/items/ubb-ska-a0033-u-0002</a></td>
               <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-a0033-u-0002/manifest">/v1/items/ubb-ska-a0033-u-0002/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=https://${API_URL || ''}/v1/items/ubb-ska-a0033-u-0002/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ska-a0033-u-0002/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
           </tbody>
