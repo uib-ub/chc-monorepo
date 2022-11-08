@@ -148,6 +148,38 @@ export const getStaticProps: GetStaticProps = async () => {
               }
             },
           }
+        },
+        "/events/{event_id}": {
+          "get": {
+            "tags": [
+              "events"
+            ],
+            "summary": "A single event.",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "event_id",
+                "in": "path",
+                "required": true,
+                "description": "The ID of the event to retrieve",
+                "schema": {
+                  "type": "string",
+                  /* "format": "uuid" */
+                },
+                "example": "132b08be5e363b9a3e9e5eec79bd0ad72c345af2"
+              }
+            ],
+            "responses": {
+              "200": {
+                "$ref": "#/components/responses/EventSuccess"
+              },
+              "404": {
+                "$ref": "#/components/responses/NotFound"
+              }
+            },
+          }
         }
       },
       "components": {
@@ -708,6 +740,428 @@ export const getStaticProps: GetStaticProps = async () => {
                 }
               }
             }
+          },
+          "Event": {
+            "type": "object",
+            "properties": {
+              "@context": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "none": {
+                    "type": "string"
+                  },
+                  "Event": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "product": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "spatial": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "subject": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "title": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "prefLabel": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "inScheme": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "altLabel": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "depicts": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "name": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "maker": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "homepage": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "image": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "showWeb": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "previousIdentifier": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "beginOfTheBegin": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "endOfTheEnd": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "label": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "created": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "identifier": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "modified": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "page": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "logo": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "seeAlso": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "place": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "superEvent": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "subEvent": {
+                    "type": "object",
+                    "properties": {
+                      "@id": {
+                        "type": "string"
+                      },
+                      "@type": {
+                        "type": "string"
+                      },
+                      "@container": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "sc": {
+                    "type": "string"
+                  },
+                  "oa": {
+                    "type": "string"
+                  },
+                  "dct": {
+                    "type": "string"
+                  },
+                  "rdf": {
+                    "type": "string"
+                  },
+                  "ubbont": {
+                    "type": "string"
+                  },
+                  "rdfs": {
+                    "type": "string"
+                  },
+                  "dc": {
+                    "type": "string"
+                  },
+                  "bibo": {
+                    "type": "string"
+                  },
+                  "event": {
+                    "type": "string"
+                  }
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "beginOfTheBegin": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "endOfTheEnd": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "homepage": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "previousIdentifier": {
+                "type": "string"
+              },
+              "showWeb": {
+                "type": "boolean"
+              },
+              "product": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "identifier": {
+                "type": "string"
+              },
+              "prefLabel": {
+                "type": "object",
+                "properties": {
+                  "none": {
+                    "type": "string"
+                  }
+                }
+              },
+              "timespan": {
+                "type": "object",
+                "properties": {
+                  "edtf": {
+                    "type": "string"
+                  },
+                  "beginOfTheBegin": {
+                    "type": "string"
+                  },
+                  "endOfTheBegin": {
+                    "type": "string"
+                  },
+                  "beginOfTheEnd": {
+                    "type": "string"
+                  },
+                  "endOfTheEnd": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         },
         "responses": {
@@ -747,6 +1201,16 @@ export const getStaticProps: GetStaticProps = async () => {
               "application/ld+json": {
                 "schema": {
                   "$ref": "#/components/schemas/Events"
+                }
+              },
+            }
+          },
+          "EventSuccess": {
+            "description": "Request for events was successful",
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
                 }
               },
             }
