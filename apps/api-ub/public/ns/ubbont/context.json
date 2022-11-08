@@ -31,8 +31,6 @@
     "locah": "http://data.archiveshub.ac.uk/def/",
     "lexvo": "http://lexvo.org/ontology#",
     "cc": "http://creativecommons.org/ns#",
-    "sc": "http://iiif.io/api/presentation/3#",
-    "oa": "http://www.w3.org/ns/oa#",
     "id": "@id",
     "type": "@type",
     "value": "@value",
