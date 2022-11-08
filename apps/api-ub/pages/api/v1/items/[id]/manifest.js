@@ -1,12 +1,73 @@
+import Cors from 'cors'
 import * as jsonld from 'jsonld'
 import { omit, sortBy } from 'lodash'
-import { getObject } from '../../../../../lib/api/getObject'
 import { constructManifest } from '../../../../../lib/getManifest/constructManifest'
-import { defaultFrame } from '../../../../../lib/getManifest/defaultFrame'
-import Cors from 'cors'
 import { API_URL } from '../../../../../lib/config'
+import { SPARQL_PREFIXES } from '../../../../../lib/constants'
 
-const FRAME = defaultFrame
+const manifestFrame = {
+  "@context": {
+    "id": "@id",
+    "type": "@type",
+    "value": "@value",
+    "body": {
+      "@id": "http://www.w3.org/ns/oa#body",
+    },
+    "Annotation": {
+      "@id": "http://www.w3.org/ns/oa#Annotation",
+      "@type": "@id"
+    },
+    "items": {
+      "@id": "http://iiif.io/api/presentation/3#items",
+      "@type": "@id"
+    },
+    "homepage": {
+      "@id": "http://iiif.io/api/presentation/3#homepage",
+      "@type": "@id"
+    },
+    "label": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#label",
+      "@container": "@language"
+    },
+    "seeAlso": {
+      "@id": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+      "@type": "@id"
+    },
+    "Manifest": {
+      "@id": "http://iiif.io/api/presentation/3#Manifest",
+      "@type": "@id"
+    },
+    "Range": {
+      "@id": "http://iiif.io/api/presentation/3#Range",
+      "@type": "@id"
+    },
+    "Canvas": {
+      "@id": "http://iiif.io/api/presentation/3#Canvas",
+      "@type": "@id"
+    },
+    "structures": {
+      "@id": "http://iiif.io/api/presentation/3#structures",
+      "@type": "@id"
+    },
+    "thumbnail": {
+      "@id": "http://iiif.io/api/presentation/3#thumbnail",
+    },
+    "description": {
+      "@id": "http://purl.org/dc/elements/1.1/description",
+      "@container": "@language"
+    },
+    "identifier": {
+      "@id": "http://purl.org/dc/terms/identifier"
+    },
+    "sc": "http://iiif.io/api/presentation/3#",
+    "oa": "http://www.w3.org/ns/oa#",
+    "dct": "http://purl.org/dc/terms/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "ubbont": "http://data.ub.uib.no/ontology/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/"
+  }
+}
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -26,6 +87,85 @@ function runMiddleware(req, res, fn) {
       return resolve(result)
     })
   })
+}
+
+async function getObject(api, id) {
+  if (!id) return error
+  const manifestBase = process.env.MANIFEST_BASE
+
+  const query = `
+    ${SPARQL_PREFIXES}
+    CONSTRUCT { 
+      ?manifestURL rdf:type sc:Manifest .
+      ?manifestURL dct:identifier ?id .
+      ?manifestURL rdfs:label ?title .
+      ?manifestURL rdfs:seeAlso ?s .
+      ?manifestURL sc:homepage ?homepage .
+      ?manifestURL dc:description ?desc .
+      ?manifestURL sc:thumbnail ?thumb .
+      ?manifestURL sc:items ?part .
+      ?manifestURL sc:items ?singleCanvas .
+      ?manifestURL sc:structures ?rangeURL .
+      ?rangeURL rdf:type sc:Range .
+      ?rangeURL sc:items ?part .
+      ?rangeURL sc:items ?singleCanvas .
+      ?part rdf:type sc:Canvas .
+      ?part rdfs:label ?seq .
+      ?part sc:thumbnail ?canvasThumb .
+      ?part sc:items ?resource .
+      ?resource rdf:type oa:Annotation .
+      ?resource oa:body ?imgUrl .
+      ?singleCanvas rdf:type sc:Canvas .
+      ?singleCanvas rdfs:label 1 .
+      ?singleCanvas sc:thumbnail ?singleCanvasThumb .
+      ?singleCanvas sc:items ?singlePart .
+      ?singlePart rdf:type oa:Annotation .
+      ?singlePart oa:body ?singleImageUrl .
+    }
+    WHERE
+      { GRAPH ?g
+          { 
+            VALUES ?id { "${id}" }
+            ?s  dct:identifier        ?id ;
+                ubbont:hasRepresentation  ?repr ;
+                dct:title             ?title ;
+                ubbont:hasThumbnail   ?thumb
+            OPTIONAL
+              { ?s  dct:description  ?desc }
+            OPTIONAL
+              { ?repr     dct:hasPart       ?singlePart ;
+                          rdfs:label        ?partLabel .
+                ?singlePart  ubbont:hasXSView  ?singleCanvasThumb
+                OPTIONAL
+                  { ?singlePart  ubbont:hasMDView  ?singleMD }
+                OPTIONAL
+                  { ?singlePart  ubbont:hasSMView  ?singleSM }
+              }
+            BIND(coalesce(?singleMD, ?singleSM) AS ?singleImage)
+            OPTIONAL { 
+              ?repr     dct:hasPart         ?part ;
+                          rdfs:label          ?partLabel .
+              ?part     ubbont:hasResource  ?resource ;
+                        ubbont:sequenceNr   ?seq .
+              ?resource  ubbont:hasMDView   ?image ;
+                        ubbont:hasXSView    ?canvasThumb
+            }
+            BIND(iri(?image) AS ?imgUrl)
+            BIND(iri(?singleImage) AS ?singleImageUrl)
+            BIND(iri(concat("${manifestBase}", ?partLabel, "/manifest")) AS ?manifestURL)
+            BIND(iri(concat("http://data.ub.uib.no/instance/manuscript/", ?id, "/manifest/range/1")) AS ?rangeURL)
+            BIND(iri(concat("http://data.ub.uib.no/instance/page/", ?id, "_p1")) AS ?singleCanvas)
+            BIND(iri(replace(str(?s), "data.ub.uib.no", "marcus.uib.no", "i")) AS ?homepage)
+          }
+      }
+    ORDER BY ?s ?repr ?part ?resource ?image
+  `
+  const result = await fetch(
+    `${api}${encodeURIComponent(
+      query,
+    )}&output=json`)
+
+  return result
 }
 
 export default async function handler(req, res) {
@@ -52,7 +192,10 @@ export default async function handler(req, res) {
         const results = await response.json();
 
         // Frame the result for nested json
-        const awaitFramed = jsonld.frame(results, FRAME);
+        const awaitFramed = jsonld.frame(results, {
+          '@context': manifestFrame,
+          '@type': 'Manifest'
+        });
         let framed = await awaitFramed
 
         // Remove json-ld context 
@@ -71,13 +214,12 @@ export default async function handler(req, res) {
         }
 
         // Sort nested arrays
-        framed.items = sortBy(framed.items, o => o.label)
+        framed.items = sortBy(framed.items, o => o.label['@none'])
         framed.structures.items = sortBy(framed.structures.items, i => parseInt(i.split("_p")[1]))
 
         // Create the manifest
         const constructedManifest = await constructManifest(framed, url)
         const manifest = await constructedManifest
-
 
         res.status(200).json(manifest)
       } else {

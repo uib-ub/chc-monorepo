@@ -131,7 +131,7 @@
       "@id": "bibo:pageStart",
       "@type": "xsd:int"
     },
-    "begin": {
+    "beginOfTheBegin": {
       "@id": "ubbont:begin"
     },
     "E9_Move": {
@@ -1376,7 +1376,7 @@
     "Sigil": {
       "@id": "ubbont:Sigil"
     },
-    "end": {
+    "endOdTheEnd": {
       "@id": "ubbont:end"
     },
     "hasTranscript": {
@@ -1423,8 +1423,13 @@
       "@id": "dct:format",
       "@type": "xsd:string"
     },
-    "relation": {
+    "relationToString": {
       "@id": "dc:relation"
+    },
+    "relation": {
+      "@id": "dct:relation",
+      "@type": "@id",
+      "@container": "@set"
     },
     "temporal": {
       "@id": "dct:temporal"
