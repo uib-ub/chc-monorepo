@@ -1,8 +1,8 @@
 import * as jsonld from 'jsonld'
-import getFrame from '../../../../../lib/getDocument/getFrame'
-import getQuery from '../../../../../lib/getDocument/getQuery'
+import { getTimespan } from '../../../../../lib/getDocument/getTimespan'
 import Cors from 'cors'
 import { API_URL } from '../../../../../lib/config'
+import { SPARQL_PREFIXES } from '../../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -28,10 +28,58 @@ async function getObject(id, url) {
   if (!id) {
     throw Error
   }
+
+  const query = `
+    ${SPARQL_PREFIXES}
+    CONSTRUCT {
+      ?uri ?p ?o .
+      ?subject ?subjectP ?subjectO .
+      ?spatial ?spatialP ?spatialO .
+      ?depicts foaf:name ?depictsLabel ;
+        dct:identifier ?depictsIdentifier .
+      ?maker foaf:name ?makerLabel ;
+        dct:identifier ?makerIdentifier .
+    } WHERE { 
+      GRAPH ?g {
+        VALUES ?id {'${id}'}
+        ?uri dct:identifier ?id ;
+          ?p ?o .
+        BIND(iri(REPLACE(str(?uri), "data.ub.uib.no","marcus.uib.no","i")) as ?homepage) .
+        OPTIONAL { ?uri dct:description ?description . }
+        OPTIONAL { ?uri dct:created ?created . }
+        OPTIONAL { ?uri ubbont:madeAfter ?madeAfter . }
+        OPTIONAL { ?uri ubbont:madeBefore ?madeBefore . }
+        OPTIONAL { 
+      	  ?uri dct:license / rdfs:label ?licenseLabel .
+    	  }
+        # Get relations and filter unwanted props as this makes construct easier
+        OPTIONAL { 
+          ?uri dct:subject ?subject . 
+          ?subject ?subjectP ?subjectO . 
+          FILTER(?subjectP != ubbont:isSubjectOf && ?subjectP != dct:modified && ?subjectP != dct:available && ?subjectP != ubbont:showWeb  && ?subjectP != skos:related && ?subjectP != skos:inScheme && ?subjectP != skos:narrower && ?subjectP != skos:broader && ?subjectP != ubbont:previousIdentifier && ?subjectP != dc:relation)
+        }
+        OPTIONAL { 
+          ?uri dct:spatial ?spatial . 
+          ?spatial ?spatialP ?spatialO . 
+          FILTER(?spatialP != skos:narrower && ?spatialP != skos:broader && ?spatialP != ubbont:previousIdentifier && ?spatialP != ubbont:locationFor && ?spatialP != dct:relation  && ?spatialP != dc:relation)
+        }
+        OPTIONAL { 
+          ?uri foaf:depicts ?depicts . 
+          ?depicts foaf:name ?depictsLabel .
+          ?depicts dct:identifier ?depictsIdentifier .
+        }
+        OPTIONAL { 
+          ?uri foaf:maker ?maker . 
+          ?maker foaf:name ?makerLabel .
+          ?maker dct:identifier ?makerIdentifier .
+        }
+      } 
+    }
+  `
   // eslint-disable-next-line no-undef
   const results = await fetch(
     `${url}${encodeURIComponent(
-      getQuery(id),
+      query,
     )}&output=json`,
   )
   return results
@@ -59,10 +107,18 @@ export default async function handler(req, res) {
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
+        // TODO: Is this safe? Is the main object type always first?
+        const frameClass = result['@graph'][0]['@type']
 
-        // Frame the result for nested json
-        const awaitFramed = jsonld.frame(result, await getFrame(result, id))
-        const framed = await awaitFramed
+        const awaitFramed = jsonld.frame(result, {
+          '@context': ['http://localhost:3009/ns/ubbont/context.json'],
+          '@type': frameClass.split(':')[1],
+          '@embed': '@always',
+        })
+        let framed = await awaitFramed
+        framed.timespan = getTimespan(undefined, framed?.madeAfter, framed?.madeBefore)
+        //delete framed?.madeAfter
+        //delete framed?.madeBefore
 
         res.status(200).json(framed)
       } else {
