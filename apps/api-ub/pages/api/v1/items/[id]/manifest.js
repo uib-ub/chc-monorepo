@@ -2,8 +2,7 @@ import Cors from 'cors'
 import * as jsonld from 'jsonld'
 import { omit, sortBy } from 'lodash'
 import { constructManifest } from '../../../../../lib/getManifest/constructManifest'
-import { API_URL } from '../../../../../lib/config'
-import { SPARQL_PREFIXES } from '../../../../../lib/constants'
+import { API_URL, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
 const manifestFrame = {
   "@context": {
@@ -153,26 +152,25 @@ async function getObject(api, id) {
                 ubbont:hasRepresentation  ?repr ;
                 dct:title             ?title ;
                 ubbont:hasThumbnail   ?thumb
-            OPTIONAL
-              { ?s  dct:description  ?desc }
-            OPTIONAL
-              { ?repr     dct:hasPart       ?singlePart ;
-                          rdfs:label        ?partLabel .
-                ?singlePart  ubbont:hasXSView  ?singleCanvasThumb
-                OPTIONAL
-                  { ?singlePart  ubbont:hasMDView  ?singleMD }
-                OPTIONAL
-                  { ?singlePart  ubbont:hasSMView  ?singleSM }
-              }
-            BIND(coalesce(?singleMD, ?singleSM) AS ?singleImage)
+            OPTIONAL { ?s  dct:description  ?desc }
             OPTIONAL { 
-              ?repr     dct:hasPart         ?part ;
-                          rdfs:label          ?partLabel .
-              ?part     ubbont:hasResource  ?resource ;
-                        ubbont:sequenceNr   ?seq .
-              ?resource  ubbont:hasMDView   ?image ;
-                        ubbont:hasXSView    ?canvasThumb
-            }
+                ?repr dct:hasPart ?singlePart ;
+                  rdfs:label ?partLabel .
+                ?singlePart  ubbont:hasXSView  ?singleCanvasThumb
+                OPTIONAL { ?singlePart ubbont:hasXLView ?singleXL . }
+                OPTIONAL { ?singlePart ubbont:hasLGView ?singleLG . }
+                OPTIONAL { ?singlePart ubbont:hasMDView ?singleMD . }
+                OPTIONAL { ?singlePart ubbont:hasSMView ?singleSM . }
+              }
+              OPTIONAL { 
+                ?repr dct:hasPart ?part ;
+                  rdfs:label ?partLabel .
+                ?part ubbont:hasResource ?resource ;
+                  ubbont:sequenceNr ?seq .
+                ?resource ubbont:hasMDView ?image ;
+                  ubbont:hasXSView ?canvasThumb .
+              }
+            BIND(coalesce(?singleXL, ?singleLG, ?singleMD, ?singleSM) AS ?singleImage)
             BIND(iri(?image) AS ?imgUrl)
             BIND(iri(?singleImage) AS ?singleImageUrl)
             BIND(iri(concat("${manifestBase}", ?partLabel, "/manifest")) AS ?manifestURL)
@@ -221,7 +219,6 @@ export default async function handler(req, res) {
           '@type': 'Manifest'
         });
         let framed = await awaitFramed
-        console.log(JSON.stringify(framed, null, 2))
 
         // Remove json-ld context 
         framed = omit(framed, ["@context"])

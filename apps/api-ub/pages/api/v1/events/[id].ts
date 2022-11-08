@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Cors from 'cors'
 import * as jsonld from 'jsonld'
-import { getTimespan } from '../../../../lib/getDocument/getTimespan'
-import { API_URL } from '../../../../lib/config'
-import { SPARQL_PREFIXES } from '../../../../lib/constants'
+import { getTimespan } from '../../../../lib/getTimespan'
+import { API_URL, SPARQL_PREFIXES } from '../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options

@@ -32,3 +32,5 @@ PREFIX cc: <http://creativecommons.org/ns#>
 PREFIX sc: <http://iiif.io/api/presentation/3#>
 PREFIX oa: <http://www.w3.org/ns/oa#>
 `
+
+export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3009' : `https://${process.env.VERCEL_URL}`
