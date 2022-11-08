@@ -33,4 +33,12 @@ PREFIX sc: <http://iiif.io/api/presentation/3#>
 PREFIX oa: <http://www.w3.org/ns/oa#>
 `
 
-export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3009' : `https://${process.env.VERCEL_URL}`
+export const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production")
+    return "https://your-production.url";
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "preview")
+    return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3009";
+};
+
+export const API_URL = getBaseUrl()
