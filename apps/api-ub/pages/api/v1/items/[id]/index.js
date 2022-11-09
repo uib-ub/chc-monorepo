@@ -73,7 +73,7 @@ async function getObject(id, url) {
       } 
     }
   `
-  // eslint-disable-next-line no-undef
+
   const results = await fetch(
     `${url}${encodeURIComponent(
       query,
@@ -97,14 +97,14 @@ export default async function handler(req, res) {
       const checkedServices = await fetch(`${API_URL}/v1/resolver/${id}`).then(res => res.json())
       const url = await checkedServices.url
       // No URL means no service found, but this is horrible error handeling
-      if (!url) return res.status(404).json({ message: 'ID not found' })
+      if (!url) res.status(404).json({ message: 'ID not found' })
 
       const response = await getObject(id, url)
 
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
-        console.log(result)
+        //console.log(result)
 
         const awaitFramed = jsonld.frame(result, {
           '@context': [`${getBaseUrl()}/ns/ubbont/context.json`],
