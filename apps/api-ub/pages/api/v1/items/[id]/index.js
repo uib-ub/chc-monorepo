@@ -105,7 +105,7 @@ export default async function handler(req, res) {
         const result = await response.json()
 
         const awaitFramed = jsonld.frame(result, {
-          '@context': ['http://localhost:3009/ns/ubbont/context.json'],
+          '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
           '@type': 'HumanMadeObject',
           '@embed': '@always',
         })

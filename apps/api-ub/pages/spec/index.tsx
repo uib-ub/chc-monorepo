@@ -797,7 +797,7 @@ export const getStaticProps: GetStaticProps = async () => {
             "properties": {
               "@context": {
                 "type": "string",
-                "example": "http://localhost:3009/ns/ubbont/context.json"
+                "example": "https://api-ub.vercel.app/ns/ubbont/context.json"
               },
               "id": {
                 "type": "string",
