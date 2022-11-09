@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import Cors from 'cors'
 import * as jsonld from 'jsonld'
 import { getTimespan } from '../../../../lib/getTimespan'
-import { API_URL, SPARQL_PREFIXES } from '../../../../lib/constants'
+import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -33,7 +33,7 @@ async function getObject(id: string | string[] | undefined, url: string): Promis
     CONSTRUCT {
       ?apiuri a ?type ;
         ?p ?o ;
-        ubbont:homepage ?homepage .
+        foaf:homepage ?homepage .
     } WHERE { 
       GRAPH ?g {
         VALUES ?id {"${id}"}
@@ -77,9 +77,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const result = await response.json()
         // console.log(result)
 
+        //const compacted = jsonld.compact(result, { '@context': 'https://api-ub.vercel.app/ns/ubbont/context.json' });
+
         // Frame the result for nested json
         const awaitFramed = jsonld.frame(result, {
-          '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
+          '@context': [`${getBaseUrl()}/ns/ubbont/context.json`],
           '@type': 'Event',
           '@embed': '@always',
         })

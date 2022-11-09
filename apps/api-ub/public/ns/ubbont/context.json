@@ -51,8 +51,7 @@
       "@id": "dct:dateAccepted"
     },
     "physicalDescription": {
-      "@id": "ubbont:physicalDescription",
-      "@type": "xsd:string"
+      "@id": "ubbont:physicalDescription"
     },
     "hasSMView": {
       "@id": "ubbont:hasSMView"
@@ -304,8 +303,7 @@
       "@type": "xsd:string"
     },
     "pages": {
-      "@id": "bibo:pages",
-      "@type": "xsd:int"
+      "@id": "bibo:pages"
     },
     "place": {
       "@id": "event:place",
@@ -767,8 +765,7 @@
       "@id": "ubbont:userDate"
     },
     "showWeb": {
-      "@id": "ubbont:showWeb",
-      "@type": "xsd:boolean"
+      "@id": "ubbont:showWeb"
     },
     "location": {
       "@id": "wgs:location",
@@ -846,8 +843,7 @@
       "@id": "ubbont:rodeNr"
     },
     "identifier": {
-      "@id": "dct:identifier",
-      "@type": "xsd:string"
+      "@id": "dct:identifier"
     },
     "Protocol": {
       "@id": "ubbont:Protocol"
@@ -1069,7 +1065,7 @@
     },
     "hasThumbnail": {
       "@id": "ubbont:hasThumbnail",
-      "@type": "xsd:string"
+      "@type": "xsd:anyuri"
     },
     "catalogueStatus": {
       "@id": "ubbont:catalogueStatus"

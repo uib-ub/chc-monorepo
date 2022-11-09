@@ -6,7 +6,7 @@ const IS_DEV = process.env.NODE_ENV == 'development' ? true : false
 export default function Home() {
   return (
     <div className='px-16'>
-      <main className='min-h-screen flex flex-grow flex-col justify-center content-center'>
+      <main className='min-h-screen py-20 flex flex-grow flex-col justify-center content-center'>
         <h1 className='my-2 text-7xl font-black text-center tracking-tighter'>
           University of Bergen Library API
         </h1>
@@ -24,11 +24,25 @@ export default function Home() {
         </div>
 
         <p className='my-5 text-center text-lg'>
-          IIIF Presentation API v3 compliant. The API serves objects from <a href="https://marcus.uib.no">Marcus</a> and <a href="https://skeivtarkiv.no">The Norwegian archive for queer history</a>.
-          The API is a simple wrapper over a SPARQL endpoint that maps the result to a simple IIIF manifest.
+          This API serves data from <a href="https://marcus.uib.no">Marcus</a> and <a href="https://skeivtarkiv.no">The Norwegian archive for queer history</a>.
+          The API is a simple wrapper over a SPARQL endpoint. The manifests served are IIIF Presentation API v3 compliant.
           <br />
           Any valid id or <i>signature</i> from these datasets will be resolved. Test some example manifests!
         </p>
+
+        <h2 className='my-2 text-4xl font-black text-center tracking-tighter'>
+          API paths
+        </h2>
+        <div className='flex content-center justify-center'>
+          <ul className='my-5'>
+            <li><a href="/v1/items/ubb-ms-0003" target={'_blank'} rel='noreferrer'>/v1/items&#123;id&#125; (ubb-ms-0003 as example)</a></li>
+            <li><a href="/v1/items/ubb-ms-0003/manifest" target={'_blank'} rel='noreferrer'>/v1/items/&#123;id&#125;/manifest (ubb-ms-0003 as example)</a></li>
+            <li><a href="/v1/events" target={'_blank'} rel='noreferrer'>/v1/events</a></li>
+            <li><a href="/v1/events/06432057-3664-4600-b1e7-4a752413ddc7" target={'_blank'} rel='noreferrer'>/v1/events&#123;id&#125; (06432057-3664-4600-b1e7-4a752413ddc7 as example)</a></li>
+            <li><a href="/v1/actors" target={'_blank'} rel='noreferrer'>/v1/actors</a></li>
+            <li><a href="/v1/actors/03f5c6c6-ce72-41b2-9797-034658c7950c" target={'_blank'} rel='noreferrer'>/v1/actors&#123;id&#125; (03f5c6c6-ce72-41b2-9797-034658c7950c as example)</a></li>
+          </ul>
+        </div>
 
 
         <h2 className='my-2 text-4xl font-black text-center tracking-tighter'>

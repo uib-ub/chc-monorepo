@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Cors from 'cors'
 import * as jsonld from 'jsonld'
-import { SPARQL_PREFIXES } from '../../../../lib/constants'
+import { getBaseUrl, SPARQL_PREFIXES } from '../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -32,7 +32,7 @@ async function getObject(): Promise<any> {
         skos:prefLabel ?label ;
         ubbont:begin ?begin ;
         ubbont:end ?end ;
-        ubbont:homepage ?homepage ;
+        foaf:homepage ?homepage ;
         dct:identifier ?id .
     } WHERE { 
       GRAPH ?g {
@@ -75,7 +75,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         // Frame the result for nested json
         const awaitFramed = jsonld.frame(result, {
-          '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
+          '@context': [`${getBaseUrl()}/ns/ubbont/context.json`],
           '@type': 'Event',
           '@embed': '@never',
         })

@@ -8,7 +8,7 @@ function ApiDoc({ spec }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <AppShell>
-        <div className='w-full flex gap-5 px-3 pt-3 pb-2 border-b items-center fixed z-50 bg-white'>
+        <div className='w-full flex gap-5 px-3 pt-3 pb-2 border-b items-center fixed z-50 bg-white backdrop-blur-xl'>
           <HeaderShell>
             <Link href="/">
               University of Bergen Library API

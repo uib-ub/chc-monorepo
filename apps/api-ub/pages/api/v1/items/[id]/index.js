@@ -1,7 +1,7 @@
 import * as jsonld from 'jsonld'
 import { getTimespan } from '../../../../../lib/getTimespan'
 import Cors from 'cors'
-import { API_URL, SPARQL_PREFIXES } from '../../../../../lib/constants'
+import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -31,8 +31,9 @@ async function getObject(id, url) {
   const query = `
     ${SPARQL_PREFIXES}
     CONSTRUCT {
-      ?uri ?p ?o .
-      ?uri a crm:E22_Human-Made_Object .
+      ?uri ?p ?o ;
+        a crm:E22_Human-Made_Object ;
+        foaf:homepage ?homepage .
       ?subject ?subjectP ?subjectO .
       ?spatial ?spatialP ?spatialO .
       ?depicts foaf:name ?depictsLabel ;
@@ -103,9 +104,10 @@ export default async function handler(req, res) {
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
+        console.log(result)
 
         const awaitFramed = jsonld.frame(result, {
-          '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
+          '@context': [`${getBaseUrl()}/ns/ubbont/context.json`],
           '@type': 'HumanMadeObject',
           '@embed': '@always',
         })
@@ -115,7 +117,7 @@ export default async function handler(req, res) {
         //delete framed?.madeBefore
 
         // Change id as this did not work in the query
-        framed.id = `https://api-ub.vercel.app/v1/items/${framed['dct:identifier' || 'identifier']}`
+        framed.id = `${getBaseUrl()}/v1/items/${framed.identifier}`
 
         res.status(200).json(framed)
       } else {

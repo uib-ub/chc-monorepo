@@ -19,7 +19,7 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider attribute="class">
-          <div className='w-full flex gap-5 px-3 pt-3 pb-2 border-b items-center fixed'>
+          <div className='w-full flex gap-5 px-3 pt-3 pb-2 border-b items-center fixed backdrop-blur-md'>
             <HeaderShell>
               <Link href="/">
                 University of Bergen Library API
