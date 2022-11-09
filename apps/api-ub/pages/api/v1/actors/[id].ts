@@ -40,7 +40,7 @@ async function getObject(id: string | string[] | undefined, url: string): Promis
         ?uri dct:identifier ?id ;
           ?p ?o .
         BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no","https://marcus.uib.no","i")) as ?homepage) .
-        BIND(iri(CONCAT("https://api-ub.vercel.app/v1/events/", ?id)) as ?apiuri) .
+        BIND(iri(CONCAT("https://api-ub.vercel.app/v1/actors/", ?id)) as ?apiuri) .
       } 
     }
   `
@@ -80,7 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // Frame the result for nested json
         const awaitFramed = jsonld.frame(result, {
           '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
-          '@type': 'Event',
+          '@type': 'Person',
           '@embed': '@always',
         })
         let framed = await awaitFramed

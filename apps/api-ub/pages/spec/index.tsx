@@ -68,9 +68,9 @@ export const getStaticProps: GetStaticProps = async () => {
       paths: {
         "/items/{manifest_id}": {
           "get": {
-            "tags": [
+            /* "tags": [
               "items"
-            ],
+            ], */
             "summary": "A single object by the given identifier. {id} is the identifier from our collections management system.",
             "produces": [
               "application/json"
@@ -100,9 +100,9 @@ export const getStaticProps: GetStaticProps = async () => {
         },
         "/items/{manifest_id}/manifest": {
           "get": {
-            "tags": [
+            /* "tags": [
               "items"
-            ],
+            ], */
             "summary": "A single object IIIF manifest by the given identifier. {id} is the identifier from our collections management system.",
             "produces": [
               "application/json"
@@ -132,9 +132,9 @@ export const getStaticProps: GetStaticProps = async () => {
         },
         "/events": {
           "get": {
-            "tags": [
+            /* "tags": [
               "events"
-            ],
+            ], */
             "summary": "A list of all events",
             "produces": [
               "application/json"
@@ -151,9 +151,9 @@ export const getStaticProps: GetStaticProps = async () => {
         },
         "/events/{event_id}": {
           "get": {
-            "tags": [
+            /* "tags": [
               "events"
-            ],
+            ], */
             "summary": "A single event.",
             "produces": [
               "application/json"
@@ -174,6 +174,57 @@ export const getStaticProps: GetStaticProps = async () => {
             "responses": {
               "200": {
                 "$ref": "#/components/responses/EventSuccess"
+              },
+              "404": {
+                "$ref": "#/components/responses/NotFound"
+              }
+            },
+          }
+        },
+        "/actors": {
+          "get": {
+            /* "tags": [
+              "actors"
+            ], */
+            "summary": "A list of \"all\" actors (LIMIT 1000)",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "$ref": "#/components/responses/ActorsSuccess"
+              },
+              "404": {
+                "$ref": "#/components/responses/NotFound"
+              }
+            },
+          }
+        },
+        "/actors/{actor_id}": {
+          "get": {
+            /* "tags": [
+              "actors"
+            ], */
+            "summary": "A single actor.",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "actor_id",
+                "in": "path",
+                "required": true,
+                "description": "The ID of the actor to retrieve",
+                "schema": {
+                  "type": "string",
+                  /* "format": "uuid" */
+                },
+                "example": "132b08be5e363b9a3e9e5eec79bd0ad72c345af2"
+              }
+            ],
+            "responses": {
+              "200": {
+                "$ref": "#/components/responses/ActorSuccess"
               },
               "404": {
                 "$ref": "#/components/responses/NotFound"
@@ -215,18 +266,476 @@ export const getStaticProps: GetStaticProps = async () => {
             "type": "object",
             "properties": {
               "@context": {
-                "$ref": "#/components/schemas/Prezi3Context"
+                "type": "string",
+                "example": "http://iiif.io/api/presentation/3/context.json"
               },
               "id": {
                 "type": "string",
-                "description": "The full Manifest URI",
-                "example": "https://api-ub.vercel.app/items/ubb-ms-0008"
+                "example": "https://api-ub.vercel.app/v1/items/ubb-ms-0003/manifest"
               },
               "type": {
                 "type": "string",
-                "enum": [
-                  "Manifest"
-                ]
+                "example": "Manifest"
+              },
+              "label": {
+                "type": "object",
+                "properties": {
+                  "@none": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "Jardarskrá stadarins at Munklifi"
+                    }
+                  }
+                }
+              },
+              "summary": {
+                "type": "object",
+                "properties": {
+                  "@none": {
+                    "type": "string",
+                    "example": "Kopi av Langes avskrift. Tilhørt W. F. K. Christie."
+                  }
+                }
+              },
+              "thumbnail": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "Image"
+                    },
+                    "format": {
+                      "type": "string",
+                      "example": "image/jpeg"
+                    }
+                  }
+                }
+              },
+              "viewingDirection": {
+                "type": "string",
+                "example": "left-to-right"
+              },
+              "behavior": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "paged"
+                }
+              },
+              "homepage": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "http://marcus.uib.no/instance/manuscript/ubb-ms-0003"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "Text"
+                    },
+                    "label": {
+                      "type": "object",
+                      "properties": {
+                        "no": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "Hjemmeside til objektet"
+                          }
+                        },
+                        "en": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "Homepage for the object"
+                          }
+                        }
+                      }
+                    },
+                    "format": {
+                      "type": "string",
+                      "example": "text/html"
+                    }
+                  }
+                }
+              },
+              "seeAlso": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "http://sparql.ub.uib.no/sparql/query?query=describe<http://data.ub.uib.no/instance/manuscript/ubb-ms-0003>"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "Dataset"
+                    },
+                    "label": {
+                      "type": "object",
+                      "properties": {
+                        "en": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "Object Description in RDF"
+                          }
+                        },
+                        "no": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "Objekt beskrivelse i RDF"
+                          }
+                        }
+                      }
+                    },
+                    "format": {
+                      "type": "string",
+                      "example": "application/rdf+xml"
+                    }
+                  }
+                }
+              },
+              "provider": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "https://www.uib.no/ub"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "Agent"
+                    },
+                    "label": {
+                      "type": "object",
+                      "properties": {
+                        "no": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "Universitetsbiblioteket i Bergen"
+                          }
+                        },
+                        "en": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "University of Bergen Library"
+                          }
+                        }
+                      }
+                    },
+                    "homepage": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "https://www.uib.no/ub"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "Text"
+                          },
+                          "label": {
+                            "type": "object",
+                            "properties": {
+                              "no": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "example": "Universitetsbiblioteket i Bergen hjemmeside"
+                                }
+                              },
+                              "en": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "example": "University of Bergen Library Homepage"
+                                }
+                              }
+                            }
+                          },
+                          "format": {
+                            "type": "string",
+                            "example": "text/html"
+                          }
+                        }
+                      }
+                    },
+                    "logo": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "https://marcus-manifest-api.vercel.app/uib-logo.png"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "Image"
+                          },
+                          "format": {
+                            "type": "string",
+                            "example": "image/png"
+                          },
+                          "width": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "200"
+                          },
+                          "height": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "200"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "rights": {
+                "type": "string",
+                "example": "http://creativecommons.org/licenses/by/4.0/"
+              },
+              "requiredStatement": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "object",
+                    "properties": {
+                      "no": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "Kreditering"
+                        }
+                      },
+                      "en": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "Attribution"
+                        }
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "object",
+                    "properties": {
+                      "no": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "Tilgjengeliggjort av Universitetsbiblioteket i Bergen"
+                        }
+                      },
+                      "en": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "Provided by University of Bergen Library"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "http://data.ub.uib.no/instance/page/ubb-ms-0003_p1"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "Canvas"
+                    },
+                    "label": {
+                      "type": "object",
+                      "properties": {
+                        "@none": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "1"
+                          }
+                        }
+                      }
+                    },
+                    "width": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": "1024"
+                    },
+                    "height": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": "1024"
+                    },
+                    "thumbnail": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "https://data.ub.uib.no/files/manlib/ubb/ubb-ms/ubb-ms-0003/jpg/ubb-ms-0003_p0001_xs.jpg"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "Image"
+                          },
+                          "width": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "200"
+                          },
+                          "height": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": "200"
+                          }
+                        }
+                      }
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "http://data.ub.uib.no/instance/digitalresource/ubb-ms-0003_p1"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "AnnotationPage"
+                          },
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "example": "http://data.ub.uib.no/instance/page/ubb-ms-0003_p1/annotation/1"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "example": "Annotation"
+                                },
+                                "motivation": {
+                                  "type": "string",
+                                  "example": "painting"
+                                },
+                                "target": {
+                                  "type": "string",
+                                  "example": "http://data.ub.uib.no/instance/page/ubb-ms-0003_p1"
+                                },
+                                "body": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "example": "https://data.ub.uib.no/files/manlib/ubb/ubb-ms/ubb-ms-0003/jpg/ubb-ms-0003_p0001_md.jpg"
+                                    },
+                                    "type": {
+                                      "type": "string",
+                                      "example": "Image"
+                                    },
+                                    "format": {
+                                      "type": "string",
+                                      "example": "image/jpeg"
+                                    },
+                                    "width": {
+                                      "type": "integer",
+                                      "format": "int32",
+                                      "example": "1024"
+                                    },
+                                    "height": {
+                                      "type": "integer",
+                                      "format": "int32",
+                                      "example": "1024"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "structures": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "http://data.ub.uib.no/instance/manuscript/ubb-ms-0003/manifest/range/1"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "Range"
+                    },
+                    "label": {
+                      "type": "object",
+                      "properties": {
+                        "no": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "Standard innholdsfortegnelse"
+                          }
+                        },
+                        "en": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "example": "Default"
+                          }
+                        }
+                      }
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "http://data.ub.uib.no/instance/page/ubb-ms-0003_p1"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "Canvas"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           },
@@ -286,33 +795,48 @@ export const getStaticProps: GetStaticProps = async () => {
           "HumanMadeObject": {
             "type": "object",
             "properties": {
+              "@context": {
+                "type": "string",
+                "example": "http://localhost:3009/ns/ubbont/context.json"
+              },
               "id": {
                 "type": "string",
-                "example": "http://data.ub.uib.no/instance/manuscript/ubb-ms-0003"
+                "example": "https://api-ub.vercel.app/v1/items/ubb-ms-0003"
               },
               "type": {
-                "type": "string",
-                "example": "bibo:Manuscript"
-              },
-              "homepage": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "example": "http://marcus.uib.no/instance/manuscript/ubb-ms-0003"
-                  }
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Manuscript"
                 }
               },
-              "image": {
+              "cataloguer": {
                 "type": "string",
-                "example": "https://data.ub.uib.no/files/manlib/ubb/ubb-ms/ubb-ms-0003/jpg/ubb-ms-0003_p0001_md.jpg"
+                "example": "http://data.ub.uib.no/instance/cataloguer/00bba5ee-2606-44a0-aadf-74ecc3e33409"
+              },
+              "hasRepresentation": {
+                "type": "string",
+                "example": "http://data.ub.uib.no/instance/aggregation/ubb-ms-0003"
+              },
+              "ubbont:hasThumbnail": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "xsd:anyuri"
+                  },
+                  "value": {
+                    "type": "string",
+                    "example": "https://data.ub.uib.no/files/manlib/ubb/ubb-ms/ubb-ms-0003/jpg/ubb-ms-0003_p0001_th.jpg"
+                  }
+                }
               },
               "madeAfter": {
                 "type": "object",
                 "properties": {
                   "type": {
                     "type": "string",
-                    "example": "http://www.w3.org/2001/XMLSchema#date"
+                    "example": "xsd:date"
                   },
                   "value": {
                     "type": "string",
@@ -325,7 +849,7 @@ export const getStaticProps: GetStaticProps = async () => {
                 "properties": {
                   "type": {
                     "type": "string",
-                    "example": "http://www.w3.org/2001/XMLSchema#date"
+                    "example": "xsd:date"
                   },
                   "value": {
                     "type": "string",
@@ -333,13 +857,57 @@ export const getStaticProps: GetStaticProps = async () => {
                   }
                 }
               },
-              "description": {
-                "type": "string",
-                "example": "Kopi av Langes avskrift. Tilhørt W. F. K. Christie."
+              "originPlace": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/instance/spatialthing/76c5aade-0809-46c9-93fe-41cdbc3892b6"
+                }
               },
-              "identifier": {
+              "ubbont:physicalDescription": {
+                "type": "string",
+                "example": "Fol. 20 blader. H."
+              },
+              "ubbont:showWeb": {
+                "type": "boolean"
+              },
+              "available": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "xsd:date"
+                  },
+                  "value": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2016-09-05"
+                  }
+                }
+              },
+              "description": {
+                "type": "object",
+                "properties": {
+                  "none": {
+                    "type": "string",
+                    "example": "Kopi av Langes avskrift. Tilhørt W. F. K. Christie."
+                  }
+                }
+              },
+              "dct:identifier": {
                 "type": "string",
                 "example": "ubb-ms-0003"
+              },
+              "isPartOf": {
+                "type": "string",
+                "example": "http://data.ub.uib.no/instance/collection/manuskriptsamlingen"
+              },
+              "relation": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/instance/spatialthing/76c5aade-0809-46c9-93fe-41cdbc3892b6"
+                }
               },
               "subject": {
                 "type": "array",
@@ -352,22 +920,62 @@ export const getStaticProps: GetStaticProps = async () => {
                     },
                     "type": {
                       "type": "string",
-                      "example": "http://www.w3.org/2004/02/skos/core#Concept"
+                      "example": "Concept"
                     },
-                    "identifier": {
+                    "dct:identifier": {
                       "type": "string",
                       "example": "6e7b6583-6a5b-498b-893c-2d239333b96d"
                     },
                     "prefLabel": {
-                      "type": "string",
-                      "example": "Jordebøker"
+                      "type": "object",
+                      "properties": {
+                        "none": {
+                          "type": "string",
+                          "example": "Jordebøker"
+                        }
+                      }
                     }
                   }
                 }
               },
               "title": {
-                "type": "string",
-                "example": "Jardarskrá stadarins at Munklifi"
+                "type": "object",
+                "properties": {
+                  "none": {
+                    "type": "string",
+                    "example": "Jardarskrá stadarins at Munklifi"
+                  }
+                }
+              },
+              "bibo:pages": {
+                "type": "integer",
+                "format": "int32",
+                "example": "43"
+              },
+              "timespan": {
+                "type": "object",
+                "properties": {
+                  "edtf": {
+                    "type": "string",
+                    "example": "1400-01-01/1500-01-01"
+                  },
+                  "beginOfTheBegin": {
+                    "type": "string",
+                    "example": "1400-01-01T00:00:00.000Z"
+                  },
+                  "endOfTheBegin": {
+                    "type": "string",
+                    "example": "1400-01-02T00:00:00.000Z"
+                  },
+                  "beginOfTheEnd": {
+                    "type": "string",
+                    "example": "1500-01-01T00:00:00.000Z"
+                  },
+                  "endOfTheEnd": {
+                    "type": "string",
+                    "example": "1500-01-02T00:00:00.000Z"
+                  }
+                }
               }
             },
             "Events": {
@@ -653,18 +1261,18 @@ export const getStaticProps: GetStaticProps = async () => {
             "properties": {
               "id": {
                 "type": "string",
-                "example": "http://data.ub.uib.no/instance/event/352916f6-2db5-4995-bbf8-c5689716051a"
+                "example": "https://api-ub.vercel.app/v1/events/352916f6-2db5-4995-bbf8-c5689716051a"
               },
               "type": {
                 "type": "string",
                 "example": "Event"
               },
-              "begin": {
+              "beginOfTheBegin": {
                 "type": "object",
                 "properties": {
                   "type": {
                     "type": "string",
-                    "example": "http://www.w3.org/2001/XMLSchema#date"
+                    "example": "xsd:date"
                   },
                   "value": {
                     "type": "string",
@@ -673,12 +1281,12 @@ export const getStaticProps: GetStaticProps = async () => {
                   }
                 }
               },
-              "end": {
+              "endOdTheEnd": {
                 "type": "object",
                 "properties": {
                   "type": {
                     "type": "string",
-                    "example": "http://www.w3.org/2001/XMLSchema#date"
+                    "example": "xsd:date"
                   },
                   "value": {
                     "type": "string",
@@ -687,7 +1295,7 @@ export const getStaticProps: GetStaticProps = async () => {
                   }
                 }
               },
-              "homepage": {
+              "ubbont:homepage": {
                 "type": "object",
                 "properties": {
                   "id": {
@@ -696,46 +1304,16 @@ export const getStaticProps: GetStaticProps = async () => {
                   }
                 }
               },
-              "identifier": {
+              "dct:identifier": {
                 "type": "string",
                 "example": "352916f6-2db5-4995-bbf8-c5689716051a"
               },
-              "modified": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "example": "http://www.w3.org/2001/XMLSchema#dateTime"
-                  },
-                  "value": {
-                    "type": "string",
-                    "example": "2021-11-23T14:42:15"
-                  }
-                }
-              },
-              "inScheme": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "example": "http://data.ub.uib.no/conceptscheme/billedsamlingens-emneord"
-                  }
-                }
-              },
               "prefLabel": {
-                "type": "string",
-                "example": "1956 Suezkrisen"
-              },
-              "logo": {
-                "type": "string",
-                "example": "http://data.ub.uib.no/files/bs/ubb/ubb-jg/ubb-jg-k/ubb-jg-k-0085/ubb-jg-k-0085-02detalj/jpg/ubb-jg-k-0085-02detalj_th.jpg"
-              },
-              "page": {
                 "type": "object",
                 "properties": {
-                  "id": {
+                  "none": {
                     "type": "string",
-                    "example": "http://data.ub.uib.no/instance/webresource/44b79a9b-e73b-4c9c-ab7c-03b66c2cc29d"
+                    "example": "1956 Suezkrisen"
                   }
                 }
               }
@@ -745,421 +1323,266 @@ export const getStaticProps: GetStaticProps = async () => {
             "type": "object",
             "properties": {
               "@context": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  },
-                  "none": {
-                    "type": "string"
-                  },
-                  "Event": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "product": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "spatial": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "subject": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "title": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "prefLabel": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "inScheme": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "altLabel": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "depicts": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "name": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "maker": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "homepage": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "image": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "showWeb": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "previousIdentifier": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "beginOfTheBegin": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "endOfTheEnd": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "label": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "description": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "created": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "identifier": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "modified": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "page": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "logo": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "seeAlso": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "place": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "superEvent": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "subEvent": {
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string"
-                      },
-                      "@type": {
-                        "type": "string"
-                      },
-                      "@container": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "sc": {
-                    "type": "string"
-                  },
-                  "oa": {
-                    "type": "string"
-                  },
-                  "dct": {
-                    "type": "string"
-                  },
-                  "rdf": {
-                    "type": "string"
-                  },
-                  "ubbont": {
-                    "type": "string"
-                  },
-                  "rdfs": {
-                    "type": "string"
-                  },
-                  "dc": {
-                    "type": "string"
-                  },
-                  "bibo": {
-                    "type": "string"
-                  },
-                  "event": {
-                    "type": "string"
-                  }
-                }
+                "type": "string",
+                "example": "https://api-ub.vercel.app/ns/ubbont/context.json"
               },
               "id": {
-                "type": "string"
+                "type": "string",
+                "example": "https://api-ub.vercel.app/v1/events/352916f6-2db5-4995-bbf8-c5689716051a"
               },
               "type": {
-                "type": "string"
+                "type": "string",
+                "example": "Event"
               },
               "beginOfTheBegin": {
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "xsd:date"
                   },
                   "value": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date",
+                    "example": "1956-10-29"
                   }
                 }
               },
-              "endOfTheEnd": {
+              "endOdTheEnd": {
                 "type": "object",
                 "properties": {
                   "type": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "xsd:date"
                   },
                   "value": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date",
+                    "example": "1956-11-06"
                   }
                 }
               },
-              "homepage": {
-                "type": "array",
-                "items": {
-                  "type": "string"
+              "ubbont:homepage": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "https://marcus.uib.no/instance/event/352916f6-2db5-4995-bbf8-c5689716051a"
+                  }
                 }
               },
-              "previousIdentifier": {
-                "type": "string"
-              },
-              "showWeb": {
+              "ubbont:showWeb": {
                 "type": "boolean"
               },
               "product": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/instance/photograph/ubb-jg-k-0003"
                 }
               },
-              "identifier": {
-                "type": "string"
+              "dct:identifier": {
+                "type": "string",
+                "example": "352916f6-2db5-4995-bbf8-c5689716051a"
+              },
+              "modified": {
+                "type": "string",
+                "example": "2021-11-23T14:42:15"
+              },
+              "inScheme": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/conceptscheme/billedsamlingens-emneord"
+                }
               },
               "prefLabel": {
                 "type": "object",
                 "properties": {
                   "none": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "1956 Suezkrisen"
                   }
                 }
+              },
+              "foaf:logo": {
+                "type": "string",
+                "example": "http://data.ub.uib.no/files/bs/ubb/ubb-jg/ubb-jg-k/ubb-jg-k-0085/ubb-jg-k-0085-02detalj/jpg/ubb-jg-k-0085-02detalj_th.jpg"
+              },
+              "page": {
+                "type": "string",
+                "example": "http://data.ub.uib.no/instance/webresource/44b79a9b-e73b-4c9c-ab7c-03b66c2cc29d"
               },
               "timespan": {
                 "type": "object",
                 "properties": {
                   "edtf": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "1956-10-29/"
                   },
                   "beginOfTheBegin": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "1956-10-29T00:00:00.000Z"
                   },
                   "endOfTheBegin": {
-                    "type": "string"
-                  },
-                  "beginOfTheEnd": {
-                    "type": "string"
-                  },
-                  "endOfTheEnd": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "1956-10-30T00:00:00.000Z"
                   }
                 }
+              }
+            }
+          },
+          "Actors": {
+            "type": "Object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "https://api-ub.vercel.app/v1/actors/00325061-3fa1-46c8-960e-9675f413c39e"
+              },
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "Person"
+                }
+              },
+              "ubbont:homepage": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "https://marcus.uib.no/instance/person/00325061-3fa1-46c8-960e-9675f413c39e"
+                  }
+                }
+              },
+              "dbo:profession": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "oseanograf"
+                }
+              },
+              "foaf:familyName": {
+                "type": "string",
+                "example": "Fjeldstad"
+              },
+              "foaf:firstName": {
+                "type": "string",
+                "example": "Jonas Ekman"
+              },
+              "foaf:name": {
+                "type": "string",
+                "example": "Jonas Ekman Fjeldstad"
+              }
+            }
+          },
+          "Actor": {
+            "type": "object",
+            "properties": {
+              "@context": {
+                "type": "string",
+                "example": "https://api-ub.vercel.app/ns/ubbont/context.json"
+              },
+              "id": {
+                "type": "string",
+                "example": "https://api-ub.vercel.app/v1/actors/07dd8798-d0c5-432b-8267-99913f654165"
+              },
+              "type": {
+                "type": "string",
+                "example": "Person"
+              },
+              "cataloguer": {
+                "type": "string",
+                "example": "http://data.ub.uib.no/instance/cataloguer/9e7cca14-8d21-4ceb-afd7-7e64408ae0dd"
+              },
+              "ubbont:homepage": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "https://marcus.uib.no/instance/person/07dd8798-d0c5-432b-8267-99913f654165"
+                  }
+                }
+              },
+              "birthYear": {
+                "type": "string",
+                "example": "1788"
+              },
+              "deathYear": {
+                "type": "string",
+                "example": "1859"
+              },
+              "relationToString": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "ubb-ms-1124"
+                }
+              },
+              "available": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "xsd:date"
+                  },
+                  "value": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2017-02-11"
+                  }
+                }
+              },
+              "dct:identifier": {
+                "type": "string",
+                "example": "07dd8798-d0c5-432b-8267-99913f654165"
+              },
+              "relation": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/instance/manuscript/ubb-ms-0289"
+                }
+              },
+              "parent": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/instance/person/84e278fc-c58e-4bd2-884e-b3b956c76933"
+                }
+              },
+              "sibling": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/instance/person/18e5207f-153e-4bfc-881b-30f6021690ca"
+                }
+              },
+              "inScheme": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/conceptscheme/8c7a6025-d771-4d6c-9c41-72f5b36ecde5"
+                }
+              },
+              "foaf:familyName": {
+                "type": "string",
+                "example": "Kølle"
+              },
+              "foaf:firstName": {
+                "type": "string",
+                "example": "Catharina Hermine"
+              },
+              "made": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": "http://data.ub.uib.no/instance/manuscript/ubb-ms-0659-e-09-02"
+                }
+              },
+              "foaf:name": {
+                "type": "string",
+                "example": "Catharine Hermine Kølle"
               }
             }
           }
@@ -1211,6 +1634,26 @@ export const getStaticProps: GetStaticProps = async () => {
               "application/ld+json": {
                 "schema": {
                   "$ref": "#/components/schemas/Event"
+                }
+              },
+            }
+          },
+          "ActorsSuccess": {
+            "description": "Request for events was successful",
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Actors"
+                }
+              },
+            }
+          },
+          "ActorSuccess": {
+            "description": "Request for events was successful",
+            "content": {
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Actor"
                 }
               },
             }

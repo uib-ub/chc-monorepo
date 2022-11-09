@@ -35,6 +35,9 @@
     "type": "@type",
     "value": "@value",
     "none": "@none",
+    "HumanMadeObject": {
+      "@id": "crm:E22_Human-Made_Object"
+    },
     "spatial": {
       "@id": "dct:spatial",
       "@type": "@id",

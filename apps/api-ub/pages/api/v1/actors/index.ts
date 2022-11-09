@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Cors from 'cors'
 import * as jsonld from 'jsonld'
-import { getTimespan } from '../../../../lib/getTimespan'
-import { API_URL, SPARQL_PREFIXES } from '../../../../lib/constants'
+import { SPARQL_PREFIXES } from '../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -18,35 +17,50 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: Function) 
       if (result instanceof Error) {
         return reject(result)
       }
-
       return resolve(result)
     })
   })
 }
 
-async function getObject(id: string | string[] | undefined, url: string): Promise<any> {
-  if (!id) {
-    throw Error
-  }
+
+async function getObject(): Promise<any> {
+  const LIMIT = 1000
   const query = `
     ${SPARQL_PREFIXES}
     CONSTRUCT {
-      ?apiuri a ?type ;
-        ?p ?o ;
-        ubbont:homepage ?homepage .
+      ?apiuri a <http://xmlns.com/foaf/0.1/Agent> ;
+        a ?class ;
+        foaf:name ?name ;
+        foaf:firstName ?firstName ;
+        foaf:familyName ?familyName ;
+        ubbont:homepage ?homepage ;
+        dbo:birthYear ?bYear ;
+        dbo:deathYear ?dYear ;
+        dbo:birthDate ?bDate ;
+        dbo:deathDate ?dDate ;
+        dbo:profession ?profession .
     } WHERE { 
       GRAPH ?g {
-        VALUES ?id {"${id}"}
-        ?uri dct:identifier ?id ;
-          ?p ?o .
+        VALUES ?type {<http://xmlns.com/foaf/0.1/Person> <http://xmlns.com/foaf/0.1/Agent> <http://xmlns.com/foaf/0.1/Organization> <http://dbpedia.org/ontology/Company> <http://data.ub.uib.no/ontology/Family>}
+        ?uri a ?type ;
+          a ?class ;
+          foaf:name ?name ;
+          foaf:firstName ?firstName ;
+          foaf:familyName ?familyName ;
+          dct:identifier ?id .
+          OPTIONAL { ?uri dbo:birthYear ?bYear } .
+          OPTIONAL { ?uri dbo:deathYear ?dYear } .
+          OPTIONAL { ?uri dbo:birthDate ?bDate } .
+          OPTIONAL { ?uri dbo:deathDate ?dDate } .
+          OPTIONAL { ?uri dbo:profession ?profession } .
         BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no","https://marcus.uib.no","i")) as ?homepage) .
-        BIND(iri(CONCAT("https://api-ub.vercel.app/v1/events/", ?id)) as ?apiuri) .
+        BIND(iri(CONCAT("https://api-ub.vercel.app/v1/actors/", ?id)) as ?apiuri) .
       } 
-    }
+    } LIMIT ${LIMIT}
   `
 
   const results = await fetch(
-    `${url}${encodeURIComponent(
+    `${process.env.MARCUS_API}${encodeURIComponent(
       query,
     )}&output=json`,
   )
@@ -55,7 +69,6 @@ async function getObject(id: string | string[] | undefined, url: string): Promis
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
-    query: { id },
     method,
   } = req
 
@@ -63,39 +76,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   switch (method) {
     case 'GET':
-
-      // Find the service that contains data on this item
-      const checkedServices = await fetch(`${API_URL}/v1/resolver/${id}`).then(res => res.json())
-      const url = await checkedServices.url
-      // No URL means no service found, but this is horrible error handeling
-      if (!url) return res.status(404).json({ message: 'ID not found' })
-
-      const response = await getObject(id, url)
+      const response = await getObject()
 
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
-        // console.log(result)
+        //console.log(result)
 
         // Frame the result for nested json
         const awaitFramed = jsonld.frame(result, {
           '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
-          '@type': 'Event',
-          '@embed': '@always',
+          '@type': 'Agent',
+          '@embed': '@never',
         })
-        let framed = await awaitFramed
+        const framed = await awaitFramed
 
-        // Transform the data, set a timespan as an example
-        framed.timespan = getTimespan(undefined, framed?.beginOfTheBegin, framed?.endOfTheEnd)
-        //delete framed?.beginOfTheBegin
-        //delete framed?.endOfTheEnd
-
-        res.status(200).json(framed)
+        res.status(200).json(framed['@graph'])
       } else {
         // Handle errors
         console.log(response.status, response.statusText);
       }
-
       break
     default:
       res.setHeader('Allow', ['GET'])

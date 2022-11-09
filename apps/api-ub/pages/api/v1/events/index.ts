@@ -22,24 +22,31 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: Function) 
   })
 }
 
-
 async function getObject(): Promise<any> {
+  const LIMIT = 300000
   const query = `
     ${SPARQL_PREFIXES}
     CONSTRUCT {
       ?apiuri a ?type ;
-        ?p ?o ;
-        ubbont:homepage ?homepage .
+        a ?class ;
+        skos:prefLabel ?label ;
+        ubbont:begin ?begin ;
+        ubbont:end ?end ;
+        ubbont:homepage ?homepage ;
+        dct:identifier ?id .
     } WHERE { 
       GRAPH ?g {
         VALUES ?type {<http://purl.org/NET/c4dm/event.owl#Event>}
         ?uri a ?type ;
-          ?p ?o .
-        FILTER(?p != event:product && ?p != ubbont:showWeb && ?p != ubbont:cataloguer && ?p != dc:relation && ?p != dct:relation && ?p != dct:hasPart)
+          a ?class ;
+          skos:prefLabel ?label ;
+          dct:identifier ?id .
+        OPTIONAL { ?uri ubbont:begin ?begin } .
+        OPTIONAL { ?uri ubbont:end ?end } .
         BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no","https://marcus.uib.no","i")) as ?homepage) .
-        BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no/instance/event/","https://api-ub.vercel.app/v1/events/","i")) as ?apiuri) .
+        BIND(iri(CONCAT("https://api-ub.vercel.app/v1/events/", ?id)) as ?apiuri) .
       } 
-    }
+    } LIMIT ${LIMIT}
   `
 
   const results = await fetch(

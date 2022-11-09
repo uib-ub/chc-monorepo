@@ -32,6 +32,7 @@ async function getObject(id, url) {
     ${SPARQL_PREFIXES}
     CONSTRUCT {
       ?uri ?p ?o .
+      ?uri a crm:E22_Human-Made_Object .
       ?subject ?subjectP ?subjectO .
       ?spatial ?spatialP ?spatialO .
       ?depicts foaf:name ?depictsLabel ;
@@ -44,10 +45,6 @@ async function getObject(id, url) {
         ?uri dct:identifier ?id ;
           ?p ?o .
         BIND(iri(REPLACE(str(?uri), "data.ub.uib.no","marcus.uib.no","i")) as ?homepage) .
-        OPTIONAL { ?uri dct:description ?description . }
-        OPTIONAL { ?uri dct:created ?created . }
-        OPTIONAL { ?uri ubbont:madeAfter ?madeAfter . }
-        OPTIONAL { ?uri ubbont:madeBefore ?madeBefore . }
         OPTIONAL { 
       	  ?uri dct:license / rdfs:label ?licenseLabel .
     	  }
@@ -106,18 +103,19 @@ export default async function handler(req, res) {
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
-        // TODO: Is this safe? Is the main object type always first?
-        const frameClass = result['@graph'][0]['@type']
 
         const awaitFramed = jsonld.frame(result, {
-          '@context': ['https://api-ub.vercel.app/ns/ubbont/context.json'],
-          '@type': frameClass.split(':')[1],
+          '@context': ['http://localhost:3009/ns/ubbont/context.json'],
+          '@type': 'HumanMadeObject',
           '@embed': '@always',
         })
         let framed = await awaitFramed
         framed.timespan = getTimespan(undefined, framed?.madeAfter, framed?.madeBefore)
         //delete framed?.madeAfter
         //delete framed?.madeBefore
+
+        // Change id as this did not work in the query
+        framed.id = `https://api-ub.vercel.app/v1/items/${framed['dct:identifier' || 'identifier']}`
 
         res.status(200).json(framed)
       } else {
