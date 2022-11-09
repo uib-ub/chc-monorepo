@@ -1433,7 +1433,7 @@ export const getStaticProps: GetStaticProps = async () => {
             }
           },
           "Actors": {
-            "type": "Object",
+            "type": "object",
             "properties": {
               "id": {
                 "type": "string",
