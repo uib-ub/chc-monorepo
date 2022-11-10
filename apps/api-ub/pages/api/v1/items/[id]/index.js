@@ -94,7 +94,7 @@ export default async function handler(req, res) {
     case 'GET':
 
       // Find the service that contains data on this item
-      const checkedServices = await fetch(`${API_URL}/v1/resolver/${id}`).then(res => res.json())
+      const checkedServices = await fetch(`${API_URL}/resolver/${id}?v=1`).then(res => res.json())
       const url = await checkedServices.url
       // No URL means no service found, but this is horrible error handeling
       if (!url) res.status(404).json({ message: 'ID not found' })
@@ -117,7 +117,7 @@ export default async function handler(req, res) {
         //delete framed?.madeBefore
 
         // Change id as this did not work in the query
-        framed.id = `${getBaseUrl()}/v1/items/${framed.identifier}`
+        framed.id = `${getBaseUrl()}/items/${framed.identifier}`
 
         res.status(200).json(framed)
       } else {

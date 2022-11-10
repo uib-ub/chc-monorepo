@@ -271,7 +271,7 @@ export const getStaticProps: GetStaticProps = async () => {
               },
               "id": {
                 "type": "string",
-                "example": "https://api-ub.vercel.app/v1/items/ubb-ms-0003/manifest"
+                "example": "https://api-ub.vercel.app/items/ubb-ms-0003/manifest"
               },
               "type": {
                 "type": "string",
@@ -801,7 +801,7 @@ export const getStaticProps: GetStaticProps = async () => {
               },
               "id": {
                 "type": "string",
-                "example": "https://api-ub.vercel.app/v1/items/ubb-ms-0003"
+                "example": "https://api-ub.vercel.app/items/ubb-ms-0003"
               },
               "type": {
                 "type": "array",

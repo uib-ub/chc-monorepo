@@ -35,12 +35,12 @@ export default function Home() {
         </h2>
         <div className='flex content-center justify-center'>
           <ul className='my-5'>
-            <li><a href="/v1/items/ubb-ms-0003" target={'_blank'} rel='noreferrer'>/v1/items&#123;id&#125; (ubb-ms-0003 as example)</a></li>
-            <li><a href="/v1/items/ubb-ms-0003/manifest" target={'_blank'} rel='noreferrer'>/v1/items/&#123;id&#125;/manifest (ubb-ms-0003 as example)</a></li>
-            <li><a href="/v1/events" target={'_blank'} rel='noreferrer'>/v1/events</a></li>
-            <li><a href="/v1/events/06432057-3664-4600-b1e7-4a752413ddc7" target={'_blank'} rel='noreferrer'>/v1/events&#123;id&#125; (06432057-3664-4600-b1e7-4a752413ddc7 as example)</a></li>
-            <li><a href="/v1/actors" target={'_blank'} rel='noreferrer'>/v1/actors</a></li>
-            <li><a href="/v1/actors/03f5c6c6-ce72-41b2-9797-034658c7950c" target={'_blank'} rel='noreferrer'>/v1/actors&#123;id&#125; (03f5c6c6-ce72-41b2-9797-034658c7950c as example)</a></li>
+            <li><a href="/items/ubb-ms-0003" target={'_blank'} rel='noreferrer'>/items&#123;id&#125; (ubb-ms-0003 as example)</a></li>
+            <li><a href="/items/ubb-ms-0003/manifest" target={'_blank'} rel='noreferrer'>/items/&#123;id&#125;/manifest (ubb-ms-0003 as example)</a></li>
+            <li><a href="/events" target={'_blank'} rel='noreferrer'>/events</a></li>
+            <li><a href="/events/06432057-3664-4600-b1e7-4a752413ddc7" target={'_blank'} rel='noreferrer'>/events&#123;id&#125; (06432057-3664-4600-b1e7-4a752413ddc7 as example)</a></li>
+            <li><a href="/actors" target={'_blank'} rel='noreferrer'>/actors</a></li>
+            <li><a href="/actors/03f5c6c6-ce72-41b2-9797-034658c7950c" target={'_blank'} rel='noreferrer'>/actors&#123;id&#125; (03f5c6c6-ce72-41b2-9797-034658c7950c as example)</a></li>
           </ul>
         </div>
 
@@ -61,50 +61,50 @@ export default function Home() {
           <tbody>
             <tr>
               <td className='border border-slate-700 p-2'>Marcus</td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ms-0003">/v1/items/ubb-ms-0003</a></td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ms-0003/manifest">/v1/items/ubb-ms-0003/manifest</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ms-0003">/items/ubb-ms-0003</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ms-0003/manifest">/items/ubb-ms-0003/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ms-0003/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/items/ubb-ms-0003/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
               <td className='border border-slate-700 p-2'>Marcus</td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ms-0185-j-a-007">/v1/items/ubb-ms-0185-j-a-007</a></td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ms-0185-j-a-007/manifest">/v1/items/ubb-ms-0185-j-a-007/manifest</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ms-0185-j-a-007">/items/ubb-ms-0185-j-a-007</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ms-0185-j-a-007/manifest">/items/ubb-ms-0185-j-a-007/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ms-0185-j-a-007/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/items/ubb-ms-0185-j-a-007/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
               <td className='border border-slate-700 p-2'>Marcus</td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-wil-f-208">/v1/items/ubb-wil-f-208</a></td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-wil-f-208/manifest">/v1/items/ubb-wil-f-208/manifest</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-wil-f-208">/items/ubb-wil-f-208</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-wil-f-208/manifest">/items/ubb-wil-f-208/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-wil-f-208/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/items/ubb-wil-f-208/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
               <td className='border border-slate-700 p-2'>Skeivt arkiv</td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-0001-f-01-01-02">/v1/items/ubb-ska-0001-f-01-01-02</a></td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-0001-f-01-01-02/manifest">/v1/items/ubb-ska-0001-f-01-01-02/manifest</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ska-0001-f-01-01-02">/items/ubb-ska-0001-f-01-01-02</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ska-0001-f-01-01-02/manifest">/items/ubb-ska-0001-f-01-01-02/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ska-0001-f-01-01-02/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/items/ubb-ska-0001-f-01-01-02/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
               <td className='border border-slate-700 p-2'>Skeivt arkiv</td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-a0009-u-457">/v1/items/ubb-ska-a0009-u-457</a></td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-a0009-u-457/manifest">/v1/items/ubb-ska-a0009-u-457/manifest</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ska-a0009-u-457">/items/ubb-ska-a0009-u-457</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ska-a0009-u-457/manifest">/items/ubb-ska-a0009-u-457/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ska-a0009-u-457/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/items/ubb-ska-a0009-u-457/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
             <tr>
               <td className='border border-slate-700 p-2'>Skeivt arkiv</td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-a0033-u-0002">/v1/items/ubb-ska-a0033-u-0002</a></td>
-              <td className='border border-slate-700 p-2'><a href="/v1/items/ubb-ska-a0033-u-0002/manifest">/v1/items/ubb-ska-a0033-u-0002/manifest</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ska-a0033-u-0002">/items/ubb-ska-a0033-u-0002</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-ska-a0033-u-0002/manifest">/items/ubb-ska-a0033-u-0002/manifest</a></td>
               <td className='border border-slate-700 p-2'>
-                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/v1/items/ubb-ska-a0033-u-0002/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/items/ubb-ska-a0033-u-0002/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
               </td>
             </tr>
           </tbody>

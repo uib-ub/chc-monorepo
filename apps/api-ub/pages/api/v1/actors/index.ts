@@ -54,7 +54,7 @@ async function getObject(): Promise<any> {
           OPTIONAL { ?uri dbo:deathDate ?dDate } .
           OPTIONAL { ?uri dbo:profession ?profession } .
         BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no","https://marcus.uib.no","i")) as ?homepage) .
-        BIND(iri(CONCAT("https://api-ub.vercel.app/v1/actors/", ?id)) as ?apiuri) .
+        BIND(iri(CONCAT("https://api-ub.vercel.app/actors/", ?id)) as ?apiuri) .
       } 
     } LIMIT ${LIMIT}
   `

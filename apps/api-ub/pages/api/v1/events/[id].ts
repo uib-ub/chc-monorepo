@@ -40,7 +40,7 @@ async function getObject(id: string | string[] | undefined, url: string): Promis
         ?uri dct:identifier ?id ;
           ?p ?o .
         BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no","https://marcus.uib.no","i")) as ?homepage) .
-        BIND(iri(CONCAT("https://api-ub.vercel.app/v1/events/", ?id)) as ?apiuri) .
+        BIND(iri(CONCAT("https://api-ub.vercel.app/events/", ?id)) as ?apiuri) .
       } 
     }
   `
@@ -65,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'GET':
 
       // Find the service that contains data on this item
-      const checkedServices = await fetch(`${API_URL}/v1/resolver/${id}`).then(res => res.json())
+      const checkedServices = await fetch(`${API_URL}/resolver/${id}?v=1`).then(res => res.json())
       const url = await checkedServices.url
       // No URL means no service found, but this is horrible error handeling
       if (!url) return res.status(404).json({ message: 'ID not found' })

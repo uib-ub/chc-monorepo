@@ -44,7 +44,7 @@ async function getObject(): Promise<any> {
         OPTIONAL { ?uri ubbont:begin ?begin } .
         OPTIONAL { ?uri ubbont:end ?end } .
         BIND(iri(REPLACE(str(?uri), "http://data.ub.uib.no","https://marcus.uib.no","i")) as ?homepage) .
-        BIND(iri(CONCAT("https://api-ub.vercel.app/v1/events/", ?id)) as ?apiuri) .
+        BIND(iri(CONCAT("https://api-ub.vercel.app/events/", ?id)) as ?apiuri) .
       } 
     } LIMIT ${LIMIT}
   `

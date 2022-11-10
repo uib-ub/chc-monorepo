@@ -25,7 +25,18 @@ const nextConfig = {
     return [
       {
         source: '/:path*',
-        destination: '/api/:path*',
+        has: [
+          {
+            type: 'query',
+            key: 'v',
+            value: '1',
+          },
+        ],
+        destination: '/api/v1/:path*',
+      },
+      {
+        source: '/:path*',
+        destination: '/api/v1/:path*',
       },
     ]
   },

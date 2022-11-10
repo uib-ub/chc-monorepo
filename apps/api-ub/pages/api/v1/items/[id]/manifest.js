@@ -202,7 +202,7 @@ export default async function handler(req, res) {
     case 'GET':
 
       // Find the service that contains data on this item
-      const checkedServices = await fetch(`${API_URL}/v1/resolver/${id}`).then(res => res.json())
+      const checkedServices = await fetch(`${API_URL}/resolver/${id}?v=1`).then(res => res.json())
       const url = await checkedServices.url
 
       // No URL means no service found, but this is horrible error handeling

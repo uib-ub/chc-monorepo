@@ -209,7 +209,7 @@ export default function getDocument(item, assetID) {
       label: nomalizedLabel(item.title),
       preferredIdentifier: item.identifier,
       homepage: item.homepage.id,
-      subjectOfManifest: `https://ub-iiif.vercel.app/api/manifest/marcus/${item.identifier}`,
+      subjectOfManifest: `https://api-ub.vercel.app/items/${item.identifier}/manifest`,
       identifiedBy: [
         {
           _type: 'Identifier',

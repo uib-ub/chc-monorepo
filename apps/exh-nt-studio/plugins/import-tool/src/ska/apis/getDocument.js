@@ -126,7 +126,7 @@ export default function getDocument(item, assetID) {
       },
       preferredIdentifier: item.identifier,
       homepage: item.homepage.id,
-      subjectOfManifest: `https://ub-iiif.vercel.app/api/manifest/skeivtarkiv/${item.identifier}`,
+      subjectOfManifest: `https://api-ub.vercel.app/items/${item.identifier}/manifest`,
       identifiedBy: [
         {
           _type: 'Identifier',
