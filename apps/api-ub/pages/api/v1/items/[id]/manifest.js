@@ -136,50 +136,51 @@ async function getObject(api, id) {
       ?part sc:thumbnail ?canvasThumb .
       ?part sc:items ?resource .
       ?resource rdf:type oa:Annotation .
-      ?resource oa:body ?imgUrl .
+      ?resource ubbont:hasXLView ?partXL ;
+        ubbont:hasMDView ?partMD ; 
+        ubbont:hasSMView ?partSM .
       ?singleCanvas rdf:type sc:Canvas .
       ?singleCanvas rdfs:label 1 .
       ?singleCanvas sc:thumbnail ?singleCanvasThumb .
       ?singleCanvas sc:items ?singlePart .
-      ?singlePart rdf:type oa:Annotation .
-      ?singlePart oa:body ?singleImageUrl .
+      ?singlePart rdf:type oa:Annotation ;
+        ubbont:hasXLView ?singleXL ;
+        ubbont:hasMDView ?singleMD ; 
+        ubbont:hasSMView ?singleSM .
     }
-    WHERE
-      { GRAPH ?g
-          { 
-            VALUES ?id { "${id}" }
-            ?s  dct:identifier        ?id ;
-                ubbont:hasRepresentation  ?repr ;
-                dct:title             ?title ;
-                ubbont:hasThumbnail   ?thumb
-            OPTIONAL { ?s  dct:description  ?desc }
-            OPTIONAL { 
-                ?repr dct:hasPart ?singlePart ;
-                  rdfs:label ?partLabel .
-                ?singlePart  ubbont:hasXSView  ?singleCanvasThumb
-                OPTIONAL { ?singlePart ubbont:hasXLView ?singleXL . }
-                OPTIONAL { ?singlePart ubbont:hasLGView ?singleLG . }
-                OPTIONAL { ?singlePart ubbont:hasMDView ?singleMD . }
-                OPTIONAL { ?singlePart ubbont:hasSMView ?singleSM . }
-              }
-              OPTIONAL { 
-                ?repr dct:hasPart ?part ;
-                  rdfs:label ?partLabel .
-                ?part ubbont:hasResource ?resource ;
-                  ubbont:sequenceNr ?seq .
-                ?resource ubbont:hasMDView ?image ;
-                  ubbont:hasXSView ?canvasThumb .
-              }
-            BIND(coalesce(?singleXL, ?singleLG, ?singleMD, ?singleSM) AS ?singleImage)
-            BIND(iri(?image) AS ?imgUrl)
-            BIND(iri(?singleImage) AS ?singleImageUrl)
-            BIND(iri(concat("${manifestBase}", ?partLabel, "/manifest")) AS ?manifestURL)
-            BIND(iri(concat("http://data.ub.uib.no/instance/manuscript/", ?id, "/manifest/range/1")) AS ?rangeURL)
-            BIND(iri(concat("http://data.ub.uib.no/instance/page/", ?id, "_p1")) AS ?singleCanvas)
-            BIND(iri(replace(str(?s), "data.ub.uib.no", "marcus.uib.no", "i")) AS ?homepage)
-          }
+    WHERE { 
+      GRAPH ?g { 
+        VALUES ?id { "${id}" }
+        ?s dct:identifier ?id ;
+          ubbont:hasRepresentation ?repr ;
+          dct:title ?title ;
+          ubbont:hasThumbnail ?thumb
+        OPTIONAL { ?s  dct:description  ?desc }
+        OPTIONAL { 
+          ?repr dct:hasPart ?singlePart ;
+            rdfs:label ?partLabel .
+          ?singlePart  ubbont:hasXSView  ?singleCanvasThumb ;
+            ubbont:hasMDView ?singleMD .
+          OPTIONAL { ?singlePart ubbont:hasXLView ?singleXL . }
+          OPTIONAL { ?singlePart ubbont:hasSMView ?singleSM . }
+        }
+        OPTIONAL { 
+          ?repr dct:hasPart ?part ;
+            rdfs:label ?partLabel .
+          ?part ubbont:hasResource ?resource ;
+            ubbont:sequenceNr ?seq .
+          ?resource ubbont:hasXSView ?canvasThumb ;
+            ubbont:hasMDView ?partMD . 
+            OPTIONAL { ?resource ubbont:hasXLView ?partXL . }
+            OPTIONAL { ?resource ubbont:hasSMView ?partSM . }
+        }
+        BIND(iri(concat("${manifestBase}", ?partLabel, "/manifest")) AS ?manifestURL)
+        BIND(iri(concat("http://data.ub.uib.no/instance/manuscript/", ?id, "/manifest/range/1")) AS ?rangeURL)
+        BIND(iri(concat("http://data.ub.uib.no/instance/page/", ?id, "_p1")) AS ?singleCanvas)
+        BIND(iri(replace(str(?s), "data.ub.uib.no", "marcus.uib.no", "i")) AS ?homepage)
       }
-    ORDER BY ?s ?repr ?part ?resource ?image
+    }
+    ORDER BY ?s ?repr ?part ?resource
   `
   const result = await fetch(
     `${api}${encodeURIComponent(
@@ -238,6 +239,7 @@ export default async function handler(req, res) {
         // Sort nested arrays before we send the objects to be manifestified
         framed.items = sortBy(framed.items, o => o.label['@none'][0])
         framed.structures.items = sortBy(framed.structures.items, i => parseInt(i.split("_p")[1]))
+        //console.log(JSON.stringify(framed, null, 2))
 
         // Create the manifest
         const constructedManifest = await constructManifest(framed, url)

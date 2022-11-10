@@ -104,7 +104,7 @@ export async function constructManifest(data, API) {
                   motivation: "painting",
                   target: canvas.id,
                   body: {
-                    id: canvas.items.body.id,
+                    id: canvas.items?.['ubbont:hasXLView'] || canvas.items?.['ubbont:hasMDView'],
                     type: "Image",
                     format: "image/jpeg",
                     width: 1024,
