@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.12",
     "@popperjs/core": "^2.11.6",
+    "@samvera/clover-iiif": "^1.12.4-rc.0",
     "clsx": "^1.2.1",
     "deep-rename-keys": "^0.2.1",
     "eslint-config-next": "^12.3.1",

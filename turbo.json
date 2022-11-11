@@ -21,8 +21,7 @@
       ],
       "env": [
         "MARCUS_API",
-        "SKA_API",
-        "MANIFEST_BASE"
+        "SKA_API"
       ]
     },
     "build#exh-nt": {

@@ -13,11 +13,21 @@ import { groq } from 'next-sanity'
 import SanityImage from '../../components/SanityImage';
 import { MainNav } from '../../components/Header/MainNav';
 import ErrorPage from 'next/error'
+import dynamic from "next/dynamic";
+
+const ManifestViewer = dynamic(() => import("../../components/IIIF/ManifestViewer"), {
+  ssr: false,
+});
 
 interface IData {
   item: any
   siteSettings: any
   mainNav: any
+}
+
+interface ICloverIIIF {
+  id: string
+  config: any
 }
 
 /**
@@ -182,12 +192,19 @@ const Home: NextPage = ({ data, preview }: any) => {
 
         <div className='p-5'>
           <h1 className='text-6xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
-          <div className='py-5'>
+          {/* <div className='py-5'>
             <SanityImage
               image={item[0].image}
               alt={''}
             />
-          </div>
+          </div> */}
+
+          {item[0]?.manifest ?
+            <div className='py-5'>
+              <ManifestViewer id={item[0].manifest} options={{ renderAbout: false, showIIIFBadge: false, showTitle: false, showInformationToggle: false }} />
+            </div>
+            : null
+          }
           <pre className=''>
             {JSON.stringify(item, null, 2)}
           </pre>
