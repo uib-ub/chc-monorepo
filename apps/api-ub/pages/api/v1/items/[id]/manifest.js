@@ -2,7 +2,7 @@ import Cors from 'cors'
 import * as jsonld from 'jsonld'
 import { omit, sortBy } from 'lodash'
 import { constructManifest } from '../../../../../lib/getManifest/constructManifest'
-import { API_URL, SPARQL_PREFIXES } from '../../../../../lib/constants'
+import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
 const manifestFrame = {
   "@context": {
@@ -113,7 +113,6 @@ function runMiddleware(req, res, fn) {
 
 async function getObject(api, id) {
   if (!id) return error
-  const manifestBase = process.env.MANIFEST_BASE
 
   const query = `
     ${SPARQL_PREFIXES}
@@ -174,7 +173,7 @@ async function getObject(api, id) {
             OPTIONAL { ?resource ubbont:hasXLView ?partXL . }
             OPTIONAL { ?resource ubbont:hasSMView ?partSM . }
         }
-        BIND(iri(concat("${manifestBase}", ?partLabel, "/manifest")) AS ?manifestURL)
+        BIND(iri(concat("${getBaseUrl()}", "/items/", ?partLabel, "/manifest")) AS ?manifestURL)
         BIND(iri(concat("http://data.ub.uib.no/instance/manuscript/", ?id, "/manifest/range/1")) AS ?rangeURL)
         BIND(iri(concat("http://data.ub.uib.no/instance/page/", ?id, "_p1")) AS ?singleCanvas)
         BIND(iri(replace(str(?s), "data.ub.uib.no", "marcus.uib.no", "i")) AS ?homepage)
