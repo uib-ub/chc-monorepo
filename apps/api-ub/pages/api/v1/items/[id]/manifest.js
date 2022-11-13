@@ -205,10 +205,11 @@ export default async function handler(req, res) {
       const url = await checkedServices.url
 
       // No URL means no service found, but this is horrible error handeling
-      if (!url) return res.status(404).json({ message: 'ID not found' })
+      if (!url) return res.status(404).json(checkedServices)
 
       // Get the RDF for this tiem
       const response = await getObject(url, id)
+      console.log(response.status)
 
       if (response.status >= 200 && response.status <= 299) {
         const results = await response.json();
@@ -245,6 +246,9 @@ export default async function handler(req, res) {
         const manifest = await constructedManifest
 
         res.status(200).json(manifest)
+      }
+      if (response.status == 503) {
+        res.status(503).json({ message: "Service is unavailable" })
       } else {
         // Handle errors
         console.log(response.status, response.statusText);
