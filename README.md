@@ -10,6 +10,7 @@ This Turborepo uses [npm](https://npmjs.com) as a packages manager. It includes 
 
 - `exh-nt`: the exhibition _Neverending and temporary_, a [Next.js](https://nextjs.org) app
 - `exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio
+- `api-ub`: the API for the Special collection at the University of Bergen Library, a [Next.js](https://nextjs.org) app
 
 ### Packages
 
@@ -54,11 +55,11 @@ yarn dev
 
 Examples here use `yarn`, but this is easy to fudge up.
 
+* npm install
 * npm install <package> – Add package to root (mainly for devDependencies)
 * npm install <package> --workspace=<workspace>
 * npm uninstall <package> --workspace=<workspace>
 * npm update <package> --workspace=<workspace>
-* npm install
 * npm run build - Build all packages and apps
 * npm run dev - Develop all packages and apps
 * npm run lint - Lint all packages

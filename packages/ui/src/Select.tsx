@@ -1,10 +1,8 @@
 import React, { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox, Portal, Transition } from '@headlessui/react'
 import { CheckIcon } from './icons/CheckIcon'
 import { usePopper } from './utils/use-popper'
-import { createPortal } from 'react-dom'
-import { useMounted } from './hooks/use-mounted'
 
 interface MenuOption {
   key: string
@@ -103,10 +101,4 @@ export function Select({
       )}
     </Listbox>
   )
-}
-
-function Portal(props: { children: ReactNode }): ReactElement | null {
-  const mounted = useMounted()
-  if (!mounted) return null
-  return createPortal(props.children, document.body)
 }

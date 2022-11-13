@@ -1,5 +1,6 @@
 import React from "react";
 import type { GetStaticProps, NextPage } from 'next'
+import { Disclosure } from '@headlessui/react'
 import { getClient } from '../../lib/sanity.server'
 import { usePreviewSubscription } from '../../lib/sanity'
 import { mainNav, siteSettings, item } from '../../lib/queries/fragments'
@@ -12,8 +13,10 @@ import { ThemeSwitch } from '../../components/ThemeSwitch';
 import { groq } from 'next-sanity'
 import SanityImage from '../../components/SanityImage';
 import { MainNav } from '../../components/Header/MainNav';
+import { TextBlocks } from '../../components/TextBlocks';
 import ErrorPage from 'next/error'
 import dynamic from "next/dynamic";
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 
 const ManifestViewer = dynamic(() => import("../../components/IIIF/ManifestViewer"), {
   ssr: false,
@@ -23,11 +26,6 @@ interface IData {
   item: any
   siteSettings: any
   mainNav: any
-}
-
-interface ICloverIIIF {
-  id: string
-  config: any
 }
 
 /**
@@ -162,7 +160,9 @@ const Home: NextPage = ({ data, preview }: any) => {
       </Head>
       <AppShell>
         <div className='flex gap-5 px-3 pt-3 pb-1 border-b'>
-          <HeaderShell>
+          <HeaderShell logo={<svg height="20" width="20">
+            <circle cx="10" cy="10" r="10" fill="BLACK" />
+          </svg>}>
             <Link href="/">
               <a>
                 {label[locale || '']}
@@ -191,7 +191,7 @@ const Home: NextPage = ({ data, preview }: any) => {
 
 
         <div className='p-5'>
-          <h1 className='text-6xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
+          <h1 className='text-2xl md:text-4xl lg:text-6xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
           {/* <div className='py-5'>
             <SanityImage
               image={item[0].image}
@@ -205,9 +205,25 @@ const Home: NextPage = ({ data, preview }: any) => {
             </div>
             : null
           }
-          <pre className=''>
-            {JSON.stringify(item, null, 2)}
-          </pre>
+          {item[0]?.referredToBy[0] ?
+            <div className='py-5'>
+              <TextBlocks value={item[0]?.referredToBy[0].body} />
+            </div>
+            : null
+          }
+
+          <Disclosure>
+            <Disclosure.Button className="py-2">
+              <div className='flex content-center'>
+                Data <ChevronDownIcon className='h-6 w-6 ml-3' />
+              </div>
+            </Disclosure.Button>
+            <Disclosure.Panel className="text-gray-500">
+              <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
+                {JSON.stringify(item, null, 2)}
+              </pre>
+            </Disclosure.Panel>
+          </Disclosure>
         </div>
 
         <footer>

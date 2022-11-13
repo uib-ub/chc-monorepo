@@ -1,7 +1,7 @@
 import * as React from "react";
 export * from "./Button";
 export * from "./Select";
-export * from "./LocaleSwitch";
+export * from "./components/LocaleSwitch";
 export * from "./shells/AppShell";
 export * from "./shells/HeaderShell";
 export * from "./shells/NavigationShell";

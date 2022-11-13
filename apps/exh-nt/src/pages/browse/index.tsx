@@ -77,12 +77,12 @@ const Home: NextPage = ({ data, preview }: any) => {
           {items && items.map((item: any) => (
             <div key={item.id} className="flex justify-center">
               <div className="rounded-lg shadow-lg max-w-sm">
-                <a href={`/id/${item._id}`}>
+                <Link href={`/id/${item._id}`}>
                   <SanityImage
                     image={item.image}
                     alt={''}
                   />
-                </a>
+                </Link>
                 <div className="p-6">
                   <h5 className="text-xl font-medium mb-2">{item.label[locale || ''] || 'Missing title'}</h5>
                   <p className="text-base mb-4">
