@@ -6,6 +6,7 @@ import { mapTypes } from '../../shared/mapTypes'
 import { getTimespan } from '../../shared/getTimespan'
 import { convertToBlock } from '../../shared/htmlUtils'
 import Schema from '@sanity/schema'
+import { mapLanguage } from '../../shared/mapLanguage'
 
 const def = Schema.compile({
   name: 'myBlog',
@@ -100,6 +101,32 @@ const nomalizedLabel = (dirtyLabel) => {
   }
 }
 
+const nomalizedDescription = (dirtyDescription) => {
+  // If we only get a string, assume that it is in norwegian
+  if (typeof dirtyDescription === 'string') {
+    const cleanDescription = convertToBlock(blockContentType, dirtyDescription, true)
+    return {
+      no: cleanDescription,
+      en: cleanDescription,
+    }
+  }
+  // If it is an array, we have multiple labels. It could be two strings and then 
+  // we assume they are in norwegian. If we get objects we need to map the language.
+  // We could get an array with both strings and objects :-(!!!!
+  if (Array.isArray(dirtyDescription)) {
+    const data = {}
+    dirtyDescription.map((i) => {
+      if (i && typeof i === 'object') {
+        Object.assign(data, { [i['@language']]: convertToBlock(blockContentType, i.value, true) })
+      }
+      if (i && typeof i === 'string') {
+        Object.assign(data, { no: convertToBlock(blockContentType, i, true) })
+      }
+    })
+    return data
+  }
+}
+
 const blockContentType = def.get('blogPost')
   .fields.find(field => field.name === 'body').type
 
@@ -108,8 +135,31 @@ export default function getDocument(item, assetID) {
   const types = mapTypes(Array.isArray(item.type) ? item.type : [item.type])
 
   // Handle description RDF to Sanity Portable Text
-  const descriptions = item.description ? Array.isArray(item.description) ? item.description : [item.description] : null
-  const descriptionBlocks = descriptions.map(description => convertToBlock(blockContentType, description, true))
+  // const descriptions = item.description ? Array.isArray(item.description) ? item.description : [item.description] : null
+  // const descriptionBlocks = descriptions.map(description => convertToBlock(blockContentType, description, true))
+
+  const localizedBlocks = nomalizedDescription(item.description)
+  const description = Object.entries(localizedBlocks).map(([key, value]) => {
+    return {
+      _key: nanoid(),
+      _type: 'LinguisticObject',
+      accessState: 'open',
+      editorialState: 'published',
+      body: value,
+      hasType: [
+        {
+          _key: nanoid(),
+          _ref: 'd4b31289-91f4-484d-a905-b3fb0970413c',
+          _type: 'reference',
+        },
+      ],
+      language: {
+        _key: nanoid(),
+        _ref: mapLanguage(key),
+        _type: 'reference',
+      }
+    }
+  })
 
   // Get the EDTF object
   const date = getTimespan(item.created?.value, item.madeAfter?.value, item.madeBefore?.value)
@@ -233,23 +283,8 @@ export default function getDocument(item, assetID) {
       ...(Object.keys(activityStream[0]).length > 2 && {
         activityStream,
       }),
-      ...(descriptionBlocks && descriptionBlocks.length > 0 && {
-        referredToBy: [
-          ...descriptionBlocks.map(block => ({
-            _key: nanoid(),
-            _type: 'LinguisticObject',
-            accessState: 'open',
-            editorialState: 'published',
-            body: block,
-            hasType: [
-              {
-                _key: nanoid(),
-                _ref: 'd4b31289-91f4-484d-a905-b3fb0970413c',
-                _type: 'reference',
-              },
-            ],
-          })),
-        ],
+      ...(description && description.length > 0 && {
+        referredToBy: description,
       }),
       ...(item.subject && {
         subject: [

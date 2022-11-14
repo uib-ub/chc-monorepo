@@ -3,9 +3,12 @@ export const mapLanguage = (lang) => {
 
   switch (lang) {
     case 'no':
-      mappedLanguage = 'e81f617f-b767-4e7c-8495-93b745f47aa0'
+      mappedLanguage = '57f069ef-d0be-49c2-85f9-7ff5c6ce8161'
       break
-    case 'nb':
+    case 'en':
+      mappedLanguage = '40b36690-50b4-4c09-a25d-d62d5fba3d8a'
+      break
+    /* case 'nb':
       mappedLanguage = '6c7b4d8d-c73b-48be-a60a-0b8803f71342'
       break
     case 'nn':
@@ -13,9 +16,6 @@ export const mapLanguage = (lang) => {
       break
     case 'sv':
       mappedLanguage = '034ada4b-fcb0-4039-9c3d-9edc6edc9db7'
-      break
-    case 'en':
-      mappedLanguage = '2334fcce-865a-4f01-87da-255e5ffb5174'
       break
     case 'fi':
       mappedLanguage = '2443edca-1f54-4c41-abcb-ad448206e873'
@@ -25,9 +25,9 @@ export const mapLanguage = (lang) => {
       break
     case 'dk':
       mappedLanguage = '0e859bea-cccd-46c5-a584-ef0e50b350ee'
-      break
+      break */
     default:
-      mappedLanguage = 'e81f617f-b767-4e7c-8495-93b745f47aa0'
+      mappedLanguage = '57f069ef-d0be-49c2-85f9-7ff5c6ce8161'
       break
   }
 
