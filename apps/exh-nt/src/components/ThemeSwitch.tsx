@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react'
 import { useTheme } from 'next-themes'
-import { Select, SunIcon, MoonIcon } from 'ui'
+import { Select } from 'ui'
 import { useMounted } from '../hooks/use-mounted'
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
 
 type ThemeSwitchProps = {
   lite?: boolean

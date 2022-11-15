@@ -4,7 +4,7 @@ export function MoonIcon(props: ComponentProps<'svg'>): ReactElement {
   return (
     <svg
       fill="none"
-      viewBox="2 2 20 20"
+      viewBox="0 0 20 20"
       width="12"
       height="12"
       stroke="currentColor"

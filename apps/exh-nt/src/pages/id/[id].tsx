@@ -6,7 +6,7 @@ import { usePreviewSubscription } from '../../lib/sanity'
 import { mainNav, siteSettings, item } from '../../lib/queries/fragments'
 import { publicDocumentTypes } from '../../lib/constants'
 import Head from "next/head";
-import { AppShell, NavigationShell, HeaderShell, LocaleSwitch } from "ui";
+import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, MainShell, MarcusIcon, PaneShell, Modal, Menu } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../../components/ThemeSwitch';
@@ -17,6 +17,7 @@ import { TextBlocks } from '../../components/TextBlocks';
 import ErrorPage from 'next/error'
 import dynamic from "next/dynamic";
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { Bars4Icon } from '@heroicons/react/24/outline';
 
 const ManifestViewer = dynamic(() => import("../../components/IIIF/ManifestViewer"), {
   ssr: false,
@@ -159,75 +160,77 @@ const Home: NextPage = ({ data, preview }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppShell>
-        <div className='flex gap-5 px-3 pt-3 pb-1 border-b'>
-          <HeaderShell logo={<svg height="20" width="20">
-            <circle cx="10" cy="10" r="10" fill="BLACK" />
-          </svg>}>
-            <Link href="/">
-              <a>
-                {label[locale || '']}
-              </a>
-            </Link>
-          </HeaderShell>
+        <PaneShell>
           <NavigationShell>
-            <MainNav value={mainNav} />
+            <Menu>
+              <MainNav value={mainNav} />
+            </Menu>
+            <div className='grow'>&nbsp;</div>
+            <HeaderShell>
+              <Link href={`/`}>
+                {label[locale || '']}
+              </Link>
+            </HeaderShell>
+
+            <a href="https://marcus.uib.no">
+              <MarcusIcon className='w-10 h-10' />
+            </a>
           </NavigationShell>
 
-          <div className='grow'>&nbsp;</div>
-
-          <LocaleSwitch
-            locales={locales || []}
-            locale={locale || ''}
-            defaultLocale={defaultLocale || ''}
-            asPath={asPath}
-            labels={{
-              no: 'Norsk',
-              en: 'English'
-            }}
-          />
-
-          <ThemeSwitch />
-        </div>
-
-
-        <div className='p-5'>
-          <h1 className='text-2xl md:text-4xl lg:text-6xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
-          {/* <div className='py-5'>
-            <SanityImage
-              image={item[0].image}
-              alt={''}
-            />
-          </div> */}
-
-          {item[0]?.manifest ?
-            <div className='py-5'>
-              <ManifestViewer id={item[0].manifest} options={{ renderAbout: false, showIIIFBadge: false, showTitle: false, showInformationToggle: false }} />
-            </div>
-            : null
-          }
-          {item[0]?.referredToBy[0] ?
-            <div className='py-5'>
-              <TextBlocks value={item[0]?.referredToBy[0].body} />
-            </div>
-            : null
-          }
-
-          <Disclosure>
-            <Disclosure.Button className="py-2">
-              <div className='flex content-center'>
-                Data <ChevronDownIcon className='h-6 w-6 ml-3' />
+          <MainShell>
+            {item[0]?.manifest ?
+              <div className='pb-5 min-h-[50vh] max-sm:hidden'>
+                <ManifestViewer id={item[0].manifest} options={{ renderAbout: false, showIIIFBadge: false, showTitle: false, showInformationToggle: false }} />
               </div>
-            </Disclosure.Button>
-            <Disclosure.Panel className="text-gray-500">
-              <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
-                {JSON.stringify(item, null, 2)}
-              </pre>
-            </Disclosure.Panel>
-          </Disclosure>
-        </div>
+              : null
+            }
+            <div className='py-b md:hidden'>
+              <SanityImage
+                image={item[0].image}
+                alt={''}
+              />
+            </div>
 
-        <footer>
-        </footer>
+            <div className='flex flex-wrap justify-center items-center gap-5'>
+              <h1 className='text-2xl md:text-4xl lg:text-6xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
+
+
+              {item[0]?.referredToBy[0] ?
+                <div className='max-w-prose py-5'>
+                  <TextBlocks value={item[0]?.referredToBy[0].body} />
+                </div>
+                : null
+              }
+            </div>
+
+            <footer className='flex gap-3 items-center'>
+              <LocaleSwitch
+                locales={locales || []}
+                locale={locale || ''}
+                defaultLocale={defaultLocale || ''}
+                asPath={asPath}
+                labels={{
+                  no: 'Norsk',
+                  en: 'English'
+                }}
+              />
+              <ThemeSwitch />
+              <a
+                href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
+                target="_blank"
+                rel="noreferrer"
+                className='text-xs text-slate-600 font-semibold py-1 px-2'
+              >
+                Studio
+              </a>
+              <Modal buttonLabel="Data" title="Data">
+                <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
+                  {JSON.stringify(item, null, 2)}
+                </pre>
+              </Modal>
+            </footer>
+          </MainShell>
+        </PaneShell>
 
       </AppShell>
     </>
