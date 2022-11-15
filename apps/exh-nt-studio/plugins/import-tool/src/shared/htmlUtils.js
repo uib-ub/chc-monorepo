@@ -18,7 +18,7 @@ export const isValidHTML = (html) => {
       /(?<=\<img src.*)(&)(?=.*\"\>)/g,
       '&amp;'
     );
-    doc.innerHTML = withoutAmpersand;
+    // doc.innerHTML = withoutAmpersand;
     console.log(
       doc.innerHTML,
       withoutAmpersand,
@@ -38,8 +38,8 @@ export function convertToBlock(
   if (isValidHTML(inputValue) || withoutValidation) {
     // sanitize html
     const cleanHtmlString = sanitizeHtml(inputValue);
-    const cleanHtmlWithoutTrailingNewline = cleanHtmlString.replace(/^\<br>+|\<br>+$/g, '')
-    console.log('Cleaned: ', cleanHtmlWithoutTrailingNewline)
+    // const cleanHtmlWithoutTrailingNewline = cleanHtmlString.replace(/^\<br>+|\<br>+$/g, '')
+    // console.log('Cleaned: ', cleanHtmlWithoutTrailingNewline)
     // replace U+00A0
     const NON_BREAKING_SPACE = /U\+00A0/g;
     const withoutSpecialChars = cleanHtmlString.replace(
@@ -56,7 +56,7 @@ export function convertToBlock(
       cleanHtmlStringWithoutBackslash,
       blockContentType
     );
-    console.log('Blocks: ', blocks)
+    // console.log('Blocks: ', blocks)
     return blocks;
   } else {
     return null;
@@ -65,6 +65,6 @@ export function convertToBlock(
 
 function sanitizeHtml(html) {
   const pure = DOMPurify.sanitize(html, { ALLOWED_TAGS: ['br', 'b', 'i', 'p', 'h1', 'h2', 'h3', 'blockquote', 'ol', 'ul', 'li', 'a'], ALLOWED_ATTR: ['href'] });
-  console.log(pure)
+  // console.log(pure)
   return pure
 }
