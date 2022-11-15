@@ -9,9 +9,8 @@ export const MainNav: React.FC<Props> = ({ value }) => {
   const { locale, defaultLocale } = useRouter()
 
   return (
-    <div className='flex gap-5 w-full'>
-
-      <ul className='flex gap-5'>
+    <div className='flex flex-col gap-5 w-full px-5 py-3'>
+      <ul className='flex gap-5 text-md text-slate-600'>
         {value && value.tree?.map((child: any) => (
           <NavLink
             key={child._key}

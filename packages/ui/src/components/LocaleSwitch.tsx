@@ -1,7 +1,6 @@
 import React from 'react'
 import { Select } from '../Select'
-import { GlobeAltIcon } from '../icons/GlobeAltIcon'
-
+import { GlobeAltIcon } from '@heroicons/react/24/outline'
 interface LocaleSwitchProps {
   lite?: boolean
   className?: string
@@ -39,7 +38,7 @@ export const LocaleSwitch: React.FC<LocaleSwitchProps> = ({
           key: selected || '',
           name: (
             <div className="flex items-center gap-2">
-              <GlobeAltIcon className="w-5 h-5" />
+              <GlobeAltIcon className="w-4 h-4" />
               <span className={lite ? 'hidden' : ''}>{labels[selected || '']}</span>
             </div>
           )
@@ -52,3 +51,4 @@ export const LocaleSwitch: React.FC<LocaleSwitchProps> = ({
     </div>
   )
 }
+

@@ -13,10 +13,8 @@ export const NavLink: React.FC<Props> = ({ href, children, className }) => {
   const isActive = asPath === href
 
   return (
-    <Link href={href} passHref>
-      <a className={`${isActive ? 'text-red-500' : ''}`}>
-        {children}
-      </a>
+    <Link href={href} passHref className={`${isActive ? 'text-red-500' : ''}`}>
+      {children}
     </Link>
   )
 }

@@ -3,12 +3,13 @@ import type { GetStaticProps, NextPage } from 'next'
 import { getClient } from '../lib/sanity.server'
 import { mainNav, siteSettings } from '../lib/queries/fragments'
 import Head from "next/head";
-import { Button, AppShell, NavigationShell, HeaderShell, LocaleSwitch } from "ui";
+import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, MainShell, PaneShell, Menu, MarcusIcon } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../components/ThemeSwitch';
 import { groq } from 'next-sanity'
 import { MainNav } from '../components/Header/MainNav';
+import { Bars4Icon } from '@heroicons/react/24/outline';
 
 const frontpageQuery = groq`
   {
@@ -42,52 +43,57 @@ const Home: NextPage = ({ data, preview }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppShell>
-        <div className='flex gap-5 px-3 pt-3 pb-1 border-b'>
-          <HeaderShell>
-            {label[locale || '']}
-          </HeaderShell>
+
+        <PaneShell>
           <NavigationShell>
-            <MainNav value={mainNav} />
+            <Menu>
+              <MainNav value={mainNav} />
+            </Menu>
+            <div className='grow'>&nbsp;</div>
+            <HeaderShell>
+              <Link href={`/`}>
+                {label[locale || '']}
+              </Link>
+            </HeaderShell>
+            <a href="https://marcus.uib.no">
+              <MarcusIcon className='w-10 h-10' />
+            </a>
           </NavigationShell>
 
-          <div className='grow'>&nbsp;</div>
+          <MainShell>
+            <div className='flex flex-col justify-center items-center gap-5'>
+              <h1 className="text-6xl ">{label[locale || '']}</h1>
 
-          <LocaleSwitch
-            locales={locales || []}
-            locale={locale || ''}
-            defaultLocale={defaultLocale || ''}
-            asPath={asPath}
-            labels={{
-              no: 'Norsk',
-              en: 'English'
-            }}
-          />
+              <p>
+                New exhibition by the University of Bergen Special collections,
+                coming in the beginning of 2023.
+              </p>
+            </div>
 
-          <ThemeSwitch />
-        </div>
+            <footer className='flex gap-3 items-center'>
+              <LocaleSwitch
+                locales={locales || []}
+                locale={locale || ''}
+                defaultLocale={defaultLocale || ''}
+                asPath={asPath}
+                labels={{
+                  no: 'Norsk',
+                  en: 'English'
+                }}
+              />
+              <ThemeSwitch />
+              <a
+                href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
+                target="_blank"
+                rel="noreferrer"
+                className='text-xs text-slate-600 font-semibold py-1 px-2'
+              >
+                Studio
+              </a>
+            </footer>
+          </MainShell>
 
-
-        <div className='flex flex-col justify-center items-center h-screen gap-5'>
-          <h1 className="text-6xl ">{label[locale || '']}</h1>
-
-          <p>
-            New exhibition by the University of Bergen Special collections,
-            coming in the beginning of 2023.
-          </p>
-        </div>
-
-        <footer>
-          <Button>
-            <a
-              href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Studio
-            </a>
-          </Button>
-        </footer>
-
+        </PaneShell>
       </AppShell>
     </>
   );
