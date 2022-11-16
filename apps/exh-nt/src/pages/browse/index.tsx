@@ -3,7 +3,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import { getClient } from '../../lib/sanity.server'
 import { mainNav, siteSettings, items } from '../../lib/queries/fragments'
 import Head from "next/head";
-import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, PaneShell, MarcusIcon, MainShell, Menu } from "ui";
+import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, PaneShell, MarcusIcon, ContentShell, Menu, SidebarPane, Modal } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../../components/ThemeSwitch';
@@ -46,23 +46,42 @@ const Home: NextPage = ({ data, preview }: any) => {
       </Head>
       <AppShell>
         <PaneShell>
-          <NavigationShell>
-            <Menu>
-              <MainNav value={mainNav} />
-            </Menu>
-            <div className='grow'>&nbsp;</div>
-            <HeaderShell>
+          <SidebarPane>
+            <HeaderShell className='order-3'>
               <Link href={`/`}>
                 {label[locale || '']}
               </Link>
             </HeaderShell>
 
-            <a href="https://marcus.uib.no">
-              <MarcusIcon className='w-10 h-10' />
-            </a>
-          </NavigationShell>
+            <Menu className='order-1' aria-label='primary navigation'>
+              <MainNav value={mainNav} />
+              <div className='p-3 border-t flex gap-2'>
+                <a
+                  href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className='text-xs font-semibold'
+                >
+                  Studio
+                </a>
+                <Modal buttonLabel="Data" title="Data">
+                  <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
+                    {JSON.stringify(data, null, 2)}
+                  </pre>
+                </Modal>
+              </div>
+            </Menu>
 
-          <MainShell>
+            <div className='grow order-2' aria-hidden>&nbsp;</div>
+
+            <nav className='order-4' aria-label='secondary'>
+              <a href="https://marcus.uib.no" aria-label='Go to Marcus'>
+                <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
+              </a>
+            </nav>
+          </SidebarPane>
+
+          <ContentShell>
             <div className='flex flex-wrap justify-center items-center gap-5 w-full p-5'>
               {items && items.map((item: any) => (
                 <div key={item.id} className="flex justify-center">
@@ -97,16 +116,8 @@ const Home: NextPage = ({ data, preview }: any) => {
                 }}
               />
               <ThemeSwitch />
-              <a
-                href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
-                target="_blank"
-                rel="noreferrer"
-                className='text-xs text-slate-600 font-semibold py-1 px-2'
-              >
-                Studio
-              </a>
             </footer>
-          </MainShell>
+          </ContentShell>
         </PaneShell>
       </AppShell>
     </>

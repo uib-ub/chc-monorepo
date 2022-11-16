@@ -64,6 +64,10 @@ module.exports = {
         destination: `/:path*`,
       },
       ...STUDIO_REWRITE,
+      {
+        source: '/jeg-ma-se',
+        destination: '/',
+      }
     ]
   },
   async redirects() {

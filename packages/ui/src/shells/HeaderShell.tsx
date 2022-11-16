@@ -1,7 +1,7 @@
 import * as React from "react";
 
 type Props = {
-  children?: React.ReactNode
+  children: React.ReactNode
   logo?: React.SVGProps<SVGElement>
   className?: string
 }

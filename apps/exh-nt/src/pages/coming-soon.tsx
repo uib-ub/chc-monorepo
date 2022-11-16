@@ -68,15 +68,6 @@ const ComingSoon: NextPage = ({ data, preview }: any) => {
           />
 
           <ThemeSwitch />
-          <Button>
-            <a
-              href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Studio
-            </a>
-          </Button>
         </footer>
 
       </AppShell>

@@ -31,7 +31,7 @@ export const LocaleSwitch: React.FC<LocaleSwitchProps> = ({
         className={className}
         onChange={(e: any) => {
           if (e.key !== locale) {
-            location.href = `${e.key !== defaultLocale ? `${e.key}/${asPath}` : asPath}`
+            location.href = `${e.key !== defaultLocale ? `/${e.key}/${asPath}` : asPath}`
           }
         }}
         selected={{

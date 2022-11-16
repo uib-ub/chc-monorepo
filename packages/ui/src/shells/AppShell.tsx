@@ -5,9 +5,9 @@ type Props = {
   className?: string
 }
 
-export const AppShell: React.FC<Props> = ({ children }) => {
+export const AppShell: React.FC<Props> = ({ children, className }) => {
   return (
-    <div>
+    <div className={`${className}`}>
       {children}
     </div>
   );
