@@ -24,7 +24,7 @@ export const Modal: React.FC<ModalProps> = ({ buttonLabel, title, description, c
       <button
         type="button"
         onClick={openModal}
-        className="rounded-md text-xs text-slate-600"
+        className="rounded-md text-xs"
       >
         {buttonLabel}
       </button>

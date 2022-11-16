@@ -6,7 +6,7 @@ import { usePreviewSubscription } from '../../lib/sanity'
 import { mainNav, siteSettings, item } from '../../lib/queries/fragments'
 import { publicDocumentTypes } from '../../lib/constants'
 import Head from "next/head";
-import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, MainShell, MarcusIcon, PaneShell, Modal, Menu } from "ui";
+import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, ContentShell, MarcusIcon, PaneShell as PanesShell, Modal, Menu, SidebarPane, MetaPane } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../../components/ThemeSwitch';
@@ -160,77 +160,111 @@ const Home: NextPage = ({ data, preview }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppShell>
-        <PaneShell>
-          <NavigationShell>
-            <Menu>
-              <MainNav value={mainNav} />
-            </Menu>
-            <div className='grow'>&nbsp;</div>
-            <HeaderShell>
+        <PanesShell>
+          <SidebarPane>
+            <HeaderShell className='order-3'>
               <Link href={`/`}>
                 {label[locale || '']}
               </Link>
             </HeaderShell>
 
-            <a href="https://marcus.uib.no">
-              <MarcusIcon className='w-10 h-10' />
-            </a>
-          </NavigationShell>
-
-          <MainShell>
-            {item[0]?.manifest ?
-              <div className='pb-5 min-h-[50vh] max-sm:hidden'>
-                <ManifestViewer id={item[0].manifest} options={{ renderAbout: false, showIIIFBadge: false, showTitle: false, showInformationToggle: false }} />
+            <Menu className='order-1' aria-label='primary navigation'>
+              <MainNav value={mainNav} />
+              <div className='p-3 border-t flex gap-2'>
+                <a
+                  href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className='text-xs font-semibold'
+                >
+                  Studio
+                </a>
+                <Modal buttonLabel="Data" title="Data">
+                  <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
+                    {JSON.stringify(item, null, 2)}
+                  </pre>
+                </Modal>
               </div>
-              : null
-            }
-            <div className='py-b md:hidden'>
-              <SanityImage
-                image={item[0].image}
-                alt={''}
-              />
-            </div>
+            </Menu>
 
-            <div className='flex flex-wrap justify-center items-center gap-5'>
-              <h1 className='text-2xl md:text-4xl lg:text-6xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
+            <div className='grow order-2' aria-hidden>&nbsp;</div>
 
+            <nav className='order-4' aria-label='secondary'>
+              <a href="https://marcus.uib.no" aria-label='Go to Marcus'>
+                <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
+              </a>
+            </nav>
+          </SidebarPane>
 
-              {item[0]?.referredToBy[0] ?
-                <div className='max-w-prose py-5'>
-                  <TextBlocks value={item[0]?.referredToBy[0].body} />
+          <main className='md:flex md:flex-grow min-h-screen'>
+            <MetaPane className='md:h-screen md:sticky flex md:top-0 md:w-72 md:shrink md:flex-grow-0 max-sm:p-5 md:bg-gray-100 md:dark:bg-[#2b2e2f]'>
+              <div >
+                <SanityImage
+                  image={item[0].image}
+                  alt={''}
+                  className='object-contain object-left md:max-h-72'
+                />
+              </div>
+
+              <h1 className='text-3xl md:text-2xl lg:text-3xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
+
+              {item[0]?.activityStream && item[0].activityStream
+                .filter((activity: any) => activity._type === 'BeginningOfExistence')
+                .map((activity: any) => (
+                  <div>
+                    <div>{activity.contributionAssignedBy?.[0].assignedActor?.label[locale || ''] || Object.values(activity.contributionAssignedBy?.[0].assignedActor?.label)[1]}</div>
+                    <div className='text-xs text-slate-700 dark:text-slate-300 m-0 p-0'>{activity.timespan?.edtf}</div>
+                  </div>
+                ))
+              }
+
+              <div className='grow max-md:hidden md:block' aria-hidden>&nbsp;</div>
+
+              <div className='md:flex gap-2 max-md:hidden'>
+                <LocaleSwitch
+                  locales={locales || []}
+                  locale={locale || ''}
+                  defaultLocale={defaultLocale || ''}
+                  asPath={asPath}
+                  labels={{
+                    no: 'Norsk',
+                    en: 'English'
+                  }}
+                />
+                <ThemeSwitch />
+              </div>
+            </MetaPane>
+
+            <ContentShell>
+              {item[0]?.manifest ?
+                <div className='pb-5 min-h-[50vh] max-md:hidden'>
+                  <ManifestViewer id={item[0].manifest} options={{ renderAbout: false, showIIIFBadge: false, showTitle: false, showInformationToggle: false }} />
                 </div>
                 : null
               }
-            </div>
+              {/*               <div className='py-b md:hidden'>
+                <SanityImage
+                  image={item[0].image}
+                  alt={''}
+                />
+              </div> */}
 
-            <footer className='flex gap-3 items-center'>
-              <LocaleSwitch
-                locales={locales || []}
-                locale={locale || ''}
-                defaultLocale={defaultLocale || ''}
-                asPath={asPath}
-                labels={{
-                  no: 'Norsk',
-                  en: 'English'
-                }}
-              />
-              <ThemeSwitch />
-              <a
-                href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
-                target="_blank"
-                rel="noreferrer"
-                className='text-xs text-slate-600 font-semibold py-1 px-2'
-              >
-                Studio
-              </a>
-              <Modal buttonLabel="Data" title="Data">
-                <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
-                  {JSON.stringify(item, null, 2)}
-                </pre>
-              </Modal>
-            </footer>
-          </MainShell>
-        </PaneShell>
+              <div className='flex flex-wrap justify-center items-center gap-5'>
+                {/* <h1 className='text-2xl md:text-4xl lg:text-6xl sm:hidden'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1> */}
+
+                {item[0]?.referredToBy[0] ?
+                  <div className='max-w-prose py-5'>
+                    <TextBlocks value={item[0]?.referredToBy[0].body} />
+                  </div>
+                  : null
+                }
+              </div>
+            </ContentShell>
+          </main>
+
+          {/* <footer className='flex w-screen gap-3 items-center text-slate-600 dark:text-slate-300'>
+          </footer> */}
+        </PanesShell>
 
       </AppShell>
     </>

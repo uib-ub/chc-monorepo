@@ -5,9 +5,10 @@ import { usePopper } from '../utils/use-popper'
 
 type MenuProps = {
   children: React.ReactNode
+  className?: string
 }
 
-export const Menu: React.FC<MenuProps> = ({ children }) => {
+export const Menu: React.FC<MenuProps> = ({ children, className }) => {
   const [trigger, container] = usePopper({
     strategy: 'fixed',
     placement: 'right-start',
@@ -26,15 +27,16 @@ export const Menu: React.FC<MenuProps> = ({ children }) => {
   })
 
   return (
-    <Popover>
+    <Popover as='nav' className={`${className}`}>
       {({ open }) => (
         /* Use the `open` state to conditionally change the direction of the chevron icon. */
         <>
           <Popover.Button
             ref={trigger}
-            className='flex flex-col items-center text-slate-600'
+            className='flex flex-col items-center text-slate-600 dark:text-slate-200 text-xs md:text-md'
+            accessKey='m'
           >
-            <Bars4Icon className={open ? 'w-6 h-6 rotate-180 transform' : 'w-6 h-6'} />
+            <Bars4Icon className={open ? 'w-5 h-5 md:w-6 md:h-6 rotate-180 transform' : 'w-5 h-5 md:w-6 md:h-6'} />
             Menu
           </Popover.Button>
           <Popover.Panel

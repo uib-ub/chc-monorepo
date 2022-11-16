@@ -3,7 +3,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import { getClient } from '../lib/sanity.server'
 import { mainNav, siteSettings } from '../lib/queries/fragments'
 import Head from "next/head";
-import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, MainShell, PaneShell, Menu, MarcusIcon } from "ui";
+import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, ContentShell, PaneShell, Menu, MarcusIcon, SidebarPane, Modal } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../components/ThemeSwitch';
@@ -45,30 +45,58 @@ const Home: NextPage = ({ data, preview }: any) => {
       <AppShell>
 
         <PaneShell>
-          <NavigationShell>
-            <Menu>
-              <MainNav value={mainNav} />
-            </Menu>
-            <div className='grow'>&nbsp;</div>
-            <HeaderShell>
+          <SidebarPane>
+            <HeaderShell className='order-3'>
               <Link href={`/`}>
                 {label[locale || '']}
               </Link>
             </HeaderShell>
-            <a href="https://marcus.uib.no">
-              <MarcusIcon className='w-10 h-10' />
-            </a>
-          </NavigationShell>
 
-          <MainShell>
-            <div className='flex flex-col justify-center items-center gap-5'>
-              <h1 className="text-6xl ">{label[locale || '']}</h1>
+            <Menu className='order-1' aria-label='primary navigation'>
+              <MainNav value={mainNav} />
+              <div className='p-3 border-t flex gap-2'>
+                <a
+                  href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className='text-xs font-semibold'
+                >
+                  Studio
+                </a>
+                <Modal buttonLabel="Data" title="Data">
+                  <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
+                    {JSON.stringify(data, null, 2)}
+                  </pre>
+                </Modal>
+              </div>
+            </Menu>
 
-              <p>
-                New exhibition by the University of Bergen Special collections,
-                coming in the beginning of 2023.
-              </p>
-            </div>
+            <div className='grow order-2' aria-hidden>&nbsp;</div>
+
+            <nav className='order-4' aria-label='secondary'>
+              <a href="https://marcus.uib.no" aria-label='Go to Marcus'>
+                <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
+              </a>
+            </nav>
+          </SidebarPane>
+
+
+          <ContentShell className='h-screen flex-grow'>
+            <main className='flex flex-grow justify-center items-center'>
+              <div className={`bg-[url('https://data.ub.uib.no/files/bs/ubb/ubb-jg/ubb-jg-n/ubb-jg-n-0313/ubb-jg-n-0313-03/jpg/ubb-jg-n-0313-03_md.jpg')] bg-center bg-cover bg-no-repeat h-5/6`}>
+                <div className={`flex flex-col justify-end items-center h-full`}>
+                  <div className="p-5 bg-white dark:bg-black flex flex-col gap-3">
+
+                    <h1 className="text-xl md:text-6xl text-center font-bold font-sans">{label[locale || '']}</h1>
+
+                    <p className='text-sm md:text-xl text-center font-light'>
+                      {locale == 'en' && 'New exhibition by the University of Bergen Special collections, coming in the beginning of 2023.'}
+                      {locale == 'no' && 'Ny utstilling fra Spesialsamlingene ved Universitetsbiblioteket i Bergen lanseres i starten av 2023.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </main>
 
             <footer className='flex gap-3 items-center'>
               <LocaleSwitch
@@ -82,16 +110,9 @@ const Home: NextPage = ({ data, preview }: any) => {
                 }}
               />
               <ThemeSwitch />
-              <a
-                href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
-                target="_blank"
-                rel="noreferrer"
-                className='text-xs text-slate-600 font-semibold py-1 px-2'
-              >
-                Studio
-              </a>
             </footer>
-          </MainShell>
+          </ContentShell>
+
 
         </PaneShell>
       </AppShell>

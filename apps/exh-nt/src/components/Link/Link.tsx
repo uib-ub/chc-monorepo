@@ -9,7 +9,7 @@ type Props = {
 
 export const Link: React.FC<Props> = ({ href, className, children }) => {
   return (
-    <NextLink href={href} passHref prefetch={false} className={className}>
+    <NextLink href={href} passHref prefetch={false} className={`${className} text-blue-600 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400`}>
       {children}
     </NextLink>
   )
