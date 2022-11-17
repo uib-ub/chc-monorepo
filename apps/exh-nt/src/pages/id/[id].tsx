@@ -1,12 +1,11 @@
 import React from "react";
 import type { GetStaticProps, NextPage } from 'next'
-import { Disclosure } from '@headlessui/react'
 import { getClient } from '../../lib/sanity.server'
 import { usePreviewSubscription } from '../../lib/sanity'
 import { mainNav, siteSettings, item } from '../../lib/queries/fragments'
 import { publicDocumentTypes } from '../../lib/constants'
 import Head from "next/head";
-import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, ContentShell, MarcusIcon, PaneShell as PanesShell, Modal, Menu, SidebarPane, MetaPane } from "ui";
+import { AppShell, HeaderShell, LocaleSwitch, MarcusIcon, PanesShell, Modal, Menu, Pane } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../../components/ThemeSwitch';
@@ -16,8 +15,7 @@ import { MainNav } from '../../components/Header/MainNav';
 import { TextBlocks } from '../../components/TextBlocks';
 import ErrorPage from 'next/error'
 import dynamic from "next/dynamic";
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { Bars4Icon } from '@heroicons/react/24/outline';
+
 
 const ManifestViewer = dynamic(() => import("../../components/IIIF/ManifestViewer"), {
   ssr: false,
@@ -161,7 +159,7 @@ const Home: NextPage = ({ data, preview }: any) => {
       </Head>
       <AppShell>
         <PanesShell>
-          <SidebarPane>
+          <Pane intent="sidebar">
             <HeaderShell className='order-3'>
               <Link href={`/`}>
                 {label[locale || '']}
@@ -180,7 +178,7 @@ const Home: NextPage = ({ data, preview }: any) => {
                   Studio
                 </a>
                 <Modal buttonLabel="Data" title="Data">
-                  <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
+                  <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
                     {JSON.stringify(item, null, 2)}
                   </pre>
                 </Modal>
@@ -194,10 +192,10 @@ const Home: NextPage = ({ data, preview }: any) => {
                 <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
               </a>
             </nav>
-          </SidebarPane>
+          </Pane>
 
           <main className='md:flex md:flex-grow min-h-screen'>
-            <MetaPane className='md:h-screen md:sticky flex md:top-0 md:w-72 md:shrink md:flex-grow-0 max-sm:p-5 md:bg-gray-100 md:dark:bg-[#2b2e2f]'>
+            <Pane intent='aside'>
               <div >
                 <SanityImage
                   image={item[0].image}
@@ -233,9 +231,9 @@ const Home: NextPage = ({ data, preview }: any) => {
                 />
                 <ThemeSwitch />
               </div>
-            </MetaPane>
+            </Pane>
 
-            <ContentShell>
+            <Pane intent='content'>
               {item[0]?.manifest ?
                 <div className='pb-5 min-h-[50vh] max-md:hidden'>
                   <ManifestViewer id={item[0].manifest} options={{ renderAbout: false, showIIIFBadge: false, showTitle: false, showInformationToggle: false }} />
@@ -259,7 +257,7 @@ const Home: NextPage = ({ data, preview }: any) => {
                   : null
                 }
               </div>
-            </ContentShell>
+            </Pane>
           </main>
 
           {/* <footer className='flex w-screen gap-3 items-center text-slate-600 dark:text-slate-300'>

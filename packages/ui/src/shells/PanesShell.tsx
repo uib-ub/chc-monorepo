@@ -5,7 +5,7 @@ type Props = {
   className?: string
 }
 
-export const PaneShell: React.FC<Props> = ({ children }) => {
+export const PanesShell: React.FC<Props> = ({ children }) => {
   return (
     <div className='flex'>
       {children}

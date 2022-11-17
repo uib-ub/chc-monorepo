@@ -34,6 +34,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "class-variance-authority": "^0.3.0",
     "react-portal": "^4.2.2"
   }
 }

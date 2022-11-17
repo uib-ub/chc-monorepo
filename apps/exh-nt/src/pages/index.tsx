@@ -3,13 +3,12 @@ import type { GetStaticProps, NextPage } from 'next'
 import { getClient } from '../lib/sanity.server'
 import { mainNav, siteSettings } from '../lib/queries/fragments'
 import Head from "next/head";
-import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, ContentShell, PaneShell, Menu, MarcusIcon, SidebarPane, Modal } from "ui";
+import { AppShell, HeaderShell, LocaleSwitch, PanesShell, Pane, Menu, MarcusIcon, Modal } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../components/ThemeSwitch';
 import { groq } from 'next-sanity'
 import { MainNav } from '../components/Header/MainNav';
-import { Bars4Icon } from '@heroicons/react/24/outline';
 
 const frontpageQuery = groq`
   {
@@ -44,8 +43,8 @@ const Home: NextPage = ({ data, preview }: any) => {
       </Head>
       <AppShell>
 
-        <PaneShell>
-          <SidebarPane>
+        <PanesShell>
+          <Pane intent='sidebar'>
             <HeaderShell className='order-3'>
               <Link href={`/`}>
                 {label[locale || '']}
@@ -64,7 +63,7 @@ const Home: NextPage = ({ data, preview }: any) => {
                   Studio
                 </a>
                 <Modal buttonLabel="Data" title="Data">
-                  <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
+                  <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
                     {JSON.stringify(data, null, 2)}
                   </pre>
                 </Modal>
@@ -78,10 +77,10 @@ const Home: NextPage = ({ data, preview }: any) => {
                 <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
               </a>
             </nav>
-          </SidebarPane>
+          </Pane>
 
 
-          <ContentShell className='h-screen flex-grow'>
+          <Pane intent='content'>
             <main className='flex flex-grow justify-center items-center'>
               <div className={`bg-[url('https://data.ub.uib.no/files/bs/ubb/ubb-jg/ubb-jg-n/ubb-jg-n-0313/ubb-jg-n-0313-03/jpg/ubb-jg-n-0313-03_md.jpg')] bg-center bg-cover bg-no-repeat h-5/6`}>
                 <div className={`flex flex-col justify-end items-center h-full`}>
@@ -111,10 +110,10 @@ const Home: NextPage = ({ data, preview }: any) => {
               />
               <ThemeSwitch />
             </footer>
-          </ContentShell>
+          </Pane>
 
 
-        </PaneShell>
+        </PanesShell>
       </AppShell>
     </>
   );

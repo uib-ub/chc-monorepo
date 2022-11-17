@@ -23,6 +23,7 @@ export const Modal: React.FC<ModalProps> = ({ buttonLabel, title, description, c
     <>
       <button
         type="button"
+        accessKey='i'
         onClick={openModal}
         className="rounded-md text-xs"
       >
@@ -54,16 +55,16 @@ export const Modal: React.FC<ModalProps> = ({ buttonLabel, title, description, c
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-5/6 transform overflow-hidden rounded-xl bg-white dark:bg-gray-900 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-lg font-medium leading-6 "
                   >
                     {title}
                   </Dialog.Title>
                   {description ? (
                     <Dialog.Description
-                      className="text-md font-medium leading-6 text-gray-900"
+                      className="text-md font-medium leading-6 "
                     >
                       {description}
                     </Dialog.Description>

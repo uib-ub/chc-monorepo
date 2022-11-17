@@ -3,14 +3,13 @@ import type { GetStaticProps, NextPage } from 'next'
 import { getClient } from '../../lib/sanity.server'
 import { mainNav, siteSettings, items } from '../../lib/queries/fragments'
 import Head from "next/head";
-import { AppShell, NavigationShell, HeaderShell, LocaleSwitch, PaneShell, MarcusIcon, ContentShell, Menu, SidebarPane, Modal } from "ui";
+import { AppShell, HeaderShell, LocaleSwitch, PanesShell, Pane, MarcusIcon, Menu, Modal } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../../components/ThemeSwitch';
 import { groq } from 'next-sanity'
 import SanityImage from '../../components/SanityImage';
 import { MainNav } from '../../components/Header/MainNav';
-import { Bars4Icon } from '@heroicons/react/24/outline';
 
 const itemsQuery = groq`
   {
@@ -45,8 +44,8 @@ const Home: NextPage = ({ data, preview }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppShell>
-        <PaneShell>
-          <SidebarPane>
+        <PanesShell>
+          <Pane intent='sidebar'>
             <HeaderShell className='order-3'>
               <Link href={`/`}>
                 {label[locale || '']}
@@ -65,7 +64,7 @@ const Home: NextPage = ({ data, preview }: any) => {
                   Studio
                 </a>
                 <Modal buttonLabel="Data" title="Data">
-                  <pre className='text-[10px] max-h-[50vh] overflow-scroll border p-3'>
+                  <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
                     {JSON.stringify(data, null, 2)}
                   </pre>
                 </Modal>
@@ -79,9 +78,9 @@ const Home: NextPage = ({ data, preview }: any) => {
                 <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
               </a>
             </nav>
-          </SidebarPane>
+          </Pane>
 
-          <ContentShell>
+          <Pane intent='content'>
             <div className='flex flex-wrap justify-center items-center gap-5 w-full p-5'>
               {items && items.map((item: any) => (
                 <div key={item.id} className="flex justify-center">
@@ -117,8 +116,8 @@ const Home: NextPage = ({ data, preview }: any) => {
               />
               <ThemeSwitch />
             </footer>
-          </ContentShell>
-        </PaneShell>
+          </Pane>
+        </PanesShell>
       </AppShell>
     </>
   );
