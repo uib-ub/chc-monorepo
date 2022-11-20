@@ -1,24 +1,22 @@
 import { defineType } from 'sanity'
 import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
+import { coalesceLabel } from '../../../../helpers'
 import { referredToBy, timespan } from '../../../properties/object'
 
 export default defineType({
   name: 'Name',
   type: 'object',
   title: 'Navn',
-  titleEN: 'Name',
   fieldsets: defaultFieldsets,
   fields: [
     {
       name: 'content',
       title: 'Navn',
-      titleEN: 'Name',
       type: 'string',
     },
     {
       name: 'hasType',
       title: 'Type',
-      titleEN: 'Type',
       type: 'reference',
       validation: (Rule) => Rule.required(),
       to: [{ type: 'AppelationType' }],
@@ -31,7 +29,6 @@ export default defineType({
     {
       name: 'part',
       title: 'Deler',
-      titleEN: 'Part',
       type: 'array',
       of: [{ type: 'Name' }],
       options: {
@@ -41,10 +38,9 @@ export default defineType({
         }
       },
     },
-    {
+    /* {
       name: 'language',
       title: 'Språk',
-      titleEN: 'Language',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'Language' }] }],
       options: {
@@ -53,9 +49,9 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
-    timespan,
-    referredToBy,
+    }, */
+    /* timespan, */
+    /* referredToBy, */
   ],
   preview: {
     select: {

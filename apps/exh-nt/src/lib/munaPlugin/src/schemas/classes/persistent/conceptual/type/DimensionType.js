@@ -1,7 +1,7 @@
 import { FaTag } from 'react-icons/fa'
 import { defineType } from 'sanity'
 import { defaultFieldsets } from '../../../../../fieldsets/defaultFieldsets'
-import { coalesceLabel } from '../../../../../helpers/coalesceLabel'
+import { coalesceLabel } from '../../../../../helpers'
 import { accessState, altLabel, editorialState, label } from '../../../../properties/datatype'
 
 export default defineType({
@@ -19,10 +19,9 @@ export default defineType({
     accessState,
     label,
     altLabel,
-    {
+    /* {
       name: 'activityStream',
       title: 'Aktivitetsstrøm',
-      titleEN: 'Activity stream',
       description: 'Events and activities connected to this object',
       type: 'array',
       of: [{ type: 'Creation' }],
@@ -32,16 +31,15 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
+    }, */
   ],
   preview: {
     select: {
       title: 'label',
     },
-    prepare(selection) {
-      const { title } = selection
+    prepare({ title }) {
       return {
-        title: coalesceLabel(title),
+        title: coalesceLabel(title, 'en'),
       }
     },
   },

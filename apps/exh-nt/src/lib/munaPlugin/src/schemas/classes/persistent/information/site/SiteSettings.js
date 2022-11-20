@@ -1,8 +1,9 @@
 import { GiSettingsKnobs } from 'react-icons/gi'
 import { license } from '../../../../properties/datatype'
 import { coalesceLabel } from '../../../../../helpers/coalesceLabel'
-import config from 'config:@sanity/document-internationalization';
 import { defineType } from 'sanity';
+
+const baseLang = process.env.NEXT_PUBLIC_BASE_LANGUAGE
 
 export default defineType({
   name: 'SiteSettings',
@@ -40,7 +41,9 @@ export default defineType({
       ],
       options: {
         filter: '__i18n_lang == $base',
-        filterParams: { base: config.base },
+        filterParams: {
+          base: baseLang
+        },
         semanticSanity: {
           '@type': '@id'
         }

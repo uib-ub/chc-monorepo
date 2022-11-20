@@ -1,7 +1,6 @@
 export const timespan = {
   name: 'timespan',
   title: 'Tidsspenn',
-  titleEN: 'Timespan',
   type: 'array',
   of: [{ type: 'Timespan' }],
   options: {

@@ -1,5 +1,5 @@
 import { defineType } from 'sanity'
-import { defaultFieldsets } from '../../../..'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
 import { carriedOutBy, referredToBy, timespan, tookPlaceAt, usedGeneralTechnique, usedObjectOfType, usedSpecificObject, usedSpecificTechnique } from '../../../properties/object'
 
 // Se https://link.springer.com/article/10.1007/s00799-016-0199-x for eksempel på modellering
@@ -12,13 +12,13 @@ export default defineType({
   fieldsets: defaultFieldsets,
   fields: [
     carriedOutBy,
-    timespan,
+    /* timespan, */
     tookPlaceAt,
     referredToBy,
     usedGeneralTechnique,
     usedSpecificTechnique,
     usedObjectOfType,
-    usedSpecificObject,
+    /* usedSpecificObject, */
   ],
   preview: {
     select: {

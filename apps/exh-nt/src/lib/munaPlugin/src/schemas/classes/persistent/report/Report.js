@@ -1,4 +1,4 @@
-import { Link } from 'part:@sanity/base/router'
+import Link from 'next/link'
 import React from 'react'
 import { BsFillQuestionCircleFill } from 'react-icons/bs'
 import { GiCrackedGlass } from 'react-icons/gi'
@@ -62,7 +62,7 @@ export default defineType({
     editorialState,
     accessState,
     label,
-    concerned,
+    /* concerned, */
     {
       name: 'hasType',
       title: 'Klassifisert som',
@@ -70,27 +70,7 @@ export default defineType({
       description: (
         <span>
           Brukes til å <i>spesifisere</i> typen av ting. For eksempel <strong>Rapport</strong>{' '}
-          klassifisert som <i>konververingsrapport</i>.{' '}
-          Legg til{' '}
-          <Link target="blank" href={'/desk/typer;reportType'}>
-            ny rapporttype.
-          </Link>{' '}
-          <Link target="blank" href={'https://muna.xyz/docs/model/properties#classified-as'}>
-            <BsFillQuestionCircleFill />
-          </Link>
-        </span>
-      ),
-      descriptionEN: (
-        <span>
-          Used to <i>specify</i> the things type. Example: <strong>Report</strong> classified as{' '}
-          <i>conservation report</i>.{' '}
-          Legg til{' '}
-          <Link target="blank" href={'/desk/typer;reportType'}>
-            ny rapporttype.
-          </Link>{' '}
-          <Link target="blank" href={'https://muna.xyz/docs/model/properties#classified-as'}>
-            <BsFillQuestionCircleFill />
-          </Link>
+          klassifisert som <i>konververingsrapport</i>.
         </span>
       ),
       type: 'array',
@@ -114,7 +94,7 @@ export default defineType({
       fieldset: 'core',
     },
     carriedOutBy,
-    timespan,
+    /* timespan, */
     hasIdentified,
     motivated,
     {
@@ -124,14 +104,6 @@ export default defineType({
       description: (
         <span>
           Hendelser og aktiviteter relatert til rapporten.{' '}
-          <Link target="blank" href={'https://muna.xyz/docs/model/properties#activity-stream'}>
-            <BsFillQuestionCircleFill />
-          </Link>
-        </span>
-      ),
-      descriptionEN: (
-        <span>
-          Events and activities connected to this object.{' '}
           <Link target="blank" href={'https://muna.xyz/docs/model/properties#activity-stream'}>
             <BsFillQuestionCircleFill />
           </Link>
@@ -180,17 +152,6 @@ export default defineType({
           </Link>
         </span>
       ),
-      descriptionEN: (
-        <span>
-          Images that documents the subject of the report.{' '}
-          <Link
-            target="blank"
-            href={'https://muna.xyz/docs/model/properties#documentation-images'}
-          >
-            <BsFillQuestionCircleFill />
-          </Link>
-        </span>
-      ),
       fieldset: 'documentation',
       type: 'array',
       of: [{ type: 'DigitalObjectImage' }],
@@ -217,17 +178,6 @@ export default defineType({
           </Link>
         </span>
       ),
-      descriptionEN: (
-        <span>
-          Files with additional information.{' '}
-          <Link
-            target="blank"
-            href={'https://muna.xyz/docs/model/properties#documentation-files'}
-          >
-            <BsFillQuestionCircleFill />
-          </Link>
-        </span>
-      ),
       fieldset: 'documentation',
       type: 'array',
       of: [{ type: 'file' }],
@@ -246,15 +196,6 @@ export default defineType({
         <span>
           Dersom det er flere selvstendige rapporter som inngår i en serie, legg til disse til her.
           Den overordene rapportens metadata bør reflektere at det er en samlepost.{' '}
-          <Link target="blank" href={'https://muna.xyz/docs/model/properties#sub-report'}>
-            <BsFillQuestionCircleFill />
-          </Link>
-        </span>
-      ),
-      descriptionEN: (
-        <span>
-          If there is several indepentent reports that forms part of a larger rapport these can be
-          added here.{' '}
           <Link target="blank" href={'https://muna.xyz/docs/model/properties#sub-report'}>
             <BsFillQuestionCircleFill />
           </Link>

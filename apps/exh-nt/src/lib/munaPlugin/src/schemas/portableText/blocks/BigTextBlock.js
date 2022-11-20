@@ -1,6 +1,7 @@
+import { defineType } from 'sanity'
 import { TextPreview } from '../../../previews/TextPreview'
 
-export default {
+export default defineType({
   name: 'BigTextBlock',
   type: 'object',
   title: 'Stor tekst',
@@ -41,4 +42,4 @@ export default {
     },
     component: TextPreview,
   },
-}
+})

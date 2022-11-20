@@ -1,6 +1,6 @@
 import { RiMapPinLine } from 'react-icons/ri'
 import { defineType } from 'sanity'
-import { defaultFieldsets } from '../../../../lib/fieldsets/defaultFieldsets'
+import { defaultFieldsets } from '../../../fieldsets/defaultFieldsets'
 import { coalesceLabel } from '../../../helpers'
 import { accessState, editorialState, label } from '../../properties/datatype'
 import { definedByGeoJSON, identifiedBy, referredToBy } from '../../properties/object'
@@ -48,7 +48,7 @@ export default defineType({
       inputComponent: KulturnavInput,
     }, */
     referredToBy,
-    definedByGeoJSON,
+    /* definedByGeoJSON, */
   ],
   preview: {
     select: {

@@ -1,13 +1,15 @@
-import React from 'react'
 import { FaPaperclip } from 'react-icons/fa'
+import { defineType } from 'sanity'
+/* 
 import ExternalLinkRenderer from '../../previews/ExternalLinkRenderer'
 import FootnoteRenderer from '../../previews/FootnoteRenderer'
+*/
 
 const highlightIcon = () => <span style={{ fontWeight: 'bold' }}>H</span>
 const highlightRender = (props) => <span style={{ backgroundColor: 'yellow' }}>{props.children}</span>
-const footnoteIcon = () => <span style={{ fontWeight: 'bold' }}>F</span>
+//const footnoteIcon = () => <span style={{ fontWeight: 'bold' }}>F</span>
 
-export default {
+export default defineType({
   name: 'blockContent',
   title: 'Excerpt',
   type: 'array',
@@ -30,24 +32,24 @@ export default {
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
-          {
+          /* {
             title: 'Highlight',
             value: 'highlight',
             blockEditor: {
               icon: highlightIcon,
               render: highlightRender,
             },
-          },
-          { title: 'Code', value: 'code' },
+          }, */
+          /* { title: 'Code', value: 'code' }, */
         ],
         annotations: [
           {
             name: 'link',
             type: 'object',
             title: 'External link',
-            blockEditor: {
+            /* blockEditor: {
               render: ExternalLinkRenderer
-            },
+            }, */
             fields: [
               {
                 name: 'href',
@@ -66,7 +68,7 @@ export default {
               },
             ],
           },
-          {
+          /* {
             name: 'internalLink',
             type: 'object',
             title: 'Internal link',
@@ -87,8 +89,8 @@ export default {
                 ],
               },
             ],
-          },
-          {
+          }, */
+          /* {
             name: 'footnote',
             type: 'object',
             title: 'Footnote',
@@ -103,11 +105,11 @@ export default {
                 of: [{ type: 'block' }]
               }
             ]
-          }
+          } */
         ],
       },
     },
-    {
+    /* {
       type: 'reference',
       title: 'Insert internal object',
       to: [
@@ -122,16 +124,15 @@ export default {
     { type: 'ObjectBlock' },
     { type: 'ObjectCompareBlock' },
     { type: 'VideoBlock' },
-    { type: 'InstagramBlock' },
     { type: 'EventBlock' },
     { type: 'QuoteBlock' },
     { type: 'TableBlock' },
     { type: 'TwoColumnBlock' },
-    { type: 'IframeBlock' },
+    { type: 'IframeBlock' }, */
   ],
   options: {
     semanticSanity: {
       exclude: true
     }
   },
-}
+})

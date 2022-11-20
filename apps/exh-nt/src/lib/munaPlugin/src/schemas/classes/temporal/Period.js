@@ -43,10 +43,10 @@ export default defineType({
       ...referredToBy,
       fieldset: 'core',
     },
-    {
+    /* {
       ...timespan,
       fieldset: 'core',
-    },
+    }, */
     {
       ...tookPlaceAt,
       fieldset: 'core',
@@ -58,7 +58,7 @@ export default defineType({
       type: 'DigitalObjectImage',
       fieldset: 'timelineMedium',
     },
-    {
+    /* {
       name: 'consistsOf',
       title: 'Består av',
       titleEN: 'consistsOf',
@@ -79,8 +79,8 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
-    {
+    }, */
+    /* {
       name: 'definingSTV',
       title: 'Definert av STV',
       titleEN: 'Defining STC',
@@ -91,7 +91,7 @@ export default defineType({
           '@type': '@json'
         }
       },
-    },
+    }, */
   ],
   preview: {
     select: {

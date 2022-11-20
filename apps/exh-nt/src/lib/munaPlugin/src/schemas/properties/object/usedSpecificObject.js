@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
-import { Link } from 'part:@sanity/base/router';
+import Link from 'next/link';
 
 
 export const usedSpecificObject = {

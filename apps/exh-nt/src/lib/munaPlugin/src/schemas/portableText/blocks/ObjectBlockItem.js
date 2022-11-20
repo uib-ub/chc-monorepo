@@ -1,8 +1,9 @@
+import { defineType } from 'sanity'
 import { coalesceLabel } from "../../../helpers"
 import { labelSingleton } from '../../properties/datatype'
 import { image } from '../../properties/object'
 
-export default {
+export default defineType({
   name: 'ObjectBlockItem',
   title: 'Object block item',
   type: 'object',
@@ -44,18 +45,16 @@ export default {
       titleEN: 'Description',
       type: 'simpleBlockContent',
     },
-    {
+    /* {
       name: 'internalRef',
       title: 'Object in the studio',
       titleEN: 'Manifest',
       type: 'reference',
       to: [{ type: 'HumanMadeObject' }],
-      /* fieldset: 'internal', */
       hidden: ({ value, parent }) => !value && parent?.image || parent?.manifestUrl,
-    },
+    }, */
     {
       ...image,
-      /* fieldset: 'illustration', */
       hidden: ({ value, parent }) => !value && parent?.manifestUrl,
     },
     {
@@ -63,7 +62,6 @@ export default {
       title: 'Manifest adresse',
       titleEN: 'Manifest URL',
       type: 'url',
-      /* fieldset: 'external', */
       hidden: ({ value, parent }) => !value && parent?.image || parent?.internalRef,
     },
     {
@@ -108,4 +106,4 @@ export default {
       }
     },
   },
-}
+})

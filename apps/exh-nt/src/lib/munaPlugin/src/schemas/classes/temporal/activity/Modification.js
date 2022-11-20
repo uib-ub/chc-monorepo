@@ -52,10 +52,10 @@ export default defineType({
       },
     },
     contributionAssignedBy,
-    timespanSingleton,
+    /* timespanSingleton, */
     tookPlaceAt,
     referredToBy,
-    {
+    /* {
       name: 'hasModified',
       title: 'Har modifisert',
       titleEN: 'Has modified',
@@ -68,7 +68,7 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
+    }, */
     usedGeneralTechnique,
     usedSpecificTechnique,
     {

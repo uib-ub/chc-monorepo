@@ -1,6 +1,6 @@
 import { FaBox } from 'react-icons/fa'
 import { defineType } from 'sanity'
-import { defaultFieldsets } from '../../../../lib/fieldsets/defaultFieldsets'
+import { defaultFieldsets } from '../../../fieldsets/defaultFieldsets'
 import { coalesceLabel } from '../../../helpers'
 import { accessState, editorialState, preferredIdentifier } from '../../properties/datatype'
 import { identifiedBy, referredToBy, timespan, tookPlaceAt } from '../../properties/object'
@@ -35,7 +35,7 @@ export default defineType({
       },
     },
     referredToBy,
-    timespan,
+    /* timespan, */
     {
       name: 'location',
       title: 'Lokasjon',
@@ -58,7 +58,7 @@ export default defineType({
           type: 'reference',
           to: [
             { type: 'Storage' },
-            { type: 'HumanMadeObject' },
+            /* { type: 'HumanMadeObject' }, */
             { type: 'Collection' }
           ],
         },

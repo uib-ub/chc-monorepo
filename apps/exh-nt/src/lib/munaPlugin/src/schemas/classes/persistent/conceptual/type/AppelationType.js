@@ -8,7 +8,6 @@ import { identifiedBy, inDataset, sameAs, wasOutputOf } from '../../../../proper
 export default defineType({
   name: 'AppelationType',
   title: 'Navnetype',
-  titleEN: 'Appelation type',
   type: 'document',
   initialValue: {
     editorialState: 'published',
@@ -22,7 +21,7 @@ export default defineType({
     label,
     altLabel,
     homepage,
-    identifiedBy,
+    /* identifiedBy, */
     definition,
     {
       name: 'activityStream',
@@ -38,9 +37,9 @@ export default defineType({
         }
       },
     },
-    sameAs,
-    inDataset,
-    wasOutputOf
+    /*     sameAs,
+        inDataset,
+        wasOutputOf */
   ],
   preview: {
     select: {

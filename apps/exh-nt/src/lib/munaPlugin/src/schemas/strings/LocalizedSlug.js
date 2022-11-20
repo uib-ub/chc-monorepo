@@ -1,5 +1,6 @@
+import { defineType } from 'sanity'
 
-export default {
+export default defineType({
   name: 'LocalizedSlug',
   type: 'object',
   title: 'Localized slug',
@@ -23,11 +24,4 @@ export default {
       isDefault: true,
     }
   ]
-  /* fields: supportedLanguages.map((lang) => ({
-    title: lang.title,
-    name: lang.id,
-    type: 'string',
-    validation: (Rule) => Rule.regex(/^[a-zA-Z0-9\-_]{0,60}$/),
-    fieldset: lang.isDefault ? null : 'translations',
-  })), */
-}
+})

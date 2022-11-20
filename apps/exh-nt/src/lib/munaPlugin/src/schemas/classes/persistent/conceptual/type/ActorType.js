@@ -1,4 +1,5 @@
 import { FaTag } from 'react-icons/fa'
+import { defineType } from 'sanity'
 import { defaultFieldsets } from '../../../../../fieldsets/defaultFieldsets'
 import { coalesceLabel } from '../../../../../helpers/coalesceLabel'
 import { accessState, altLabel, definition, editorialState, label } from '../../../../properties/datatype'

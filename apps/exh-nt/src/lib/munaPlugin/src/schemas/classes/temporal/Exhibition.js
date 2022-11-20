@@ -1,6 +1,6 @@
 import { FaGlasses } from 'react-icons/fa'
 import { defineType } from 'sanity'
-import { defaultFieldsets } from '../../../../lib/fieldsets/defaultFieldsets'
+import { defaultFieldsets } from '../../../fieldsets/defaultFieldsets'
 import { coalesceLabel } from '../../../helpers'
 import { accessState, editorialState, labelSingleton } from '../../properties/datatype'
 import { identifiedBy, language, referredToBy, tookPlaceAt } from '../../properties/object'

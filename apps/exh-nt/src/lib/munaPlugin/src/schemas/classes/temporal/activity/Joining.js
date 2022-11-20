@@ -39,7 +39,7 @@ export default defineType({
         }
       },
     },
-    timespanSingleton,
+    /*  timespanSingleton, */
     tookPlaceAt,
     {
       name: 'joinedWith',

@@ -1,4 +1,4 @@
-import { Link } from 'part:@sanity/base/router'
+import Link from 'next/link'
 import React from 'react'
 import { FaCalendar } from 'react-icons/fa'
 import { defineType } from 'sanity'
@@ -45,10 +45,10 @@ export default defineType({
       ...referredToBy,
       fieldset: 'core',
     },
-    {
+    /* {
       ...timespan,
       fieldset: 'core',
-    },
+    }, */
     {
       ...tookPlaceAt,
       fieldset: 'core',

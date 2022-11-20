@@ -33,7 +33,7 @@ export default defineType({
         }
       },
     },
-    timespanSingleton,
+    /* timespanSingleton, */
     tookPlaceAt,
     {
       name: 'separatedFrom',

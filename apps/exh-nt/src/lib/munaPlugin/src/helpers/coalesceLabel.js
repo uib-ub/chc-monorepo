@@ -1,10 +1,21 @@
-/* eslint-disable array-callback-return */
-import config from 'config:@sanity/document-internationalization';
+const i18nConfig = {
+  base: "en",
+  languages: [
+    {
+      "id": "en",
+      "title": "English"
+    },
+    {
+      "id": "no",
+      "title": "Bokmål"
+    }
+  ]
+}
 
 export const coalesceLabel = (label, lang) => {
   let langs = [lang || ''];
 
-  config.languages.map((x) => {
+  i18nConfig.languages.map((x) => {
     langs.push(x.id);
   });
 

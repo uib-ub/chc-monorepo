@@ -1,20 +1,20 @@
 /* eslint-disable prefer-template */
 import { FaRulerCombined } from 'react-icons/fa'
 import { defineType } from 'sanity'
-import { coalesceLabel, defaultFieldsets } from '../../../..'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
+import { coalesceLabel } from '../../../../helpers'
 import { featured } from '../../../properties/datatype'
-import { carriedOutBy, referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
+import { carriedOutBy, referredToBy, tookPlaceAt } from '../../../properties/object'
 
 export default defineType({
   name: 'Measurement',
   type: 'document',
   title: 'Måling',
-  titleEN: 'Measurement',
   icon: FaRulerCombined,
   fieldsets: defaultFieldsets,
   fields: [
     featured,
-    {
+    /* {
       name: 'observedDimension',
       title: 'Dimensjon',
       titleEN: 'Dimension',
@@ -27,11 +27,11 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
-    timespanSingleton,
+    }, */
+    /* timespanSingleton, */
     carriedOutBy,
     referredToBy,
-    tookPlaceAt,
+    tookPlaceAt
   ],
   preview: {
     select: {

@@ -31,7 +31,7 @@ export default defineType({
         }
       },
     },
-    {
+    /* {
       name: 'temporalProjection',
       title: 'Tidsspenn',
       titleEN: 'Timespan',
@@ -43,7 +43,7 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
+    }, */
     {
       name: 'spatialProjection',
       title: 'Fant sted ved',

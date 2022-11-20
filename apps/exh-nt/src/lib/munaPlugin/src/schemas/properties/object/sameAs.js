@@ -1,8 +1,6 @@
-
 export const sameAs = {
   name: 'sameAs',
   title: 'Samme som',
-  titleEN: 'Same as',
   type: 'array',
   of: [{ type: 'url' }],
   options: {

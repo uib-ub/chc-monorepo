@@ -14,6 +14,9 @@
     "@popperjs/core": "^2.11.6",
     "@portabletext/react": "^2.0.0",
     "@samvera/clover-iiif": "^1.12.4-rc.0",
+    "@sanity/code-input": "^3.0.0-v3-studio.15",
+    "@sanity/color-input": "^3.0.0-v3-studio.12",
+    "@sanity/document-internationalization": "^1.0.0-v3-studio.14",
     "clsx": "^1.2.1",
     "deep-rename-keys": "^0.2.1",
     "eslint-config-next": "^13.0.3",
@@ -25,6 +28,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sanity": "^3.0.0-rc.2",
+    "sanity-plugin-hotspot-array": "^1.0.0",
     "ui": "*"
   },
   "devDependencies": {

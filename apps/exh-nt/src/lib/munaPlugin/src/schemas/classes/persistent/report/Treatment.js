@@ -1,4 +1,4 @@
-import { Link } from 'part:@sanity/base/router'
+import Link from 'next/link'
 import React from 'react'
 import { BsFillQuestionCircleFill } from 'react-icons/bs'
 import { defineType } from 'sanity'
@@ -13,13 +13,13 @@ export default defineType({
   fieldsets: defaultFieldsets,
   fields: [
     carriedOutBy,
-    timespan,
+    /* timespan, */
     tookPlaceAt,
     referredToBy,
     usedGeneralTechnique,
     usedSpecificTechnique,
     usedObjectOfType,
-    usedSpecificObject,
+    /* usedSpecificObject, */
     {
       name: 'assessedBy',
       title: 'Vurdert av',
@@ -27,14 +27,6 @@ export default defineType({
       description: (
         <span>
           Legg til en vurdering av behandlingen. Var det en suksess?{' '}
-          <Link target="blank" href={'https://muna.xyz/docs/model/properties#assessment'}>
-            <BsFillQuestionCircleFill />
-          </Link>
-        </span>
-      ),
-      descriptionEN: (
-        <span>
-          Add an assessment of the treatment, was it a success?{' '}
           <Link target="blank" href={'https://muna.xyz/docs/model/properties#assessment'}>
             <BsFillQuestionCircleFill />
           </Link>

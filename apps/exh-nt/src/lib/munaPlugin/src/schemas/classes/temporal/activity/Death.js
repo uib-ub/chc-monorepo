@@ -1,10 +1,9 @@
 import { GiDeathSkull } from 'react-icons/gi'
 import { defineType } from 'sanity'
-import { defaultFieldsets, timespanAsString } from '../../../..'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
+import { timespanAsString } from '../../../../helpers'
 import { featured } from '../../../properties/datatype'
-import { carriedOutBy, referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
-
-const capitalize = require('capitalize')
+import { carriedOutBy, referredToBy, tookPlaceAt } from '../../../properties/object'
 
 export default defineType({
   name: 'Death',
@@ -13,7 +12,13 @@ export default defineType({
   titleEN: 'Death',
   icon: GiDeathSkull,
   fieldsets: defaultFieldsets,
-  fields: [featured, carriedOutBy, timespanSingleton, tookPlaceAt, referredToBy],
+  fields: [
+    featured,
+    carriedOutBy,
+    /* timespanSingleton, */
+    tookPlaceAt,
+    referredToBy
+  ],
   preview: {
     select: {
       bb: 'timespan.beginOfTheBegin',
@@ -28,7 +33,7 @@ export default defineType({
       const { type, bb, eb, date, be, ee } = selection
       const timespanString = timespanAsString(bb, eb, date, be, ee, 'nb')
       return {
-        title: `${capitalize(type)}`,
+        title: `${type}`,
         subtitle: timespanString,
       }
     },

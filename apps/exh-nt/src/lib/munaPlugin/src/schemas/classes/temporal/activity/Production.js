@@ -55,16 +55,16 @@ export default defineType({
       ...contributionAssignedBy,
       hidden: ({ value, parent }) => !value && parent?.consistsOf,
     },
-    {
+    /* {
       ...timespanSingleton,
-    },
+    }, */
     {
       ...tookPlaceAt,
     },
     {
       ...referredToBy,
     },
-    {
+    /* {
       name: 'hasModified',
       title: 'Har modifisert',
       titleEN: 'Has modified',
@@ -77,15 +77,15 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
-    {
+    }, */
+    /* {
       ...usedGeneralTechnique,
       hidden: ({ value, parent }) => !value && parent?.consistsOf,
     },
     {
       ...usedSpecificTechnique,
       hidden: ({ value, parent }) => !value && parent?.consistsOf,
-    }
+    } */
   ],
   preview: {
     select: {

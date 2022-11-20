@@ -1,4 +1,6 @@
-export default {
+import { defineType } from 'sanity'
+
+export default defineType({
   name: 'HeroBlock',
   type: 'object',
   title: 'Hero',
@@ -50,4 +52,4 @@ export default {
       }
     },
   },
-}
+})

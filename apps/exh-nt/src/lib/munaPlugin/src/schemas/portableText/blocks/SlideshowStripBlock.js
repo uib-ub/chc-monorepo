@@ -1,4 +1,6 @@
-export default {
+import { defineType } from 'sanity';
+
+export default defineType({
   name: 'SlideshowStripBlock',
   type: 'object',
   title: 'Slideshow-strip',
@@ -44,4 +46,4 @@ export default {
       subtitle: `Slideshow stripe`,
     }),
   },
-}
+})

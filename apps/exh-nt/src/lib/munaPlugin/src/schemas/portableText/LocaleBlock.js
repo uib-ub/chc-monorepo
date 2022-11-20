@@ -1,5 +1,6 @@
+import { defineType } from 'sanity'
 
-export default {
+export default defineType({
   name: 'LocaleBlock',
   type: 'object',
   title: 'LocaleBlock',
@@ -47,4 +48,4 @@ export default {
       }
     },
   },
-}
+})

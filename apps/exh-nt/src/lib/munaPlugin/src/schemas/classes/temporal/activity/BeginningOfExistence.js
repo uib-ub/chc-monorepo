@@ -13,7 +13,7 @@ export default defineType({
   fields: [
     featured,
     contributionAssignedBy,
-    timespanSingleton,
+    /* timespanSingleton, */
     tookPlaceAt
   ],
   preview: {

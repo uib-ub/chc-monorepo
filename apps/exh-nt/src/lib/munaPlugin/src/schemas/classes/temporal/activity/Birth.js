@@ -1,41 +1,35 @@
 import { FaBirthdayCake } from 'react-icons/fa'
 import { defineType } from 'sanity'
-import { defaultFieldsets, timespanAsString } from '../../../..'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
+import { timespanAsString } from '../../../../helpers'
 import { featured } from '../../../properties/datatype'
 import { carriedOutBy, referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
-
-const capitalize = require('capitalize')
 
 export default defineType({
   name: 'Birth',
   type: 'document',
   title: 'Fødsel',
-  titleEN: 'Birth',
   icon: FaBirthdayCake,
   fieldsets: defaultFieldsets,
   fields: [
     featured,
     carriedOutBy,
-    timespanSingleton,
+    //timespanSingleton,
     tookPlaceAt,
     referredToBy
   ],
   preview: {
     select: {
-      bb: 'timespan.beginOfTheBegin',
-      eb: 'timespan.endOfTheBegin',
-      date: 'timespan.date',
-      be: 'timespan.beginOfTheEnd',
-      ee: 'timespan.endOfTheEnd',
+      edtf: 'timespan.edtf',
       blocks: 'description',
       type: '_type',
     },
     prepare(selection) {
-      const { type, bb, eb, date, be, ee } = selection
-      const timespanString = timespanAsString(bb, eb, date, be, ee, 'nb')
+      const { type, edtf } = selection
+
       return {
-        title: `${capitalize(type)}`,
-        subtitle: timespanString,
+        title: type,
+        subtitle: edtf,
       }
     },
   },

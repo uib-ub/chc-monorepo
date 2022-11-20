@@ -1,6 +1,20 @@
-import config from 'config:@sanity/document-internationalization';
+import { defineType } from 'sanity';
 
-export default {
+const i18nConfig = {
+  base: "en",
+  languages: [
+    {
+      "id": "en",
+      "title": "English"
+    },
+    {
+      "id": "no",
+      "title": "Bokmål"
+    }
+  ]
+}
+
+export default defineType({
   name: 'LocalizedString',
   type: 'object',
   title: 'Localized string',
@@ -19,10 +33,10 @@ export default {
       },
     },
   ],
-  fields: config.languages.map((lang) => ({
+  fields: i18nConfig.languages.map((lang) => ({
     title: lang.title,
     name: lang.id,
     type: 'string',
-    fieldset: lang.isDefault ? null : 'translations',
+    fieldset: lang.id === i18nConfig.base ? null : 'translations',
   })),
-}
+})

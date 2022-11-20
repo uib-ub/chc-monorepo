@@ -56,7 +56,7 @@ export default defineType({
     accessState,
     preferredIdentifier,
     labelSingleton,
-    {
+    /* {
       ...identifiedBy,
       fieldset: 'core',
     },
@@ -67,8 +67,8 @@ export default defineType({
     {
       ...subjectOf,
       fieldset: 'core',
-    },
-    {
+    }, */
+    /* {
       name: 'activityStream',
       title: 'Aktivitetsstrøm',
       titleEN: 'Activity stream',
@@ -88,7 +88,7 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
+    }, */
     {
       name: 'composedOf',
       title: 'Består av',
@@ -101,7 +101,7 @@ export default defineType({
           type: 'reference',
           to: [
             { type: 'Collection' },
-            { type: 'HumanMadeObject' }
+            /* { type: 'HumanMadeObject' } */
           ]
         }
       ],

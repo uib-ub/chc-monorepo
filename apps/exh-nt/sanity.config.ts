@@ -4,14 +4,29 @@
 
 //import { visionTool } from '@sanity/vision'
 import { defineConfig, Slug } from 'sanity'
-import { deskTool } from 'sanity/desk'
-import * as schemas from './src/lib/munaPlugin/src'
+import { withDocumentI18nPlugin } from '@sanity/document-internationalization'
+import { imageHotspotArrayPlugin } from "sanity-plugin-hotspot-array"
+import { codeInput } from "@sanity/code-input";
+import { colorInput } from "@sanity/color-input";
+//import { deskTool } from 'sanity/desk'
+import { schemaTypes } from './src/lib/munaPlugin/src'
 
 // @TODO: update next-sanity/studio to automatically set this when needed
 const basePath = '/studio'
 
-const muna = schemas
-console.log(muna)
+const i18nConfig = {
+  base: "en",
+  languages: [
+    {
+      "id": "en",
+      "title": "English"
+    },
+    {
+      "id": "no",
+      "title": "Bokmål"
+    }
+  ]
+}
 
 export default defineConfig({
   basePath,
@@ -19,59 +34,34 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || '',
   title:
     'Never-ending and temporary',
-  /*  schema: {
-     // If you want more content types, you can add them to this array
-     types: muna,
-   }, */
-  /* plugins: [
-    deskTool({
-      structure: (S) => {
-        // The `Settings` root list item
-        const settingsListItem = // A singleton not using `documentListItem`, eg no built-in preview
-          S.listItem()
-            .title(settingsType.title)
-            .icon(settingsType.icon)
-            .child(
-              S.editor()
-                .id(settingsType.name)
-                .schemaType(settingsType.name)
-                .documentId(settingsType.name)
-            )
- 
-        // The default root list items (except custom ones)
-        const defaultListItems = S.documentTypeListItems().filter(
-          (listItem) => listItem.getId() !== settingsType.name
-        )
- 
-        return S.list()
-          .title('Content')
-          .items([settingsListItem, S.divider(), ...defaultListItems])
+  schema: {
+    // If you want more content types, you can add them to this array
+    types: [
+      {
+        name: 'book',
+        type: 'document',
+        title: 'Book',
+        fields: [
+          {
+            name: 'title',
+            type: 'string',
+            title: 'Book title'
+          }
+        ]
       },
-
-      // `defaultDocumentNode is responsible for adding a “Preview” tab to the document pane
-      // You can add any React component to `S.view.component` and it will be rendered in the pane
-      // and have access to content in the form in real-time.
-      // It's part of the Studio's “Structure Builder API” and is documented here:
-      // https://www.sanity.io/docs/structure-builder-reference
-      defaultDocumentNode: (S, { schemaType }) => {
-        if (schemaType === 'post') {
-          return S.document().views([
-            S.view.form(),
-            S.view.component(PostsPreview).title('Preview'),
-          ])
-        }
- 
-        return null
-      },
-    }),
-    // Add an image asset source for Unsplash
-    // unsplashImageAsset(),
+      ...schemaTypes
+    ],
+  },
+  plugins: withDocumentI18nPlugin([
+    imageHotspotArrayPlugin(),
+    codeInput(),
+    colorInput(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({
+    /* visionTool({
       defaultApiVersion: '2022-08-08',
-    }),
-  ], */
+    }), */
+  ], i18nConfig),
   /* document: {
     productionUrl: async (prev, { document }) => {
       const url = new URL('/api/preview', location.origin)

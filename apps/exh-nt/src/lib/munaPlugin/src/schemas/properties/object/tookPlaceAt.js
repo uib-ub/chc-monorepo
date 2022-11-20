@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'part:@sanity/base/router';
-
+import Link from 'next/link';
 
 export const tookPlaceAt = {
   name: 'tookPlaceAt',
   title: 'Skjedde ved',
-  titleEN: 'Took place at',
   description: (
     <span>
       Hvor skjedde dette? Legg til{' '}
@@ -14,14 +12,7 @@ export const tookPlaceAt = {
       </Link>
     </span>
   ),
-  descriptionEN: (
-    <span>
-      Where did this happen? Add{' '}
-      <Link target="blank" href={'/desk/steder'}>
-        a new place
-      </Link>
-    </span>
-  ),
+
   type: 'array',
   of: [{ type: 'reference', to: [{ type: 'Place' }] }],
   options: {

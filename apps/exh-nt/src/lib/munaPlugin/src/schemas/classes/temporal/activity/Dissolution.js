@@ -35,7 +35,7 @@ export default defineType({
         }
       },
     },
-    timespanSingleton,
+    /* timespanSingleton, */
     tookPlaceAt,
     motivatedBy,
     referredToBy,

@@ -1,9 +1,10 @@
 import React from 'react'
+import { defineType } from 'sanity'
 
 const highlightIcon = () => <span style={{ fontWeight: 'bold' }}>H</span>
 const highlightRender = (props) => <span style={{ backgroundColor: 'yellow' }}>{props.children}</span>
 
-export default {
+export default defineType({
   name: 'reportText',
   type: 'array',
   title: 'Excerpt',
@@ -51,7 +52,7 @@ export default {
         ],
       },
     },
-    { type: 'DigitalObjectImage' },
+    /* { type: 'DigitalObjectImage' },
     {
       type: 'reference',
       to: [
@@ -63,11 +64,11 @@ export default {
         { type: 'Material' },
         { type: 'Measurement' },
       ],
-    },
+    }, */
   ],
   options: {
     semanticSanity: {
       exclude: true
     }
   },
-}
+})

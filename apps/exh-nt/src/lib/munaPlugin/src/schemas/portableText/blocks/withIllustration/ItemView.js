@@ -1,6 +1,7 @@
+import { defineType } from 'sanity'
 import { image } from '../../../properties/object'
 
-export default {
+export default defineType({
   type: 'object',
   name: 'ItemView',
   title: 'Visning',
@@ -103,4 +104,4 @@ export default {
       }
     },
   },
-}
+})

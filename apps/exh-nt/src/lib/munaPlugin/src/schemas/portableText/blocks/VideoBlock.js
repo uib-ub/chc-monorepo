@@ -1,7 +1,8 @@
 import { MdOutlineLocalMovies } from 'react-icons/md'
+import { defineType } from 'sanity'
 import { labelSingleton } from '../../properties/datatype'
 
-export default {
+export default defineType({
   name: 'VideoBlock',
   type: 'object',
   title: 'Video',
@@ -39,4 +40,4 @@ export default {
       }
     }
   },
-}
+})

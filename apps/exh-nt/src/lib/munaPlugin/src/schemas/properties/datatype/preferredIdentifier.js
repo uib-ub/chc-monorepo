@@ -1,9 +1,7 @@
 import React from 'react';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
-import { Link } from 'part:@sanity/base/router';
-import sanityClient from 'part:@sanity/base/client'
-
-const client = sanityClient.withConfig({ apiVersion: '2021-03-25', useCdn: false })
+import Link from 'next/link';
+// import { useClient } from 'sanity';
 
 export const preferredIdentifier = {
   name: 'preferredIdentifier',
@@ -34,11 +32,12 @@ export const preferredIdentifier = {
     </span>
   ),
   type: 'string',
-  validation: (Rule) => Rule.required().custom(async (prefId) => {
+  /* validation: (Rule) => Rule.required().custom(async (prefId) => {
+    const client = useClient().withConfig({apiVersion: '2021-10-21'})
     const docs = await client.fetch(
       `*[preferredIdentifier == "${prefId}" && !(_id in path("drafts.**"))] { preferredIdentifier }`,
       { prefId }
     );
     return docs.length > 1 ? 'Value is not unique' : true;
-  }),
+  }), */
 };

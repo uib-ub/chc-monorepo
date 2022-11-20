@@ -1,12 +1,11 @@
 import React from 'react';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
-import { Link } from 'part:@sanity/base/router';
+import Link from 'next/link';
 
 
 export const referredToBy = {
   name: 'referredToBy',
   title: 'Beskrivelse',
-  titleEN: 'Description',
   description: (
     <span>
       Objektet kan ha mange beskrivelser, korte og/eller lange. Tekstene kan types for ulike

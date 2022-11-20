@@ -1,7 +1,8 @@
+import { defineType } from 'sanity'
 import { coalesceLabel } from "../../../helpers"
 import { image } from "../../properties/object"
 
-export default {
+export default defineType({
   name: 'EventBlock',
   type: 'object',
   title: 'Hendelse',
@@ -55,4 +56,4 @@ export default {
       }
     },
   },
-}
+})

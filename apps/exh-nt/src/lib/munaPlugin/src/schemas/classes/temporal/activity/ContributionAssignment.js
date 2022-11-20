@@ -1,12 +1,11 @@
 import { defineType } from 'sanity'
-import { coalesceLabel } from "../../../.."
-import { assignedRole, assignedActor, usedName } from '../../../properties/object'
+import { coalesceLabel } from '../../../../helpers'
+import { assignedActor, assignedRole, usedName } from '../../../properties/object'
 
 export default defineType({
   name: 'ContributionAssignment',
   type: 'object',
   title: 'Bidragspåstand',
-  titleEN: 'Contribution Assignment',
   fields: [
     assignedActor,
     assignedRole,

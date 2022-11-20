@@ -51,10 +51,10 @@ export default defineType({
       ...referredToBy,
       fieldset: 'core',
     },
-    {
+    /* {
       ...timespanSingleton,
       fieldset: 'core',
-    },
+    }, */
     {
       name: 'isAbout',
       title: 'Omhandler',
@@ -65,7 +65,7 @@ export default defineType({
         {
           type: 'reference',
           to: [
-            { type: 'HumanMadeObject' },
+            /* { type: 'HumanMadeObject' }, */
             { type: 'Collection' },
             { type: 'Actor' },
           ],

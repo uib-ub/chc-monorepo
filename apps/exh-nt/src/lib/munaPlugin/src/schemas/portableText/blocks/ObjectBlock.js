@@ -1,7 +1,8 @@
+import { defineType } from 'sanity'
 import { coalesceLabel } from "../../../helpers"
 import { labelSingleton } from '../../properties/datatype'
 
-export default {
+export default defineType({
   name: 'ObjectBlock',
   type: 'object',
   title: 'Object(s) block',
@@ -78,4 +79,4 @@ export default {
       }
     },
   },
-}
+})

@@ -1,4 +1,6 @@
-export default {
+import { defineType } from 'sanity'
+
+export default defineType({
   name: 'IframeBlock',
   type: 'object',
   title: 'iFrame',
@@ -40,4 +42,4 @@ export default {
       }
     },
   },
-}
+})

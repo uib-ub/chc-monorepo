@@ -8,9 +8,8 @@ import {
   relation, showsVisualObject, subject, subjectOf, subjectOfManifest, wasOutputOf
 } from '../../../properties/object'
 import HotspotArray from 'sanity-plugin-hotspot-array'
-import HotspotPreview from '../../../../previews/hotspotPreview'
 import { depictsFunctional } from '../../../properties/object/depictsFunctional'
-import { defineType } from 'sanity'
+import { defineType, defineField } from 'sanity'
 
 export default defineType({
   name: 'HumanMadeObject',
@@ -196,12 +195,12 @@ export default defineType({
       group: 'images',
       inputComponent: HotspotArray,
       of: [
-        {
-          name: 'point',
+        defineField({
+          name: 'spot',
           type: 'object',
           fieldsets: [{ name: 'position', options: { columns: 2 } }],
           fields: [
-            { name: 'label', type: 'text', rows: 2 },
+            { name: 'details', type: 'text', rows: 2 },
             depictsFunctional,
             {
               name: 'x',
@@ -222,7 +221,7 @@ export default defineType({
           ],
           preview: {
             select: {
-              title: 'label',
+              title: 'details',
               x: 'x',
               y: 'y',
             },
@@ -233,12 +232,17 @@ export default defineType({
               }
             },
           },
-        }
+        })
       ],
       options: {
-        hotspotImagePath: `image`,
-        hotspotDescriptionPath: `label`,
-        hotspotTooltip: HotspotPreview,
+        // plugin adds support for this option
+        imageHotspot: {
+          // see `Image and description path` setup below
+          imagePath: `image`,
+          descriptionPath: `label`,
+          // see `Custom tooltip` setup below
+          tooltip: undefined,
+        }
       },
     },
     {

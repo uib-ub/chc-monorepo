@@ -1,5 +1,5 @@
 import { defineType } from 'sanity'
-import { coalesceLabel } from '../../../helpers/coalesceLabel'
+import { coalesceLabel } from '../../../helpers'
 
 export default defineType({
   name: 'Dimension',

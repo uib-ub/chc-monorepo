@@ -1,6 +1,7 @@
+import { defineType } from 'sanity'
 import { QuotePreview } from '../../../previews/QuotePreview'
 
-export default {
+export default defineType({
   name: 'QuoteBlock',
   type: 'object',
   title: 'Quote',
@@ -40,4 +41,4 @@ export default {
     },
     component: QuotePreview,
   },
-}
+})

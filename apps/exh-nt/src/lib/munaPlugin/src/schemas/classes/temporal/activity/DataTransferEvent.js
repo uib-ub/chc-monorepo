@@ -12,6 +12,6 @@ export default defineType({
   fields: [
     transferred,
     hasSender,
-    timestamp,
+    /* timestamp, */
   ],
 })

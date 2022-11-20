@@ -1,6 +1,7 @@
+import { defineType } from 'sanity'
 import { coalesceLabel } from '../../../../helpers'
 
-export default {
+export default defineType({
   title: 'Gallery manifest',
   name: 'MiradorGalleryWindow',
   type: 'object',
@@ -83,4 +84,4 @@ export default {
       }
     },
   },
-}
+})

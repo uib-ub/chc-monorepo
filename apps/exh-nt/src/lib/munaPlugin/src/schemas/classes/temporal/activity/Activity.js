@@ -96,10 +96,10 @@ export default defineType({
       ...referredToBy,
       group: 'core',
     },
-    {
+    /* {
       ...timespanSingleton,
       group: ['core', 'continuation']
-    },
+    }, */
     {
       ...carriedOutBy,
       group: 'core',
@@ -165,7 +165,7 @@ export default defineType({
         {
           type: 'reference',
           to: [
-            { type: 'HumanMadeObject' },
+            /* { type: 'HumanMadeObject' }, */
             { type: 'Event' },
             { type: 'Place' },
             { type: 'Work' },
@@ -195,11 +195,11 @@ export default defineType({
       fieldset: 'technique',
       group: 'technique',
     },
-    {
+    /* {
       ...usedSpecificObject,
       fieldset: 'technique',
       group: 'technique',
-    },
+    }, */
     {
       name: 'generalPurpose',
       title: 'Generelt formål',
@@ -221,7 +221,7 @@ export default defineType({
         }
       },
     },
-    {
+    /* {
       name: 'motivatedBy',
       title: 'Motivert av',
       titleEN: 'Motivated by',
@@ -248,8 +248,8 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
-    {
+    }, */
+    /* {
       name: 'intendedUseOf',
       title: 'Forutså bruk av',
       titleEN: 'Intended use of',
@@ -264,7 +264,7 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
+    }, */
   ],
   preview: {
     select: {

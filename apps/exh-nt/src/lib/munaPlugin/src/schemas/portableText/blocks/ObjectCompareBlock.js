@@ -1,6 +1,7 @@
+import { defineType } from 'sanity'
 import { label } from "../../properties/datatype"
 
-export default {
+export default defineType({
   name: 'ObjectCompareBlock',
   type: 'object',
   title: 'Compare images',
@@ -63,4 +64,4 @@ export default {
       }
     },
   },
-}
+})

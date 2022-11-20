@@ -1,5 +1,6 @@
-import config from 'config:@sanity/document-internationalization';
 import { defineType } from 'sanity';
+
+const baseLang = process.env.NEXT_PUBLIC_BASE_LANGUAGE
 
 export default defineType({
   name: 'Page',
@@ -7,7 +8,7 @@ export default defineType({
   title: 'Side',
   i18n: true,
   initialValue: {
-    '__i18n_lang': config.base,
+    '__i18n_lang': baseLang,
     '__i18n_refs': [],
   },
   fields: [
@@ -34,7 +35,6 @@ export default defineType({
         { type: 'TwoColumnBlock' },
         { type: 'GridBlock' },
         { type: 'VideoBlock' },
-        { type: 'InstagramBlock' },
         { type: 'IframeBlock' },
       ],
       options: {

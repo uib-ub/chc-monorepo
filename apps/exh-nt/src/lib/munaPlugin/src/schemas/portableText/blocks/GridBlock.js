@@ -1,6 +1,7 @@
 import { BiGrid } from 'react-icons/bi'
+import { defineType } from 'sanity'
 
-export default {
+export default defineType({
   name: 'GridBlock',
   type: 'object',
   title: 'Rutenett',
@@ -68,4 +69,4 @@ export default {
       }
     }
   }
-}
+})

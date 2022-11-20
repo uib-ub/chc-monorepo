@@ -20,10 +20,10 @@ export default defineType({
     accessState,
     label,
     altLabel,
-    definition,
+    /* definition, */
     homepage,
     identifiedBy,
-    {
+    /* {
       name: 'activityStream',
       title: 'Aktivitetsstrøm',
       titleEN: 'Activity stream',
@@ -36,21 +36,21 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
+    }, */
     sameAs,
-    inDataset,
-    wasOutputOf
+    /* inDataset,
+    wasOutputOf */
   ],
   preview: {
     select: {
       title: 'label',
-      imported: 'wasOutputOf'
+      //imported: 'wasOutputOf'
     },
     prepare(selection) {
       const { title, imported } = selection
       return {
         title: coalesceLabel(title),
-        subtitle: imported ? `Importert fra ${imported.hasSender.label}` : 'Lokal'
+        // subtitle: imported ? `Importert fra ${imported.hasSender.label}` : 'Lokal'
       }
     },
   },

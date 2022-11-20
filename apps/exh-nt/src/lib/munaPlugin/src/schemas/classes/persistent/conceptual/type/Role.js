@@ -1,8 +1,9 @@
 import { FaTag } from 'react-icons/fa'
 import { defineType } from 'sanity'
 import { defaultFieldsets } from '../../../../../fieldsets/defaultFieldsets'
-import { coalesceLabel } from '../../../../../helpers/coalesceLabel'
-import { altLabel, definition, label } from '../../../../properties/datatype'
+import { coalesceLabel } from '../../../../../helpers'
+import { accessState, altLabel, definition, editorialState, homepage, label } from '../../../../properties/datatype'
+import { identifiedBy, inDataset, sameAs, wasOutputOf } from '../../../../properties/object'
 
 export default defineType({
   name: 'Role',
@@ -15,10 +16,14 @@ export default defineType({
   icon: FaTag,
   fieldsets: defaultFieldsets,
   fields: [
+    editorialState,
+    accessState,
     label,
     altLabel,
-    definition,
-    {
+    /* definition, */
+    /* identifiedBy, */
+    homepage,
+    /* {
       name: 'activityStream',
       title: 'Aktivitetsstrøm',
       titleEN: 'Activity stream',
@@ -31,7 +36,10 @@ export default defineType({
           '@type': '@id'
         }
       },
-    },
+    }, */
+    sameAs,
+    /* inDataset,
+    wasOutputOf */
   ],
   preview: {
     select: {

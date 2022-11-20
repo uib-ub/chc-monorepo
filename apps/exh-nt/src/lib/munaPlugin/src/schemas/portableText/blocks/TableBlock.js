@@ -1,4 +1,6 @@
-export default {
+import { defineType } from 'sanity'
+
+export default defineType({
   name: 'TableBlock',
   type: 'object',
   title: 'Tabell',
@@ -21,12 +23,12 @@ export default {
       titleEN: 'Title',
       type: 'string',
     },
-    {
+    /* {
       name: 'data',
       title: 'Illustrasjonsbilde',
       titleEN: 'Illustration',
       type: 'table',
-    },
+    }, */
   ],
   preview: {
     select: {
@@ -40,4 +42,4 @@ export default {
       }
     },
   },
-}
+})

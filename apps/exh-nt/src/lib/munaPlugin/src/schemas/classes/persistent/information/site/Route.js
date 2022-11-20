@@ -1,10 +1,8 @@
-import sanityClient from 'part:@sanity/base/client'
 import { MdLink } from 'react-icons/md'
-import config from 'config:@sanity/document-internationalization'
-import { coalesceLabel } from '../../../../../../lib'
-import { defineType } from 'sanity'
+import { defineType, useClient } from 'sanity'
+import { coalesceLabel } from '../../../../../helpers'
 
-const client = sanityClient.withConfig({ apiVersion: '2021-03-25', useCdn: false })
+const baseLang = process.env.NEXT_PUBLIC_BASE_LANGUAGE
 
 const getSubtitle = (slug, link, route) => {
   if (slug) {
@@ -19,7 +17,8 @@ const getSubtitle = (slug, link, route) => {
   return null
 }
 
-function myAsyncSlugifier(input) {
+function useAsyncSlugifier(input) {
+  const client = useClient().withConfig({ apiVersion: '2021-10-21' })
   const query = '*[_id == $id][0]'
   const params = { id: input._ref }
   // eslint-disable-next-line consistent-return
@@ -77,7 +76,6 @@ export default defineType({
       title: 'Side',
       titleEN: 'Page',
       description: 'Siden du vil at skal vises på denne adressen. Siden må være publisert.',
-      descriptionEN: 'The page you want to appear at this path. Remember it needs to be published.',
       fieldset: 'page',
       type: 'reference',
       to: [
@@ -87,7 +85,7 @@ export default defineType({
       hidden: ({ parent, value }) => !value && (parent?.route || parent?.link),
       options: {
         filter: '__i18n_lang == $base',
-        filterParams: { base: config.base },
+        filterParams: { base: baseLang },
         semanticSanity: {
           '@type': '@id'
         }
@@ -96,9 +94,7 @@ export default defineType({
     {
       name: 'slug',
       title: 'Sti',
-      titleEN: 'Path',
       description: 'Dette er adressen siden vil bli tilgjengelig på',
-      descriptionEN: 'This is the website path the page will accessible on',
       fieldset: 'page',
       type: 'slug',
       hidden: ({ parent, value }) => !value && (parent?.route || parent?.link),
@@ -112,15 +108,13 @@ export default defineType({
       options: {
         source: 'page',
         // Read more: https://www.sanity.io/docs/slug-type
-        slugify: myAsyncSlugifier,
+        slugify: useAsyncSlugifier,
       },
     },
     {
       name: 'link',
       title: 'Ekstern lenke',
-      titleEN: 'External link',
       description: 'Example: https://www.uib.no/ub',
-      descriptionEN: 'Example: https://www.sanity.io',
       fieldset: 'paths',
       type: 'url',
       hidden: ({ parent, value }) => !value && (parent?.route || parent?.page)
@@ -128,9 +122,7 @@ export default defineType({
     {
       name: 'route',
       title: 'Sti til side i frontend',
-      titleEN: 'Path',
       description: 'Referense til en "path" i frontend, som ikke er i Studioet. For eksempel "/abc".',
-      descriptionEN: 'Reference to a path in the frontend, not available in the Studio',
       fieldset: 'paths',
       type: 'string',
       hidden: ({ parent, value }) => !value && (parent?.page || parent?.link)
@@ -138,9 +130,7 @@ export default defineType({
     {
       name: 'openGraph',
       title: 'Open graph',
-      titleEN: 'Open graph',
       description: 'Disse vil bli brukt i "meta tags"',
-      descriptionEN: 'These values populate meta tags',
       type: 'OpenGraph',
       hidden: ({ parent, value }) => !value && (parent?.page || parent?.link),
       options: {
