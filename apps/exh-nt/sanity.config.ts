@@ -9,15 +9,20 @@ import { imageHotspotArrayPlugin } from "sanity-plugin-hotspot-array"
 import { codeInput } from "@sanity/code-input";
 import { colorInput } from "@sanity/color-input";
 import { table } from '@sanity/table';
+import { dashboardTool, projectInfoWidget, projectUsersWidget } from "@sanity/dashboard";
 import { deskTool } from 'sanity/desk'
+import { languageFilter } from '@sanity/language-filter'
+import { media } from 'sanity-plugin-media'
+import { vercelWidget } from "sanity-plugin-dashboard-widget-vercel";
 import { schemaTypes } from './src/lib/munaPlugin/src'
 import SiteSettings from './src/lib/munaPlugin/src/schemas/classes/persistent/information/site/SiteSettings';
+import { structure, defaultDocumentNode } from './src/lib/deskStructure'
 
 // @TODO: update next-sanity/studio to automatically set this when needed
 const basePath = '/studio'
 
 const i18nConfig = {
-  base: "en",
+  base: "no",
   languages: [
     {
       "id": "en",
@@ -37,16 +42,40 @@ export default defineConfig({
   title:
     'Never-ending and temporary',
   schema: {
-    // If you want more content types, you can add them to this array
     types: [
       ...schemaTypes
     ],
   },
   plugins: withDocumentI18nPlugin([
+    deskTool({
+      structure,
+      defaultDocumentNode,
+    }),
+    dashboardTool({
+      widgets: [
+        vercelWidget(),
+        projectInfoWidget(),
+        projectUsersWidget(),
+      ]
+    }),
     imageHotspotArrayPlugin(),
     codeInput(),
     colorInput(),
     table(),
+    languageFilter({
+      supportedLanguages: [
+        { id: 'no', title: 'Norwegian' },
+        { id: 'en', title: 'English' },
+        { id: 'arb', title: 'Arabic' },
+      ],
+      // Select Norwegian (Bokmål) by default
+      defaultLanguages: ['no'],
+      // Only show language filter for document type `page` (schemaType.name)
+      documentTypes: ['page'],
+      filterField: (enclosingType, field, selectedLanguageIds) =>
+        !enclosingType.name.startsWith('Localized') || selectedLanguageIds.includes(field.name),
+    }),
+    media(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({
