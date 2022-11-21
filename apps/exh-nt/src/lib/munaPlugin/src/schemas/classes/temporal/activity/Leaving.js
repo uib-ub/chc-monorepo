@@ -1,10 +1,9 @@
 import { GiExitDoor } from 'react-icons/gi'
 import { defineType } from 'sanity'
-import { coalesceLabel, defaultFieldsets, timespanAsString } from '../../../..'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
+import { coalesceLabel, timespanAsString } from '../../../../helpers'
 import { featured } from '../../../properties/datatype'
 import { referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
-
-const capitalize = require('capitalize')
 
 export default defineType({
   name: 'Leaving',
@@ -33,7 +32,7 @@ export default defineType({
         }
       },
     },
-    /* timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt,
     {
       name: 'separatedFrom',
@@ -94,7 +93,7 @@ export default defineType({
       const { type, separatedFrom, bb, eb, date, be, ee } = selection
       const timespanString = timespanAsString(bb, eb, date, be, ee, 'nb')
       return {
-        title: `${capitalize(type)} ${separatedFrom ? coalesceLabel(separatedFrom) : ''}`,
+        title: `${type} ${separatedFrom ? coalesceLabel(separatedFrom) : ''}`,
         subtitle: `${timespanString ? timespanString : ''}`,
       }
     },

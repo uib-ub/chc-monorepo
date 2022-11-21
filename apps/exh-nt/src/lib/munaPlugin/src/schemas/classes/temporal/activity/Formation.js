@@ -1,10 +1,8 @@
 import { GiStarFormation } from 'react-icons/gi'
 import { defineType } from 'sanity'
-import { defaultFieldsets } from '../../../..'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
 import { featured } from '../../../properties/datatype'
 import { motivatedBy, referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
-
-const capitalize = require('capitalize')
 
 // Implisit 'wasFormedBy' to parent actor
 
@@ -59,7 +57,7 @@ export default defineType({
         }
       },
     },
-    /* timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt,
     motivatedBy,
     referredToBy,
@@ -71,7 +69,7 @@ export default defineType({
     prepare(selection) {
       const { type } = selection
       return {
-        title: `${capitalize(type)}`,
+        title: `${type}`,
       }
     },
   },

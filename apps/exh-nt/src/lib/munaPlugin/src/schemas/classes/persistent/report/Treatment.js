@@ -13,17 +13,16 @@ export default defineType({
   fieldsets: defaultFieldsets,
   fields: [
     carriedOutBy,
-    /* timespan, */
+    timespan,
     tookPlaceAt,
     referredToBy,
     usedGeneralTechnique,
     usedSpecificTechnique,
     usedObjectOfType,
-    /* usedSpecificObject, */
+    usedSpecificObject,
     {
       name: 'assessedBy',
       title: 'Vurdert av',
-      titleEN: 'Assessment',
       description: (
         <span>
           Legg til en vurdering av behandlingen. Var det en suksess?{' '}
@@ -44,7 +43,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      date: 'productionDate',
+      date: 'timespan',
     },
     prepare(selection) {
       const { date } = selection

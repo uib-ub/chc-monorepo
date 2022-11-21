@@ -6,8 +6,6 @@ import {
   carriedOutBy, motivatedBy, referredToBy, timespanSingleton, tookPlaceAt
 } from '../../../properties/object'
 
-const capitalize = require('capitalize')
-
 export default defineType({
   name: 'Move',
   title: 'Move',
@@ -23,7 +21,7 @@ export default defineType({
     accessState,
     label,
     carriedOutBy,
-    /* timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt,
     referredToBy,
     {
@@ -35,7 +33,7 @@ export default defineType({
         {
           type: 'reference',
           to: [
-            /* { type: 'HumanMadeObject' }, */
+            { type: 'HumanMadeObject' },
             { type: 'Exhibition' },
             { type: 'Actor' }
           ],
@@ -90,7 +88,7 @@ export default defineType({
       const secret = published === 'secret' ? '🔒' : ''
 
       return {
-        title: `${capitalize(type)}`,
+        title: `${type}`,
         subtitle: secret,
       }
     },

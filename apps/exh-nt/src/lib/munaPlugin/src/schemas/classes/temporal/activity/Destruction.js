@@ -30,7 +30,7 @@ export default defineType({
       },
     },
     carriedOutBy,
-    /* timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt,
   ],
   preview: {

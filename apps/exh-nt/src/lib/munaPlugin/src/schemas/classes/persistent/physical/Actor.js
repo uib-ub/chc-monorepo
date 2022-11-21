@@ -1,6 +1,6 @@
 import { FaUser } from 'react-icons/fa'
 import { defineType } from 'sanity'
-// import { coalesceLabel } from '../../../../helpers'
+import { coalesceLabel } from '../../../../helpers'
 import { accessState, editorialState, homepage, label, shortDescription, sortLabel } from '../../../properties/datatype'
 import {
   identifiedBy, image, inDataset, memberOf, referredToBy, wasOutputOf
@@ -41,17 +41,17 @@ export default defineType({
     editorialState,
     accessState,
     label,
-    /* sortLabel,
-    shortDescription, */
+    sortLabel,
+    shortDescription,
     homepage,
-    /*     {
-          ...identifiedBy,
-          fieldset: 'core',
-        },
-        {
-          ...referredToBy,
-          fieldset: 'core',
-        }, */
+    {
+      ...identifiedBy,
+      fieldset: 'core',
+    },
+    {
+      ...referredToBy,
+      fieldset: 'core',
+    },
     {
       name: 'hasType',
       title: 'Klassifisert som',
@@ -71,7 +71,7 @@ export default defineType({
         }
       },
     },
-    /* {
+    {
       name: 'activityStream',
       title: 'Aktivitetsstrøm',
       titleEN: 'Activity stream',
@@ -101,9 +101,9 @@ export default defineType({
       fieldset: 'representation',
     },
     inDataset,
-    wasOutputOf */
+    wasOutputOf
   ],
-  /* preview: {
+  preview: {
     select: {
       label: 'label',
       type: 'hasType.0.label',
@@ -120,5 +120,5 @@ export default defineType({
         media: media,
       }
     },
-  }, */
+  },
 })

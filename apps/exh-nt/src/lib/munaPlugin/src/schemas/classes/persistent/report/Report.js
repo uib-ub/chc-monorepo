@@ -8,7 +8,7 @@ import {
   accessState, editorialState, label
 } from '../../../properties/datatype'
 import {
-  carriedOutBy, concerned, hasIdentified, motivated, referredToBy, timespan
+  carriedOutBy, concerned, hasIdentified, motivated, referredToBy, timespan, usedGeneralTechnique, usedObjectOfType, usedSpecificObject, usedSpecificTechnique
 } from '../../../properties/object'
 
 /**
@@ -46,12 +46,12 @@ export default defineType({
       title: 'Felt relatert til deler eller innhold',
       options: { collapsible: true, collapsed: false },
     },
-    /* {
+    {
       name: 'technique',
       description: 'Disse bør fjernes eller flyttes til aktiviteter denne rapporten dokumenterer.',
       title: 'Felt relatert til teknikk',
-      options: {collapsible: true, collapsed: false},
-    }, */
+      options: { collapsible: true, collapsed: false },
+    },
     {
       name: 'documentation',
       title: 'Dokumentasjon',
@@ -62,7 +62,7 @@ export default defineType({
     editorialState,
     accessState,
     label,
-    /* concerned, */
+    concerned,
     {
       name: 'hasType',
       title: 'Klassifisert som',
@@ -94,7 +94,7 @@ export default defineType({
       fieldset: 'core',
     },
     carriedOutBy,
-    /* timespan, */
+    timespan,
     hasIdentified,
     motivated,
     {
@@ -121,7 +121,7 @@ export default defineType({
         }
       },
     },
-    /* {
+    {
       ...usedGeneralTechnique,
       fieldset: 'technique',
     },
@@ -136,11 +136,10 @@ export default defineType({
     {
       ...usedSpecificObject,
       fieldset: 'technique',
-    }, */
+    },
     {
       name: 'images',
       title: 'Dokumentasjonsfotografi',
-      titleEN: 'Documentation images',
       description: (
         <span>
           Bilder knyttet til rapporten som dokumentere det rapporten omhandler.{' '}
@@ -166,7 +165,6 @@ export default defineType({
     {
       name: 'files',
       title: 'Documentation files',
-      titleEN: 'Dokumentasjonsfiler',
       description: (
         <span>
           Filer med utfyllende informasjon.{' '}
@@ -191,7 +189,6 @@ export default defineType({
     {
       name: 'consistsOf',
       title: 'Underrapport',
-      titleEN: 'Sub report',
       description: (
         <span>
           Dersom det er flere selvstendige rapporter som inngår i en serie, legg til disse til her.

@@ -58,6 +58,11 @@ export default defineType({
       },
     },
     {
+      name: 'edtf',
+      title: 'EDTF',
+      type: 'string',
+    },
+    {
       name: 'date',
       title: 'Dato',
       titleEN: 'Date',

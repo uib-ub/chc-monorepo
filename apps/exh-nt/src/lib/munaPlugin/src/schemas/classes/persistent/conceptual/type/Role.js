@@ -20,10 +20,10 @@ export default defineType({
     accessState,
     label,
     altLabel,
-    /* definition, */
-    /* identifiedBy, */
+    definition,
+    identifiedBy,
     homepage,
-    /* {
+    {
       name: 'activityStream',
       title: 'Aktivitetsstrøm',
       titleEN: 'Activity stream',
@@ -36,10 +36,10 @@ export default defineType({
           '@type': '@id'
         }
       },
-    }, */
+    },
     sameAs,
-    /* inDataset,
-    wasOutputOf */
+    inDataset,
+    wasOutputOf
   ],
   preview: {
     select: {

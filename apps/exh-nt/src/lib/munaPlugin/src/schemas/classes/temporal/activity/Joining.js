@@ -1,10 +1,8 @@
 import { BiDoorOpen } from 'react-icons/bi'
 import { defineType } from 'sanity'
-import { coalesceLabel, timespanAsString } from '../../../..'
+import { coalesceLabel, timespanAsString } from '../../../../helpers'
 import { featured } from '../../../properties/datatype'
 import { referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
-
-const capitalize = require('capitalize')
 
 export default defineType({
   name: 'Joining',
@@ -39,7 +37,7 @@ export default defineType({
         }
       },
     },
-    /*  timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt,
     {
       name: 'joinedWith',
@@ -96,7 +94,7 @@ export default defineType({
       const { type, joinedWith, bb, eb, date, be, ee } = selection
       const timespanString = timespanAsString(bb, eb, date, be, ee, 'nb')
       return {
-        title: `${capitalize(type)}: ${joinedWith ? coalesceLabel(joinedWith) : ''}`,
+        title: `${type}: ${joinedWith ? coalesceLabel(joinedWith) : ''}`,
         subtitle: `${timespanString ? timespanString : ''}`,
       }
     },

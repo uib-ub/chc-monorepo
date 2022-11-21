@@ -50,60 +50,57 @@ export default defineType({
       ...accessState,
       group: 'core',
     },
-    /*  {
-       name: 'hasType',
-       title: 'Klassifisert som',
-       titleEN: 'Classified as',
-       group: 'core',
-       type: 'array',
-       of: [
-         {
-           type: 'reference',
-           to: [{ type: 'TextType' }],
-         },
-       ],
-       validation: (Rule) => Rule.required(),
-       options: {
-         semanticSanity: {
-           '@container': '@set',
-           '@type': '@id'
-         }
-       },
-     },
-     {
-       name: 'language',
-       title: 'Språk',
-       titleEN: 'Language',
-       group: 'core',
-       type: 'reference',
-       to: [{ type: 'Language' }],
-       validation: (Rule) => Rule.required(),
-       options: {
-         semanticSanity: {
-           '@type': '@id'
-         }
-       },
-     },
-     {
-       name: 'creator',
-       title: 'Skaper',
-       titleEN: 'Creator',
-       group: 'metadata',
-       description:
-         'Registrer en eller flere aktører som har skapt dette dokumentet, gjerne med hvilken rolle de hadde.',
-       type: 'array',
-       of: [
-         {
-           type: 'ContributionAssignment',
-         },
-       ],
-       options: {
-         semanticSanity: {
-           '@container': '@set',
-           '@type': '@id'
-         }
-       },
-     }, */
+    {
+      name: 'hasType',
+      title: 'Klassifisert som',
+      group: 'core',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'TextType' }],
+        },
+      ],
+      validation: (Rule) => Rule.required(),
+      options: {
+        semanticSanity: {
+          '@container': '@set',
+          '@type': '@id'
+        }
+      },
+    },
+    {
+      name: 'language',
+      title: 'Språk',
+      group: 'core',
+      type: 'reference',
+      to: [{ type: 'Language' }],
+      validation: (Rule) => Rule.required(),
+      options: {
+        semanticSanity: {
+          '@type': '@id'
+        }
+      },
+    },
+    {
+      name: 'creator',
+      title: 'Skaper',
+      group: 'metadata',
+      description:
+        'Registrer en eller flere aktører som har skapt dette dokumentet, gjerne med hvilken rolle de hadde.',
+      type: 'array',
+      of: [
+        {
+          type: 'ContributionAssignment',
+        },
+      ],
+      options: {
+        semanticSanity: {
+          '@container': '@set',
+          '@type': '@id'
+        }
+      },
+    },
     {
       name: 'publishedAt',
       title: 'Publikasjonsdato',

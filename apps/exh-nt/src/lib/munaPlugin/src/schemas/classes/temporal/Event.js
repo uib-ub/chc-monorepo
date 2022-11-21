@@ -45,10 +45,10 @@ export default defineType({
       ...referredToBy,
       fieldset: 'core',
     },
-    /* {
+    {
       ...timespan,
       fieldset: 'core',
-    }, */
+    },
     {
       ...tookPlaceAt,
       fieldset: 'core',

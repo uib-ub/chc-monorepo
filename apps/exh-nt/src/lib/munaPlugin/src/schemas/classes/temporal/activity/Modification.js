@@ -1,15 +1,12 @@
 import { GiFactory } from 'react-icons/gi'
 import { defineType } from 'sanity'
-import { defaultFieldsets } from '../../../../helpers/coalesceLabel'
-import { timespanAsString } from '../../../../helpers/timespanAsString'
+import { defaultFieldsets, timespanAsString } from '../../../../helpers'
 import {
   featured
 } from '../../../properties/datatype'
 import {
   contributionAssignedBy, referredToBy, timespanSingleton, tookPlaceAt, usedGeneralTechnique, usedSpecificTechnique
 } from '../../../properties/object'
-
-const capitalize = require('capitalize')
 
 export default defineType({
   name: 'Modification',
@@ -52,10 +49,10 @@ export default defineType({
       },
     },
     contributionAssignedBy,
-    /* timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt,
     referredToBy,
-    /* {
+    {
       name: 'hasModified',
       title: 'Har modifisert',
       titleEN: 'Has modified',
@@ -68,7 +65,7 @@ export default defineType({
           '@type': '@id'
         }
       },
-    }, */
+    },
     usedGeneralTechnique,
     usedSpecificTechnique,
     {
@@ -102,7 +99,7 @@ export default defineType({
       const timespanString = timespanAsString(bb, eb, date, be, ee, 'nb')
 
       return {
-        title: `${capitalize(type)}, by ${contributor || contributorName || 'unknown'}`,
+        title: `${type}, by ${contributor || contributorName || 'unknown'}`,
         subtitle: timespanString,
       }
     },

@@ -3,7 +3,7 @@ import { defineType } from 'sanity'
 import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
 import { timespanAsString } from '../../../../helpers'
 import { featured } from '../../../properties/datatype'
-import { carriedOutBy, referredToBy, tookPlaceAt } from '../../../properties/object'
+import { carriedOutBy, referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
 
 export default defineType({
   name: 'Death',
@@ -15,7 +15,7 @@ export default defineType({
   fields: [
     featured,
     carriedOutBy,
-    /* timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt,
     referredToBy
   ],

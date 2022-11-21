@@ -1,7 +1,6 @@
 import { FaBirthdayCake } from 'react-icons/fa'
 import { defineType } from 'sanity'
 import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
-import { timespanAsString } from '../../../../helpers'
 import { featured } from '../../../properties/datatype'
 import { carriedOutBy, referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
 
@@ -14,7 +13,7 @@ export default defineType({
   fields: [
     featured,
     carriedOutBy,
-    //timespanSingleton,
+    timespanSingleton,
     tookPlaceAt,
     referredToBy
   ],

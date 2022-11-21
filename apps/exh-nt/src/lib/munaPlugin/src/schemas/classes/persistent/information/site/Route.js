@@ -152,33 +152,29 @@ export default defineType({
       type: 'color',
       fieldset: 'colors',
       group: 'colors',
-    }
-    /* {
+    },
+    {
       name: 'includeInSitemap',
       title: 'Inkluder i sitemap',
-      titleEN: 'Include in sitemap',
       description: 'For søkemotorer. Vil bli generert i /sitemap.xml',
-      descriptionEN: 'For search engines. Will be generateed to /sitemap.xml',
       type: 'boolean',
       options: {
         semanticSanity: {
           "@type": "xsd:boolean"
         }
       },
-    }, */
-    /* {
+    },
+    {
       name: 'disallowRobots',
       title: 'Disallow in robots.txt',
-      titleEN: '"Disallow" i robots.txt',
       description: 'Skjul denne stien fra søkemoterer',
-      descriptionEN: 'Hide this route for search engines like google',
       type: 'boolean',
       options: {
         semanticSanity: {
           "@type": "xsd:boolean"
         }
       },
-    }, */
+    },
   ],
   preview: {
     select: {

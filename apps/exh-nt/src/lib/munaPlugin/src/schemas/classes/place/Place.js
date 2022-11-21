@@ -4,7 +4,6 @@ import { defaultFieldsets } from '../../../fieldsets/defaultFieldsets'
 import { coalesceLabel } from '../../../helpers'
 import { accessState, editorialState, label } from '../../properties/datatype'
 import { definedByGeoJSON, identifiedBy, referredToBy } from '../../properties/object'
-// import {KulturnavInput} from '../components/kulturnavInput/KulturnavInput'
 
 export default defineType({
   name: 'Place',
@@ -24,7 +23,6 @@ export default defineType({
     {
       name: 'hasType',
       title: 'Klassifisert som',
-      titleEN: 'Classified as',
       type: 'array',
       of: [
         {
@@ -39,16 +37,9 @@ export default defineType({
         }
       },
     },
-    /* {
-      name: 'hasType',
-      title: 'Klassifisert som',
-      titleEN: 'Classified as',
-      type: 'array',
-      of: [{type: 'string'}],
-      inputComponent: KulturnavInput,
-    }, */
+
     referredToBy,
-    /* definedByGeoJSON, */
+    definedByGeoJSON,
   ],
   preview: {
     select: {

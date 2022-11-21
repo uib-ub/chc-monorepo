@@ -2,7 +2,7 @@
  * This config is used to set up Sanity Studio that's mounted on the `/pages/studio/[[...index]].tsx` route
  */
 
-//import { visionTool } from '@sanity/vision'
+import { visionTool } from '@sanity/vision'
 import { defineConfig, Slug } from 'sanity'
 import { withDocumentI18nPlugin } from '@sanity/document-internationalization'
 import { imageHotspotArrayPlugin } from "sanity-plugin-hotspot-array"
@@ -58,9 +58,9 @@ export default defineConfig({
     colorInput(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
-    /* visionTool({
+    visionTool({
       defaultApiVersion: '2022-08-08',
-    }), */
+    }),
   ], i18nConfig),
   /* document: {
     productionUrl: async (prev, { document }) => {

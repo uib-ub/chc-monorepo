@@ -4,6 +4,7 @@ import { labelSingleton } from '../../properties/datatype'
 
 export default defineType({
   name: 'CardBlock',
+  title: 'Kort blokk',
   type: 'object',
   options: {
     semanticSanity: {
@@ -24,21 +25,17 @@ export default defineType({
     {
       name: 'description',
       title: 'Beskrivelse',
-      titleEN: 'Description',
       type: 'simpleBlockContent',
     },
     {
       name: 'illustration',
       title: 'Illustrasjonsbilde',
-      titleEN: 'Illustration',
       type: 'Illustration',
     },
     {
       name: 'landingPageRoute',
       title: 'Nettside',
-      titleEN: 'Landing page',
       description: 'Referanse til en "route" i datasettet',
-      descriptionEN: 'Rerefence to a route in the dataset',
       fieldset: 'link',
       type: 'reference',
       to: [{ type: 'Route' }],
@@ -46,18 +43,14 @@ export default defineType({
     {
       name: 'route',
       title: 'Sti',
-      titleEN: 'Path',
       description: 'Referense til en "path" i frontend, som ikke er i Studioet',
-      descriptionEN: 'Reference to a path in the frontend, not available in the Studio',
       fieldset: 'link',
       type: 'string',
     },
     {
       name: 'link',
       title: 'Ekstern lenke',
-      titleEN: 'External link',
       description: 'Example: https://www.uib.no/ub',
-      descriptionEN: 'Example: https://www.uib.no/en/ub',
       fieldset: 'link',
       type: 'string',
     },

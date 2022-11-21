@@ -29,8 +29,8 @@ export default defineType({
         }
       },
     },
-    /* timespanSingleton, */
-    /* referredToBy, */
+    timespanSingleton,
+    referredToBy,
   ],
   preview: {
     select: {

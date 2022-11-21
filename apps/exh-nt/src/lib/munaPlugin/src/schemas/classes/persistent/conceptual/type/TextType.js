@@ -44,8 +44,8 @@ export default defineType({
       },
     },
     sameAs,
-    /* inDataset,
-    wasOutputOf */
+    inDataset,
+    wasOutputOf
   ],
   preview: {
     select: {

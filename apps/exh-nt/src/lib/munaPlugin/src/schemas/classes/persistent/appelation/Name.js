@@ -38,7 +38,7 @@ export default defineType({
         }
       },
     },
-    /* {
+    {
       name: 'language',
       title: 'Språk',
       type: 'array',
@@ -49,9 +49,9 @@ export default defineType({
           '@type': '@id'
         }
       },
-    }, */
-    /* timespan, */
-    /* referredToBy, */
+    },
+    timespan,
+    referredToBy,
   ],
   preview: {
     select: {

@@ -13,7 +13,6 @@ export default defineType({
   name: 'Production',
   type: 'document',
   title: 'Production',
-  titleEN: 'Produksjon',
   icon: GiFactory,
   fieldsets: defaultFieldsets,
   fields: [
@@ -21,7 +20,6 @@ export default defineType({
     {
       name: 'consistsOf',
       title: 'Underaktiviteter',
-      titleEN: 'Sub activities',
       description: 'OBS! Det er mulig å nøste flere produksjoner under hverandre per i dag, men bare bruk ett nivå!',
       type: 'array',
       of: [{ type: 'Production' }],
@@ -36,7 +34,6 @@ export default defineType({
     {
       name: 'hasType',
       title: 'Klassifisert som',
-      titleEN: 'Classified as',
       type: 'array',
       of: [
         {
@@ -55,19 +52,18 @@ export default defineType({
       ...contributionAssignedBy,
       hidden: ({ value, parent }) => !value && parent?.consistsOf,
     },
-    /* {
+    {
       ...timespanSingleton,
-    }, */
+    },
     {
       ...tookPlaceAt,
     },
     {
       ...referredToBy,
     },
-    /* {
+    {
       name: 'hasModified',
       title: 'Har modifisert',
-      titleEN: 'Has modified',
       description: 'A production can modify an existing object',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'HumanMadeObject' }] }],
@@ -77,15 +73,15 @@ export default defineType({
           '@type': '@id'
         }
       },
-    }, */
-    /* {
+    },
+    {
       ...usedGeneralTechnique,
       hidden: ({ value, parent }) => !value && parent?.consistsOf,
     },
     {
       ...usedSpecificTechnique,
       hidden: ({ value, parent }) => !value && parent?.consistsOf,
-    } */
+    }
   ],
   preview: {
     select: {

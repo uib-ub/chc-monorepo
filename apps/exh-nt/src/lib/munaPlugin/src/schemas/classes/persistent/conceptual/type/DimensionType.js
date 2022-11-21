@@ -19,7 +19,7 @@ export default defineType({
     accessState,
     label,
     altLabel,
-    /* {
+    {
       name: 'activityStream',
       title: 'Aktivitetsstrøm',
       description: 'Events and activities connected to this object',
@@ -31,7 +31,7 @@ export default defineType({
           '@type': '@id'
         }
       },
-    }, */
+    },
   ],
   preview: {
     select: {

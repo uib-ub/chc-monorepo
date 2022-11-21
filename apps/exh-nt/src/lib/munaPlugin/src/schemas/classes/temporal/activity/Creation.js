@@ -7,15 +7,12 @@ export default defineType({
   name: 'Creation',
   type: 'document',
   title: 'Skapelse',
-  titleEN: 'Creation',
   icon: IoMdCreate,
   fields: [
     featured,
-    /* 
-    tookPlaceAt
-    contributionAssignedBy,s
+    tookPlaceAt,
+    contributionAssignedBy,
     timespanSingleton,
-    */
   ],
   preview: {
     select: {

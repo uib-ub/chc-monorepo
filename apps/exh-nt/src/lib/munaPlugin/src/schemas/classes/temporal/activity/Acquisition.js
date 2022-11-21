@@ -67,7 +67,7 @@ export default defineType({
         }
       },
     },
-    /* timespanSingleton, */
+    timespanSingleton,
     {
       ...transferredTitleOf,
       fieldset: 'ownership',

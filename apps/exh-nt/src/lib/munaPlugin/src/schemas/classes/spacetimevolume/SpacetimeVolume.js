@@ -13,7 +13,6 @@ export default defineType({
     {
       name: 'description',
       title: 'Beskrivelse',
-      titleEN: 'Description',
       description: 'A shortish description',
       type: 'LocaleBlockSimple',
       options: {
@@ -22,10 +21,9 @@ export default defineType({
         }
       },
     },
-    /* {
+    {
       name: 'temporalProjection',
       title: 'Tidsspenn',
-      titleEN: 'Timespan',
       type: 'array',
       of: [{ type: 'Timespan' }],
       options: {
@@ -34,7 +32,7 @@ export default defineType({
           '@type': '@id'
         }
       },
-    }, */
+    },
     {
       name: 'spatialProjection',
       title: 'Fant sted ved',

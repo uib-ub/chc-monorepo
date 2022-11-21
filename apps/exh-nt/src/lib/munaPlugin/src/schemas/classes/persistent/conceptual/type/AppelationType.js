@@ -21,7 +21,7 @@ export default defineType({
     label,
     altLabel,
     homepage,
-    /* identifiedBy, */
+    identifiedBy,
     definition,
     {
       name: 'activityStream',
@@ -37,9 +37,9 @@ export default defineType({
         }
       },
     },
-    /*     sameAs,
-        inDataset,
-        wasOutputOf */
+    sameAs,
+    inDataset,
+    wasOutputOf
   ],
   preview: {
     select: {

@@ -43,7 +43,7 @@ export default defineType({
       group: ['core', 'content']
     },
     identifiedBy,
-    /* {
+    {
       name: 'slug',
       title: 'Slug',
       titleEN: 'Slug',
@@ -53,27 +53,27 @@ export default defineType({
         source: 'label',
         maxLength: 96,
       },
-    }, */
-    /*  {
-       name: 'creator',
-       title: 'Skaper',
-       titleEN: 'Author',
-       description:
-         'Registrer en eller flere aktører som har skapt dette dokumentet, gjerne med hvilken rolle de hadde.',
-       group: 'core',
-       type: 'array',
-       of: [
-         {
-           type: 'ContributionAssignment',
-         },
-       ],
-       options: {
-         semanticSanity: {
-           '@container': '@list',
-           '@type': '@id'
-         }
-       },
-     }, */
+    },
+    {
+      name: 'creator',
+      title: 'Skaper',
+      titleEN: 'Author',
+      description:
+        'Registrer en eller flere aktører som har skapt dette dokumentet, gjerne med hvilken rolle de hadde.',
+      group: 'core',
+      type: 'array',
+      of: [
+        {
+          type: 'ContributionAssignment',
+        },
+      ],
+      options: {
+        semanticSanity: {
+          '@container': '@list',
+          '@type': '@id'
+        }
+      },
+    },
     language,
     {
       name: 'hasType',
@@ -95,7 +95,7 @@ export default defineType({
         }
       },
     },
-    /* {
+    {
       name: 'categories',
       title: 'Kategorier',
       titleEN: 'Categories',
@@ -113,7 +113,7 @@ export default defineType({
           '@type': '@id'
         }
       },
-    }, */
+    },
     {
       name: 'publishedAt',
       title: 'Publikasjonsdato',
@@ -175,23 +175,14 @@ export default defineType({
   preview: {
     select: {
       title: 'label',
-      blocks: 'excerpt',
       media: 'mainImage',
       lang: '__i18n_lang',
     },
     prepare(selection) {
-      const { title, blocks, media, lang } = selection
-      /* const expression = jsonata('nor[0]')
-      const block = expression.evaluate(blocks) */
+      const { title, media, lang } = selection
 
       return {
         title: `${lang} | ${title}`,
-        /* description: block
-          ? block.children
-            .filter((child) => child._type === 'span')
-            .map((span) => span.text)
-            .join('')
-          : 'No description', */
         media: media,
       }
     },

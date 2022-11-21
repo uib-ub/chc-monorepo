@@ -1,6 +1,6 @@
 import { GiStarFormation } from 'react-icons/gi'
 import { defineType } from 'sanity'
-import { coalesceLabel } from '../../../../helpers/coalesceLabel'
+import { coalesceLabel } from '../../../../helpers'
 import { featured } from '../../../properties/datatype'
 import { contributionAssignedBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
 
@@ -13,7 +13,7 @@ export default defineType({
   fields: [
     featured,
     contributionAssignedBy,
-    /* timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt
   ],
   preview: {

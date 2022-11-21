@@ -24,7 +24,6 @@ export default defineType({
     {
       name: 'hasType',
       title: 'Klassifisert som',
-      titleEN: 'Classified as',
       type: 'reference',
       to: [{ type: 'StorageType' }],
       validation: (Rule) => Rule.required(),
@@ -35,11 +34,10 @@ export default defineType({
       },
     },
     referredToBy,
-    /* timespan, */
+    timespan,
     {
       name: 'location',
       title: 'Lokasjon',
-      titleEN: 'Location',
       type: 'geopoint',
       options: {
         semanticSanity: {
@@ -58,7 +56,7 @@ export default defineType({
           type: 'reference',
           to: [
             { type: 'Storage' },
-            /* { type: 'HumanMadeObject' }, */
+            { type: 'HumanMadeObject' },
             { type: 'Collection' }
           ],
         },

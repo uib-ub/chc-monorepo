@@ -32,7 +32,7 @@ export default defineType({
       },
     },
     carriedOutBy,
-    /* timespanSingleton, */
+    timespanSingleton,
     tookPlaceAt,
     referredToBy,
   ],

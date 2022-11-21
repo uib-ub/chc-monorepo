@@ -13,7 +13,7 @@ export default defineType({
   fieldsets: defaultFieldsets,
   fields: [
     carriedOutBy,
-    /* timespan, */
+    timespan,
     {
       name: 'success',
       title: 'Suksess?',
@@ -25,7 +25,6 @@ export default defineType({
     {
       name: 'images',
       title: 'Documentasjonsfotografi',
-      titleEN: 'Documentation images',
       description: (
         <span>
           Bilder som dokumenterer behandlingsresultatet.{' '}

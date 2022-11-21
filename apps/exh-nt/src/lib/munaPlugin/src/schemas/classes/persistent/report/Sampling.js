@@ -12,17 +12,17 @@ export default defineType({
   fieldsets: defaultFieldsets,
   fields: [
     carriedOutBy,
-    /* timespan, */
+    timespan,
     tookPlaceAt,
     referredToBy,
     usedGeneralTechnique,
     usedSpecificTechnique,
     usedObjectOfType,
-    /* usedSpecificObject, */
+    usedSpecificObject,
   ],
   preview: {
     select: {
-      date: 'productionDate',
+      date: 'timespan',
     },
     prepare(selection) {
       const { date } = selection
