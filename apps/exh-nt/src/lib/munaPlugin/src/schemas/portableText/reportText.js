@@ -52,7 +52,7 @@ export default defineType({
         ],
       },
     },
-    /* { type: 'DigitalObjectImage' },
+    { type: 'DigitalObjectImage' },
     {
       type: 'reference',
       to: [
@@ -64,7 +64,7 @@ export default defineType({
         { type: 'Material' },
         { type: 'Measurement' },
       ],
-    }, */
+    },
   ],
   options: {
     semanticSanity: {

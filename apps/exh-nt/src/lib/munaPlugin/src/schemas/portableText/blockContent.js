@@ -32,15 +32,15 @@ export default defineType({
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
-          /* {
+          {
             title: 'Highlight',
             value: 'highlight',
             blockEditor: {
               icon: highlightIcon,
               render: highlightRender,
             },
-          }, */
-          /* { title: 'Code', value: 'code' }, */
+          },
+          { title: 'Code', value: 'code' },
         ],
         annotations: [
           {
@@ -68,7 +68,7 @@ export default defineType({
               },
             ],
           },
-          /* {
+          {
             name: 'internalLink',
             type: 'object',
             title: 'Internal link',
@@ -89,7 +89,7 @@ export default defineType({
                 ],
               },
             ],
-          }, */
+          },
           /* {
             name: 'footnote',
             type: 'object',
@@ -109,7 +109,7 @@ export default defineType({
         ],
       },
     },
-    /* {
+    {
       type: 'reference',
       title: 'Insert internal object',
       to: [
@@ -128,7 +128,7 @@ export default defineType({
     { type: 'QuoteBlock' },
     { type: 'TableBlock' },
     { type: 'TwoColumnBlock' },
-    { type: 'IframeBlock' }, */
+    { type: 'IframeBlock' },
   ],
   options: {
     semanticSanity: {

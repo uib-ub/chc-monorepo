@@ -63,12 +63,12 @@ export default defineType({
       titleEN: 'Canvas URL',
       type: 'url',
     },
-    /* {
+    {
       name: 'canvasNumber',
       title: 'Canvas nummer',
       titleEN: 'Canvas number',
       type: 'number',
-    }, */
+    },
   ],
   preview: {
     select: {

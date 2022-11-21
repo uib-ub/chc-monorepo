@@ -23,12 +23,11 @@ export default defineType({
       titleEN: 'Title',
       type: 'string',
     },
-    /* {
+    {
       name: 'data',
-      title: 'Illustrasjonsbilde',
-      titleEN: 'Illustration',
+      title: 'Tabell',
       type: 'table',
-    }, */
+    },
   ],
   preview: {
     select: {

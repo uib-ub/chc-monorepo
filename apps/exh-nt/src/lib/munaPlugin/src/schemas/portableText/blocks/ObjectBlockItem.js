@@ -45,14 +45,14 @@ export default defineType({
       titleEN: 'Description',
       type: 'simpleBlockContent',
     },
-    /* {
+    {
       name: 'internalRef',
       title: 'Object in the studio',
       titleEN: 'Manifest',
       type: 'reference',
       to: [{ type: 'HumanMadeObject' }],
       hidden: ({ value, parent }) => !value && parent?.image || parent?.manifestUrl,
-    }, */
+    },
     {
       ...image,
       hidden: ({ value, parent }) => !value && parent?.manifestUrl,

@@ -17,6 +17,7 @@
     "@sanity/code-input": "^3.0.0-v3-studio.15",
     "@sanity/color-input": "^3.0.0-v3-studio.12",
     "@sanity/document-internationalization": "^1.0.0-v3-studio.14",
+    "@sanity/table": "^1.0.0",
     "@sanity/vision": "3.0.0-rc.2",
     "clsx": "^1.2.1",
     "deep-rename-keys": "^0.2.1",

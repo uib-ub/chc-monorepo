@@ -14,15 +14,6 @@ export const subjectOf = {
       </Link>
     </span>
   ),
-  descriptionEN: (
-    <span>
-      <strong>Experimental:</strong> Texts that have this object as its main subject, both internal
-      and other texts.{' '}
-      <Link target="blank" href={'https://muna.xyz/docs/model/properties#subject-of'}>
-        <BsFillQuestionCircleFill />
-      </Link>
-    </span>
-  ),
   type: 'array',
   of: [
     {

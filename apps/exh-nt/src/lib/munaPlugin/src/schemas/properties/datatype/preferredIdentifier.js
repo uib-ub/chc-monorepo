@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import Link from 'next/link';
-// import { useClient } from 'sanity';
+//import { useClient } from 'sanity';
 
 export const preferredIdentifier = {
   name: 'preferredIdentifier',
@@ -33,7 +33,7 @@ export const preferredIdentifier = {
   ),
   type: 'string',
   /* validation: (Rule) => Rule.required().custom(async (prefId) => {
-    const client = useClient().withConfig({apiVersion: '2021-10-21'})
+    const client = useClient().withConfig({ apiVersion: '2021-10-21' })
     const docs = await client.fetch(
       `*[preferredIdentifier == "${prefId}" && !(_id in path("drafts.**"))] { preferredIdentifier }`,
       { prefId }
