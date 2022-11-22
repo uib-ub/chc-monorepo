@@ -31,6 +31,22 @@ export default function Home() {
         </p>
 
         <h2 className='my-2 text-4xl font-black text-center tracking-tighter'>
+          UBBONT
+        </h2>
+
+        <p className='my-5 text-center text-lg'>
+          <div className='flex gap-5 content-center justify-center'>
+            <a href={`/ns/ubbont/context.json`}>
+              JSONLD Context
+            </a>
+            <a href={`/ns/ubbont/ubbont.owl`}>
+              UBBONT Ontology
+            </a>
+          </div>
+        </p>
+
+
+        <h2 className='my-2 text-4xl font-black text-center tracking-tighter'>
           API paths
         </h2>
         <div className='flex content-center justify-center'>

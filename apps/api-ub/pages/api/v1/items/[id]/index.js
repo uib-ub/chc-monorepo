@@ -33,43 +33,27 @@ async function getObject(id, url) {
     CONSTRUCT {
       ?uri ?p ?o ;
         a crm:E22_Human-Made_Object ;
+        rdfs:label ?label ;
         foaf:homepage ?homepage .
-      ?subject ?subjectP ?subjectO .
-      ?spatial ?spatialP ?spatialO .
-      ?depicts foaf:name ?depictsLabel ;
-        dct:identifier ?depictsIdentifier .
-      ?maker foaf:name ?makerLabel ;
-        dct:identifier ?makerIdentifier .
+      ?o a ?oClass ;
+        dct:identifier ?identifier ;
+        rdfs:label ?oLabel .
     } WHERE { 
       GRAPH ?g {
-        VALUES ?id {'${id}'}
+        VALUES ?id {'ubb-bros-00001'}
         ?uri dct:identifier ?id ;
           ?p ?o .
+        ?uri (dct:title|foaf:name|skos:prefLabel|rdfs:label) ?label .
+        OPTIONAL {
+          ?o a ?oClass ;
+            (dct:title|foaf:name|skos:prefLabel|rdfs:label) ?oLabel ;
+            dct:identifier ?identifier .
+        }
+        OPTIONAL { 
+          ?uri dct:license / rdfs:label ?licenseLabel .
+        }
         BIND(iri(REPLACE(str(?uri), "data.ub.uib.no","marcus.uib.no","i")) as ?homepage) .
-        OPTIONAL { 
-      	  ?uri dct:license / rdfs:label ?licenseLabel .
-    	  }
-        # Get relations and filter unwanted props as this makes construct easier
-        OPTIONAL { 
-          ?uri dct:subject ?subject . 
-          ?subject ?subjectP ?subjectO . 
-          FILTER(?subjectP != ubbont:isSubjectOf && ?subjectP != dct:modified && ?subjectP != dct:available && ?subjectP != ubbont:showWeb  && ?subjectP != skos:related && ?subjectP != skos:inScheme && ?subjectP != skos:narrower && ?subjectP != skos:broader && ?subjectP != ubbont:previousIdentifier && ?subjectP != dc:relation)
-        }
-        OPTIONAL { 
-          ?uri dct:spatial ?spatial . 
-          ?spatial ?spatialP ?spatialO . 
-          FILTER(?spatialP != skos:narrower && ?spatialP != skos:broader && ?spatialP != ubbont:previousIdentifier && ?spatialP != ubbont:locationFor && ?spatialP != dct:relation  && ?spatialP != dc:relation)
-        }
-        OPTIONAL { 
-          ?uri foaf:depicts ?depicts . 
-          ?depicts foaf:name ?depictsLabel .
-          ?depicts dct:identifier ?depictsIdentifier .
-        }
-        OPTIONAL { 
-          ?uri foaf:maker ?maker . 
-          ?maker foaf:name ?makerLabel .
-          ?maker dct:identifier ?makerIdentifier .
-        }
+        FILTER(?p != ubbont:cataloguer && ?p != ubbont:internalNote)
       } 
     }
   `
@@ -112,7 +96,7 @@ export default async function handler(req, res) {
           '@embed': '@always',
         })
         let framed = await awaitFramed
-        framed.timespan = getTimespan(undefined, framed?.madeAfter, framed?.madeBefore)
+        framed.timespan = getTimespan(framed?.created, framed?.madeAfter, framed?.madeBefore)
         //delete framed?.madeAfter
         //delete framed?.madeBefore
 

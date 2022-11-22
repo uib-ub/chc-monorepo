@@ -1,7 +1,6 @@
 'use client';
 import '../styles/globals.css'
 import { ThemeProvider } from 'next-themes';
-import { HeaderShell } from 'ui';
 import Link from 'next/link';
 import { ThemeSwitch } from './ThemeSwitch';
 
@@ -20,11 +19,11 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class">
           <div className='w-full flex gap-5 px-3 pt-3 pb-2 border-b items-center fixed backdrop-blur-md'>
-            <HeaderShell>
+            <header>
               <Link href="/">
                 University of Bergen Library API
               </Link>
-            </HeaderShell>
+            </header>
 
             <div className='grow'>&nbsp;</div>
             <Link href={`/spec`}>

@@ -2,18 +2,18 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { createSwaggerSpec } from 'next-swagger-doc';
 import Link from 'next/link';
 import { RedocStandalone } from 'redoc';
-import { AppShell, HeaderShell } from 'ui';
+import { AppShell } from 'ui';
 
 function ApiDoc({ spec }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <AppShell>
         <div className='w-full flex gap-5 px-3 pt-3 pb-2 border-b items-center fixed z-50 bg-white backdrop-blur-xl'>
-          <HeaderShell>
+          <header>
             <Link href="/">
               University of Bergen Library API
             </Link>
-          </HeaderShell>
+          </header>
 
           <div className='grow'>&nbsp;</div>
           <Link href={`/spec`}>
