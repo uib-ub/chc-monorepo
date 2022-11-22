@@ -1,4 +1,4 @@
-import TextBlocks from '..'
+import { TextBlocks } from '..'
 
 export default function PageHeaderBlock(props) {
   if (!props || props.disabled === true) {

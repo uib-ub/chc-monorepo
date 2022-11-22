@@ -1,4 +1,4 @@
-import TextBlocks from '..'
+import { TextBlocks } from '..'
 
 export default function TwoColumnBlock(props) {
   if (!props || props.disabled === true) {

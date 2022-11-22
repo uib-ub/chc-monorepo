@@ -44,6 +44,7 @@ const SearchNB = () => {
           totalElements: jsonResponse.page.totalElements,
         })
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handlePageClick = (data) => {

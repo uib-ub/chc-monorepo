@@ -1,4 +1,4 @@
-import TextBlocks from '../..'
+import { TextBlocks } from '../..'
 import Source from './Source'
 
 export default function Caption(props) {
