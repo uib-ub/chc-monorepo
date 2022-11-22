@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, preview = false }
   }
 }
 
-const Home: NextPage = ({ data, preview }: any) => {
+const Browse: NextPage = ({ data, preview }: any) => {
   const { locale, locales, asPath, defaultLocale }: NextRouter = useRouter()
   const { mainNav, siteSettings: { label }, items } = data
 
@@ -83,7 +83,7 @@ const Home: NextPage = ({ data, preview }: any) => {
           <Pane intent='content'>
             <div className='flex flex-wrap justify-center items-center gap-5 w-full p-5'>
               {items && items.map((item: any) => (
-                <div key={item.id} className="flex justify-center">
+                <div key={item._id} className="flex justify-center">
                   <div className="rounded-lg shadow-lg md:w-64 lg:max-w-sm">
                     <Link href={`/id/${item._id}`}>
                       <SanityImage
@@ -123,4 +123,4 @@ const Home: NextPage = ({ data, preview }: any) => {
   );
 };
 
-export default Home;
+export default Browse;

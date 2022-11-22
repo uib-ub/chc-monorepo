@@ -113,7 +113,7 @@ export async function getStaticPaths() {
 }
 
 
-const Home: NextPage = ({ data, preview }: any) => {
+const Id: NextPage = ({ data, preview }: any) => {
   const { locale, locales, asPath, defaultLocale, isFallback }: NextRouter = useRouter()
 
   const { data: previewData } = usePreviewSubscription(data?.query, {
@@ -269,4 +269,4 @@ const Home: NextPage = ({ data, preview }: any) => {
   );
 };
 
-export default Home;
+export default Id;
