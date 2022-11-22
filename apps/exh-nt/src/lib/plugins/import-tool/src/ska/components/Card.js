@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react'
 import {
   Box,
@@ -37,7 +38,7 @@ const Card = ({ item }) => {
   return (
     <SanityCard style={{ display: "flex", flexDirection: "column" }} key={item.id} padding={[2, 2, 3]} radius={2} shadow={1}>
       <Box>
-        <img style={{ width: "100%" }} src={item.hasThumbnail} />
+        <img style={{ width: "100%" }} src={item.hasThumbnail} alt="" />
       </Box>
       <Box style={{ flexGrow: "1" }} marginY={3}>
         <Heading size="1">

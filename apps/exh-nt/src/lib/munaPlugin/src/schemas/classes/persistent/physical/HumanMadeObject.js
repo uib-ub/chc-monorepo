@@ -7,7 +7,6 @@ import {
   hasFormerOrCurrentOwner, identifiedBy, image, measuredBy, presentAt, referredToBy,
   relation, showsVisualObject, subject, subjectOf, subjectOfManifest, wasOutputOf
 } from '../../../properties/object'
-import { HotspotArray } from 'sanity-plugin-hotspot-array'
 import { depictsFunctional } from '../../../properties/object/depictsFunctional'
 import { defineType, defineField } from 'sanity'
 
@@ -193,7 +192,6 @@ export default defineType({
       type: `array`,
       fieldset: 'mainImage',
       group: 'images',
-      inputComponent: HotspotArray,
       of: [
         defineField({
           name: 'spot',
