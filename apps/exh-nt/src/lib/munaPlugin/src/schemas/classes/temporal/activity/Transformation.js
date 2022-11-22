@@ -1,6 +1,6 @@
 import { GiTransform } from 'react-icons/gi'
 import { defineType } from 'sanity'
-import { defaultFieldsets } from '../../../../helpers'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
 import { featured } from '../../../properties/datatype'
 import { carriedOutBy, referredToBy, timespanSingleton, tookPlaceAt } from '../../../properties/object'
 

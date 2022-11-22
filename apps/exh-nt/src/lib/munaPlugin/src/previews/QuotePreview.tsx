@@ -1,20 +1,19 @@
 import React from 'react'
 import {
   Box,
-  Text
 } from '@sanity/ui'
 
-export const QuotePreview = ({ value: { content, credit } }) => {
+export const QuotePreview = ({ value: { content, credit } }: any) => {
   const text = content
-    ? content.map((block) => block.children
-      .filter((child) => child._type === 'span')
-      .map((span, index) => (<p key={index}>"{span.text}"</p>)))
+    ? content.map((block: any) => block.children
+      .filter((child: any) => child._type === 'span')
+      .map((span: any, index: number) => (<p key={index}>{`"${span.text}"`}</p>)))
     : ''
 
   const textCredit = credit
-    ? credit.map((block) => block.children
-      .filter((child) => child._type === 'span')
-      .map((span, index) => (<small key={index}>{span.text}</small>)))
+    ? credit.map((block: any) => block.children
+      .filter((child: any) => child._type === 'span')
+      .map((span: any, index: number) => (<small key={index}>{span.text}</small>)))
     : ''
 
   return (

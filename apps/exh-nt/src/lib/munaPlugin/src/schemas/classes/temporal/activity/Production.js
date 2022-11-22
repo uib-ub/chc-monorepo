@@ -1,6 +1,7 @@
 import { GiFactory } from 'react-icons/gi'
 import { defineType } from 'sanity'
-import { coalesceLabel, defaultFieldsets } from '../../../../helpers/coalesceLabel'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
+import { coalesceLabel } from '../../../../helpers'
 import {
   featured
 } from '../../../properties/datatype'

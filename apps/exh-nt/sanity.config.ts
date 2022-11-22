@@ -84,7 +84,8 @@ export default defineConfig({
     }),
   ], i18nConfig),
   tools: [
-    { name: 'import-tool', title: 'Import', component: ImportTool },],
+    { name: 'import-tool', title: 'Import', component: ImportTool },
+  ],
   document: {
     /* productionUrl: async (prev, { document }) => {
       const url = new URL('/api/preview', location.origin)

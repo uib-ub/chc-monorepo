@@ -1,6 +1,7 @@
 import { GiFactory } from 'react-icons/gi'
 import { defineType } from 'sanity'
-import { defaultFieldsets, timespanAsString } from '../../../../helpers'
+import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
+import { timespanAsString } from '../../../../helpers'
 import {
   featured
 } from '../../../properties/datatype'

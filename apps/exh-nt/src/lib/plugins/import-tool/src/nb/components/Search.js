@@ -21,7 +21,6 @@ const Search = (props) => {
     <>
       <Box flex={3}>
         <TextInput
-          style={{ backgroundColor: "white", border: "solid 1px #ccc" }}
           fontSize={[2, 2, 2, 3]}
           padding={[2, 2, 3]}
           type="text"

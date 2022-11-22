@@ -7,11 +7,11 @@
   "author": "Tarje Lavik <tarje.lavik@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity start",
-    "build": "sanity build",
-    "start": "sanity start",
-    "deploy": "sanity deploy",
-    "clean": "rm -rf node_modules && rm -rf dist"
+    "devX": "sanity start",
+    "buildX": "sanity build",
+    "startX": "sanity start",
+    "deployX": "sanity deploy",
+    "cleanX": "rm -rf node_modules && rm -rf dist"
   },
   "keywords": [
     "sanity"
