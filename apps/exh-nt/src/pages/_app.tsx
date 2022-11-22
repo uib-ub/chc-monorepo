@@ -10,6 +10,7 @@ import { Merriweather_Sans } from '@next/font/google'
 const merriweathersans = Merriweather_Sans({
   subsets: ['latin'],
   variable: '--font-merriweathersans',
+  fallback: ['Helvetica', 'ui-sans-serif'],
 })
 
 const App = ({ Component, pageProps }: AppProps) => {

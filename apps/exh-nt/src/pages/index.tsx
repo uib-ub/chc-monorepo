@@ -112,7 +112,6 @@ const Home: NextPage = ({ data, preview }: any) => {
             </footer>
           </Pane>
 
-
         </PanesShell>
       </AppShell>
     </>
