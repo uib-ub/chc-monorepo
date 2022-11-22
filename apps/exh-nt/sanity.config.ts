@@ -17,6 +17,7 @@ import { vercelWidget } from "sanity-plugin-dashboard-widget-vercel";
 import { schemaTypes } from './src/lib/munaPlugin/src'
 import SiteSettings from './src/lib/munaPlugin/src/schemas/classes/persistent/information/site/SiteSettings';
 import { structure, defaultDocumentNode } from './src/lib/deskStructure'
+import { default as ImportTool } from './src/lib/plugins/import-tool/src/App'
 
 // @TODO: update next-sanity/studio to automatically set this when needed
 const basePath = '/studio'
@@ -82,6 +83,8 @@ export default defineConfig({
       defaultApiVersion: '2022-08-08',
     }),
   ], i18nConfig),
+  tools: [
+    { name: 'import-tool', title: 'Import', component: ImportTool },],
   document: {
     /* productionUrl: async (prev, { document }) => {
       const url = new URL('/api/preview', location.origin)
