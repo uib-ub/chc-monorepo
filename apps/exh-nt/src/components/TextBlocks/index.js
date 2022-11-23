@@ -2,7 +2,6 @@ import { Link } from '../../components/Link'
 import { PortableText } from '@portabletext/react'
 import {
   BigTextBlock,
-  HeroBlock,
   IframeBlock,
   PageHeaderBlock,
   QuoteBlock,
@@ -12,9 +11,6 @@ import {
   TwoColumnBlock,
   VideoBlock,
   IllustrationWithCaption,
-  ExhibitionElement,
-  EventBlock,
-  GridBlock,
 } from './Blocks'
 
 const myPortableTextComponents = () => {
@@ -22,12 +18,8 @@ const myPortableTextComponents = () => {
     types: {
       //image: ({value}) => <img src={value.imageUrl} />,
       BigTextBlock: ({ value }) => <BigTextBlock {...value} />,
-      ExhibitionElement: ({ value }) => <ExhibitionElement {...value} />,
-      EventSection: ({ value }) => <EventBlock {...value} />,
-      HeroBlock: ({ value }) => <HeroBlock {...value} />,
       IframeBlock: ({ value }) => <IframeBlock {...value} />,
       IllustrationWithCaption: ({ value }) => <IllustrationWithCaption {...value} />,
-      GridBlock: ({ value }) => <GridBlock {...value} />,
       ObjectBlock: ({ value }) => <ObjectBlock {...value} />,
       PageHeader: ({ value }) => <PageHeaderBlock {...value} />,
       Quote: ({ value }) => <QuoteBlock {...value} />,

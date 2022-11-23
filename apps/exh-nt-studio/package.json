@@ -7,11 +7,11 @@
   "author": "Tarje Lavik <tarje.lavik@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity start",
-    "build": "sanity build",
-    "start": "sanity start",
-    "deploy": "sanity deploy",
-    "clean": "rm -rf node_modules && rm -rf dist"
+    "devX": "sanity start",
+    "buildX": "sanity build",
+    "startX": "sanity start",
+    "deployX": "sanity deploy",
+    "cleanX": "rm -rf node_modules && rm -rf dist"
   },
   "keywords": [
     "sanity"
@@ -35,9 +35,9 @@
     "@sanity/vision": "^2.34.0",
     "@seidhr/sanity-plugin-muna-schemas": "^1.0.0-alpha.13",
     "@seidhr/sanity-plugin-timespan-input": "^2.0.2",
-    "edtf": "github:SylvainBigonneau/browser-edtf.js",
     "dayjs": "^1.11.0",
     "dompurify": "^2.4.0",
+    "edtf": "github:SylvainBigonneau/browser-edtf.js",
     "eslint": "^8.6.0",
     "jsonld": "^5.2.0",
     "prop-types": "^15.7",

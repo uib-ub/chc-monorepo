@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import * as SectionComponents from '.'
-import { Alert, AlertIcon, AlertDescription, AlertTitle, Code } from '@chakra-ui/react'
 
 function resolveSections(section) {
   const Section = SectionComponents[section._type]

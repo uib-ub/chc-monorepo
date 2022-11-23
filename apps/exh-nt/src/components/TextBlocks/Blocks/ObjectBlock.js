@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { GetImage } from '../../../../../../apps/exh-nt/src/lib/sanity.server'
-import Link from '../../../components/Link'
-import TextBlocks from '..'
+import { Link } from '../../../components/Link'
+import { TextBlocks } from '..'
 import Source from './shared/Source'
 import { useRouter } from 'next/router'
 

@@ -1,4 +1,4 @@
-import TextBlocks from '..'
+import { TextBlocks } from '..'
 
 export default function QuoteBlock(props) {
   if (!props || props.disabled === true) {

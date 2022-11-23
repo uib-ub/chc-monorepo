@@ -113,7 +113,7 @@ export async function getStaticPaths() {
 }
 
 
-const Home: NextPage = ({ data, preview }: any) => {
+const Id: NextPage = ({ data, preview }: any) => {
   const { locale, locales, asPath, defaultLocale, isFallback }: NextRouter = useRouter()
 
   const { data: previewData } = usePreviewSubscription(data?.query, {
@@ -209,7 +209,7 @@ const Home: NextPage = ({ data, preview }: any) => {
               {item[0]?.activityStream && item[0].activityStream
                 .filter((activity: any) => activity._type === 'BeginningOfExistence')
                 .map((activity: any) => (
-                  <div>
+                  <div key={activity._id || activity._key}>
                     <div>{activity.contributionAssignedBy?.[0].assignedActor?.label[locale || ''] || Object.values(activity.contributionAssignedBy?.[0].assignedActor?.label)[1]}</div>
                     <div className='text-xs text-slate-700 dark:text-slate-300 m-0 p-0'>{activity.timespan?.edtf}</div>
                   </div>
@@ -269,4 +269,4 @@ const Home: NextPage = ({ data, preview }: any) => {
   );
 };
 
-export default Home;
+export default Id;

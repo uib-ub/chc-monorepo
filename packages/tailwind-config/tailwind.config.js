@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors");
+const { fontFamily } = require('tailwindcss/defaultTheme')
 
 const makePrimaryColor =
   l =>
@@ -9,6 +10,7 @@ const makePrimaryColor =
       return `hsl(var(--nextra-primary-hue) 100% ${l}% / ${opacityValue})`
     }
 
+/** @type {import('tailwindcss').Config} \*/
 module.exports = {
   content: [
     // app content
@@ -24,7 +26,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Merriweather Sans', 'sans-serif']
+        //sans: ['Merriweather Sans', 'sans-serif']
+        sans: ['var(--font-merriweathersans)', ...fontFamily.sans],
       },
       colors: {
         brandblue: colors.blue[500],

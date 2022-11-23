@@ -1,4 +1,4 @@
-import TextBlocks from '..'
+import { TextBlocks } from '..'
 
 export default function BigTextBlock(props) {
   if (!props || props.disabled === true) {

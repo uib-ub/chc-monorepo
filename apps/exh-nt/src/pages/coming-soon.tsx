@@ -3,7 +3,7 @@ import { groq } from 'next-sanity';
 import Head from "next/head";
 import { NextRouter, useRouter } from 'next/router';
 import React from "react";
-import { Button, AppShell, LocaleSwitch } from "ui";
+import { AppShell, LocaleSwitch } from "ui";
 import { ThemeSwitch } from '../components/ThemeSwitch';
 import { siteSettings } from '../lib/queries/fragments';
 import { getClient } from '../lib/sanity.server';
@@ -16,7 +16,7 @@ const frontpageQuery = groq`
 
 export const getStaticProps: GetStaticProps = async ({ locale, preview = false }) => {
   const data = await getClient(preview).fetch(frontpageQuery, { language: locale })
-  console.log(JSON.stringify(data, null, 2))
+  // console.log(JSON.stringify(data, null, 2))
   return {
     props: {
       data,

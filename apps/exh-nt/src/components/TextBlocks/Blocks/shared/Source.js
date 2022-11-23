@@ -1,6 +1,6 @@
-import Link from '../../../../components/Link'
+import { Link } from '../../../../components/Link'
 import { useRouter } from 'next/router'
-import TextBlocks from '../..'
+import { TextBlocks } from '../..'
 
 export default function Source(props) {
   const { locale, defaultLocale } = useRouter()
