@@ -9,7 +9,14 @@ export default function SearchSka() {
   const ska = 'https://jambo.uib.no/elasticsearch'
 
   return (
-    <ReactiveBase app="ska2" url={ska}>
+    <ReactiveBase
+      url={ska}
+      app="ska2"
+      transformRequest={props => ({
+        ...props,
+        url: props.url.replace('_msearch', '_search')
+      })}
+    >
       <Box marginTop={5}>
         {/* <Search /> */}
         <Flex marginTop="5" paddingX={2} style={{ borderTop: '1px solid #ccc' }}>
@@ -17,6 +24,6 @@ export default function SearchSka() {
           <Results />
         </Flex>
       </Box>
-    </ReactiveBase>
+    </ReactiveBase >
   )
 }
