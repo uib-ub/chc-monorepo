@@ -16,10 +16,15 @@ const merriweathersans = Merriweather_Sans({
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <React.StrictMode>
+      <style jsx global>
+        {`
+          :root {
+            --font-merriweathersans: ${merriweathersans.style.fontFamily};
+          }
+        `}
+      </style>
       <ThemeProvider enableSystem={true} attribute="class">
-        <div className={`${merriweathersans.variable} font-sans`}>
-          <Component {...pageProps} />
-        </div>
+        <Component {...pageProps} />
       </ThemeProvider>
     </React.StrictMode>
   );
