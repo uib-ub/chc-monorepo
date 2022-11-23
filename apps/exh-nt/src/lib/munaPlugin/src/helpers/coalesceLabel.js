@@ -1,5 +1,5 @@
 const i18nConfig = {
-  base: "en",
+  base: "no",
   languages: [
     {
       "id": "en",

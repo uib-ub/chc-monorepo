@@ -1,7 +1,7 @@
 import { defineType } from 'sanity';
 
 const i18nConfig = {
-  base: "en",
+  base: "no",
   languages: [
     {
       "id": "en",

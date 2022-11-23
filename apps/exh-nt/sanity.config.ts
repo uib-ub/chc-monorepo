@@ -72,7 +72,7 @@ export default defineConfig({
       // Select Norwegian (Bokmål) by default
       defaultLanguages: ['no'],
       // Only show language filter for document type `page` (schemaType.name)
-      documentTypes: ['page'],
+      // documentTypes: ['page'],
       filterField: (enclosingType, field, selectedLanguageIds) =>
         !enclosingType.name.startsWith('Localized') || selectedLanguageIds.includes(field.name),
     }),

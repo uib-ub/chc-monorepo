@@ -11,7 +11,7 @@ import { GiBoltSpellCast, GiSettingsKnobs, GiCrackedGlass } from 'react-icons/gi
 import { FiActivity } from 'react-icons/fi'
 
 const i18nConfig = {
-  base: "en",
+  base: "no",
   languages: [
     {
       "id": "en",
