@@ -40,7 +40,7 @@ async function getObject(id, url) {
         rdfs:label ?oLabel .
     } WHERE { 
       GRAPH ?g {
-        VALUES ?id {'ubb-bros-00001'}
+        VALUES ?id {'${id}'}
         ?uri dct:identifier ?id ;
           ?p ?o .
         ?uri (dct:title|foaf:name|skos:prefLabel|rdfs:label) ?label .
