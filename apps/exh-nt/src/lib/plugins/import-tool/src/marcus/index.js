@@ -14,7 +14,7 @@ export default function SearchMarcus() {
       app="marcus-prod"
       transformRequest={props => ({
         ...props,
-        url: props.url.replace('_msearch', '_search')
+        url: process.env.NODE_ENV === 'production' ? props.url.replace('_msearch', '_search') : props.url
       })}
     >
       <Box marginTop={5}>
