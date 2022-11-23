@@ -173,7 +173,7 @@ async function getObject(api, id) {
             OPTIONAL { ?resource ubbont:hasXLView ?partXL . }
             OPTIONAL { ?resource ubbont:hasSMView ?partSM . }
         }
-        BIND(iri(concat("${getBaseUrl()}", "/items/", ?partLabel, "/manifest")) AS ?manifestURL)
+        BIND(iri(concat("${getBaseUrl()}", "/items/", ?id, "/manifest")) AS ?manifestURL)
         BIND(iri(concat("http://data.ub.uib.no/instance/manuscript/", ?id, "/manifest/range/1")) AS ?rangeURL)
         BIND(iri(concat("http://data.ub.uib.no/instance/page/", ?id, "_p1")) AS ?singleCanvas)
         BIND(iri(replace(str(?s), "data.ub.uib.no", "marcus.uib.no", "i")) AS ?homepage)
