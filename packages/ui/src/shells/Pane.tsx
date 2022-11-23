@@ -39,10 +39,10 @@ export const paneStyles = cva([], {
         "md:flex-grow-0",
         "max-sm:p-5",
         "md:bg-gray-100",
-        "md:dark:bg-[#2b2e2f],"
+        "md:dark:bg-[#2b2e2f]",
       ],
       content: [
-        "min-h-screen",
+        "md:min-h-screen",
         "flex",
         "flex-col",
         "flex-grow",
