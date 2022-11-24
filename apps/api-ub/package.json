@@ -19,6 +19,7 @@
     "typescript": "4.8.4"
   },
   "dependencies": {
+    "@next/font": "^13.0.4",
     "@popperjs/core": "^2.11.6",
     "autoprefixer": "^10.4.13",
     "cors": "^2.8.5",
