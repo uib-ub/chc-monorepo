@@ -65,7 +65,7 @@ const Card = ({ item }) => {
             text={buttonLabel}
             mode={isImported ? 'ghost' : 'default'}
             disabled={isFetching || item.type === "Emne"}
-            onClick={() => onChooseItem(item.uri)}
+            onClick={() => onChooseItem(item.identifier)}
             tone='positive'
           />
           <a href={item._id} target="_blank" rel="noopener noreferrer">Åpne i Marcus</a>

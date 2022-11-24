@@ -1,9 +1,7 @@
 import { nanoid } from 'nanoid'
-// import { parse } from 'date-fns'
 import { mapLicenses } from '../../shared/mapLicenses'
 import { mapOwner } from '../../shared/mapOwner'
 import { mapTypes } from '../../shared/mapTypes'
-import { getTimespan } from '../../shared/getTimespan'
 import { convertToBlock } from '../../shared/htmlUtils'
 import Schema from '@sanity/schema'
 import { mapLanguage } from '../../shared/mapLanguage'
@@ -73,60 +71,6 @@ const def = Schema.compile({
   ]
 })
 
-const nomalizedLabel = (dirtyLabel) => {
-  // If we only get a string, assume that it is in norwegian
-  if (typeof dirtyLabel === 'string') {
-    return {
-      _type: 'LocalizedString',
-      no: dirtyLabel,
-      en: dirtyLabel
-    }
-  }
-  // If it is an array, we have multiple labels. It could be two strings and then 
-  // we assume they are in norwegian. If we get objects we need to map the language.
-  // We could get an array with both strings and objects :-(!!!!
-  if (Array.isArray(dirtyLabel)) {
-    const labels = {
-      _type: 'LocalizedString',
-    }
-    dirtyLabel.map((i) => {
-      if (i && typeof i === 'object') {
-        Object.assign(labels, { [i['@language']]: i.value })
-      }
-      if (i && typeof i === 'string') {
-        Object.assign(labels, { no: i })
-      }
-    })
-    return labels
-  }
-}
-
-const nomalizedDescription = (dirtyDescription) => {
-  // If we only get a string, assume that it is in norwegian
-  if (typeof dirtyDescription === 'string') {
-    const cleanDescription = convertToBlock(blockContentType, dirtyDescription, true)
-    return {
-      no: cleanDescription,
-      en: cleanDescription,
-    }
-  }
-  // If it is an array, we have multiple labels. It could be two strings and then 
-  // we assume they are in norwegian. If we get objects we need to map the language.
-  // We could get an array with both strings and objects :-(!!!!
-  if (Array.isArray(dirtyDescription)) {
-    const data = {}
-    dirtyDescription.map((i) => {
-      if (i && typeof i === 'object') {
-        Object.assign(data, { [i['@language']]: convertToBlock(blockContentType, i.value, true) })
-      }
-      if (i && typeof i === 'string') {
-        Object.assign(data, { no: convertToBlock(blockContentType, i, true) })
-      }
-    })
-    return data
-  }
-}
-
 const blockContentType = def.get('blogPost')
   .fields.find(field => field.name === 'body').type
 
@@ -134,18 +78,13 @@ export default function getDocument(item, assetID) {
   // Map type to Sanity types
   const types = mapTypes(Array.isArray(item.type) ? item.type : [item.type])
 
-  // Handle description RDF to Sanity Portable Text
-  // const descriptions = item.description ? Array.isArray(item.description) ? item.description : [item.description] : null
-  // const descriptionBlocks = descriptions.map(description => convertToBlock(blockContentType, description, true))
-
-  const localizedBlocks = nomalizedDescription(item.description)
-  const description = Object.entries(localizedBlocks).map(([key, value]) => {
+  const referredToBy = item.description ? Object.entries(item.description).map(([key, value]) => {
     return {
       _key: nanoid(),
       _type: 'LinguisticObject',
       accessState: 'open',
       editorialState: 'published',
-      body: value,
+      body: convertToBlock(blockContentType, value, true),
       hasType: [
         {
           _key: nanoid(),
@@ -159,10 +98,7 @@ export default function getDocument(item, assetID) {
         _type: 'reference',
       }
     }
-  })
-
-  // Get the EDTF object
-  const date = getTimespan(item.created?.value, item.madeAfter?.value, item.madeBefore?.value)
+  }) : undefined
 
   const subject = item.subject
     ? [
@@ -173,7 +109,10 @@ export default function getDocument(item, assetID) {
           _rev: nanoid(),
           accessState: 'open',
           editorialState: 'published',
-          label: nomalizedLabel(s.prefLabel),
+          label: {
+            _type: 'LocalizedString',
+            ...s.label
+          },
         }
       }),
     ]
@@ -190,7 +129,7 @@ export default function getDocument(item, assetID) {
           editorialState: 'published',
           label: {
             _type: "LocalizedString",
-            no: Array.isArray(s.name) === false ? s.name : s.name[0]
+            ...s.label
           },
         }
       }),
@@ -208,7 +147,7 @@ export default function getDocument(item, assetID) {
           editorialState: 'published',
           label: {
             _type: "LocalizedString",
-            no: Array.isArray(s.name) === false ? s.name : s.name[0]
+            ...s.label
           },
         }
       }),
@@ -218,7 +157,8 @@ export default function getDocument(item, assetID) {
   const activityStream = [
     {
       _key: nanoid(),
-      _type: 'BeginningOfExistence',
+      _type: 'Activity',
+      subType: 'crm:Production',
       ...(item.maker && {
         contributionAssignedBy: [
           ...item.maker.map((s) => {
@@ -233,15 +173,11 @@ export default function getDocument(item, assetID) {
           }),
         ],
       }),
-      ...(date && {
+      ...(item.timespan && {
         timespan: {
           _key: nanoid(),
           _type: 'Timespan',
-          ...date,
-          /* edtf: item.created.value,
-          ...(item.madeAfter?.value ? { beginOfTheBegin: item.madeAfter?.value } : ''),
-          ...(item.madeBefore?.value ? { endOfTheEnd: item.madeBefore?.value } : ''),
-          ...(item.created?.value ? { date: parseDate(item.created?.value) } : ''), */
+          ...item.timespan
         },
       }),
     },
@@ -256,10 +192,13 @@ export default function getDocument(item, assetID) {
       _id: `${item.identifier}`,
       accessState: 'open',
       editorialState: 'published',
-      label: nomalizedLabel(item.title),
+      label: {
+        _type: 'LocalizedString',
+        ...item.title
+      },
       preferredIdentifier: item.identifier,
-      homepage: item.homepage.id,
-      subjectOfManifest: `https://api-ub.vercel.app/items/${item.identifier}/manifest`,
+      homepage: item.homepage,
+      subjectOfManifest: item.subjectOfManifest,
       identifiedBy: [
         {
           _type: 'Identifier',
@@ -283,8 +222,8 @@ export default function getDocument(item, assetID) {
       ...(Object.keys(activityStream[0]).length > 2 && {
         activityStream,
       }),
-      ...(description && description.length > 0 && {
-        referredToBy: description,
+      ...(referredToBy && referredToBy.length > 0 && {
+        referredToBy: referredToBy
       }),
       ...(item.subject && {
         subject: [

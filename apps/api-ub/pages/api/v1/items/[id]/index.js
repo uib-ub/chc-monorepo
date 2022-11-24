@@ -34,6 +34,8 @@ async function getObject(id, url) {
       ?uri ?p ?o ;
         a crm:E22_Human-Made_Object ;
         rdfs:label ?label ;
+        muna:image ?image ;
+        muna:subjectOfManifest ?manifest ;
         foaf:homepage ?homepage .
       ?o a ?oClass ;
         dct:identifier ?identifier ;
@@ -42,8 +44,23 @@ async function getObject(id, url) {
       GRAPH ?g {
         VALUES ?id {'${id}'}
         ?uri dct:identifier ?id ;
-          ?p ?o .
-        ?uri (dct:title|foaf:name|skos:prefLabel|rdfs:label) ?label .
+          ?p ?o ;
+          (dct:title|foaf:name|skos:prefLabel|rdfs:label) ?label .
+          # Get multipage image
+        OPTIONAL { 
+          ?uri ubbont:hasRepresentation / dct:hasPart ?page .
+          ?page ubbont:sequenceNr 1 .
+          ?page ubbont:hasResource ?resource .
+          OPTIONAL {?resource ubbont:hasSMView ?smImage.}  
+          OPTIONAL {?resource ubbont:hasMDView ?mdImage.}
+        }
+        # Get singlepage image
+        OPTIONAL { 
+          ?uri ubbont:hasRepresentation / dct:hasPart ?part .
+          OPTIONAL {?part ubbont:hasMDView ?imgMD .}
+          OPTIONAL {?part ubbont:hasSMView ?imgSM .} 
+        }
+        BIND (COALESCE(?imgMD,?imgSM,?mdImage,?smImage) AS ?image).
         OPTIONAL {
           ?o a ?oClass ;
             (dct:title|foaf:name|skos:prefLabel|rdfs:label) ?oLabel ;
@@ -53,6 +70,7 @@ async function getObject(id, url) {
           ?uri dct:license / rdfs:label ?licenseLabel .
         }
         BIND(iri(REPLACE(str(?uri), "data.ub.uib.no","marcus.uib.no","i")) as ?homepage) .
+        BIND(CONCAT("https://api-ub.vercel.app/items/", ?id, "/manifest") as ?manifest) .
         FILTER(?p != ubbont:cataloguer && ?p != ubbont:internalNote)
       } 
     }
@@ -89,6 +107,7 @@ export default async function handler(req, res) {
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
         //console.log(result)
+        //res.status(200).json(result)
 
         const awaitFramed = jsonld.frame(result, {
           '@context': [`${getBaseUrl()}/ns/ubbont/context.json`],
@@ -96,12 +115,15 @@ export default async function handler(req, res) {
           '@embed': '@always',
         })
         let framed = await awaitFramed
-        framed.timespan = getTimespan(framed?.created, framed?.madeAfter, framed?.madeBefore)
-        //delete framed?.madeAfter
-        //delete framed?.madeBefore
 
         // Change id as this did not work in the query
         framed.id = `${getBaseUrl()}/items/${framed.identifier}`
+        // We assume all @none language tags are really norwegian
+        framed = JSON.parse(JSON.stringify(framed).replaceAll('"none":', '"no":'))
+
+        framed.timespan = getTimespan(framed?.created, framed?.madeAfter, framed?.madeBefore)
+        delete framed?.madeAfter
+        delete framed?.madeBefore
 
         res.status(200).json(framed)
       } else {

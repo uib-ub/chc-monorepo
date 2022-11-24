@@ -1,4 +1,5 @@
 export const SPARQL_PREFIXES = `
+PREFIX muna: <http://muna.xyz/model/0.1/>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX ecrm: <http://erlangen-crm.org/current/>
 PREFIX ubbont: <http://data.ub.uib.no/ontology/>

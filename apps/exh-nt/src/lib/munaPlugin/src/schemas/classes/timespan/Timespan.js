@@ -32,12 +32,12 @@ export default defineType({
       title: 'Begynnelsen av begynnelsen',
       titleEN: 'Begin of the begin',
       fieldset: 'beginning',
-      type: 'date',
+      type: 'datetime',
       options: {
         dateFormat: 'YYYY-MM-DD',
         calendarTodayLabel: 'Today',
         semanticSanity: {
-          "@type": "xsd:date"
+          "@type": "xsd:dateTime"
         }
       },
       // Validation on min/max date does not work, also handling of undefined is sub par
@@ -48,12 +48,12 @@ export default defineType({
       title: 'Slutten på begynnelsen',
       titleEN: 'End of the begin',
       fieldset: 'beginning',
-      type: 'date',
+      type: 'datetime',
       options: {
         dateFormat: 'YYYY-MM-DD',
         calendarTodayLabel: 'Today',
         semanticSanity: {
-          "@type": "xsd:date"
+          "@type": "xsd:dateTime"
         }
       },
     },
@@ -80,12 +80,12 @@ export default defineType({
       title: 'Begynnelsen av slutten',
       titleEN: 'Begin of the end',
       fieldset: 'ending',
-      type: 'date',
+      type: 'datetime',
       options: {
         dateFormat: 'YYYY-MM-DD',
         calendarTodayLabel: 'Today',
         semanticSanity: {
-          "@type": "xsd:date"
+          "@type": "xsd:dateTime"
         }
       },
     },
@@ -94,12 +94,12 @@ export default defineType({
       title: 'Slutten av slutten',
       titleEN: 'End of the end',
       fieldset: 'ending',
-      type: 'date',
+      type: 'datetime',
       options: {
         dateFormat: 'YYYY-MM-DD',
         calendarTodayLabel: 'Today',
         semanticSanity: {
-          "@type": "xsd:date"
+          "@type": "xsd:dateTime"
         }
       },
     },

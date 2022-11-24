@@ -1,6 +1,7 @@
 {
   "@context": {
     "@version": 1.1,
+    "muna": "http://muna.xyz/model/0.1/",
     "crm": "http://www.cidoc-crm.org/cidoc-crm/",
     "ecrm": "http://erlangen-crm.org/current/",
     "ubbont": "http://data.ub.uib.no/ontology/",
@@ -33,8 +34,13 @@
     "cc": "http://creativecommons.org/ns#",
     "id": "@id",
     "type": "@type",
-    "value": "@value",
     "none": "@none",
+    "subjectOfManifest": {
+      "@id": "muna:subjectOfManifest"
+    },
+    "image": {
+      "@id": "muna:image"
+    },
     "HumanMadeObject": {
       "@id": "crm:E22_Human-Made_Object"
     },
@@ -578,8 +584,7 @@
     },
     "homepage": {
       "@id": "foaf:homepage",
-      "@type": "@id",
-      "@container": "@set"
+      "@type": "@id"
     },
     "CashBook": {
       "@id": "ubbont:CashBook"

@@ -5,7 +5,7 @@ import {
   label, accessState, editorialState,
 } from '../../../properties/datatype'
 import {
-  carriedOutBy, hadParticipant, identifiedBy, referredToBy, timespanSingleton, tookPlaceAt, usedGeneralTechnique, usedObjectOfType, usedSpecificObject, usedSpecificTechnique
+  carriedOutBy, contributionAssignedBy, hadParticipant, identifiedBy, referredToBy, timespanSingleton, tookPlaceAt, usedGeneralTechnique, usedObjectOfType, usedSpecificObject, usedSpecificTechnique
 } from '../../../properties/object'
 
 export default defineType({
@@ -85,12 +85,16 @@ export default defineType({
     },
     {
       ...label,
+      validation: null,
+      group: 'core',
+    },
+    {
+      ...contributionAssignedBy,
       group: 'core',
     },
     {
       name: 'hasType',
       title: 'Aktivitetstype',
-      titleEN: 'Activity type',
       group: 'core',
       type: 'array',
       of: [
