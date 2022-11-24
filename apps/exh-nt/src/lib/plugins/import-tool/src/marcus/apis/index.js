@@ -1,54 +1,24 @@
 import { omit } from 'lodash'
-import getQuery from './getQuery'
-import getFrame from './getFrame'
 import getDocument from './getDocument'
 import { createDoc, getImageBlob, patchAssetMeta, uploadImageBlob } from '../../shared/storeFunctions'
-import { mapTypes } from '../../shared/mapTypes'
-import jsonld from 'jsonld'
 
-export const chooseItem = async (uri) => {
-  // We get the web uri from ES, so we need to switch to the data uri
-  const dataUri = uri.replace('marcus', 'data.ub')
+export const getBaseUrl = () => {
+  if (process.env.VERCEL_ENV === "production")
+    return "https://api-ub.vercel.app";
+  if (process.env.VERCEL_ENV === "preview")
+    return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3009";
+};
 
-  async function getObject(id) {
-    if (!id) {
-      throw Error
-    }
-    // eslint-disable-next-line no-undef
-    const results = await fetch(
-      `https://sparql.ub.uib.no/sparql/query?query=${encodeURIComponent(
-        getQuery(dataUri),
-      )}&output=json`,
-    )
-    return results
-  }
-
-  const response = await getObject(dataUri)
+export const chooseItem = async (item) => {
+  const response = await fetch(`${getBaseUrl()}/items/${item}`)
 
   // Deal with response
   if (response.status >= 200 && response.status <= 299) {
     const result = await response.json()
 
-    // Frame the result for nested json
-    const awaitFramed = jsonld.frame(result, await getFrame(result, dataUri))
-    const framed = await awaitFramed
-
-    // Make sure we have arrays
-    if (framed.subject && Array.isArray(framed.subject) === false) {
-      framed.subject = [framed.subject]
-    }
-    if (framed.spatial && Array.isArray(framed.spatial) === false) {
-      framed.spatial = [framed.spatial]
-    }
-    if (framed.depicts && Array.isArray(framed.depicts) === false) {
-      framed.depicts = [framed.depicts]
-    }
-    if (framed.maker && Array.isArray(framed.maker) === false) {
-      framed.maker = [framed.maker]
-    }
-
     // Remove json-ld context
-    const cleanJSON = omit(framed, ['@context'])
+    const cleanJSON = omit(result, ['@context'])
     console.log(cleanJSON)
 
     const imageResonse = await getImageBlob(cleanJSON.image)
@@ -63,7 +33,7 @@ export const chooseItem = async (uri) => {
       source: {
         // The source this image is from
         name: 'marcus.uib.no',
-        url: dataUri,
+        url: doc.homepage || '',
         // A string that uniquely idenitfies it within the source.
         // In this example the URL is the closest thing we have as an actual ID.
         id: cleanJSON.identifier,

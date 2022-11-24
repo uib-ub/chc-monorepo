@@ -77,7 +77,7 @@ export const createDoc = async (docs) => {
   ]
 
   rest.forEach((arr) => {
-    transaction.createIfNotExists(arr)
+    transaction.createOrReplace(arr)
   })
 
   transaction

@@ -5,7 +5,7 @@ import {
   label, accessState, editorialState,
 } from '../../../properties/datatype'
 import {
-  carriedOutBy, hadParticipant, identifiedBy, referredToBy, timespanSingleton, tookPlaceAt, usedGeneralTechnique, usedObjectOfType, usedSpecificObject, usedSpecificTechnique
+  carriedOutBy, contributionAssignedBy, hadParticipant, identifiedBy, referredToBy, timespanSingleton, tookPlaceAt, usedGeneralTechnique, usedObjectOfType, usedSpecificObject, usedSpecificTechnique
 } from '../../../properties/object'
 
 export default defineType({
@@ -69,13 +69,32 @@ export default defineType({
       group: 'core',
     },
     {
+      name: 'subType',
+      title: 'What kind of activity?',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          { title: 'Beginning of existence', value: 'crm:BeginningOfExistence' },
+          { title: 'Production', value: 'crm:Production' },
+          { title: 'Destruction', value: 'crm:Destruction' },
+          { title: 'Transformation', value: 'crm:Transformation' },
+        ]
+      },
+      group: 'core',
+    },
+    {
       ...label,
+      validation: null,
+      group: 'core',
+    },
+    {
+      ...contributionAssignedBy,
       group: 'core',
     },
     {
       name: 'hasType',
       title: 'Aktivitetstype',
-      titleEN: 'Activity type',
       group: 'core',
       type: 'array',
       of: [

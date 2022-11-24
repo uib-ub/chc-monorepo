@@ -2,6 +2,7 @@ import DOMPurify from 'dompurify';
 import blockTools from '@sanity/block-tools';
 
 export const validationsPass = (html) => {
+  //console.log(html)
   // must have same number of opening and closing brackets
   const numberOpeningMatchesClosing =
     (html.match(/</g) || []).length === (html.match(/>/g) || []).length;
