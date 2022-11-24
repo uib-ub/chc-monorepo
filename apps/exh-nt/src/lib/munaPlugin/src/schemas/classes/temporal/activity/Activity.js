@@ -69,6 +69,19 @@ export default defineType({
       group: 'core',
     },
     {
+      name: 'subClass',
+      title: 'Sub class',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Beginning of existence', value: 'BeginningOfExistence' },
+          { title: 'Production', value: 'Production' },
+          { title: 'Destruction', value: 'Destruction' },
+          { title: 'Transformation', value: 'Transformation' },
+        ]
+      }
+    },
+    {
       ...label,
       group: 'core',
     },
