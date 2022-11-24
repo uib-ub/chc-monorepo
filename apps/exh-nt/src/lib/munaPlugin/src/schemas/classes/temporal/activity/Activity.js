@@ -69,17 +69,19 @@ export default defineType({
       group: 'core',
     },
     {
-      name: 'subClass',
-      title: 'Sub class',
+      name: 'subType',
+      title: 'What kind of activity?',
       type: 'string',
+      validation: (Rule) => Rule.required(),
       options: {
         list: [
-          { title: 'Beginning of existence', value: 'BeginningOfExistence' },
-          { title: 'Production', value: 'Production' },
-          { title: 'Destruction', value: 'Destruction' },
-          { title: 'Transformation', value: 'Transformation' },
+          { title: 'Beginning of existence', value: 'crm:BeginningOfExistence' },
+          { title: 'Production', value: 'crm:Production' },
+          { title: 'Destruction', value: 'crm:Destruction' },
+          { title: 'Transformation', value: 'crm:Transformation' },
         ]
-      }
+      },
+      group: 'core',
     },
     {
       ...label,
