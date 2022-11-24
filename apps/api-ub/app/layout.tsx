@@ -11,12 +11,7 @@ const merriweathersans = Merriweather_Sans({
   fallback: ['Helvetica', 'ui-sans-serif'],
 })
 
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr" className={merriweathersans.variable}>
       <head>
