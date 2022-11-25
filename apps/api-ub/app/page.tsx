@@ -82,6 +82,14 @@ export default function Home() {
             </tr>
             <tr>
               <td className='border border-slate-700 p-2'>Marcus</td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-jg-n-0614-06">/items/ubb-jg-n-0614-06</a></td>
+              <td className='border border-slate-700 p-2'><a href="/items/ubb-jg-n-0614-06/manifest">/items/ubb-jg-n-0614-06/manifest</a></td>
+              <td className='border border-slate-700 p-2'>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/items/ubb-jg-n-0614-06/manifest`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+              </td>
+            </tr>
+            <tr>
+              <td className='border border-slate-700 p-2'>Marcus</td>
               <td className='border border-slate-700 p-2'><a href="/items/ubb-ms-0185-j-a-007">/items/ubb-ms-0185-j-a-007</a></td>
               <td className='border border-slate-700 p-2'><a href="/items/ubb-ms-0185-j-a-007/manifest">/items/ubb-ms-0185-j-a-007/manifest</a></td>
               <td className='border border-slate-700 p-2'>

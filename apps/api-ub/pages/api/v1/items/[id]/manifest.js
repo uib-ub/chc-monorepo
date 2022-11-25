@@ -181,6 +181,7 @@ async function getObject(api, id) {
     }
     ORDER BY ?s ?repr ?part ?resource
   `
+
   const result = await fetch(
     `${api}${encodeURIComponent(
       query,
@@ -239,7 +240,8 @@ export default async function handler(req, res) {
         // Sort nested arrays before we send the objects to be manifestified
         framed.items = sortBy(framed.items, o => o.label['@none'][0])
         framed.structures.items = sortBy(framed.structures.items, i => parseInt(i.split("_p")[1]))
-        //console.log(JSON.stringify(framed, null, 2))
+        // We assume all @none language tags are really norwegian
+        framed = JSON.parse(JSON.stringify(framed).replaceAll('"@none":', '"no":'))
 
         // Create the manifest
         const constructedManifest = await constructManifest(framed, url)
