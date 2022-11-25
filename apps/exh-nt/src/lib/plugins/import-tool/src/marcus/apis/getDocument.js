@@ -152,6 +152,49 @@ export default function getDocument(item, assetID) {
     ]
     : []
 
+  const depictsRefs = item.depicts ?
+    [
+      ...item.depicts.map((s) => {
+        return {
+          _type: 'reference',
+          _key: nanoid(),
+          _ref: s.identifier,
+        }
+      }),
+    ] : false
+
+  const spatial = item.spatial
+    ? [
+      ...item.spatial.map((s) => {
+        return {
+          _type: 'Place',
+          _id: s.identifier,
+          _rev: nanoid(),
+          accessState: 'open',
+          editorialState: 'published',
+          label: {
+            _type: "LocalizedString",
+            ...s.label
+          },
+          definedBy: {
+            lat: s.lat,
+            lng: s.long,
+          }
+        }
+      }),
+    ] : []
+
+  const spatialRefs = item.spatial ?
+    [
+      ...item.spatial.map((s) => {
+        return {
+          _type: 'reference',
+          _key: nanoid(),
+          _ref: s.identifier,
+        }
+      }),
+    ] : false
+
   const activityStream = [
     {
       _key: nanoid(),
@@ -185,6 +228,7 @@ export default function getDocument(item, assetID) {
     subject,
     maker,
     depicts,
+    spatial,
     doc: {
       _type: 'HumanMadeObject',
       _id: `${item.identifier}`,
@@ -234,15 +278,10 @@ export default function getDocument(item, assetID) {
           }),
         ],
       }),
-      ...(item.depicts && {
+      ...((depictsRefs || spatialRefs) && {
         depicts: [
-          ...item.depicts.map((s) => {
-            return {
-              _type: 'reference',
-              _key: nanoid(),
-              _ref: s.identifier,
-            }
-          }),
+          ...(depictsRefs ? depictsRefs : []),
+          ...(spatialRefs ? spatialRefs : []),
         ],
       }),
       hasCurrentOwner: mapOwner(item.identifier),
