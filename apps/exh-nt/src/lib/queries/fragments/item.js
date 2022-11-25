@@ -94,17 +94,15 @@ export const item = groq`
         }
       }
     },
-    hasType[]-> {
+    hasType-> {
+      _id,
       label,
     },
     creator{
       "_id": assignedActor->._id,
       "label": assignedActor->.label,
     },
-    language-> {
-      identifiedByISO6393,
-      label,
-    }
+    "language": language->.identifiedByISO6393
   },
   hasCurrentOwner[]-> {
     _id,

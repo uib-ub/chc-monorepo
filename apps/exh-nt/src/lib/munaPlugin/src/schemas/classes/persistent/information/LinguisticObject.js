@@ -54,13 +54,8 @@ export default defineType({
       name: 'hasType',
       title: 'Klassifisert som',
       group: 'core',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: [{ type: 'TextType' }],
-        },
-      ],
+      type: 'reference',
+      to: [{ type: 'TextType' }],
       validation: (Rule) => Rule.required(),
       options: {
         semanticSanity: {

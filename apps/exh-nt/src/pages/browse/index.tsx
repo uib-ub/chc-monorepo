@@ -55,14 +55,15 @@ const Browse: NextPage = ({ data, preview }: any) => {
             <Menu className='order-1' aria-label='primary navigation'>
               <MainNav value={mainNav} />
               <div className='p-3 border-t flex gap-2'>
-                <a
+                <Link
                   href={`/studio`}
+                  locale={false}
                   target="_blank"
                   rel="noreferrer"
                   className='text-xs font-semibold'
                 >
                   Studio
-                </a>
+                </Link>
                 <Modal buttonLabel="Data" title="Data">
                   <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
                     {JSON.stringify(data, null, 2)}

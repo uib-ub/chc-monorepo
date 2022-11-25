@@ -85,13 +85,11 @@ export default function getDocument(item, assetID) {
       accessState: 'open',
       editorialState: 'published',
       body: convertToBlock(blockContentType, value, true),
-      hasType: [
-        {
-          _key: nanoid(),
-          _ref: 'd4b31289-91f4-484d-a905-b3fb0970413c',
-          _type: 'reference',
-        },
-      ],
+      hasType: {
+        _key: nanoid(),
+        _ref: 'd4b31289-91f4-484d-a905-b3fb0970413c',
+        _type: 'reference',
+      },
       language: {
         _key: nanoid(),
         _ref: mapLanguage(key),

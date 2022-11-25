@@ -15,6 +15,7 @@ import { MainNav } from '../../components/Header/MainNav';
 import { TextBlocks } from '../../components/TextBlocks';
 import ErrorPage from 'next/error'
 import dynamic from "next/dynamic";
+import { Description } from '../../components/Props/Description';
 
 
 const ManifestViewer = dynamic(() => import("../../components/IIIF/ManifestViewer"), {
@@ -169,14 +170,15 @@ const Id: NextPage = ({ data, preview }: any) => {
             <Menu className='order-1' aria-label='primary navigation'>
               <MainNav value={mainNav} />
               <div className='p-3 border-t flex gap-2'>
-                <a
+                <Link
                   href={`/studio`}
+                  locale={false}
                   target="_blank"
                   rel="noreferrer"
                   className='text-xs font-semibold'
                 >
                   Studio
-                </a>
+                </Link>
                 <Modal buttonLabel="Data" title="Data">
                   <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
                     {JSON.stringify(item, null, 2)}
@@ -207,7 +209,7 @@ const Id: NextPage = ({ data, preview }: any) => {
               <h1 className='text-3xl md:text-2xl lg:text-3xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
 
               {item[0]?.activityStream && item[0].activityStream
-                .filter((activity: any) => activity._type === 'BeginningOfExistence')
+                .filter((activity: any) => ['crm:BeginningOfExistence', 'crm:Production'].includes(activity.subType))
                 .map((activity: any) => (
                   <div key={activity._id || activity._key}>
                     <div>{activity.contributionAssignedBy?.[0].assignedActor?.label[locale || ''] || Object.values(activity.contributionAssignedBy?.[0].assignedActor?.label)[1]}</div>
@@ -250,9 +252,9 @@ const Id: NextPage = ({ data, preview }: any) => {
               <div className='flex flex-wrap justify-center items-center gap-5'>
                 {/* <h1 className='text-2xl md:text-4xl lg:text-6xl sm:hidden'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1> */}
 
-                {item[0]?.referredToBy[0] ?
+                {item[0]?.referredToBy ?
                   <div className='max-w-prose py-5'>
-                    <TextBlocks value={item[0]?.referredToBy[0].body} />
+                    <Description value={item[0]?.referredToBy} language={locale || ''} />
                   </div>
                   : null
                 }
