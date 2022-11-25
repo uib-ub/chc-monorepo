@@ -12,11 +12,10 @@ import { ThemeSwitch } from '../../components/ThemeSwitch';
 import { groq } from 'next-sanity'
 import SanityImage from '../../components/SanityImage';
 import { MainNav } from '../../components/Header/MainNav';
-import { TextBlocks } from '../../components/TextBlocks';
 import ErrorPage from 'next/error'
 import dynamic from "next/dynamic";
 import { Description } from '../../components/Props/Description';
-
+import { CodeBracketSquareIcon, IdentificationIcon } from '@heroicons/react/24/outline';
 
 const ManifestViewer = dynamic(() => import("../../components/IIIF/ManifestViewer"), {
   ssr: false,
@@ -214,18 +213,45 @@ const Id: NextPage = ({ data, preview }: any) => {
                   <div key={activity._id || activity._key}>
                     <div>{activity.contributionAssignedBy?.[0].assignedActor?.label[locale || ''] || Object.values(activity.contributionAssignedBy?.[0].assignedActor?.label)[1]}</div>
                     <div className='text-xs text-slate-700 dark:text-slate-300 m-0 p-0'>{activity.timespan?.edtf}</div>
+                    <div className='flex flex-col text-xs font-light'>
+                      {activity.usedGeneralTechnique && activity.usedGeneralTechnique.map((t: any) => (
+                        <div>{t.label[locale || '']}</div>
+                      ))}
+                    </div>
                   </div>
                 ))
               }
 
               <Spacer />
 
-              {item[0]?.image?.palette ?
-                <Palette colors={item[0]?.image?.palette} />
-                : null
-              }
+              <div className='flex flex-col gap-1'>
+                {item[0]?.preferredIdentifier ?
+                  <div className='flex gap-1 items-center font-light text-xs text-gray-700 dark:text-gray-300 mb-1'>
+                    <IdentificationIcon className='w-3 h-3' />
+                    <p className='text-xs dark:text-gray-300'>{item[0]?.preferredIdentifier}</p>
 
-              <div className='md:flex gap-2 max-md:hidden'>
+                    <Spacer />
+
+                    <Link
+                      href={`https://api-ub.vercel.app/items/${item[0]?.preferredIdentifier}`}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      <CodeBracketSquareIcon className='w-3 h-3' />
+                      <span className="sr-only">JSON data</span>
+                    </Link>
+                  </div>
+                  : null
+                }
+
+                {item[0]?.image?.palette ?
+                  <Palette colors={item[0]?.image?.palette} />
+                  : null
+                }
+
+              </div>
+
+              <div className='md:flex gap-2 max-md:hidden border-t border-gray-200 dark:border-gray-600 pt-1'>
                 <LocaleSwitch
                   locales={locales || []}
                   locale={locale || ''}
@@ -252,7 +278,7 @@ const Id: NextPage = ({ data, preview }: any) => {
                 {/* <h1 className='text-2xl md:text-4xl lg:text-6xl sm:hidden'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1> */}
 
                 {item[0]?.referredToBy ?
-                  <div className='max-w-prose py-5'>
+                  <div className='max-w-prose py-5 xl:text-2xl'>
                     <Description value={item[0]?.referredToBy} language={locale || ''} />
                   </div>
                   : null
