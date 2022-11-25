@@ -2,7 +2,7 @@ import { RiMapPinLine } from 'react-icons/ri'
 import { defineType } from 'sanity'
 import { defaultFieldsets } from '../../../fieldsets/defaultFieldsets'
 import { coalesceLabel } from '../../../helpers'
-import { accessState, editorialState, label } from '../../properties/datatype'
+import { accessState, definedBy, editorialState, label } from '../../properties/datatype'
 import { definedByGeoJSON, identifiedBy, referredToBy } from '../../properties/object'
 
 export default defineType({
@@ -39,6 +39,7 @@ export default defineType({
     },
 
     referredToBy,
+    definedBy,
     definedByGeoJSON,
   ],
   preview: {

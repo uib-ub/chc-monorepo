@@ -39,7 +39,9 @@ async function getObject(id, url) {
         foaf:homepage ?homepage .
       ?o a ?oClass ;
         dct:identifier ?identifier ;
-        rdfs:label ?oLabel .
+        rdfs:label ?oLabel ;
+        wgs:long ?long ;
+        wgs:lat ?lat .
     } WHERE { 
       GRAPH ?g {
         VALUES ?id {'${id}'}
@@ -65,6 +67,10 @@ async function getObject(id, url) {
           ?o a ?oClass ;
             (dct:title|foaf:name|skos:prefLabel|rdfs:label) ?oLabel ;
             dct:identifier ?identifier .
+            OPTIONAL {
+              ?o wgs:long ?long ;
+                wgs:lat ?lat
+            }
         }
         OPTIONAL { 
           ?uri dct:license / rdfs:label ?licenseLabel .

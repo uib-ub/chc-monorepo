@@ -5,7 +5,7 @@ import { usePreviewSubscription } from '../../lib/sanity'
 import { mainNav, siteSettings, item } from '../../lib/queries/fragments'
 import { publicDocumentTypes } from '../../lib/constants'
 import Head from "next/head";
-import { AppShell, HeaderShell, LocaleSwitch, MarcusIcon, PanesShell, Modal, Menu, Pane } from "ui";
+import { AppShell, HeaderShell, LocaleSwitch, MarcusIcon, PanesShell, Modal, Menu, Palette, Pane, Spacer, Subjects } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../../components/ThemeSwitch';
@@ -198,7 +198,7 @@ const Id: NextPage = ({ data, preview }: any) => {
 
           <main className='md:flex md:flex-grow min-h-screen'>
             <Pane intent='aside'>
-              <div >
+              <div>
                 <SanityImage
                   image={item[0].image}
                   alt={''}
@@ -218,7 +218,12 @@ const Id: NextPage = ({ data, preview }: any) => {
                 ))
               }
 
-              <div className='grow max-md:hidden md:block' aria-hidden>&nbsp;</div>
+              <Spacer />
+
+              {item[0]?.image?.palette ?
+                <Palette colors={item[0]?.image?.palette} />
+                : null
+              }
 
               <div className='md:flex gap-2 max-md:hidden'>
                 <LocaleSwitch
@@ -242,12 +247,6 @@ const Id: NextPage = ({ data, preview }: any) => {
                 </div>
                 : null
               }
-              {/*               <div className='py-b md:hidden'>
-                <SanityImage
-                  image={item[0].image}
-                  alt={''}
-                />
-              </div> */}
 
               <div className='flex flex-wrap justify-center items-center gap-5'>
                 {/* <h1 className='text-2xl md:text-4xl lg:text-6xl sm:hidden'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1> */}
@@ -258,6 +257,12 @@ const Id: NextPage = ({ data, preview }: any) => {
                   </div>
                   : null
                 }
+
+                {item[0]?.subject ?
+                  <Subjects value={item[0]?.subject} language={locale || ''} />
+                  : null
+                }
+
               </div>
             </Pane>
           </main>

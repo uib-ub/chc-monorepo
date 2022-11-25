@@ -29,7 +29,8 @@ export const depicts = {
       to: [
         { type: 'HumanMadeObject' },
         { type: 'Actor' },
-        { type: 'Concept' }
+        { type: 'Concept' },
+        { type: 'Place' }
       ],
     },
   ],
