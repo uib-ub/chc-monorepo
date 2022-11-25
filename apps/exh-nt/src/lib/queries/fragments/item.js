@@ -38,7 +38,11 @@ export const item = groq`
             asset->
           }
         }
-      }
+      },
+      usedGeneralTechnique[]->{
+        _id,
+        label
+      },
     },
     ...,
     hasType[accessState == 'open']-> {

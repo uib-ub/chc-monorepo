@@ -116,6 +116,24 @@ export default function getDocument(item, assetID) {
     ]
     : []
 
+  const technique = item.technique
+    ? [
+      ...item.technique.map((s) => {
+        return {
+          _type: 'Technique',
+          _id: s.identifier,
+          _rev: nanoid(),
+          accessState: 'open',
+          editorialState: 'published',
+          label: {
+            _type: 'LocalizedString',
+            ...s.label
+          },
+        }
+      }),
+    ]
+    : []
+
   const maker = item.maker
     ? [
       ...item.maker.map((s) => {
@@ -221,11 +239,23 @@ export default function getDocument(item, assetID) {
           ...item.timespan
         },
       }),
-    },
+      ...(item.technique && {
+        usedGeneralTechnique: [
+          ...(item.technique && item.technique.map((s) => {
+            return {
+              _type: 'reference',
+              _key: nanoid(),
+              _ref: s.identifier,
+            }
+          }))
+        ]
+      })
+    }
   ]
 
   const doc = {
     subject,
+    technique,
     maker,
     depicts,
     spatial,
