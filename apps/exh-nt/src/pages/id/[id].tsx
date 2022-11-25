@@ -268,8 +268,8 @@ const Id: NextPage = ({ data, preview }: any) => {
 
             <Pane intent='content'>
               {item[0]?.manifest ?
-                <div className='pb-5 min-h-[50vh] max-md:hidden'>
-                  <ManifestViewer id={item[0].manifest} options={{ renderAbout: false, showIIIFBadge: false, showTitle: false, showInformationToggle: false }} />
+                <div className='pb-5 min-h-[65vh] max-md:hidden'>
+                  <ManifestViewer id={item[0].manifest} options={{ canvasHeight: '65vh', renderAbout: false, showIIIFBadge: false, showTitle: false, showInformationToggle: false }} />
                 </div>
                 : null
               }
