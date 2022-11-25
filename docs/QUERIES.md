@@ -20,6 +20,7 @@ ORDER BY DESC(?frequency)
 ## Get all classes, all used properties and a sample value
 
 ```sparql
+PREFIX muna: <http://muna.xyz/model/0.1/>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX ecrm: <http://erlangen-crm.org/current/>
 PREFIX ubbont: <http://data.ub.uib.no/ontology/>
@@ -63,6 +64,7 @@ ORDER BY ?type ?property
 ### Get same as above but as json objects
 
 ```sparql
+PREFIX muna: <http://muna.xyz/model/0.1/>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX ecrm: <http://erlangen-crm.org/current/>
 PREFIX ubbont: <http://data.ub.uib.no/ontology/>
@@ -123,6 +125,7 @@ PREFIX nie: <http://www.semanticdesktop.org/ontologies/nie/#>
 PREFIX locah: <http://data.archiveshub.ac.uk/def/>
 PREFIX lexvo: <http://lexvo.org/ontology#>
 PREFIX cc: <http://creativecommons.org/ns#>
+
 CONSTRUCT {
 ?type ?property ?sample .
 } 
@@ -135,5 +138,14 @@ WHERE {
 }
 GROUP BY ?type ?property
 ORDER BY ?type ?property
+}
+```
+
+### Find all subjects with english language
+
+```sparql
+SELECT ?s WHERE {
+	?s ?p ?localizedString .
+  filter(lang(?localizedString) = 'en')
 }
 ```

@@ -56,7 +56,7 @@ const Browse: NextPage = ({ data, preview }: any) => {
               <MainNav value={mainNav} />
               <div className='p-3 border-t flex gap-2'>
                 <a
-                  href={`${process.env.NEXT_PUBLIC_STUDIO_URL}/studio`}
+                  href={`/studio`}
                   target="_blank"
                   rel="noreferrer"
                   className='text-xs font-semibold'
