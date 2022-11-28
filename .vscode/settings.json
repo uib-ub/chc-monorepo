@@ -4,6 +4,7 @@
     "ui",
     "exhibitions",
     "studios",
-    "api-ub"
+    "api-ub",
+    "url-shortener"
   ]
 }
