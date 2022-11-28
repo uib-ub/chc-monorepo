@@ -4,6 +4,7 @@ export * from "./Select";
 export * from "./components/Modal";
 export * from "./components/LocaleSwitch";
 export * from "./components/Menu";
+export * from "./components/Minimap";
 export * from "./components/Palette";
 export * from "./components/Spacer";
 export * from "./components/Subjects";

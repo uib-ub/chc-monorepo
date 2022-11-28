@@ -4,6 +4,7 @@ export const depicts = groq`
 depicts[]-> {
   _id,
   label,
-  image
+  image,
+  definedBy,
 }
 `

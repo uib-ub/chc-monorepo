@@ -5,7 +5,7 @@ import { usePreviewSubscription } from '../../lib/sanity'
 import { mainNav, siteSettings, item } from '../../lib/queries/fragments'
 import { publicDocumentTypes } from '../../lib/constants'
 import Head from "next/head";
-import { AppShell, HeaderShell, LocaleSwitch, MarcusIcon, PanesShell, Modal, Menu, Palette, Pane, Spacer, Subjects } from "ui";
+import { AppShell, HeaderShell, LocaleSwitch, MarcusIcon, PanesShell, Modal, Menu, Minimap, Palette, Pane, Spacer, Subjects } from "ui";
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
 import { ThemeSwitch } from '../../components/ThemeSwitch';
@@ -205,6 +205,7 @@ const Id: NextPage = ({ data, preview }: any) => {
                 />
               </div>
 
+
               <h1 className='text-3xl md:text-2xl lg:text-3xl'>{item[0].label[locale || ''] || `Missing ${locale} title`}</h1>
 
               {item[0]?.activityStream && item[0].activityStream
@@ -215,7 +216,7 @@ const Id: NextPage = ({ data, preview }: any) => {
                     <div className='text-xs text-slate-700 dark:text-slate-300 m-0 p-0'>{activity.timespan?.edtf}</div>
                     <div className='flex flex-col text-xs font-light'>
                       {activity.usedGeneralTechnique && activity.usedGeneralTechnique.map((t: any) => (
-                        <div>{t.label[locale || '']}</div>
+                        <div key={t._id ?? item._key}>{t.label[locale || '']}</div>
                       ))}
                     </div>
                   </div>
@@ -223,6 +224,7 @@ const Id: NextPage = ({ data, preview }: any) => {
               }
 
               <Spacer />
+              <Minimap label={item[0]?.depicts?.[0].label[locale ?? '']} lnglat={[item[0]?.depicts?.[0].definedBy?.lng, item[0]?.depicts?.[0].definedBy?.lat]} />
 
               <div className='flex flex-col gap-1'>
                 {item[0]?.preferredIdentifier ?
