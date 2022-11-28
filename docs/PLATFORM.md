@@ -5,6 +5,46 @@ Vercel is the preferred deployment platform for `chc-monorepo` because of the CD
 The diagram below shows some issues in the current deployment. Everything in this monorepo is written to be run in the cloud, but will use datasources that is not distributed.
 
 ```mermaid
+C4Context
+    title Context Diagram for UB
+
+Enterprise_Boundary(databases, "UiB-UB databases") {
+    SystemDb_Ext(xata, "Xata.io", "Stores shortened urls and QR codes")
+    SystemDb_Ext(sanity, "Sanity.io", "CMS for web apps")
+    SystemDb(sparql_ub, "sparql.ub.uib.no", "Stores triples for marcus, ska and wab")
+}
+
+Enterprise_Boundary(web, "UiB-UB apis") {
+    System(exh-nt, "Never-ending & temporary", "Next.js app")
+    Component(studio, "/studio")
+    Component(studio_import_tool, "/studio/import-tool")
+    Rel(studio_import_tool, api_ub_items, "FETCH", "https")
+    Rel(studio_import_tool, sanity, "POST", "https")
+    Rel(studio, studio_import_tool, "Mounts")
+    Rel(exh-nt, studio, "Serves")
+}
+
+Enterprise_Boundary(api, "UiB-UB apis") {
+    System(api_ub, "UiB-UB API", "Next.js app")
+    Component(api_ub_links, "/links")
+    Component(api_ub_items, "/items")
+    Component(api_ub_manifest, "/items/{id}/manifest")
+    Component(api_ub_events, "/events")
+    Component(api_ub_actors, "/actors")
+    Rel(api_ub_links, xata, "FETCH", "https")
+    Rel(api_ub, api_ub_links, "Serves")
+    Rel(api_ub, api_ub_events, "Serves")
+    Rel(api_ub, api_ub_actors, "Serves")
+    Rel(api_ub, api_ub_items, "Serves")
+    Rel(api_ub, api_ub_manifest, "Serves")
+    Rel(api_ub_items, sparql_ub, "FETCH", "https")
+    Rel(api_ub_manifest, sparql_ub, "FETCH", "https")
+    Rel(api_ub_events, sparql_ub, "FETCH", "https")
+    Rel(api_ub_actors, sparql_ub, "FETCH", "https")
+}
+```
+
+```mermaid
 C4Deployment
     title Deployment Diagram for UB exhibitions (hybrid CDN and central datastore)
 
