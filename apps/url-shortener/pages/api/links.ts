@@ -16,6 +16,8 @@ export default async function handler(
     const links = await getLinks()
     res.status(200).json(links)
   } else {
-    // Handle any other HTTP method
+    res.status(405).json({
+      error: { message: 'Method not allowed' },
+    })
   }
 }

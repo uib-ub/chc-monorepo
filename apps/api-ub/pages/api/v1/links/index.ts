@@ -34,22 +34,26 @@ export default async function handler(
         break
       }
       case 'POST': {
+        // No response without token
         if (req.query.API_SECRET !== process.env.API_SECRET) {
           return res.status(401).send('You are not authorized!')
         }
+
+        const domain = 'ub-urls.vercel.app'
         // Get the path
         const path = nanoid(8)
         // Set date
         const date = new Date()
         // create QR as SVG
-        const qr = await generateQR(req.body.originalURL)
+        const qr = await generateQR(`https://${domain}/${path}`)
 
         const newLink = {
+          qr,
+          domain,
           ...req.body,
           path,
           created: date,
           modified: date,
-          qr
         }
 
         const links = await createLink(newLink)

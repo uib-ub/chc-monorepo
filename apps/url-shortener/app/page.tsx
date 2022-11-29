@@ -1,3 +1,5 @@
+export const revalidate = 30;
+
 import Image from 'next/image'
 import { ArrowDownIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { XataClient } from '../utils/xata';
@@ -28,21 +30,16 @@ export default async function Home() {
               <div className='flex-grow'>
                 <div className='font-black text-xl'>{link.title || 'No title'}</div>
                 <div>
-                  <del>
-                    {`https://????.??/${link.path}`}
-                  </del>
+                  <a href={`https://${link.domain}/${link.path}`}>
+                    {`https://${link.domain}/${link.path}`}
+                  </a>
                   <ArrowDownIcon className='w-8 h-8' />
-                  {link.originalURL ?
-                    <a href={link.originalURL} target='_blank' rel='noreferrer' className='flex items-center'>
-                      {link.originalURL} <ArrowTopRightOnSquareIcon className='h-4 w-8' />
-                    </a> : <p>Missing data</p>
-                  }
+                  <a href={link.originalURL} target='_blank' rel='noreferrer' className='flex items-center'>
+                    {link.originalURL} <ArrowTopRightOnSquareIcon className='h-4 w-8' />
+                  </a>
                 </div>
-                <p className='text-md mt-10'>Not originalURL not path, as we do not have a short domain.</p>
               </div>
-              {link.qr ?
-                <Image alt='' className='' width={150} height={150} src={`data:image/svg+xml;utf8,${encodeURIComponent(link.qr)}`} /> : null
-              }
+              <Image alt='' className='' width={150} height={150} src={`data:image/svg+xml;utf8,${encodeURIComponent(link.qr)}`} />
             </div>
           ))}
         </div>
