@@ -35,6 +35,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "@next/font": "^13.0.5",
     "class-variance-authority": "^0.3.0",
     "react-portal": "^4.2.2",
     "react-simple-maps": "^3.0.0"

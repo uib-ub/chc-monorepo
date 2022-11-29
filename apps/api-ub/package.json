@@ -20,7 +20,7 @@
     "typescript": "4.8.4"
   },
   "dependencies": {
-    "@next/font": "^13.0.4",
+    "@next/font": "^13.0.5",
     "@popperjs/core": "^2.11.6",
     "@xata.io/client": "^0.21.2",
     "autoprefixer": "^10.4.13",

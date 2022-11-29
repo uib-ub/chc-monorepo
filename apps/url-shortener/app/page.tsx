@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { XataClient } from '../../api-ub/utils/xata'
 import { ArrowDownIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import { XataClient } from '../utils/xata';
 
 const xata = new XataClient();
 
