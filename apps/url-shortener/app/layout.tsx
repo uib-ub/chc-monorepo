@@ -1,4 +1,5 @@
 import './globals.css'
+import 'ui/styles.css'
 import { Merriweather_Sans } from '@next/font/google'
 
 const merriweathersans = Merriweather_Sans({

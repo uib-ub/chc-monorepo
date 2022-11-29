@@ -250,7 +250,6 @@ const Id: NextPage = ({ data, preview }: any) => {
                   <Palette colors={item[0]?.image?.palette} />
                   : null
                 }
-
               </div>
 
               <div className='md:flex gap-2 max-md:hidden border-t border-gray-200 dark:border-gray-600 pt-1'>

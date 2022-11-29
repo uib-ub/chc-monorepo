@@ -33,6 +33,9 @@ export default async function handler(
         res.status(200).json(links)
       }
       case 'POST': {
+        if (req.query.API_SECRET !== process.env.API_SECRET) {
+          return res.status(401).send('You are not authorized!')
+        }
         // Get the path
         const path = nanoid(8)
         // Set date

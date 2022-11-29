@@ -1,6 +1,4 @@
-//const withTM = require("next-transpile-modules")(["ui"]);
-
-const { NEXT_PUBLIC_STUDIO_URL, NODE_ENV } = process.env
+const { NODE_ENV } = process.env
 
 const COMING_SOON_REDIRECT = [{
   source: '/',
