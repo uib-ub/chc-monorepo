@@ -31,6 +31,7 @@ export default async function handler(
       case 'GET': {
         const links = await getLinks()
         res.status(200).json(links)
+        break
       }
       case 'POST': {
         if (req.query.API_SECRET !== process.env.API_SECRET) {
@@ -53,6 +54,7 @@ export default async function handler(
 
         const links = await createLink(newLink)
         res.status(200).json(links)
+        break
       }
       default:
         res.status(405).json({
@@ -60,7 +62,7 @@ export default async function handler(
         })
     }
   } catch (err) {
-    console.error(err)
+    //console.error(err)
     return res.status(500).json({
       error: { message: `An error ocurred, ${err}` },
     })
