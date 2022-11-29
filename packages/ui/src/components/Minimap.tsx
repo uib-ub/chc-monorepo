@@ -24,12 +24,12 @@ export const Minimap = ({ label, lnglat }: MinimapProps) => {
             <Geography
               key={geo.rsmKey}
               geography={geo}
+              fill="#D6D6DA"
+              stroke="#FF5533"
+              strokeWidth={1}
               style={{
                 default: {
-                  fill: "#D6D6DA",
-                  stroke: "#FF5533",
                   outline: "none",
-                  strokeWidth: 1,
                 }
               }}
             />
