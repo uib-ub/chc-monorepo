@@ -9,8 +9,9 @@ This Turborepo uses [npm](https://npmjs.com) as a packages manager. It includes 
 ### Apps
 
 - `exh-nt`: the exhibition _Neverending and temporary_, a [Next.js](https://nextjs.org) app
-- `exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio
 - `api-ub`: the API for the Special collection at the University of Bergen Library, a [Next.js](https://nextjs.org) app
+- `url-shortener`: WIP, a url redirect service with QR, a [Next.js](https://nextjs.org) app
+- ~~`exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio~~
 
 ### Packages
 
