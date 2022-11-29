@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { XataClient } from '../../utils/xata';
+import { XataClient } from '../../../utils/xata';
 
 const xata = new XataClient()
 

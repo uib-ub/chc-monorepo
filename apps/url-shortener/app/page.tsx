@@ -1,7 +1,7 @@
 export const revalidate = 30;
 
 import Image from 'next/image'
-import { ArrowDownIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { XataClient } from '../utils/xata';
 
 const xata = new XataClient();
@@ -20,20 +20,15 @@ export default async function Home() {
           UiB-UB URL shortener
         </h1>
 
-        <p className=''>
-          WIP. Goal is to create an app that makes creating short urls and QR codes easy and cheap. The actual API is in the api-ub repo. This will be the user interface.
-        </p>
-
         <div className='flex flex-col gap-3 mt-10'>
           {data && data.map(link => (
             <div key={link.id} className='flex flex-row gap-5 bg-gray-200 p-3 shadow-md'>
               <div className='flex-grow'>
                 <div className='font-black text-xl'>{link.title || 'No title'}</div>
-                <div>
+                <div className='text-sm'>
                   <a href={`https://${link.domain}/${link.path}`}>
                     {`https://${link.domain}/${link.path}`}
-                  </a>
-                  <ArrowDownIcon className='w-8 h-8' />
+                  </a> <ArrowRightIcon className='inline w-4 h-4' /> <strong>redirects to</strong> <ArrowRightIcon className='inline w-4 h-4' />
                   <a href={link.originalURL} target='_blank' rel='noreferrer' className='flex items-center'>
                     {link.originalURL} <ArrowTopRightOnSquareIcon className='h-4 w-8' />
                   </a>

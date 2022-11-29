@@ -5,7 +5,7 @@ import { Merriweather_Sans } from '@next/font/google'
 const merriweathersans = Merriweather_Sans({
   subsets: ['latin'],
   variable: '--font-merriweathersans',
-  fallback: ['Helvetica', 'ui-sans-serif'],
+  fallback: ['Helvetica', 'ui-sans-serif', 'sans-serif'],
 })
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
