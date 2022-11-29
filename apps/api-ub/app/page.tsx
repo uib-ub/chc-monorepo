@@ -54,6 +54,7 @@ export default function Home() {
             <li><a href="/events/06432057-3664-4600-b1e7-4a752413ddc7" target={'_blank'} rel='noreferrer'>/events&#123;id&#125; (06432057-3664-4600-b1e7-4a752413ddc7 as example)</a></li>
             <li><a href="/actors" target={'_blank'} rel='noreferrer'>/actors</a></li>
             <li><a href="/actors/03f5c6c6-ce72-41b2-9797-034658c7950c" target={'_blank'} rel='noreferrer'>/actors&#123;id&#125; (03f5c6c6-ce72-41b2-9797-034658c7950c as example)</a></li>
+            <li><a href="/linksc" target={'_blank'} rel='noreferrer'>/links</a></li>
           </ul>
         </div>
 

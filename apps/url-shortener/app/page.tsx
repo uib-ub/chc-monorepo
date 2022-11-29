@@ -32,13 +32,17 @@ export default async function Home() {
                     {`https://????.??/${link.path}`}
                   </del>
                   <ArrowDownIcon className='w-8 h-8' />
-                  <a href={link.originalURL} target='_blank' rel='noreferrer' className='flex items-center'>
-                    {link.originalURL} <ArrowTopRightOnSquareIcon className='h-4 w-8' />
-                  </a>
+                  {link.originalURL ?
+                    <a href={link.originalURL} target='_blank' rel='noreferrer' className='flex items-center'>
+                      {link.originalURL} <ArrowTopRightOnSquareIcon className='h-4 w-8' />
+                    </a> : <p>Missing data</p>
+                  }
                 </div>
                 <p className='text-md mt-10'>Not originalURL not path, as we do not have a short domain.</p>
               </div>
-              <Image alt='' className='' width={150} height={150} src={`data:image/svg+xml;utf8,${encodeURIComponent(link.qr)}`} />
+              {link.qr ?
+                <Image alt='' className='' width={150} height={150} src={`data:image/svg+xml;utf8,${encodeURIComponent(link.qr)}`} /> : null
+              }
             </div>
           ))}
         </div>
