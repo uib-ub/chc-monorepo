@@ -35,7 +35,7 @@ export default async function handler(
       }
       case 'POST': {
         // No response without token
-        if (req.query.API_SECRET !== process.env.API_SECRET) {
+        if (req.query.token !== process.env.API_SECRET) {
           return res.status(401).send('You are not authorized!')
         }
 
