@@ -61,12 +61,6 @@ declare const tables: readonly [
         readonly type: "string";
       },
       {
-        readonly name: "redirectType";
-        readonly type: "string";
-        readonly notNull: true;
-        readonly defaultValue: "302";
-      },
-      {
         readonly name: "utmSource";
         readonly type: "string";
       },
@@ -85,6 +79,12 @@ declare const tables: readonly [
       {
         readonly name: "utmContent";
         readonly type: "string";
+      },
+      {
+        readonly name: "redirectType";
+        readonly type: "int";
+        readonly notNull: true;
+        readonly defaultValue: "302";
       }
     ];
   }

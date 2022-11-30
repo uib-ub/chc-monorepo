@@ -4,16 +4,6 @@ import { XataClient } from '../../../utils/xata';
 
 const xata = new XataClient()
 
-const getLink = async (path: string): Promise<string> => {
-  const response: any = await xata.db.links.filter("path", path).getFirst()
-
-  // TODO: do this non-stupid
-  if (!response) {
-    return '404'
-  }
-  return response
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -22,15 +12,15 @@ export default async function handler(
 
   if (req.method === 'GET') {
     try {
-      const link = await getLink(path as string)
+      const response: any = await xata.db.links.filter("path", path as string).getFirst()
 
-      if (link === '404') {
+      if (!response) {
         return res.status(404).json({
           error: { message: `No redirect found` },
         })
       }
 
-      res.status(200).json(link)
+      res.status(200).json(response)
     } catch (err) {
       res.status(500).json({
         error: { message: `An error ocurred, ${err}` },

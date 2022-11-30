@@ -21,17 +21,12 @@ const tables = [
       { name: "tags", type: "multiple" },
       { name: "expiresAt", type: "datetime" },
       { name: "expiresURL", type: "string" },
-      {
-        name: "redirectType",
-        type: "string",
-        notNull: true,
-        defaultValue: "302",
-      },
       { name: "utmSource", type: "string" },
       { name: "utmMedium", type: "string" },
       { name: "utmCampaign", type: "string" },
       { name: "utmTerm", type: "string" },
       { name: "utmContent", type: "string" },
+      { name: "redirectType", type: "int", notNull: true, defaultValue: "302" },
     ],
   },
 ] as const;
