@@ -4,9 +4,9 @@
     "title": "University of Bergen Library - Cultural heritage collections API",
     "version": "1.0",
     "contact": {
-      "name": "API Support",
-      "url": "http://www.example.com/support",
-      "email": "support@example.com"
+      "name": "Digital development at the University of Bergen Library",
+      "url": "https://www.uib.no/en/digitaldevelopment",
+      "email": "tarje.lavik@uib.no"
     }
   },
   "externalDocs": {
@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": "https://api-ub.vercel.app/v1",
+      "url": "https://api-ub.vercel.app",
       "description": "Production server"
     }
   ],
@@ -157,6 +157,126 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/ActorSuccess"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/links/{path}": {
+      "get": {
+        "summary": "A single link redirect with all metadata",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "description": "The path slug to look up.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "4hM3Tchx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LinkSuccess"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/links": {
+      "post": {
+        "summary": "Create a new shortlink",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "description": "API token",
+            "schema": {
+              "type": "string"
+            },
+            "example": "some-key"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "originalURL": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "domain": {
+                    "type": "string"
+                  },
+                  "qr": {
+                    "type": "string"
+                  },
+                  "redirectType": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "title": {
+                    "type": "string",
+                    "format": "nullable"
+                  },
+                  "expiresAt": {
+                    "type": "string",
+                    "format": "nullable"
+                  },
+                  "expiresURL": {
+                    "type": "string",
+                    "format": "nullable"
+                  },
+                  "utmSource": {
+                    "type": "string",
+                    "format": "nullable"
+                  },
+                  "utmMedium": {
+                    "type": "string",
+                    "format": "nullable"
+                  },
+                  "utmCampaign": {
+                    "type": "string",
+                    "format": "nullable"
+                  },
+                  "utmTerm": {
+                    "type": "string",
+                    "format": "nullable"
+                  },
+                  "utmContent": {
+                    "type": "string",
+                    "format": "nullable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LinkSuccess"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -1193,7 +1313,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "https://api-ub.vercel.app/v1/events/352916f6-2db5-4995-bbf8-c5689716051a"
+            "example": "https://api-ub.vercel.app/events/352916f6-2db5-4995-bbf8-c5689716051a"
           },
           "type": {
             "type": "string",
@@ -1260,7 +1380,7 @@
           },
           "id": {
             "type": "string",
-            "example": "https://api-ub.vercel.app/v1/events/352916f6-2db5-4995-bbf8-c5689716051a"
+            "example": "https://api-ub.vercel.app/events/352916f6-2db5-4995-bbf8-c5689716051a"
           },
           "type": {
             "type": "string",
@@ -1369,7 +1489,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "https://api-ub.vercel.app/v1/actors/00325061-3fa1-46c8-960e-9675f413c39e"
+            "example": "https://api-ub.vercel.app/actors/00325061-3fa1-46c8-960e-9675f413c39e"
           },
           "type": {
             "type": "array",
@@ -1417,7 +1537,7 @@
           },
           "id": {
             "type": "string",
-            "example": "https://api-ub.vercel.app/v1/actors/07dd8798-d0c5-432b-8267-99913f654165"
+            "example": "https://api-ub.vercel.app/actors/07dd8798-d0c5-432b-8267-99913f654165"
           },
           "type": {
             "type": "string",
@@ -1517,6 +1637,75 @@
             "example": "Catharine Hermine Kølle"
           }
         }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "created": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "modified": {
+            "type": "string"
+          },
+          "originalURL": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "qr": {
+            "type": "string"
+          },
+          "redirectType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string"
+          },
+          "views": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tags": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "expiresURL": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "utmSource": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "utmMedium": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "utmCampaign": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "utmTerm": {
+            "type": "string",
+            "format": "nullable"
+          },
+          "utmContent": {
+            "type": "string",
+            "format": "nullable"
+          }
+        }
       }
     },
     "responses": {
@@ -1586,6 +1775,16 @@
           "application/ld+json": {
             "schema": {
               "$ref": "#/components/schemas/Actor"
+            }
+          }
+        }
+      },
+      "LinkSuccess": {
+        "description": "Request for link was successful",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Link"
             }
           }
         }
