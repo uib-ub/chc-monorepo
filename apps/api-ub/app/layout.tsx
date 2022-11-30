@@ -1,9 +1,8 @@
-'use client';
 import '../styles/globals.css'
-import { ThemeProvider } from 'next-themes';
 import Link from 'next/link';
 import { ThemeSwitch } from './ThemeSwitch';
 import { Merriweather_Sans } from '@next/font/google'
+import ThemeProvider from './ThemeProvider';
 
 const merriweathersans = Merriweather_Sans({
   subsets: ['latin'],
@@ -20,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <ThemeProvider attribute="class">
+        <ThemeProvider>
           <div className='w-full flex gap-5 px-3 pt-3 pb-2 border-b items-center fixed backdrop-blur-md'>
             <header>
               <Link href="/">
@@ -37,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <ThemeSwitch />
           </div>
+
           {children}
         </ThemeProvider>
       </body>
