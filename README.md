@@ -1,25 +1,28 @@
 # Cultural Heritage Collections @ UiB-UB
 
-This is a monorepo containing the web exhibitions published by UiB-UB.
+This is a monorepo containing the web exhibitions, API published by UiB-UB.
 
 ## What's inside?
 
-This Turborepo uses [npm](https://npmjs.com) as a packages manager. It includes the following packages/apps:
+This Turborepo uses [npm](https://npmjs.com) as a packages manager. It uses Next.js v13, React v18 and Sanity Studio v3. 
+
+It includes the following packages/apps:
 
 ### Apps
 
-- `exh-nt`: the exhibition _Neverending and temporary_, a [Next.js](https://nextjs.org) app
+- `exh-nt`: the exhibition _Never-ending and temporary_, a [Next.js](https://nextjs.org) app
 - `api-ub`: the API for the Special collection at the University of Bergen Library, a [Next.js](https://nextjs.org) app
 - `url-shortener`: WIP, a url redirect service with QR, a [Next.js](https://nextjs.org) app
-- ~~`exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio~~
+- ~~`exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio~~ DEPRECATED.
 
 ### Packages
 
-- ui: core React components
-- tsconfig: shared tsconfig.jsons used throughout the monorepo
-- eslint-preset-custom: ESLint preset
+- `eslint-preset-custom`: ESLint preset
+- `tailwind-config`: shared tailwindcss config
+- `tsconfig`: shared tsconfig.jsons used throughout the monorepo
+- `ui`: core React components
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Each package/app is aims to react 100% [TypeScript](https://www.typescriptlang.org/).
 
 ### Utilities
 
@@ -41,7 +44,7 @@ cd choc-monorepo
 To build all apps and packages, run the following command:
 
 ```
-yarn build
+npm build
 ```
 
 ### Develop
@@ -49,7 +52,7 @@ yarn build
 To develop all apps and packages, run the following command:
 
 ```
-yarn dev
+npm dev
 ```
 
 ### Useful commands
