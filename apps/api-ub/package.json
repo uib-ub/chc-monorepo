@@ -33,7 +33,7 @@
     "lodash": "^4.17.21",
     "mobx": "^6.6.2",
     "nanoid": "^4.0.0",
-    "next": "^13.0.4",
+    "next": "^13.0.5",
     "next-http-proxy-middleware": "^1.2.5",
     "next-swagger-doc": "^0.3.6",
     "next-themes": "^0.2.1",
