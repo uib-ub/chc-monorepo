@@ -10,7 +10,10 @@ export const config = {
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (req: NextApiRequest, res: NextApiResponse) => (
-  httpProxyMiddleware(req, res, {
+
+  res.status(401).send('Fail')
+
+  /* httpProxyMiddleware(req, res, {
     // You can use the `http-proxy` option
     target: 'https://cdn.sanity.io',
     changeOrigin: true,
@@ -19,6 +22,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => (
       patternStr: '^/api/image/',
       replaceStr: '/'
     }],
-  })
+  }) */
 );
 
