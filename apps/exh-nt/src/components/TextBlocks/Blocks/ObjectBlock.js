@@ -1,10 +1,11 @@
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { GetImage } from '../../../../../../apps/exh-nt/src/lib/sanity.server'
 import { Link } from '../../../components/Link'
 import { TextBlocks } from '..'
 import Source from './shared/Source'
 import { useRouter } from 'next/router'
+import { GetImage } from '../../../lib/sanity.server'
+import SanityImage from '../../SanityImage'
 
 /* const MiradorWithNoSSR = dynamic(() => import('../../IIIF/MiradorViewer'), {
   ssr: false,
@@ -41,13 +42,13 @@ const ObjectBlock = (props) => {
     return null
   }
 
-  const { _key, label, description, item, source, variant } = props
+  const { _key, label, description, items, source, variant } = props
   const height = 'clamp(40em, 50vh, 20em)'
 
   if (variant === 'static-individual-captions') {
     return (
       <div key={_key} className='flex gap-5 align-baseline justify-evenly flex-wrap'>
-        {item.map((i) => (
+        {items.map((i) => (
           <div
             key={i._key}
             as='figure'
@@ -98,16 +99,16 @@ const ObjectBlock = (props) => {
   if (variant === 'static-compare') {
     return (
       <figure
-        key={item._key}
+        key={items._key}
         variant={variant}
         w='full'
       >
-        {item?.length === 0 && <div className='flex'>Missing figures or not exactly two figures!</div>}
+        {items?.length === 0 && <div className='flex'>Missing figures or not exactly two figures!</div>}
 
-        {item.length === 2 && (
+        {items.length === 2 && (
           <div className='relative'>
             <div className='flex align-baseline justify-evenly'>
-              {item.map((i) => (
+              {items.map((i) => (
                 <figure key={i._key} className='relative max-h-70vh'>
                   {i.image && (
                     <Image
@@ -135,23 +136,24 @@ const ObjectBlock = (props) => {
   }
 
   return (
-    <figure key={item._key}>
-      {item?.length === 0 && <div className='flex'>Missing figure</div>}
+    <figure key={_key}>
+      {items?.length === 0 && <div className='flex'>Missing figure</div>}
 
-      {item && (
+      {items && (
         <div className='relative'>
           {/* {variant === 'mirador' && (
             <MiradorWithNoSSR gridArea="image" variant="basic" manifests={item} height={height} />
           )} */}
 
           {variant === 'static' && (
-            <div className='flex flex-wrap gap-5align-baseline justify-evenly'>
-              {item.length > 1 && item.map((i) => (
+            <div className='flex flex-wrap gap-5 align-baseline justify-evenly'>
+
+              {items.length > 1 && items.map((i) => (
                 <div key={i._key} className='flex'>
                   {!i.internalRef && (
-                    <Image
+                    <SanityImage
                       key={i._key}
-                      {...GetImage(i.image)}
+                      image={i.image}
                       sizes='80vh'
                       style={{ objectFit: 'contain', maxWidth: 'auto', maxHeight: '80vh' }}
                       alt={i.image?.alt?.[locale ?? defaultLocale] ?? ''}
@@ -163,9 +165,9 @@ const ObjectBlock = (props) => {
                       ariaLabelledBy={i._key}
                       href={`/id/${i.internalRef._ref}`}
                     >
-                      <Image
+                      <SanityImage
                         key={i._key}
-                        {...GetImage(i.image)}
+                        image={i.image}
                         sizes='80vh'
                         style={{ objectFit: 'contain', maxWidth: 'auto', maxHeight: '80vh' }}
                         alt={i.image?.alt?.[locale ?? defaultLocale] ?? ''}
@@ -175,12 +177,12 @@ const ObjectBlock = (props) => {
                 </div>
               ))}
 
-              {item.length === 1 && item.map((i) => (
+              {items.length === 1 && items.map((i) => (
                 <>
                   {!i.internalRef && (
-                    <Image
+                    <SanityImage
                       key={i._key}
-                      {...GetImage(i.image)}
+                      image={i.image}
                       sizes='80vh'
                       style={{ objectFit: 'contain', maxWidth: 'auto', maxHeight: '80vh' }}
                       alt={i.image?.alt?.[locale ?? defaultLocale] ?? ''}
@@ -192,11 +194,11 @@ const ObjectBlock = (props) => {
                       ariaLabelledBy={i._key}
                       href={`/id/${i.internalRef._ref}`}
                     >
-                      <Image
+                      <SanityImage
                         key={i._key}
-                        {...GetImage(i.image)}
-                        sizes='80vh'
-                        style={{ objectFit: 'contain', maxWidth: 'auto', maxHeight: '80vh' }}
+                        image={i.image}
+                        className='w-screen'
+                        style={{ objectFit: 'contain' }}
                         alt={i.image?.alt?.[locale ?? defaultLocale] ?? ''}
                       />
                     </Link>
@@ -209,7 +211,7 @@ const ObjectBlock = (props) => {
       )}
 
       <FigCaption label={label} description={description}>
-        {item && item.filter(i => i.objectDescription).map((item, i) => (
+        {items && items.filter(i => i.objectDescription).map((item, i) => (
           <div key={item.objectDescription?._id}>
             <p>
               <i>

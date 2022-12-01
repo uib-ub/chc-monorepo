@@ -13,7 +13,7 @@ export const Menu: React.FC<MenuProps> = ({ children, className }) => {
     strategy: 'fixed',
     placement: 'right-start',
     modifiers: [
-      { name: 'offset', options: { offset: [0, 10] } },
+      { name: 'offset', options: { offset: [0, 25] } },
       {
         name: 'sameWidth',
         enabled: true,
