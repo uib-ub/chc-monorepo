@@ -1,6 +1,6 @@
 # Cultural Heritage Collections @ UiB-UB
 
-This is a monorepo containing the web exhibitions, API published by UiB-UB.
+This is a monorepo containing the web exhibitions, API, a url-shortener and related packages published by UiB-UB.
 
 ## What's inside?
 
@@ -10,7 +10,7 @@ It includes the following packages/apps:
 
 ### Apps
 
-- `exh-nt`: the exhibition _Never-ending and temporary_, a [Next.js](https://nextjs.org) app
+- `exh-nt`: the exhibition _Never-ending and temporary_, a [Next.js](https://nextjs.org) app and a [Sanity](https://sanity.io) Studio.
 - `api-ub`: the API for the Special collection at the University of Bergen Library, a [Next.js](https://nextjs.org) app
 - `url-shortener`: WIP, a url redirect service with QR, a [Next.js](https://nextjs.org) app
 - ~~`exh-nt-studio`: the headless CMS for _Neverending and temporary_, a [Sanity](https://sanity.io) Studio~~ DEPRECATED.
