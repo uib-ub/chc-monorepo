@@ -98,7 +98,7 @@ const Page: NextPage = ({ data, preview }: any) => {
       <AppShell>
 
         <PanesShell>
-          <Pane intent='sidebar'>
+          <Pane intent='sidebar' padded={false}>
             <HeaderShell className='order-3'>
               <Link href={`/`}>
                 {label[locale || '']}
@@ -135,8 +135,8 @@ const Page: NextPage = ({ data, preview }: any) => {
           </Pane>
 
 
-          <Pane intent='content' padding='none'>
-            <div className='flex flex-col self-center'>
+          <Pane intent='content' padded={false}>
+            <div className='flex flex-col'>
               <h1 className='text-4xl'>
                 {slug?.label}
               </h1>

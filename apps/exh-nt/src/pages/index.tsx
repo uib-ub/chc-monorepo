@@ -44,7 +44,7 @@ const Home: NextPage = ({ data, preview }: any) => {
       <AppShell>
 
         <PanesShell>
-          <Pane intent='sidebar'>
+          <Pane intent='sidebar' padded={false}>
             <HeaderShell className='order-3'>
               <Link href={`/`}>
                 {label[locale || '']}
