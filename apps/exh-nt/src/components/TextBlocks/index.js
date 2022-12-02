@@ -32,7 +32,7 @@ const myPortableTextComponents = () => {
 
     block: {
       normal: ({ children }) => (
-        <p>
+        <p className='mb-3 font-light max-w-prose'>
           {children}
         </p>
       ),

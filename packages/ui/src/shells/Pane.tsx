@@ -20,8 +20,6 @@ export const paneStyles = cva([], {
         "bg-gray-200",
         "dark:bg-[#35393a]",
       ],
-      // **or**
-      // primary: "bg-blue-500 text-white border-transparent hover:bg-blue-600",
       aside: [
         "max-md:flex",
         "md:flex",
@@ -34,7 +32,7 @@ export const paneStyles = cva([], {
         "md:h-screen",
         "md:sticky",
         "md:top-0",
-        "md:w-72",
+        "w-64",
         "md:shrink",
         "md:flex-grow-0",
         "max-sm:p-5",
@@ -46,16 +44,22 @@ export const paneStyles = cva([], {
         "flex",
         "flex-col",
         "flex-grow",
-        "p-3",
-        "md:p-5",
-        "md:pb-2",
         "bg-white",
         "dark:bg-[#1a1d1e]"
       ]
     },
+    padded: {
+      true: [
+        "p-3",
+        "md:p-5",
+        "md:pb-2",
+      ],
+      false: [],
+    },
   },
   defaultVariants: {
     intent: "content",
+    padded: true
   },
 });
 
@@ -66,9 +70,9 @@ type PaneProps = {
 
 interface Props extends PaneProps, VariantProps<typeof paneStyles> { }
 
-export const Pane = ({ intent, children }: Props) => {
+export const Pane = ({ intent, padded, children }: Props) => {
   return (
-    <div className={paneStyles({ intent })}>
+    <div className={paneStyles({ intent, padded })}>
       {children}
     </div>
   );
