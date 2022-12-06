@@ -26,13 +26,17 @@ const i18nConfig = {
   base: "no",
   languages: [
     {
+      "id": "no",
+      "title": "Bokmål"
+    },
+    {
       "id": "en",
       "title": "English"
     },
     {
-      "id": "no",
-      "title": "Bokmål"
-    }
+      "id": "ar",
+      "title": "Arabic"
+    },
   ]
 }
 
@@ -67,7 +71,7 @@ export default defineConfig({
       supportedLanguages: [
         { id: 'no', title: 'Norwegian' },
         { id: 'en', title: 'English' },
-        { id: 'arb', title: 'Arabic' },
+        { id: 'ar', title: 'Arabic' },
       ],
       // Select Norwegian (Bokmål) by default
       defaultLanguages: ['no'],
