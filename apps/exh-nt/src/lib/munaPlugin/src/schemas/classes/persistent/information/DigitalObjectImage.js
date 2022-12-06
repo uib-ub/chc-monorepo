@@ -17,17 +17,11 @@ export default defineType({
   },
   fields: [
     {
-      name: 'caption',
-      title: 'Bildetekst',
-      titleEN: 'Caption',
-      type: 'LocalizedString',
-    },
-    {
       name: 'alt',
       title: 'Alternative tekst',
       titleEN: 'Alternative text',
       description: 'Important for SEO and accessiblity.',
-      type: 'LocalizedString',
+      type: 'string',
       validation: (Rule) => Rule.warning('You should to fill out the alternative text.'),
       options: {
         isHighlighted: true,
@@ -36,8 +30,8 @@ export default defineType({
   ],
   preview: {
     select: {
+      title: 'alt',
       imageUrl: 'asset.url',
-      title: 'caption',
     },
   },
 })
