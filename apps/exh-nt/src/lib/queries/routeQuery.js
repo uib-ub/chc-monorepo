@@ -5,6 +5,7 @@ import { mainNav } from './fragments'
 const ROUTE_CONTENT = groq`
   ...,
   "excerpt": pt::text(excerpt),
+  "headings": body[length(style) == 2 && string::startsWith(style, "h")],
   creator[] {
     ...,
     assignedActor-> {
