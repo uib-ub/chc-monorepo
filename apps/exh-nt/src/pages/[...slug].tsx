@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { usePreviewSubscription } from '../lib/sanity'
-import { filterDataToSingleItem, getOpenGraphImages } from '../lib/functions'
-import { getClient } from '../lib/sanity.server'
+import { filterDataToSingleItem } from '../lib/functions'
+import { getClient, GetImage } from '../lib/sanity.server'
 import { groq } from 'next-sanity'
 import { routeQuery } from '../lib/queries/routeQuery'
 import { TextBlocks } from '../components/TextBlocks'
@@ -10,6 +10,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { AppShell, HeaderShell, MarcusIcon, Menu, Modal, Pane, PanesShell } from 'ui'
 import Link from 'next/link';
 import { MainNav } from '../components/Header/MainNav'
+import Image from 'next/image'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const routesQuery = groq`
@@ -136,12 +137,38 @@ const Page: NextPage = ({ data, preview }: any) => {
 
 
           <Pane intent='content' padded={false}>
-            <div className='flex flex-col'>
-              <h1 className='text-4xl'>
-                {slug?.label}
-              </h1>
+            <div className='flex flex-col flex-grow'>
+              <div className='grid grid-template-columns-1 w-full max-h-screen'>
+                <div
+                  className='z-10 text-center font-light  text-neutral-900'
+                  style={{ gridArea: '1 / 1 / 2 / 2', textShadow: '1px 2px 1px #bbb' }}
+                >
+                  <h1
+                    className='text-6xl mt-40'
+                  >
+                    {slug?.label}
+                  </h1>
+                  <div
+                    className='mt-10 text-2xl'
+                  >
+                    by {' '}
+                    {slug?.creator[0].assignedActor.label[locale || '']}
+                  </div>
+                </div>
 
-              {linguisticDocumentBody && <TextBlocks value={linguisticDocumentBody} />}
+                {slug?.image && (
+                  <Image
+                    src={''}
+                    {...GetImage(slug.image) as Record<string, unknown>}
+                    style={{ gridArea: '1 / 1 / 2 / 2' }}
+                    className='object-cover w-full max-h-screen'
+                    alt={slug?.image?.alt ?? ''} />
+                )}
+              </div>
+
+              <div className='flex flex-col mx-5 my-5 self-center max-w-1/4'>
+                {linguisticDocumentBody && <TextBlocks value={linguisticDocumentBody} />}
+              </div>
             </div>
 
           </Pane>

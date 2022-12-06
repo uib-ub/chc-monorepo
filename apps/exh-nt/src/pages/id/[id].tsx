@@ -224,7 +224,10 @@ const Id: NextPage = ({ data, preview }: any) => {
               }
 
               <Spacer />
-              <Minimap label={item[0]?.depicts?.[0].label[locale ?? '']} lnglat={[item[0]?.depicts?.[0].definedBy?.lng, item[0]?.depicts?.[0].definedBy?.lat]} />
+
+              {item[0]?.depicts ? (
+                <Minimap label={item[0]?.depicts?.[0].label[locale ?? '']} lnglat={[item[0]?.depicts?.[0].definedBy?.lng, item[0]?.depicts?.[0].definedBy?.lat]} />
+              ) : null}
 
               <div className='flex flex-col gap-1'>
                 {item[0]?.preferredIdentifier ?

@@ -5,6 +5,17 @@ import { mainNav } from './fragments'
 const ROUTE_CONTENT = groq`
   ...,
   "excerpt": pt::text(excerpt),
+  creator[] {
+    ...,
+    assignedActor-> {
+      _id,
+      label
+    },
+    assignedRole-> {
+      _id,
+      label
+    }
+  },
   body[] {
     ...,
     _type == 'reference' => @->{
