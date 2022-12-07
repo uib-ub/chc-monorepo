@@ -1,6 +1,5 @@
 import { createClient } from 'next-sanity'
-import { config } from './config'
-import { useNextSanityImage } from 'next-sanity-image'
+import { config } from './sanity.config'
 
 // Set up the client for fetching data in the getProps page functions
 export const sanityClient = createClient(config)
@@ -14,6 +13,3 @@ export const previewClient = createClient({
 
 // Helper function for easily switching between normal client and preview client
 export const getClient = (usePreview) => (usePreview ? previewClient : sanityClient)
-
-// Helper function for using Sanity image assets with next/image
-export const GetImage = (image) => useNextSanityImage(config, image)

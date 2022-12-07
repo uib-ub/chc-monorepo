@@ -1,10 +1,7 @@
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
 import { Link } from '../../../components/Link'
 import { TextBlocks } from '..'
 import Source from './shared/Source'
 import { useRouter } from 'next/router'
-import { GetImage } from '../../../lib/sanity.server'
 import SanityImage from '../../SanityImage'
 
 /* const MiradorWithNoSSR = dynamic(() => import('../../IIIF/MiradorViewer'), {
@@ -55,10 +52,10 @@ const ObjectBlock = (props) => {
             flex={{ base: '0 0 100%', md: '0 0 30%' }}
           >
             {!i.internalRef && (
-              <Image
-                {...GetImage(i.image)}
-                objectFit={'contain'}
-                alt={i.image?.alt?.[locale ?? defaultLocale] ?? ''}
+              <SanityImage
+                key={i._key}
+                image={i.image}
+                alt={i.image?.alt?.[locale ?? defaultLocale]}
               />
             )}
             {i.internalRef && (
@@ -67,11 +64,10 @@ const ObjectBlock = (props) => {
                 ariaLabelledBy={i._key}
                 href={`/id/${i.internalRef._ref}`}
               >
-                <Image
-                  id={i._key}
-                  {...GetImage(i.image)}
-                  objectFit={'contain'}
-                  alt={i.image?.alt?.[locale ?? defaultLocale] ?? ''}
+                <SanityImage
+                  key={i._key}
+                  image={i.image}
+                  alt={i.image?.alt?.[locale ?? defaultLocale]}
                 />
               </Link>
             )}
@@ -111,11 +107,10 @@ const ObjectBlock = (props) => {
               {items.map((i) => (
                 <figure key={i._key} className='relative max-h-70vh'>
                   {i.image && (
-                    <Image
+                    <SanityImage
                       key={i._key}
-                      {...GetImage(i.image)}
-                      objectFit={'contain'}
-                      alt={i.image?.alt?.[locale ?? defaultLocale] ?? ''}
+                      image={i.image}
+                      alt={i.image?.alt?.[locale ?? defaultLocale]}
                     />
                   )}
                 </figure>

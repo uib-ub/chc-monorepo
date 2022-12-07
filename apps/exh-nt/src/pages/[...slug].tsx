@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { usePreviewSubscription } from '../lib/sanity'
 import { filterDataToSingleItem } from '../lib/functions'
-import { getClient, GetImage } from '../lib/sanity.server'
+import { getClient } from '../lib/sanity.server'
 import { groq } from 'next-sanity'
 import { routeQuery } from '../lib/queries/routeQuery'
 import { TextBlocks } from '../components/TextBlocks'
@@ -10,7 +10,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { AppShell, HeaderShell, MarcusIcon, Menu, Modal, Pane, PanesShell } from 'ui'
 import Link from 'next/link';
 import { MainNav } from '../components/Header/MainNav'
-import Image from 'next/image'
+import SanityImage from '../components/SanityImage'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const routesQuery = groq`
@@ -108,27 +108,21 @@ const Page: NextPage = ({ data, preview }: any) => {
 
             <Menu className='order-1' aria-label='primary navigation'>
               <MainNav value={mainNav} />
-              <div className='p-3 border-t flex gap-2'>
-                <Link
-                  href={`/studio`}
-                  locale={false}
-                  target="_blank"
-                  rel="noreferrer"
-                  className='text-xs font-semibold'
-                >
-                  Studio
-                </Link>
-                <Modal buttonLabel="Data" title="Data">
-                  <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
-                    {JSON.stringify(data, null, 2)}
-                  </pre>
-                </Modal>
-              </div>
             </Menu>
 
             <div className='grow order-2' aria-hidden>&nbsp;</div>
 
             <nav className='order-4' aria-label='secondary'>
+              {process.env.NODE_ENV === 'development' && (
+                <div className='text-center'>
+                  <Modal buttonLabel="Data" title="Data">
+                    <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
+                      {JSON.stringify(data, null, 2)}
+                    </pre>
+                  </Modal>
+                </div>
+              )}
+
               <a href="https://marcus.uib.no" aria-label='Go to Marcus'>
                 <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
               </a>
@@ -137,10 +131,10 @@ const Page: NextPage = ({ data, preview }: any) => {
 
 
           <Pane intent='content' padded={false}>
-            <div className='flex flex-col flex-grow'>
+            <div className='flex flex-col'>
               <div className='grid grid-template-columns-1 w-full max-h-screen'>
                 <div
-                  className='z-10 text-center font-light  text-neutral-900'
+                  className='z-10 text-center font-light text-neutral-900'
                   style={{ gridArea: '1 / 1 / 2 / 2', textShadow: '1px 2px 1px #bbb' }}
                 >
                   <h1
@@ -151,15 +145,18 @@ const Page: NextPage = ({ data, preview }: any) => {
                   <div
                     className='mt-10 text-2xl'
                   >
-                    by {' '}
-                    {slug?.creator[0].assignedActor.label[locale || '']}
+                    {slug?.creator && (
+                      <>
+                        by {' '}
+                        {slug?.creator[0].assignedActor.label[locale || '']}
+                      </>
+                    )}
                   </div>
                 </div>
 
                 {slug?.image && (
-                  <Image
-                    src={''}
-                    {...GetImage(slug.image) as Record<string, unknown>}
+                  <SanityImage
+                    image={(slug.image)}
                     style={{ gridArea: '1 / 1 / 2 / 2' }}
                     className='object-cover w-full max-h-screen'
                     alt={slug?.image?.alt ?? ''} />

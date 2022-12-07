@@ -17,6 +17,12 @@ const ROUTE_CONTENT = groq`
       label
     }
   },
+  image {
+    asset->{
+      ...,
+      metadata
+    }
+  },
   body[] {
     ...,
     _type == 'reference' => @->{
@@ -28,7 +34,12 @@ const ROUTE_CONTENT = groq`
       memberOf[]->{
         _id,
         label,
-        image
+        image {
+					asset->{
+						...,
+						metadata
+					}
+				}
       }
     },
     _type == 'EventSection' && disabled != true => {
@@ -41,7 +52,12 @@ const ROUTE_CONTENT = groq`
         referredToBy[] {
           ...
         },
-        image,
+        image {
+					asset->{
+						...,
+						metadata
+					}
+				},
       }
     },
     _type == 'ObjectBlock' => @{
@@ -58,8 +74,18 @@ const ROUTE_CONTENT = groq`
           },
         },
         "image": coalesce(
-          image,
-          internalRef->.image,
+          image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
+          internalRef->.image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
         ),
         "manifest": coalesce(
           internalRef->.subjectOfManifest, 
@@ -82,8 +108,18 @@ const ROUTE_CONTENT = groq`
           },
         },
         "image": coalesce(
-          image,
-          internalRef->.image,
+          image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
+          internalRef->.image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
         ),
         "manifest": coalesce(
           internalRef->.subjectOfManifest, 
@@ -122,8 +158,18 @@ const ROUTE_CONTENT = groq`
           },
         },
         "image": coalesce(
-          image,
-          internalRef->.image,
+          image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
+          internalRef->.image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
         ),
         "manifest": coalesce(
           internalRef->.subjectOfManifest, 

@@ -251,6 +251,10 @@ export const structure = (S, context) =>
                   S.documentTypeList('Route')
                     .title('Stier')
                 ),
+              S.listItem()
+                .title('Innholdsfortegnelse')
+                .icon(GiSettingsKnobs)
+                .child(S.editor().schemaType('ToC').documentId('mainNav')),
             ]),
         ),
       S.listItem()

@@ -15,7 +15,6 @@ export const paneStyles = cva([], {
         "top-0",
         "z-20",
         "p-2",
-        "pr-3",
         "max-md:pt-3",
         "md:pt-5",
         "border-r",

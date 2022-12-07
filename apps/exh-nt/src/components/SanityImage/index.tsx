@@ -3,10 +3,11 @@ import { sanityClient } from "../../lib/sanity.server";
 import { useNextSanityImage } from "next-sanity-image";
 
 interface SanityImage {
-  _type: "image";
+  _type: string;
   asset: {
     _ref: string;
     _type: "reference";
+    metadata: any
   };
   caption: string;
 }
@@ -19,9 +20,10 @@ type SanityImageProps = {
 
 export default function SanityImage({
   image,
-  alt,
+  alt = '',
   placeholder = "blur",
-  ...props
+  style,
+  className
 }: SanityImageProps) {
   const imageProps = useNextSanityImage(sanityClient, image);
 
@@ -29,9 +31,11 @@ export default function SanityImage({
   return (
     <Image
       {...imageProps}
-      {...props}
-      alt={alt ?? image?.caption}
+      style={style}
+      className={className}
+      alt={alt}
       placeholder={placeholder}
+      blurDataURL={image.asset.metadata.lqip}
     />
   );
 }

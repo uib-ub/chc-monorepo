@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import { GetImage } from '../../../../../../../apps/exh-nt/src/lib/sanity.server'
+import SanityImage from '../../../SanityImage'
 
 export default function IllustrationWithCaption(props) {
   const bg = useColorModeValue('blackAlpha.100', 'black')
@@ -15,11 +14,10 @@ export default function IllustrationWithCaption(props) {
       {image ? (
         <div className='relative min-h-50vh'>
           {image && (
-            <Image
-              alt=""
-              {...GetImage(image)}
-              layout="fill"
-              objectFit={'contain'}
+            <SanityImage
+              key={i._key}
+              image={i.image}
+              alt={i.image?.alt?.[locale ?? defaultLocale]}
             />
           )}
         </div>

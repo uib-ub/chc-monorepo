@@ -56,12 +56,15 @@ export const Modal: React.FC<ModalProps> = ({ buttonLabel, title, description, c
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-5/6 transform overflow-hidden rounded-xl bg-white dark:bg-gray-900 p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 "
-                  >
-                    {title}
-                  </Dialog.Title>
+                  <div className='flex justify-between gap-5 mb-3'>
+                    <Dialog.Title
+                      as="h3"
+                      className="text-lg font-medium leading-6"
+                    >
+                      {title}
+                    </Dialog.Title>
+                    <button className='px-3 py-1 border-2' onClick={closeModal}>Close</button>
+                  </div>
                   {description ? (
                     <Dialog.Description
                       className="text-md font-medium leading-6 "
