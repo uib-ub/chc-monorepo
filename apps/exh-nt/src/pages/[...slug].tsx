@@ -7,7 +7,7 @@ import { routeQuery } from '../lib/queries/routeQuery'
 import { TextBlocks } from '../components/TextBlocks'
 import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { AppShell, HeaderShell, MarcusIcon, Menu, Modal, Pane, PanesShell } from 'ui'
+import { AppShell, HeaderShell, Hero, MarcusIcon, MegaHero, Menu, Modal, Pane, PanesShell } from 'ui'
 import Link from 'next/link';
 import { MainNav } from '../components/Header/MainNav'
 import SanityImage from '../components/SanityImage'
@@ -130,43 +130,22 @@ const Page: NextPage = ({ data, preview }: any) => {
           </Pane>
 
 
-          <Pane intent='content' padded={false}>
-            <div className='flex flex-col'>
-              <div className='grid grid-template-columns-1 w-full max-h-screen'>
-                <div
-                  className='z-10 text-center font-light text-neutral-900'
-                  style={{ gridArea: '1 / 1 / 2 / 2', textShadow: '1px 2px 1px #bbb' }}
-                >
-                  <h1
-                    className='text-6xl mt-40'
-                  >
-                    {slug?.label}
-                  </h1>
-                  <div
-                    className='mt-10 text-2xl'
-                  >
-                    {slug?.creator && (
-                      <>
-                        by {' '}
-                        {slug?.creator[0].assignedActor.label[locale || '']}
-                      </>
-                    )}
-                  </div>
-                </div>
+          <Pane intent='content'>
+            <Hero
+              label={slug?.label}
+              image={slug?.image ? <SanityImage
+                image={slug?.image}
+                type='fill'
+                alt={slug?.image?.alt ?? ''}
+              /> : null}
+              creators={slug?.creator}
+              locale={locale || ''}
+            />
 
-                {slug?.image && (
-                  <SanityImage
-                    image={(slug.image)}
-                    style={{ gridArea: '1 / 1 / 2 / 2' }}
-                    className='object-cover w-full max-h-screen'
-                    alt={slug?.image?.alt ?? ''} />
-                )}
-              </div>
-
-              <div className='flex flex-col mx-5 my-5 self-center max-w-1/4'>
-                {linguisticDocumentBody && <TextBlocks value={linguisticDocumentBody} />}
-              </div>
+            <div className='flex flex-col mx-5 my-5 self-center max-w-prose'>
+              {linguisticDocumentBody && <TextBlocks value={linguisticDocumentBody} />}
             </div>
+
 
           </Pane>
         </PanesShell>

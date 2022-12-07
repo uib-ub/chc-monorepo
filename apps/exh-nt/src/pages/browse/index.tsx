@@ -54,27 +54,20 @@ const Browse: NextPage = ({ data, preview }: any) => {
 
             <Menu className='order-1' aria-label='primary navigation'>
               <MainNav value={mainNav} />
-              <div className='p-3 border-t flex gap-2'>
-                <Link
-                  href={`/studio`}
-                  locale={false}
-                  target="_blank"
-                  rel="noreferrer"
-                  className='text-xs font-semibold'
-                >
-                  Studio
-                </Link>
-                <Modal buttonLabel="Data" title="Data">
-                  <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
-                    {JSON.stringify(data, null, 2)}
-                  </pre>
-                </Modal>
-              </div>
             </Menu>
 
             <div className='grow order-2' aria-hidden>&nbsp;</div>
 
             <nav className='order-4' aria-label='secondary'>
+              {process.env.NODE_ENV === 'development' && (
+                <div className='text-center'>
+                  <Modal buttonLabel="Data" title="Data">
+                    <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
+                      {JSON.stringify(data, null, 2)}
+                    </pre>
+                  </Modal>
+                </div>
+              )}
               <a href="https://marcus.uib.no" aria-label='Go to Marcus'>
                 <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
               </a>
@@ -86,14 +79,14 @@ const Browse: NextPage = ({ data, preview }: any) => {
               {items && items.map((item: any) => (
                 <div key={item._id} className="flex justify-center">
                   <div className="rounded-lg shadow-lg md:w-64 lg:max-w-sm">
-                    <Link href={`/id/${item._id}`}>
+                    {item.image ? (<Link href={`/id/${item._id}`}>
                       <SanityImage
                         image={item.image}
                         alt={''}
                       />
-                    </Link>
+                    </Link>) : null}
                     <div className="p-6">
-                      <h5 className="text-xl font-medium mb-2">{item.label[locale || ''] || 'Missing title'}</h5>
+                      <h5 className="text-xl font-medium mb-2"><Link href={`/id/${item._id}`}>{item.label[locale || ''] || 'Missing title'}</Link></h5>
                       <p className="text-base mb-4">
                         {item.referredToBy?.[locale || '']}
                       </p>

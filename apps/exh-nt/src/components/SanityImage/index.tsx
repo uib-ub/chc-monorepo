@@ -16,10 +16,12 @@ type ImagePropsWithoutSrc = Omit<ImageProps, "src">;
 
 type SanityImageProps = {
   image: SanityImage;
+  type?: string
 } & ImagePropsWithoutSrc;
 
 export default function SanityImage({
   image,
+  type = 'responsive',
   alt = '',
   placeholder = "blur",
   style,
@@ -27,15 +29,32 @@ export default function SanityImage({
 }: SanityImageProps) {
   const imageProps = useNextSanityImage(sanityClient, image);
 
+  if (type === 'fill') {
+    return (
+      <Image
+        src={imageProps.src}
+        loader={imageProps.loader}
+        className={className}
+        alt={alt}
+        fill
+        sizes="100vw"
+        style={{
+          objectFit: 'contain',
+        }}
+      />
+
+    )
+  }
+
   /* eslint-disable */
   return (
     <Image
       {...imageProps}
-      style={style}
       className={className}
+      style={{ width: '100%', height: 'auto' }}
       alt={alt}
       placeholder={placeholder}
-      blurDataURL={image.asset.metadata.lqip}
+      blurDataURL={image?.asset.metadata.lqip}
     />
   );
 }

@@ -40,14 +40,18 @@ export const paneStyles = cva([], {
         "md:shrink",
         "md:flex-grow-0",
         "max-sm:p-5",
-        /* "md:bg-gray-100",
-        "md:dark:bg-[#2b2e2f]", */
+        "border-r",
+        "border-neutral-200",
+        "shadow-lg",
+        "md:bg-neutral-50",
+        "md:dark:bg-[#2b2e2f]",
       ],
       content: [
         "md:min-h-screen",
         "flex",
         "flex-col",
         "flex-grow",
+        "md:bg-neutral-100",
         /* "bg-white",
         "dark:bg-[#1a1d1e]" */
       ]

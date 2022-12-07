@@ -53,27 +53,20 @@ const Home: NextPage = ({ data, preview }: any) => {
 
             <Menu className='order-1' aria-label='primary navigation'>
               <MainNav value={mainNav} />
-              <div className='p-3 border-t flex gap-2'>
-                <Link
-                  href={`/studio`}
-                  locale={false}
-                  target="_blank"
-                  rel="noreferrer"
-                  className='text-xs font-semibold'
-                >
-                  Studio
-                </Link>
-                <Modal buttonLabel="Data" title="Data">
-                  <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
-                    {JSON.stringify(data, null, 2)}
-                  </pre>
-                </Modal>
-              </div>
             </Menu>
 
             <div className='grow order-2' aria-hidden>&nbsp;</div>
 
             <nav className='order-4' aria-label='secondary'>
+              {process.env.NODE_ENV === 'development' && (
+                <div className='text-center'>
+                  <Modal buttonLabel="Data" title="Data">
+                    <pre className='text-xs max-h-[70vh] overflow-scroll border p-3'>
+                      {JSON.stringify(data, null, 2)}
+                    </pre>
+                  </Modal>
+                </div>
+              )}
               <a href="https://marcus.uib.no" aria-label='Go to Marcus'>
                 <MarcusIcon className='max-sm:w-6 max-sm:h-6 md:w-10 md:h-10' />
               </a>
