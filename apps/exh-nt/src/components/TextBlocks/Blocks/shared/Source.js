@@ -1,4 +1,4 @@
-import { Link } from '../../../../components/Link'
+import { Link } from 'ui'
 import { useRouter } from 'next/router'
 import { TextBlocks } from '../..'
 
@@ -12,7 +12,7 @@ export default function Source(props) {
     <div>
       <p>
         <i>
-          <Link href={`/id/${_id}`} color='unset' isExternal>
+          <Link href={`/id/${_id}`} isExternal>
             {label[locale] || label[defaultLocale] || 'Missing default language label'}
           </Link>
         </i>

@@ -20,8 +20,8 @@ export const Palette = ({ colors }: any) => {
         Colour palette
       </div>
       <div className='grid grid-cols-7'>
-        {palette.map((color: string) => (
-          <div key={color} className={`h-1`} style={{ backgroundColor: color }}></div>
+        {palette.map((color: string, index: number) => (
+          <div key={`${index}-${color}`} className={`h-1`} style={{ backgroundColor: color }}></div>
         ))}
       </div>
     </div>

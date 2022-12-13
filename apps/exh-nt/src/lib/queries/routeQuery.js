@@ -17,6 +17,21 @@ const ROUTE_CONTENT = groq`
       label
     }
   },
+  about-> {
+    _id,
+    label,
+    preferredIdentifier,
+    hasCurrentOwner[]->{
+      _id,
+      label,
+    },
+    image {
+      asset->{
+        ...,
+        metadata
+      }
+    },
+  },
   image {
     asset->{
       ...,

@@ -6,23 +6,26 @@ export const paneStyles = cva([], {
     intent: {
       sidebar: [
         "h-screen",
+        "max-sm:h-fit",
         "sticky",
         "flex",
-        "flex-col",
-        "gap-5",
+        "sm:flex-col",
+        "gap-2",
+        "sm:gap-5",
         "items-center",
         "shrink-0",
         "top-0",
         "z-20",
         "p-2",
-        "max-md:pt-3",
-        "md:pt-5",
+        "max-sm:pt-2",
+        "max-md:pt-4",
+        "max-sm:border-b",
         "border-r",
         "border-neutral-200",
         "shadow-lg",
-        "max-sm:hidden",
-        /* "bg-gray-200",
-        "dark:bg-[#35393a]", */
+        "max-sm:w-full",
+        "bg-white",
+        /* "dark:bg-[#35393a]", */
       ],
       aside: [
         "max-md:flex",

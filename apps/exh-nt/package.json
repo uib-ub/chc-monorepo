@@ -14,7 +14,7 @@
     "@next/font": "^13.0.5",
     "@popperjs/core": "^2.11.6",
     "@portabletext/react": "^2.0.0",
-    "@samvera/clover-iiif": "^1.12.4-rc.0",
+    "@samvera/clover-iiif": "^1.12.4",
     "@sanity/code-input": "^3.0.0-v3-studio.15",
     "@sanity/color-input": "^3.0.0-v3-studio.12",
     "@sanity/dashboard": "^3.0.0-v3-studio.8",

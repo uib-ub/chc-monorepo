@@ -36,6 +36,10 @@ module.exports = {
         yellow: colors.yellow,
         green: colors.green,
       },
+      gridTemplateColumns: {
+        'content': 'minmax(1.2rem, 1fr) 1em minmax(auto, 65ch) 1em minmax(1.2rem, 1fr)',
+        'content-sm': 'minmax(1.2rem, 1fr) 1em minmax(42ch, 65ch) 1em minmax(1.2rem, 1fr)',
+      }
     },
   },
   plugins: [],

@@ -36,8 +36,8 @@ export const Menu: React.FC<MenuProps> = ({ children, className }) => {
             className='flex flex-col items-center text-slate-600 dark:text-slate-200 text-xs md:text-md'
             accessKey='m'
           >
-            <Bars4Icon className={open ? 'w-5 h-5 md:w-6 md:h-6 rotate-180 transform' : 'w-5 h-5 md:w-6 md:h-6'} />
-            Menu
+            <Bars4Icon className={'w-5 h-5 md:w-6 md:h-6 sm:hidden'} />
+            <div className='max-sm:sr-only'>Menu</div>
           </Popover.Button>
           <Popover.Panel
             ref={container}
