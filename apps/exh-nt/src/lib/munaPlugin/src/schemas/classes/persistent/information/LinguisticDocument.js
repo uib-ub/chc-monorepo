@@ -4,7 +4,7 @@ import { FaMarker } from 'react-icons/fa'
 import { defineType } from 'sanity';
 import { defaultFieldsets } from '../../../../fieldsets/defaultFieldsets'
 import { accessState, editorialState, labelSingleton } from '../../../properties/datatype'
-import { identifiedBy, image, language } from '../../../properties/object'
+import { about, identifiedBy, image, language } from '../../../properties/object'
 
 const baseLang = process.env.NEXT_PUBLIC_BASE_LANGUAGE
 
@@ -126,6 +126,10 @@ export default defineType({
           "@type": "xsd:dateTime"
         }
       },
+    },
+    {
+      ...about,
+      group: 'content',
     },
     {
       name: 'body',

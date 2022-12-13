@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select } from '../Select'
+import { Select } from './Select'
 import { GlobeAltIcon } from '@heroicons/react/24/outline'
 interface LocaleSwitchProps {
   lite?: boolean

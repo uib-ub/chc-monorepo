@@ -1,3 +1,4 @@
+export { about } from "./about";
 export { assignedActor } from "./assignedActor";
 export { assignedRole } from "./assignedRole";
 export { carriedOutBy } from "./carriedOutBy";

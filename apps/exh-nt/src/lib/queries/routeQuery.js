@@ -5,6 +5,39 @@ import { mainNav } from './fragments'
 const ROUTE_CONTENT = groq`
   ...,
   "excerpt": pt::text(excerpt),
+  "headings": body[length(style) == 2 && string::startsWith(style, "h")],
+  creator[] {
+    ...,
+    assignedActor-> {
+      _id,
+      label
+    },
+    assignedRole-> {
+      _id,
+      label
+    }
+  },
+  about-> {
+    _id,
+    label,
+    preferredIdentifier,
+    hasCurrentOwner[]->{
+      _id,
+      label,
+    },
+    image {
+      asset->{
+        ...,
+        metadata
+      }
+    },
+  },
+  image {
+    asset->{
+      ...,
+      metadata
+    }
+  },
   body[] {
     ...,
     _type == 'reference' => @->{
@@ -16,7 +49,12 @@ const ROUTE_CONTENT = groq`
       memberOf[]->{
         _id,
         label,
-        image
+        image {
+					asset->{
+						...,
+						metadata
+					}
+				}
       }
     },
     _type == 'EventSection' && disabled != true => {
@@ -29,7 +67,12 @@ const ROUTE_CONTENT = groq`
         referredToBy[] {
           ...
         },
-        image,
+        image {
+					asset->{
+						...,
+						metadata
+					}
+				},
       }
     },
     _type == 'ObjectBlock' => @{
@@ -46,8 +89,18 @@ const ROUTE_CONTENT = groq`
           },
         },
         "image": coalesce(
-          image,
-          internalRef->.image,
+          image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
+          internalRef->.image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
         ),
         "manifest": coalesce(
           internalRef->.subjectOfManifest, 
@@ -70,8 +123,18 @@ const ROUTE_CONTENT = groq`
           },
         },
         "image": coalesce(
-          image,
-          internalRef->.image,
+          image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
+          internalRef->.image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
         ),
         "manifest": coalesce(
           internalRef->.subjectOfManifest, 
@@ -110,8 +173,18 @@ const ROUTE_CONTENT = groq`
           },
         },
         "image": coalesce(
-          image,
-          internalRef->.image,
+          image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
+          internalRef->.image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
         ),
         "manifest": coalesce(
           internalRef->.subjectOfManifest, 

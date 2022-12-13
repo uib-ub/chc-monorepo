@@ -149,3 +149,22 @@ SELECT ?s WHERE {
   filter(lang(?localizedString) = 'en')
 }
 ```
+
+### Find all descroptions in no and en, plus internalNote for the Jørgen Grinde collection
+
+```sparql
+PREFIX ubbont: <http://data.ub.uib.no/ontology/>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT ?uri ?id ?desc_no ?desc_en ?alt_text WHERE {
+  values ?col {'ubb-jg-'}
+	?s dct:identifier ?id ;
+      dct:description ?desc .
+  OPTIONAL{ ?s ubbont:internalNote ?alt } .
+  filter(STRSTARTS (?id, ?col))
+  bind(if(contains(?alt, "ALT"), ?alt, ?_ ) as ?alt_text)
+  bind(if(langMatches(lang(?desc),"en"),?desc,?_) as ?desc_en)
+  bind(if(langMatches(lang(?desc),""),?desc,?_) as ?desc_no)
+  bind(uri(replace(str(?s), "data.ub", "marcus")) as ?uri)
+}
+```

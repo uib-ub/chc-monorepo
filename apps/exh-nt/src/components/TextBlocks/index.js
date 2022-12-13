@@ -1,4 +1,4 @@
-import { Link } from '../../components/Link'
+import { Link } from 'ui'
 import { PortableText } from '@portabletext/react'
 import {
   BigTextBlock,
@@ -32,7 +32,7 @@ const myPortableTextComponents = () => {
 
     block: {
       normal: ({ children }) => (
-        <p className='mb-3 font-light max-w-prose'>
+        <p className='mb-3 font-light col-start-3 col-end-4'>
           {children}
         </p>
       ),

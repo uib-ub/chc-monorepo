@@ -1,6 +1,6 @@
 import { createPreviewSubscriptionHook, createCurrentUserHook } from 'next-sanity'
 import createImageUrlBuilder from '@sanity/image-url'
-import { config } from './config'
+import { config } from './sanity.config'
 
 /**
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.

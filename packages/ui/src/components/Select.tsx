@@ -1,8 +1,8 @@
 import React, { ReactElement, ReactNode } from 'react'
 import cn from 'clsx'
 import { Listbox, Portal, Transition } from '@headlessui/react'
-import { CheckIcon } from './icons/CheckIcon'
-import { usePopper } from './utils/use-popper'
+import { CheckIcon } from '../icons/CheckIcon'
+import { usePopper } from '../utils/use-popper'
 
 interface MenuOption {
   key: string

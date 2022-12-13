@@ -3,12 +3,11 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 type Props = {
-  className?: string
   children: string | React.ReactNode
   href: string
 }
 
-export const NavLink: React.FC<Props> = ({ href, children, className }) => {
+export const NavLink: React.FC<Props> = ({ href, children }) => {
   const { asPath } = useRouter()
   const isActive = asPath === href
 

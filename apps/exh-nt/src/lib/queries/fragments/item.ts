@@ -8,8 +8,11 @@ export const item = groq`
     _id,
     label
   },
-  image{
-    ...,
+  image {
+    asset->{
+      ...,
+      metadata
+    },
     "palette": asset->.metadata.palette,
   },
   subjectOfManifest,
@@ -34,9 +37,12 @@ export const item = groq`
         assignedActor->{
           _id,
           label,
-          image{
-            asset->
-          }
+          image {
+            asset->{
+              ...,
+              metadata
+            }
+          },
         }
       },
       usedGeneralTechnique[]->{
@@ -64,9 +70,12 @@ export const item = groq`
       assignedActor->{
         _id,
         label,
-        image{
-          asset->
-        }
+        image {
+          asset->{
+            ...,
+            metadata
+          }
+        },
       }
     },
     usedGeneralTechnique[]->{
@@ -76,9 +85,12 @@ export const item = groq`
     target->{
       _id,
       label,
-      image{
-        asset->
-      }
+      image {
+        asset->{
+          ...,
+          metadata
+        }
+      },
     }
   },
   "excerpt": pt::text(referredToBy[0].body),
@@ -92,10 +104,12 @@ export const item = groq`
         preferredIdentifier,
         label,
         subjectOfManifest,
-        image{
-          ...,
-          asset->
-        }
+        image {
+          asset->{
+            ...,
+            metadata
+          }
+        },
       }
     },
     hasType-> {
@@ -111,7 +125,12 @@ export const item = groq`
   hasCurrentOwner[]-> {
     _id,
     label,
-    image
+    image {
+      asset->{
+        ...,
+        metadata
+      }
+    },
   },
   subject[]-> {
     _id,

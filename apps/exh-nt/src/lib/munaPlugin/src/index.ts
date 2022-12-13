@@ -72,6 +72,9 @@ import { default as ObjectBlockItem } from "./schemas/portableText/blocks/Object
 import { default as Post } from "./schemas/classes/persistent/information/site/Post";
 import { default as Route } from "./schemas/classes/persistent/information/site/Route";
 import { default as SiteSettings } from "./schemas/classes/persistent/information/site/SiteSettings";
+import { default as ToC } from "./schemas/classes/persistent/information/site/ToC";
+import { default as ToCSection } from "./schemas/classes/persistent/information/site/ToCSection";
+import { default as ToCLink } from "./schemas/classes/persistent/information/site/ToCLink";
 import { default as Actor } from "./schemas/classes/persistent/physical/Actor";
 import { default as Collection } from "./schemas/classes/persistent/physical/Collection";
 import { default as DigitalDevice } from "./schemas/classes/persistent/physical/DigitalDevice";
@@ -229,4 +232,7 @@ export const schemaTypes = [
 	LocalizedText,
 	LocalizedString,
 	LocaleBlockSimple,
+	ToC,
+	ToCLink,
+	ToCSection
 ]

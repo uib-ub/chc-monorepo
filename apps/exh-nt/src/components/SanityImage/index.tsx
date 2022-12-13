@@ -3,10 +3,11 @@ import { sanityClient } from "../../lib/sanity.server";
 import { useNextSanityImage } from "next-sanity-image";
 
 interface SanityImage {
-  _type: "image";
+  _type: string;
   asset: {
     _ref: string;
     _type: "reference";
+    metadata: any
   };
   caption: string;
 }
@@ -15,23 +16,47 @@ type ImagePropsWithoutSrc = Omit<ImageProps, "src">;
 
 type SanityImageProps = {
   image: SanityImage;
+  type?: string
 } & ImagePropsWithoutSrc;
 
 export default function SanityImage({
   image,
-  alt,
+  type = 'responsive',
+  alt = '',
   placeholder = "blur",
-  ...props
+  style,
+  className
 }: SanityImageProps) {
   const imageProps = useNextSanityImage(sanityClient, image);
+
+  if (type === 'fill') {
+    return (
+      <Image
+        src={imageProps.src}
+        loader={imageProps.loader}
+        className={className}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+        style={{
+          objectFit: 'contain'
+        }}
+      />
+
+    )
+  }
 
   /* eslint-disable */
   return (
     <Image
       {...imageProps}
-      {...props}
-      alt={alt ?? image?.caption}
+      className={className}
+      style={{ width: '100%', height: 'auto' }}
+      alt={alt}
       placeholder={placeholder}
+      blurDataURL={image?.asset.metadata.lqip}
     />
   );
 }

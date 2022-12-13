@@ -36,12 +36,12 @@ export const Menu: React.FC<MenuProps> = ({ children, className }) => {
             className='flex flex-col items-center text-slate-600 dark:text-slate-200 text-xs md:text-md'
             accessKey='m'
           >
-            <Bars4Icon className={open ? 'w-5 h-5 md:w-6 md:h-6 rotate-180 transform' : 'w-5 h-5 md:w-6 md:h-6'} />
-            Menu
+            <Bars4Icon className={'w-5 h-5 md:w-6 md:h-6 sm:hidden'} />
+            <div className='max-sm:sr-only'>Menu</div>
           </Popover.Button>
           <Popover.Panel
             ref={container}
-            className="border border-black/5 dark:border-white/20 relative z-30 max-h-64 overflow-auto rounded-md bg-white py-1 text-sm shadow-lg dark:bg-neutral-800"
+            className="border border-black/5 dark:border-white/20 relative z-30 max-h-2/4 overflow-auto rounded-md bg-white py-1 text-sm shadow-lg dark:bg-neutral-800"
           >
             {children}
           </Popover.Panel>

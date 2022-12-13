@@ -6,19 +6,26 @@ export const paneStyles = cva([], {
     intent: {
       sidebar: [
         "h-screen",
+        "max-sm:h-fit",
         "sticky",
         "flex",
-        "flex-col",
-        "gap-5",
+        "sm:flex-col",
+        "gap-2",
+        "sm:gap-5",
         "items-center",
         "shrink-0",
         "top-0",
         "z-20",
         "p-2",
-        "max-md:pt-3",
-        "md:pt-5",
-        "bg-gray-200",
-        "dark:bg-[#35393a]",
+        "max-sm:pt-2",
+        "max-md:pt-4",
+        "max-sm:border-b",
+        "border-r",
+        "border-neutral-200",
+        "shadow-lg",
+        "max-sm:w-full",
+        "bg-white",
+        /* "dark:bg-[#35393a]", */
       ],
       aside: [
         "max-md:flex",
@@ -36,7 +43,10 @@ export const paneStyles = cva([], {
         "md:shrink",
         "md:flex-grow-0",
         "max-sm:p-5",
-        "md:bg-gray-100",
+        "border-r",
+        "border-neutral-200",
+        "shadow-lg",
+        "md:bg-neutral-50",
         "md:dark:bg-[#2b2e2f]",
       ],
       content: [
@@ -44,8 +54,9 @@ export const paneStyles = cva([], {
         "flex",
         "flex-col",
         "flex-grow",
-        "bg-white",
-        "dark:bg-[#1a1d1e]"
+        "md:bg-neutral-100",
+        /* "bg-white",
+        "dark:bg-[#1a1d1e]" */
       ]
     },
     padded: {

@@ -10,12 +10,22 @@ export const items = groq`"items": *[_type == "HumanMadeObject"] | order(label){
     _id,
     label
   },
-  image,
+  image {
+    asset->{
+      ...,
+      metadata
+    }
+  },
   "excerpt": pt::text(referredToBy[0].body),
   hasCurrentOwner[0]->{
     _id,
     label,
-    image
+    image {
+      asset->{
+        ...,
+        metadata
+      }
+    }
   },
   "creation": activityStream[]{
     _type in ["Production", "BeginningOfExistence"] => @{
@@ -26,6 +36,5 @@ export const items = groq`"items": *[_type == "HumanMadeObject"] | order(label){
       timespan
     }
   },
-  "aspectRatio": image.asset->.metadata.dimensions.aspectRatio,
-  "palette": image.asset->.metadata.palette,
+  "aspectRatio": image.asset->.metadata.dimensions.aspectRatio, 
 },`

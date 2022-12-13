@@ -4,13 +4,17 @@ const i18nConfig = {
   base: "no",
   languages: [
     {
+      "id": "no",
+      "title": "Bokmål"
+    },
+    {
       "id": "en",
       "title": "English"
     },
     {
-      "id": "no",
-      "title": "Bokmål"
-    }
+      "id": "ar",
+      "title": "Arabic"
+    },
   ]
 }
 
