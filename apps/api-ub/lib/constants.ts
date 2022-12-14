@@ -32,6 +32,8 @@ PREFIX lexvo: <http://lexvo.org/ontology#>
 PREFIX cc: <http://creativecommons.org/ns#>
 PREFIX sc: <http://iiif.io/api/presentation/3#>
 PREFIX oa: <http://www.w3.org/ns/oa#>
+PREFIX iiif_prezi: <http://iiif.io/api/presentation/3#>
+PREFIX as: <http://www.w3.org/ns/activitystreams#>
 `
 
 export const getBaseUrl = () => {
