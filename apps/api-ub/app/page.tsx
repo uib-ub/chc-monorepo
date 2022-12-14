@@ -50,6 +50,8 @@ export default function Home() {
           <ul className='my-5'>
             <li><a href="/items/ubb-ms-0003" target={'_blank'} rel='noreferrer'>/items&#123;id&#125; (ubb-ms-0003 as example)</a></li>
             <li><a href="/items/ubb-ms-0003/manifest" target={'_blank'} rel='noreferrer'>/items/&#123;id&#125;/manifest (ubb-ms-0003 as example)</a></li>
+            <li><a href="/collections/search?id=ubb-kk-" target={'_blank'} rel='noreferrer'>/collections/search?id=&#123;id&#125; (ub-kk- as example)</a></li>
+            <li><a href="/collections/search?id=ubb-kk-&page=2" target={'_blank'} rel='noreferrer'>/collections/search?id=&#123;id&#125;&page=&#123;page&#125; (ub-kk- as example)</a></li>
             <li><a href="/events" target={'_blank'} rel='noreferrer'>/events</a></li>
             <li><a href="/events/06432057-3664-4600-b1e7-4a752413ddc7" target={'_blank'} rel='noreferrer'>/events&#123;id&#125; (06432057-3664-4600-b1e7-4a752413ddc7 as example)</a></li>
             <li><a href="/actors" target={'_blank'} rel='noreferrer'>/actors</a></li>
