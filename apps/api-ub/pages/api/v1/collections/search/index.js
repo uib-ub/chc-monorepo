@@ -1,4 +1,4 @@
-import * as jsonld from 'jsonld'
+import { sortBy } from 'lodash'
 import Cors from 'cors'
 import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
@@ -22,6 +22,17 @@ function runMiddleware(req, res, fn) {
   })
 }
 
+const labelSplitter = (label) => {
+  const splitted = label.split('|')
+  const data = splitted.map(l => {
+    const langArr = l.split('@')
+    return {
+      [langArr[1] ? `@${langArr[1]}` : '@none']: langArr[0].replaceAll("\"", "")
+    }
+  })
+  return data
+}
+
 async function getData(url, id, page = 0) {
   if (!id) {
     throw Error
@@ -30,43 +41,37 @@ async function getData(url, id, page = 0) {
   const query = `
     ${SPARQL_PREFIXES}
     CONSTRUCT {
-      ?uri a iiif_prezi:Collection ;
-        rdfs:label ?label ;
-        iiif_prezi:summary ?count ;
-        as:items ?item .
-      ?item a iiif_prezi:Manifest ;
+      ?uri iiif_prezi:summary ?count .
+      ?item a ?itemType ;
         rdfs:label ?itemLabel ;
         dct:identifier ?itemId .
     }
     WHERE {
         {
-            SELECT ?uri (COUNT(?part) as ?count)
-            WHERE {
-             VALUES ?id {'${id}'}
-                ?uri dct:identifier ?id ;
-               dct:hasPart ?part .
-            }
+          SELECT ?uri (COUNT(?part) as ?count)
+          WHERE {
+            VALUES ?id {'${id}'}
+              ?uri dct:identifier ?id ;
+              dct:hasPart ?part .
+          }
           GROUP BY ?uri
         }
         UNION
         {
-            SELECT *
-            WHERE {
-             VALUES ?id {'${id}'}
-              ?uri dct:identifier ?id .
-              OPTIONAL { 
-                ?uri dct:hasPart ?item .
-                ?item dct:identifier ?itemId ;
-                     rdfs:label|dct:title ?itemLabel .
-                 }
-        OPTIONAL { ?uri rdfs:label ?label . }
-        OPTIONAL { ?uri dct:title ?label . }
-        OPTIONAL { ?uri dct:description ?description . }
-        OPTIONAL { ?uri foaf:logo ?logo . }
-            }
-            ORDER BY ?uri
-            OFFSET ${page}
-            LIMIT 10
+          SELECT DISTINCT  ?item ?itemId ?itemType
+            (group_concat( concat('"',?itemLabels,'"@',lang(?itemLabels)); separator="|" ) as ?itemLabel)
+          WHERE {
+            VALUES ?id {'${id}'}
+            ?uri dct:identifier ?id .
+            ?item dct:isPartOf ?uri .
+            ?item a ?itemType .
+            ?item dct:identifier ?itemId .
+            ?item dct:title ?itemLabels .
+          }
+          GROUP BY ?itemId ?item ?itemType ?itemLabel
+          ORDER BY ?itemId
+          OFFSET ${page}
+          LIMIT 10
         }
     }
   `
@@ -91,7 +96,7 @@ export default async function handler(req, res) {
     case 'GET':
 
       // Find the service that contains data on this item
-      const checkedServices = await fetch(`${API_URL}/resolver/${id}?v=1`).then(res => res.json())
+      const checkedServices = await fetch(`${API_URL}/resolver/${id}`).then(res => res.json())
       const url = await checkedServices.url
       // No URL means no service found, but this is horrible error handeling
       if (!url) res.status(404).json({ message: 'ID not found' })
@@ -103,22 +108,15 @@ export default async function handler(req, res) {
         const result = await response.json()
         //res.status(200).json(result)
 
-        const awaitFramed = jsonld.frame(result, {
-          '@context': [`https://iiif.io/api/presentation/3/context.json`],
-          '@type': 'Collection',
-          '@embed': '@always',
-        })
-        let framed = await awaitFramed
-
         // Change id as this did not work in the query
         //framed.id = `${getBaseUrl()}/items/${framed.identifier}`
         // We assume all @none language tags are really norwegian
-        framed = JSON.parse(JSON.stringify(framed).replaceAll('"none":', '"no":'))
 
-        const count = framed['iiif_prezi:summary']
-        const items = framed['as:items']
+        const count = result['@graph'].filter(o => o['sc:summary'])[0]['sc:summary']
+        const filteredItems = result['@graph'].filter(o => !o['sc:summary'])
+        const items = sortBy(filteredItems, ["identifier"])
 
-        const collection = {
+        let collection = {
           "@context": "https://iiif.io/api/presentation/3/context.json",
           "id": `${getBaseUrl()}/collections/search?id=${id}${page ? `&page=${page}` : ''}`,
           "type": "Collection",
@@ -134,15 +132,16 @@ export default async function handler(req, res) {
           },
           "items": items.map(item => {
             return {
-              "id": `${getBaseUrl()}/items/${item['dcterms:identifier']}/manifest`,
-
-              "type": "Manifest",
-              "label": item.label,
+              "id": item['@type'] == 'bibo:Collection' ?
+                `${getBaseUrl()}/collections/search?id=${item.identifier}` :
+                `${getBaseUrl()}/items/${item.identifier}/manifest`,
+              "type": item['@type'] == 'bibo:Collection' ? "Collection" : "Manifest",
+              "label": labelSplitter(item.label),
               "homepage": [
                 {
-                  "id": item.id.replace("http://data.ub", "https://marcus"),
+                  "id": item['@id'].replace("http://data.ub", "https://marcus"),
                   "type": "Text",
-                  "label": item.label
+                  "label": labelSplitter(item.label)
                 }
               ]
             }
@@ -154,7 +153,7 @@ export default async function handler(req, res) {
             }
           ]
         }
-
+        collection = JSON.parse(JSON.stringify(collection).replaceAll('"@none":', '"no":'))
 
         res.status(200).json(collection)
       } else {
