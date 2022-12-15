@@ -113,7 +113,7 @@ const getItems = (items) => {
 
 }
 const getPages = (id, total) => {
-  const count = Math.ceil(total / 10);
+  const count = Math.ceil(total / 10) - 1;
   const pages = Array.from(Array(count).keys());
 
   const data = pages.map((index) => {
@@ -122,7 +122,7 @@ const getPages = (id, total) => {
       type: "Collection",
       label: {
         no: [
-          `Side ${index + 1} (${total} totalt)`
+          `Side ${index + 1} (${count} totalt)`
         ]
       }
     };
@@ -178,7 +178,7 @@ export default async function handler(req, res) {
           "type": "Collection",
           "label": {
             "no": [
-              `${page ? `Side ${page} (${Math.ceil(count / 10)} totalt)` : 'All results'}`
+              `${page ? `Side ${page} (${Math.ceil(count / 10) - 1} totalt)` : 'All results'}`
             ]
           },
           "summary": {
