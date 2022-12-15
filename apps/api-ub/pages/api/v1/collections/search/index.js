@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash'
+import { isUndefined, sortBy } from 'lodash'
 import Cors from 'cors'
 import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
@@ -100,7 +100,7 @@ export default async function handler(req, res) {
 
   await runMiddleware(req, res, cors)
 
-  if (!Number(page)) {
+  if (page && page < 0) {
     return res.status(400).json({ message: 'Page parameter must be a positive number.' })
   }
 
