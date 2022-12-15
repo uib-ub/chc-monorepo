@@ -38,9 +38,11 @@ async function getData(url, id, page = 0) {
     throw Error
   }
 
+  const offset = page <= 0 ? 0 : (page - 1) * 10
+
   const query = `
     ${SPARQL_PREFIXES}
-        CONSTRUCT 
+    CONSTRUCT 
       { 
         ?uri iiif_prezi:summary ?count .
         ?item rdf:type ?itemType .
@@ -75,7 +77,7 @@ async function getData(url, id, page = 0) {
                 GROUP BY ?item ?itemType ?itemId ?itemLabel
                 ORDER BY ?itemId
               }
-            OFFSET  ${page}
+            OFFSET  ${offset}
             LIMIT   10
           }
       }
@@ -97,6 +99,10 @@ export default async function handler(req, res) {
   } = req
 
   await runMiddleware(req, res, cors)
+
+  if (!Number(page)) {
+    return res.status(400).json({ message: 'Page parameter must be a positive number.' })
+  }
 
   switch (method) {
     case 'GET':
