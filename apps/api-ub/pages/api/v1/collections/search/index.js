@@ -27,10 +27,10 @@ const labelSplitter = (label) => {
   const data = splitted.map(l => {
     const langArr = l.split('@')
     return {
-      [langArr[1] ? `@${langArr[1]}` : '@none']: langArr[0].replaceAll("\"", "")
+      [langArr[1] ? `@${langArr[1]}` : '@none']: [langArr[0].replaceAll("\"", "")]
     }
   })
-  return data
+  return data[0]
 }
 
 async function getData(url, id, page = 0) {
@@ -40,40 +40,46 @@ async function getData(url, id, page = 0) {
 
   const query = `
     ${SPARQL_PREFIXES}
-    CONSTRUCT {
-      ?uri iiif_prezi:summary ?count .
-      ?item a ?itemType ;
-        rdfs:label ?itemLabel ;
-        dct:identifier ?itemId .
-    }
-    WHERE {
-        {
-          SELECT ?uri (COUNT(?part) as ?count)
-          WHERE {
-            VALUES ?id {'${id}'}
-              ?uri dct:identifier ?id ;
-              dct:hasPart ?part .
+        CONSTRUCT 
+      { 
+        ?uri iiif_prezi:summary ?count .
+        ?item rdf:type ?itemType .
+        ?item rdfs:label ?itemLabel .
+        ?item dct:identifier ?itemId .
+      }
+    WHERE
+      { 
+        { SELECT ?uri (COUNT(?part) AS ?count)
+            WHERE
+              { VALUES ?id { "${id}" }
+                ?uri  dct:identifier  ?id ;
+                      dct:hasPart     ?part .
+                ?part rdf:type/(rdfs:subClassOf)* bibo:Document .
+              }
+            GROUP BY ?uri
           }
-          GROUP BY ?uri
-        }
         UNION
-        {
-          SELECT DISTINCT  ?item ?itemId ?itemType
-            (group_concat( concat('"',?itemLabels,'"@',lang(?itemLabels)); separator="|" ) as ?itemLabel)
-          WHERE {
-            VALUES ?id {'${id}'}
-            ?uri dct:identifier ?id .
-            ?item dct:isPartOf ?uri .
-            ?item a ?itemType .
-            ?item dct:identifier ?itemId .
-            ?item dct:title ?itemLabels .
+          { SELECT DISTINCT ?item ?itemId ?itemType ?itemLabel
+            WHERE
+              { SELECT DISTINCT  ?item ?itemId ?itemType 
+                (GROUP_CONCAT( concat('"',?itemLabels,'"@',lang(?itemLabels)); separator="|" ) as ?itemLabel)
+                WHERE
+                  { VALUES ?id { "${id}" }
+                    ?uri   dct:identifier  ?id .
+                    ?item  dct:isPartOf    ?uri ;
+                          rdf:type        ?itemType .
+                    ?itemType (rdfs:subClassOf)* bibo:Document .
+                    ?item  dct:identifier  ?itemId ;
+                          dct:title       ?itemLabels .
+                  }
+                GROUP BY ?item ?itemType ?itemId ?itemLabel
+                ORDER BY ?itemId
+              }
+            OFFSET  ${page}
+            LIMIT   10
           }
-          GROUP BY ?itemId ?item ?itemType ?itemLabel
-          ORDER BY ?itemId
-          OFFSET ${page}
-          LIMIT 10
-        }
-    }
+      }
+    ORDER BY ?itemId
   `
 
   const results = await fetch(

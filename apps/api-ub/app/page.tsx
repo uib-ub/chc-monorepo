@@ -77,6 +77,14 @@ export default function Home() {
           <tbody>
             <tr>
               <td className='border border-slate-700 p-2'>Marcus</td>
+              <td className='border border-slate-700 p-2'><a href="/collections/search?id=astrup-samlingen">/collections/search?id=astrup-samlingen</a></td>
+              <td className='border border-slate-700 p-2'>---</td>
+              <td className='border border-slate-700 p-2'>
+                <a href={`https://projectmirador.org/embed/?manifest=${API_URL || ''}/collections/search?id=astrup-samlingen`} target="_blank" rel='noreferrer' style={{ pointerEvents: IS_DEV ? 'none' : 'unset' }}>open in new window</a>
+              </td>
+            </tr>
+            <tr>
+              <td className='border border-slate-700 p-2'>Marcus</td>
               <td className='border border-slate-700 p-2'><a href="/items/ubb-ms-0003">/items/ubb-ms-0003</a></td>
               <td className='border border-slate-700 p-2'><a href="/items/ubb-ms-0003/manifest">/items/ubb-ms-0003/manifest</a></td>
               <td className='border border-slate-700 p-2'>
