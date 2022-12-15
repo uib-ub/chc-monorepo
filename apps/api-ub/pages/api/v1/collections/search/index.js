@@ -92,6 +92,46 @@ async function getData(url, id, page = 0) {
   return results
 }
 
+const getItems = (items) => {
+  const data = items.map(item => {
+    return {
+      "id": item['@type'] == 'bibo:Collection' ?
+        `${getBaseUrl()}/collections/search?id=${item.identifier}` :
+        `${getBaseUrl()}/items/${item.identifier}/manifest`,
+      "type": item['@type'] == 'bibo:Collection' ? "Collection" : "Manifest",
+      "label": labelSplitter(item.label),
+      "homepage": [
+        {
+          "id": item['@id'].replace("http://data.ub", "https://marcus"),
+          "type": "Text",
+          "label": labelSplitter(item.label)
+        }
+      ]
+    }
+  })
+  return data
+
+}
+const getPages = (id, total) => {
+  const count = Math.ceil(total / 10);
+  const pages = Array.from(Array(count).keys());
+
+  const data = pages.map((index) => {
+    return {
+      id: `${getBaseUrl()}/collections/search?id=${id}&page=${index + 1}`,
+      type: "Collection",
+      label: {
+        no: [
+          `Side ${index + 1} (${total} totalt)`
+        ]
+      }
+    };
+  });
+
+  return data
+
+}
+
 export default async function handler(req, res) {
   const {
     query: { id, page },
@@ -126,38 +166,27 @@ export default async function handler(req, res) {
 
         const count = result['@graph'].filter(o => o['sc:summary'])[0]['sc:summary']
         const filteredItems = result['@graph'].filter(o => !o['sc:summary'])
-        const items = sortBy(filteredItems, ["identifier"])
+        const sortedItems = sortBy(filteredItems, ["identifier"])
+        const items = page ?
+          getItems(sortedItems) :
+          getPages(id, count)
+
 
         let collection = {
           "@context": "https://iiif.io/api/presentation/3/context.json",
           "id": `${getBaseUrl()}/collections/search?id=${id}${page ? `&page=${page}` : ''}`,
           "type": "Collection",
           "label": {
-            "@none": [
-              "All results"
+            "no": [
+              `${page ? `Side ${page} (${Math.ceil(count / 10)} totalt)` : 'All results'}`
             ]
           },
           "summary": {
-            "@none": [
-              `${count} results`
+            "no": [
+              `${count} resultat`
             ]
           },
-          "items": items.map(item => {
-            return {
-              "id": item['@type'] == 'bibo:Collection' ?
-                `${getBaseUrl()}/collections/search?id=${item.identifier}` :
-                `${getBaseUrl()}/items/${item.identifier}/manifest`,
-              "type": item['@type'] == 'bibo:Collection' ? "Collection" : "Manifest",
-              "label": labelSplitter(item.label),
-              "homepage": [
-                {
-                  "id": item['@id'].replace("http://data.ub", "https://marcus"),
-                  "type": "Text",
-                  "label": labelSplitter(item.label)
-                }
-              ]
-            }
-          }),
+          "items": items,
           "partOf": [
             {
               "id": `${getBaseUrl()}/collections/search?id=${id}`,
