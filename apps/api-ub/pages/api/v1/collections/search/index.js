@@ -1,4 +1,4 @@
-import { isUndefined, sortBy } from 'lodash'
+import { sortBy } from 'lodash'
 import Cors from 'cors'
 import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
