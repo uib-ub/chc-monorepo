@@ -100,7 +100,7 @@ export default async function handler(req, res) {
 
   await runMiddleware(req, res, cors)
 
-  if (!Number(page)) {
+  if (page && page < 0) {
     return res.status(400).json({ message: 'Page parameter must be a positive number.' })
   }
 
