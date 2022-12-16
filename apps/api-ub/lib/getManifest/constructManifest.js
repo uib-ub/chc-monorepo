@@ -1,3 +1,5 @@
+import { getBaseUrl } from '../constants'
+
 export async function constructManifest(data, API) {
   let manifest = {
     "@context": "http://iiif.io/api/presentation/3/context.json",
@@ -27,13 +29,22 @@ export async function constructManifest(data, API) {
     ],
     seeAlso: [
       {
+        id: `${getBaseUrl()}/items/${data.identifier}`,
+        type: "Dataset",
+        label: {
+          en: ["Object Description in JSON format"],
+          no: ["Objekt beskrivelse i JSON format"]
+        },
+        format: "application/ld+json"
+      },
+      {
         id: `${API}describe<${data.seeAlso}>`,
         type: "Dataset",
         label: {
           en: ["Object Description in RDF"],
           no: ["Objekt beskrivelse i RDF"]
         },
-        format: "application/rdf+xml"
+        format: "text/turtle"
       }
     ],
     provider: [
