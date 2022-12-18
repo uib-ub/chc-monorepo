@@ -1,6 +1,6 @@
 import { sortBy } from 'lodash'
 import Cors from 'cors'
-import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
+import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -39,11 +39,7 @@ const labelSplitter = (label) => {
   return data[0]
 }
 
-async function getData(url, id, page = 0) {
-  if (!id) {
-    throw Error
-  }
-
+async function getData(url, page = 0) {
   // Calculate the offset based on the requested page. NOTE, a page without a page params,
   // or one with values 0 or 1 will result in the same list. 
   const offset = page <= 0 ? 0 : (page - 1) * 10
@@ -52,46 +48,42 @@ async function getData(url, id, page = 0) {
     ${SPARQL_PREFIXES}
     CONSTRUCT 
       { 
-        ?uri iiif_prezi:summary ?count .
-        ?item a ?itemType ;
-          rdfs:label ?itemLabel ;
-          dct:identifier ?itemId ;
-          sc:thumbnail ?itemThumb .
+        <http://data.ub.uib.no/instance/collection/ubb> iiif_prezi:summary ?count .
+        ?item a bibo:Collection ;
+          rdfs:label ?colLabel ;
+          dct:identifier ?colId ;
+          sc:thumbnail ?colLogo .
       }
     WHERE
       { 
-        { SELECT ?uri (COUNT(?part) AS ?count)
+        { SELECT (COUNT(?uri) AS ?count)
             WHERE
-              { VALUES ?id { "${id}" }
-                ?uri  dct:identifier  ?id ;
-                      dct:hasPart     ?part .
-                ?part rdf:type/(rdfs:subClassOf)* bibo:Document .
+              { 
+                ?uri a bibo:Collection .
+                FILTER NOT EXISTS { ?uri dct:isPartOf ?partOf . }
               }
-            GROUP BY ?uri
           }
         UNION
-          { SELECT DISTINCT ?item ?itemId ?itemType ?itemLabel ?itemThumb
+          { SELECT DISTINCT ?item ?colId ?colLabel ?colLogo
             WHERE
-              { SELECT DISTINCT  ?item ?itemId ?itemType ?itemThumb
-                (GROUP_CONCAT( concat('"',?itemLabels,'"@',lang(?itemLabels)); separator="|" ) as ?itemLabel)
+              { SELECT DISTINCT ?item ?colId ?colLogo
+                (GROUP_CONCAT( concat('"',?colLabels,'"@',lang(?colLabels)); separator="|" ) as ?colLabel)
                 WHERE
-                  { VALUES ?id { "${id}" }
-                    ?uri   dct:identifier  ?id .
-                    ?item  dct:isPartOf    ?uri ;
-                      rdf:type        ?itemType .
-                    ?itemType (rdfs:subClassOf)* bibo:Document .
-                    ?item  dct:identifier  ?itemId ;
-                          dct:title       ?itemLabels ;
-                          ubbont:hasThumbnail ?itemThumb .
+                  { 
+                    ?item a bibo:Collection .
+                    FILTER NOT EXISTS { ?item dct:isPartOf ?partOf . }
+                    ?item   dct:identifier  ?colId ;
+                          dct:title       ?colLabels ;
+                          foaf:logo ?colLogo .
                   }
-                GROUP BY ?item ?itemType ?itemId ?itemLabel ?itemThumb
-                ORDER BY ?itemId
+                GROUP BY ?item ?colId ?colLabel ?colLogo
+                ORDER BY ?colId
               }
             OFFSET  ${offset}
             LIMIT   10
           }
       }
-    ORDER BY ?itemId
+    ORDER BY ?colId
   `
 
   const results = await fetch(
@@ -105,10 +97,8 @@ async function getData(url, id, page = 0) {
 const getItems = (items) => {
   const data = items.map(item => {
     return {
-      "id": item['@type'] == 'bibo:Collection' ?
-        `${getBaseUrl()}/collections/search?id=${item.identifier}` :
-        `${getBaseUrl()}/items/${item.identifier}/manifest`,
-      "type": item['@type'] == 'bibo:Collection' ? "Collection" : "Manifest",
+      "id": `${getBaseUrl()}/collections/${item.identifier}`,
+      "type": "Collection",
       "label": labelSplitter(item.label),
       "thumbnail": item.thumbnail,
       "homepage": [
@@ -117,20 +107,30 @@ const getItems = (items) => {
           "type": "Text",
           "label": labelSplitter(item.label)
         }
-      ]
+      ],
+      "items": [{
+        "id": `${getBaseUrl()}/collections/search?id=${item.identifier}`,
+        "type": "Collection",
+        "label": {
+          no: [
+            "Samlingens innhold."
+          ]
+        }
+      }]
     }
   })
 
   return data
 }
 
-const getPages = (id, total) => {
+const getPages = (total) => {
   const count = Math.ceil(total / 10);
+  console.log(count)
   const pages = Array.from(Array(count).keys());
 
   const data = pages.map((index) => {
     return {
-      id: `${getBaseUrl()}/collections/search?id=${id}&page=${index + 1}`,
+      id: `${getBaseUrl()}/collections?page=${index + 1}`,
       type: "Collection",
       label: {
         no: [
@@ -145,7 +145,7 @@ const getPages = (id, total) => {
 
 export default async function handler(req, res) {
   const {
-    query: { id, page },
+    query: { page },
     method,
   } = req
 
@@ -157,21 +157,12 @@ export default async function handler(req, res) {
 
   switch (method) {
     case 'GET':
-
-      // Find the service that contains data on this item
-      const checkedServices = await fetch(`${API_URL}/resolver/${id}`).then(res => res.json())
-      const url = await checkedServices.url
-      // No URL means no service found, but this is horrible error handeling
-      if (!url) {
-        res.status(404).json({ message: 'ID not found' })
-        return
-      }
-
-      const response = await getData(url, id, page)
+      const response = await getData('https://sparql.ub.uib.no/sparql/query?query=', page)
 
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
+        //console.log(JSON.stringify(result, null, 2))
         //res.status(200).json(result)
 
         if (!result['@graph']?.some(o => o['sc:summary'])) {
@@ -184,12 +175,12 @@ export default async function handler(req, res) {
         const sortedItems = sortBy(filteredItems, ["identifier"])
         const items = (page || count <= 10) ?
           getItems(sortedItems) :
-          getPages(id, count)
+          getPages(count)
 
 
         let collection = {
           "@context": "https://iiif.io/api/presentation/3/context.json",
-          "id": `${getBaseUrl()}/collections/search?id=${id}${page ? `&page=${page}` : ''}`,
+          "id": `${getBaseUrl()}/collections${page ? `?page=${page}` : ''}`,
           "type": "Collection",
           "label": {
             "no": [
@@ -204,7 +195,7 @@ export default async function handler(req, res) {
           "items": items,
           "partOf": [
             {
-              "id": `${getBaseUrl()}/collections/search?id=${id}`,
+              "id": `${getBaseUrl()}/collections`,
               "type": "Collection"
             }
           ]

@@ -71,10 +71,9 @@ PREFIX iiif_prezi: <http://iiif.io/api/presentation/3#>
 ### Get all prop count on class
 
 ```sparql
-PREFIX fo: <http://www.w3.org/1999/XSL/Format#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX event: <http://purl.org/NET/c4dm/event.owl#>
-prefix ubbont: <http://data.ub.uib.no/ontology/>
+PREFIX ubbont: <http://data.ub.uib.no/ontology/>
 
 SELECT ?predicate (COUNT(*)AS ?frequency)
 WHERE {
@@ -100,8 +99,6 @@ ORDER BY ?type ?property
 ### Get same as above but as json objects
 
 ```sparql
-
-
 CONSTRUCT {
 ?type ?property ?sample .
 } 
@@ -126,7 +123,7 @@ SELECT ?s WHERE {
 }
 ```
 
-### Find all descroptions in no and en, plus internalNote for the Jørgen Grinde collection
+### Find all descriptions in no and en, plus internalNote for the Jørgen Grinde collection
 
 ```sparql
 PREFIX ubbont: <http://data.ub.uib.no/ontology/>
@@ -177,43 +174,56 @@ ORDER BY ?label
 ### Create a search IIIF collection for ... collections
 
 ```
-CONSTRUCT {
-  ?uri a iiif_prezi:Collection ;
-    iiif_prezi:summary ?count ;
-    iiif_prezi:items ?item .
-  ?item a iiif_prezi:Manifest ;
-    rdfs:label ?itemLabel ;
-    dct:identifier ?itemId .
-}
-WHERE {
-    {
-        SELECT ?uri (COUNT(?part) as ?count)
-        WHERE {
-         VALUES ?id {'astrup-samlingen'}
-            ?uri dct:identifier ?id ;
-           dct:hasPart ?part .
-        }
-    	GROUP BY ?uri
-    }
+CONSTRUCT 
+  { 
+    ?uri iiif_prezi:summary ?count .
+    ?item rdf:type ?itemType .
+    ?item rdfs:label ?itemLabel .
+    ?item dct:identifier ?itemId .
+  }
+WHERE
+  { 
+    { SELECT ?uri (COUNT(?part) AS ?count)
+        WHERE
+          { VALUES ?id { "ubb-kk-" }
+            ?uri  dct:identifier  ?id ;
+                  dct:hasPart     ?part .
+            ?part rdf:type/(rdfs:subClassOf)* bibo:Document .
+          }
+        GROUP BY ?uri
+      }
     UNION
-    {
-        SELECT *
-        WHERE {
-         VALUES ?id {'astrup-samlingen'}
-          ?uri dct:identifier ?id .
-          OPTIONAL { 
-            ?uri dct:hasPart ?item .
-            ?item dct:identifier ?itemId ;
-                 rdfs:label|dct:title ?itemLabel .
-             }
-    OPTIONAL { ?uri rdfs:label ?label . }
-    OPTIONAL { ?uri dct:title ?label . }
-    OPTIONAL { ?uri dct:description ?description . }
-    OPTIONAL { ?uri foaf:logo ?logo . }
-        }
-        ORDER BY ?uri
-        OFFSET 0
-        LIMIT 10
-    }
+      { SELECT DISTINCT ?item ?itemId ?itemType ?itemLabel
+        WHERE
+          { SELECT DISTINCT  ?item ?itemId ?itemType 
+            (GROUP_CONCAT( concat('"',?itemLabels,'"@',lang(?itemLabels)); separator="|" ) as ?itemLabel)
+            WHERE
+              { VALUES ?id { "ubb-kk-" }
+                ?uri   dct:identifier  ?id .
+                ?item  dct:isPartOf    ?uri ;
+                      rdf:type        ?itemType .
+                ?itemType (rdfs:subClassOf)* bibo:Document .
+                ?item  dct:identifier  ?itemId ;
+                      dct:title       ?itemLabels .
+              }
+            GROUP BY ?item ?itemType ?itemId ?itemLabel
+            ORDER BY ?itemId
+          }
+        OFFSET  0
+        LIMIT   10
+      }
+  }
+ORDER BY ?itemId
+```
+
+### Get the objects with the most props
+
+```sparql
+SELECT ?id (COUNT(?p) AS ?props)
+WHERE {
+  ?id rdf:type/(rdfs:subClassOf)* bibo:Document . ;
+    ?p ?o .
 }
+GROUP BY ?id
+ORDER BY DESC(?props)
 ```
