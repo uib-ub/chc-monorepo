@@ -153,7 +153,7 @@ async function getObject(api, id) {
         ?s dct:identifier ?id ;
           ubbont:hasRepresentation ?repr ;
           dct:title ?title ;
-          ubbont:hasThumbnail ?thumb
+          ubbont:hasThumbnail ?thumb .
         OPTIONAL { ?s  dct:description  ?desc }
         OPTIONAL { 
           ?repr dct:hasPart ?singlePart ;
