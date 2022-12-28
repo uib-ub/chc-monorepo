@@ -165,7 +165,7 @@ export default async function handler(req, res) {
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
         const result = await response.json()
-        console.log(JSON.stringify(result, null, 2))
+        //console.log(JSON.stringify(result, null, 2))
         //res.status(200).json(result)
 
         if (!result['@graph']?.some(o => o['sc:summary'])) {

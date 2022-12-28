@@ -1,7 +1,5 @@
-import * as jsonld from 'jsonld'
-import { getTimespan } from '../../../../../lib/getTimespan'
 import Cors from 'cors'
-import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
+import { API_URL, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -23,9 +21,32 @@ function runMiddleware(req, res, fn) {
   })
 }
 
-async function getObject(id, url) {
+async function getObject(id, url, format) {
   if (!id) {
     throw Error
+  }
+
+  let outputType = '&output=json'
+
+  if (format) {
+    switch (format) {
+      case 'xml':
+        outputType = '&output=xml'
+        break;
+      case 'turtle':
+        outputType = '&output=turtle'
+        break;
+      case 'json':
+        outputType = '&output=json'
+        break;
+      case '':
+        outputType = '&output=json'
+        break;
+
+      default:
+        res.status(400).end(`Format ${format} Not Allowed. Use "xml" or "turtle".`)
+        break;
+    }
   }
 
   const query = `
@@ -89,14 +110,14 @@ async function getObject(id, url) {
   const results = await fetch(
     `${url}${encodeURIComponent(
       query,
-    )}&output=json`,
+    )}${outputType}`
   )
   return results
 }
 
 export default async function handler(req, res) {
   const {
-    query: { id },
+    query: { format, id },
     method,
   } = req
 
@@ -111,31 +132,15 @@ export default async function handler(req, res) {
       // No URL means no service found, but this is horrible error handeling
       if (!url) res.status(404).json({ message: 'ID not found' })
 
-      const response = await getObject(id, url)
+      const response = await getObject(id, url, format)
 
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
-        const result = await response.json()
+        const result = await response.text()
         //console.log(result)
         //res.status(200).json(result)
 
-        const awaitFramed = jsonld.frame(result, {
-          '@context': [`${getBaseUrl()}/ns/ubbont/context.json`],
-          '@type': 'HumanMadeObject',
-          '@embed': '@always',
-        })
-        let framed = await awaitFramed
-
-        // Change id as this did not work in the query
-        framed.id = `${getBaseUrl()}/items/${framed.identifier}`
-        // We assume all @none language tags are really norwegian
-        framed = JSON.parse(JSON.stringify(framed).replaceAll('"none":', '"no":'))
-
-        framed.timespan = getTimespan(framed?.created, framed?.madeAfter, framed?.madeBefore)
-        delete framed?.madeAfter
-        delete framed?.madeBefore
-
-        res.status(200).json(framed)
+        res.status(200).send(result)
       } else {
         // Handle errors
         console.log(response.status, response.statusText);
