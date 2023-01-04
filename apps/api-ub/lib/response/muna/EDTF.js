@@ -1,5 +1,6 @@
 import { utcToZonedTime, format } from 'date-fns-tz'
 import { fromUnixTime } from 'date-fns'
+import edtf from 'edtf'
 
 const getDateFromDateTime = (unix) => {
   const date = format(utcToZonedTime(fromUnixTime(unix / 1000), 'UTC'), "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", { timeZone: 'UTC' })
@@ -9,6 +10,33 @@ const getDateFromDateTime = (unix) => {
 const getDateFromDate = (unix) => {
   const date = format(fromUnixTime(unix / 1000), "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", { timeZone: 'UTC' })
   return date
+}
+
+
+export const getTimespan = (date, after, before) => {
+  if (!date && !after && !before) return undefined
+
+  if (date) {
+    const e = edtf(date['@value'], { types: ['Year', 'Date', 'Interval', 'Season'] })
+    return mapEDTF(e)
+  }
+  if (after?.['@value'] === before?.['@value']) {
+    const e = edtf(before?.['@value'], { types: ['Year', 'Date', 'Interval', 'Season'] })
+    return mapEDTF(e)
+  }
+  if (after && !before) {
+    const e = edtf(`${after['@value']}/`, { types: ['Year', 'Date', 'Interval', 'Season'] })
+    return mapEDTF(e)
+  }
+  if (!after && before) {
+    const e = edtf(`/${before['@value']}`, { types: ['Year', 'Date', 'Interval', 'Season'] })
+    return mapEDTF(e)
+  }
+  if (after && before) {
+    const e = edtf(`${after['@value']}/${before['@value']}`, { types: ['Year', 'Date', 'Interval', 'Season'] })
+    return mapEDTF(e)
+  }
+  return null
 }
 
 /**

@@ -1,7 +1,7 @@
 import * as jsonld from 'jsonld'
-import { getTimespan } from '../../../../../lib/response/muna/EDTF'
+import { getTimespan } from '../../../../lib/response/muna/EDTF'
 import Cors from 'cors'
-import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
+import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../lib/constants'
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -23,11 +23,7 @@ function runMiddleware(req, res, fn) {
   })
 }
 
-async function getObject(id, url) {
-  if (!id) {
-    throw Error
-  }
-
+async function getObject(url) {
   const query = `
     ${SPARQL_PREFIXES}
     CONSTRUCT {
@@ -44,8 +40,7 @@ async function getObject(id, url) {
         wgs:lat ?lat .
     } WHERE { 
       GRAPH ?g {
-        VALUES ?id {'${id}'}
-        ?uri dct:identifier ?id ;
+        ?uri rdf:type/(rdfs:subClassOf)* bibo:Document ;
           ?p ?o .
           OPTIONAL {?uri dct:title ?title } .
           OPTIONAL {?uri foaf:name ?name } .
@@ -84,6 +79,7 @@ async function getObject(id, url) {
         FILTER(?p != ubbont:cataloguer && ?p != ubbont:internalNote)
       } 
     }
+    LIMIT 1000
   `
 
   const results = await fetch(
@@ -96,7 +92,6 @@ async function getObject(id, url) {
 
 export default async function handler(req, res) {
   const {
-    query: { id },
     method,
   } = req
 
@@ -104,14 +99,9 @@ export default async function handler(req, res) {
 
   switch (method) {
     case 'GET':
+      const url = 'https://sparql.ub.uib.no/sparql/query?query='
 
-      // Find the service that contains data on this item
-      const checkedServices = await fetch(`${API_URL}/resolver/${id}?v=1`).then(res => res.json())
-      const url = await checkedServices.url
-      // No URL means no service found, but this is horrible error handeling
-      if (!url) res.status(404).json({ message: 'ID not found' })
-
-      const response = await getObject(id, url)
+      const response = await getObject(url)
 
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
@@ -126,14 +116,14 @@ export default async function handler(req, res) {
         })
         let framed = await awaitFramed
 
-        // Change id as this did not work in the query
-        framed.id = `${getBaseUrl()}/items/${framed.identifier}`
-        // We assume all @none language tags are really norwegian
-        framed = JSON.parse(JSON.stringify(framed).replaceAll('"none":', '"no":'))
+        // // Change id as this did not work in the query
+        // framed.id = `${getBaseUrl()}/items/${framed.identifier}`
+        // // We assume all @none language tags are really norwegian
+        // framed = JSON.parse(JSON.stringify(framed).replaceAll('"none":', '"no":'))
 
-        framed.timespan = getTimespan(framed?.created, framed?.madeAfter, framed?.madeBefore)
-        delete framed?.madeAfter
-        delete framed?.madeBefore
+        // framed.timespan = getTimespan(framed?.created, framed?.madeAfter, framed?.madeBefore)
+        // delete framed?.madeAfter
+        // delete framed?.madeBefore
 
         res.status(200).json(framed)
       } else {

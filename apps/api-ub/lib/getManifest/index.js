@@ -1,1 +1,0 @@
-// TODO Move all IIIF manifest logic here

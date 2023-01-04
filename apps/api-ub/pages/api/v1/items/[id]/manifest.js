@@ -1,7 +1,7 @@
 import Cors from 'cors'
 import * as jsonld from 'jsonld'
 import { omit, sortBy } from 'lodash'
-import { constructManifest } from '../../../../../lib/getManifest/constructManifest'
+import { constructManifest } from '../../../../../lib/response/iiif/constructManifest'
 import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
 const manifestFrame = {
