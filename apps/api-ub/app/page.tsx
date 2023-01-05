@@ -60,6 +60,7 @@ export default function Home() {
           <pre className='bg-neutral-900 text-neutral-100 px-5 py-2 rounded my-3'>
             <code>
               {API_URL}/items/ubb-ms-0003?as=iiif
+              <br />
               {API_URL}/items/ubb-ms-0003/manifest
             </code>
           </pre>
