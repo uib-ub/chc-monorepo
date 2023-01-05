@@ -38,7 +38,7 @@ PREFIX as: <http://www.w3.org/ns/activitystreams#>
 
 export const getBaseUrl = () => {
   if (process.env.VERCEL_ENV === "production")
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+    return `https://${process.env.NEXT_PUBLIC_PUBLIC_DOMAIN}`;
   if (process.env.VERCEL_ENV === "preview")
     return `https://${process.env.VERCEL_URL}`;
   return "http://localhost:3009";

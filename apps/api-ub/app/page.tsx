@@ -2,14 +2,11 @@ import Link from 'next/link'
 import { API_URL } from '../lib/constants'
 const IS_DEV = process.env.NODE_ENV == 'development' ? true : false
 
-const next_public_vercel_url = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-const vercel_url = `https://${process.env.VERCEL_URL}`
-const vercel_env = `${process.env.VERCEL_ENV}`
 
 export default function Home() {
   return (
     <div className='px-16'>
-      <main className='min-h-screen py-20 flex flex-grow flex-col '>
+      <main className='min-h-screen py-20 flex flex-grow flex-col'>
         <h1 className='my-2 text-7xl font-black tracking-tighter'>
           University of Bergen Library API
         </h1>
@@ -17,12 +14,6 @@ export default function Home() {
         <h2 className='m-0 text-4xl font-black tracking-tighter'>
           Cultural Heritage Collections at the Special collections
         </h2>
-
-        <ul>
-          <li>next_public_vercel_url: {next_public_vercel_url ?? 'Undefined'}</li>
-          <li>vercel_url: {vercel_url ?? 'Undefined'}</li>
-          <li>vercel_env: {vercel_env ?? 'Undefined'}</li>
-        </ul>
 
         <div className='flex'>
           <span className="w-max my-10 text-4xl font-black text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">
