@@ -47,12 +47,12 @@ async function getObject(id, url) {
         VALUES ?id {'${id}'}
         ?uri dct:identifier ?id ;
           ?p ?o .
-          OPTIONAL {?uri dct:title ?title } .
-          OPTIONAL {?uri foaf:name ?name } .
-          OPTIONAL {?uri skos:prefLabel ?prefLabel } .
-          OPTIONAL {?uri rdfs:label ?rdfsLabel } .
-          BIND (COALESCE(?title,?name,?prefLabel,?rdfsLabel) AS ?label) .
-          # Get multipage image
+        OPTIONAL {?uri dct:title ?title } .
+        OPTIONAL {?uri foaf:name ?name } .
+        OPTIONAL {?uri skos:prefLabel ?prefLabel } .
+        OPTIONAL {?uri rdfs:label ?rdfsLabel } .
+        BIND (COALESCE(?title,?name,?prefLabel,?rdfsLabel) AS ?label) .
+        # Get multipage image
         OPTIONAL { 
           ?uri ubbont:hasRepresentation / dct:hasPart ?page .
           ?page ubbont:sequenceNr 1 .

@@ -419,8 +419,19 @@
       "@id": "ubbont:Parish"
     },
     "label": {
+      "@id": "rdfs:label"
+    },
+    "label_none": {
       "@id": "rdfs:label",
-      "@container": "@language"
+      "@language": null
+    },
+    "label_no": {
+      "@id": "rdfs:label",
+      "@language": "no"
+    },
+    "label_en": {
+      "@id": "rdfs:label",
+      "@language": "en"
     },
     "PressClipping": {
       "@id": "ubbont:PressClipping"
@@ -818,7 +829,8 @@
     },
     "technique": {
       "@id": "ubbont:technique",
-      "@type": "@id"
+      "@type": "@id",
+      "@container": "@set"
     },
     "Family": {
       "@id": "ubbont:Family"
@@ -1410,9 +1422,17 @@
       "@type": "@id",
       "@container": "@set"
     },
-    "description": {
+    "description_none": {
       "@id": "dct:description",
-      "@container": "@language"
+      "@language": null
+    },
+    "description_no": {
+      "@id": "dct:description",
+      "@language": "no"
+    },
+    "description_en": {
+      "@id": "dct:description",
+      "@language": "en"
     },
     "hasTranscription": {
       "@id": "ubbont:hasTranscription",

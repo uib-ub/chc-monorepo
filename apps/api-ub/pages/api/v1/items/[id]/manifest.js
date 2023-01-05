@@ -210,7 +210,6 @@ export default async function handler(req, res) {
 
       // Get the RDF for this tiem
       const response = await getObject(url, id)
-      console.log(response.status)
 
       if (response.status >= 200 && response.status <= 299) {
         const results = await response.json();

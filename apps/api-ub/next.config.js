@@ -57,6 +57,10 @@ const nextConfig = {
         destination: '/api/v1/items/:path*/rdf',
       },
       {
+        source: '/items/:path*/manifest',
+        destination: '/api/v1/items/:path*/manifest',
+      },
+      {
         source: '/:path*',
         destination: '/api/v1/:path*',
       },

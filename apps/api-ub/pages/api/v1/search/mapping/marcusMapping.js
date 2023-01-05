@@ -14,57 +14,10 @@ export const marcusMapping = {
       }
     },
     "created": {
-      "properties": {
-        "@value": {
-          "type": "date"
-        },
-        "type": {
-          "type": "keyword"
-        }
-      }
+      "type": "date"
     },
-    "description": {
-      "properties": {
-        "no": {
-          "type": "keyword"
-        }
-      }
-    },
-    "field": {
-      "type": "text",
-      "fields": {
-        "keyword": {
-          "type": "keyword",
-          "ignore_above": 256
-        }
-      }
-    },
-    "field2": {
-      "type": "text",
-      "fields": {
-        "keyword": {
-          "type": "keyword",
-          "ignore_above": 256
-        }
-      }
-    },
-    "field3": {
-      "type": "text",
-      "fields": {
-        "keyword": {
-          "type": "keyword",
-          "ignore_above": 256
-        }
-      }
-    },
-    "field4": {
-      "type": "text",
-      "fields": {
-        "keyword": {
-          "type": "keyword",
-          "ignore_above": 256
-        }
-      }
+    "description_no": {
+      "type": "keyword"
     },
     "hasRepresentation": {
       "type": "keyword"
@@ -84,19 +37,35 @@ export const marcusMapping = {
     "image": {
       "type": "keyword"
     },
-    "label": {
-      "properties": {
-        "no": {
-          "type": "keyword"
-        }
-      }
-    },
     "label_no": {
       "type": "text",
       "fields": {
         "keyword": {
-          "type": "keyword",
-          "ignore_above": 256
+          "type": "keyword"
+        }
+      }
+    },
+    "label_en": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "description_no": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "description_en": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
         }
       }
     },
@@ -113,8 +82,7 @@ export const marcusMapping = {
           "type": "text",
           "fields": {
             "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
+              "type": "keyword"
             }
           }
         },
@@ -122,8 +90,67 @@ export const marcusMapping = {
           "type": "text",
           "fields": {
             "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
+              "type": "keyword"
+            }
+          }
+        },
+        "type": {
+          "type": "keyword"
+        }
+      }
+    },
+    "technique": {
+      "type": "nested",
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "identifier": {
+          "type": "keyword"
+        },
+        "label_no": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "label_en": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "type": {
+          "type": "keyword"
+        }
+      }
+    },
+    "isReferencedBy": {
+      "type": "nested",
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "identifier": {
+          "type": "keyword"
+        },
+        "label_no": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "label_en": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
             }
           }
         },
@@ -136,8 +163,7 @@ export const marcusMapping = {
       "type": "text",
       "fields": {
         "keyword": {
-          "type": "keyword",
-          "ignore_above": 256
+          "type": "keyword"
         }
       }
     },
@@ -152,9 +178,18 @@ export const marcusMapping = {
         "identifier": {
           "type": "keyword"
         },
-        "label": {
-          "properties": {
-            "no": {
+        "label_no": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "label_en": {
+          "type": "text",
+          "fields": {
+            "keyword": {
               "type": "keyword"
             }
           }
@@ -175,9 +210,18 @@ export const marcusMapping = {
         "identifier": {
           "type": "keyword"
         },
-        "label": {
-          "properties": {
-            "no": {
+        "label_no": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "label_en": {
+          "type": "text",
+          "fields": {
+            "keyword": {
               "type": "keyword"
             }
           }
@@ -187,12 +231,8 @@ export const marcusMapping = {
         }
       }
     },
-    "prefLabel": {
-      "properties": {
-        "no": {
-          "type": "keyword"
-        }
-      }
+    "prefLabel_no": {
+      "type": "keyword"
     },
     "relation": {
       "type": "nested",
@@ -203,9 +243,18 @@ export const marcusMapping = {
         "identifier": {
           "type": "keyword"
         },
-        "label": {
-          "properties": {
-            "no": {
+        "label_no": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "label_en": {
+          "type": "text",
+          "fields": {
+            "keyword": {
               "type": "keyword"
             }
           }
@@ -217,6 +266,36 @@ export const marcusMapping = {
     },
     "showWeb": {
       "type": "boolean"
+    },
+    "spatial": {
+      "type": "nested",
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "identifier": {
+          "type": "keyword"
+        },
+        "label_no": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "label_en": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "type": {
+          "type": "keyword"
+        }
+      }
     },
     "subject": {
       "type": "nested",
@@ -231,8 +310,7 @@ export const marcusMapping = {
           "type": "text",
           "fields": {
             "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
+              "type": "keyword"
             }
           }
         },
@@ -240,8 +318,7 @@ export const marcusMapping = {
           "type": "text",
           "fields": {
             "keyword": {
-              "type": "keyword",
-              "ignore_above": 256
+              "type": "keyword"
             }
           }
         },
@@ -258,7 +335,18 @@ export const marcusMapping = {
         "beginOfTheBegin": {
           "type": "date"
         },
+        "endOfTheBegin": {
+          "type": "date"
+        },
         "edtf": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "beginOfTheEnd": {
           "type": "date"
         },
         "endOfTheEnd": {
@@ -275,6 +363,19 @@ export const marcusMapping = {
     },
     "type": {
       "type": "keyword"
+    },
+    "hierarchicalPlaces": {
+      "properties": {
+        "lvl0": {
+          "type": "keyword"
+        },
+        "lvl1": {
+          "type": "keyword"
+        },
+        "lvl2": {
+          "type": "keyword"
+        }
+      }
     }
   }
 }

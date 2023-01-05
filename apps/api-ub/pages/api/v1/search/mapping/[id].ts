@@ -26,6 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     method,
   } = req
 
+
   switch (method) {
     case 'GET':
       try {
@@ -36,6 +37,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
       break
     case 'PUT':
+      if (req.query.token !== process.env.ES_INDEX_SECRET) {
+        return res.status(401).send('You are not authorized!')
+      }
       try {
         /* @ts-ignore */
         const response = await client.indices.putMapping({ index: id, body: marcusMapping }, function (err) {
@@ -45,7 +49,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         })
         res.status(200).json(response)
       } catch (err) {
-        (err: any) => { return err }
+        (err: any) => {
+          res.status(400).json({ message: err })
+        }
+      } finally {
+        res.status(400).json({ message: "Done?" })
       }
       break
     default:

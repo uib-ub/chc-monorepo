@@ -57,7 +57,8 @@ async function getObject(id, url, format) {
         rdfs:label ?label ;
         muna:image ?image ;
         muna:subjectOfManifest ?manifest ;
-        foaf:homepage ?homepage .
+        foaf:homepage ?homepage ;
+        muna:spatialHierarchy ?spatialBroader .
       ?o a ?oClass ;
         dct:identifier ?identifier ;
         rdfs:label ?oLabel ;
@@ -68,12 +69,17 @@ async function getObject(id, url, format) {
         VALUES ?id {'${id}'}
         ?uri dct:identifier ?id ;
           ?p ?o .
-          OPTIONAL {?uri dct:title ?title } .
-          OPTIONAL {?uri foaf:name ?name } .
-          OPTIONAL {?uri skos:prefLabel ?prefLabel } .
-          OPTIONAL {?uri rdfs:label ?rdfsLabel } .
-          BIND (COALESCE(?title,?name,?prefLabel,?rdfsLabel) AS ?label) .
-          # Get multipage image
+        OPTIONAL {?uri dct:title ?title } .
+        OPTIONAL {?uri foaf:name ?name } .
+        OPTIONAL {?uri skos:prefLabel ?prefLabel } .
+        OPTIONAL {?uri rdfs:label ?rdfsLabel } .
+        BIND (COALESCE(?title,?name,?prefLabel,?rdfsLabel) AS ?label) .
+        OPTIONAL { 
+          ?uri dct:spatial ?levelUri . 
+          ?levelUri skos:broader* ?broaderUri . 
+          ?broaderUri skos:prefLabel ?spatialBroader. 
+        } 
+        # Get multipage image
         OPTIONAL { 
           ?uri ubbont:hasRepresentation / dct:hasPart ?page .
           ?page ubbont:sequenceNr 1 .

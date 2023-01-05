@@ -1,0 +1,20 @@
+# Context hints
+
+## Create language props suitable for indexing
+
+```json
+{
+  "@context": {
+    "ex": "http://example.com/vocab/",
+    "@language": "ja",
+    "name": { "@id": "ex:name", "@language": null },
+    "occupation": { "@id": "ex:occupation" },
+    "occupation_en": { "@id": "ex:occupation", "@language": "en" },
+    "occupation_cs": { "@id": "ex:occupation", "@language": "cs" }
+  },
+  "name": "Yagyū Muneyoshi",
+  "occupation": "忍者",
+  "occupation_en": "Ninja",
+  "occupation_cs": "Nindža",
+}
+```
