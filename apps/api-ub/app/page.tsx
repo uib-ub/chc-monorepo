@@ -60,6 +60,7 @@ export default function Home() {
           <pre className='bg-neutral-900 text-neutral-100 px-5 py-2 rounded my-3'>
             <code>
               {API_URL}/items/ubb-ms-0003?as=iiif
+              {API_URL}/items/ubb-ms-0003/manifest
             </code>
           </pre>
           <p className='text-sm text-neutral-500'>
@@ -106,18 +107,20 @@ export default function Home() {
             <a href="/collections" target={'_blank'} rel='noreferrer'>/collections</a>
           </p>
 
-
-          <li><a href="/collections/billedsamlingen" target={'_blank'} rel='noreferrer'>/collections/&#123;id&#125; (billedsamlingen as example)</a></li>
-          <li><a href="/collections/search?id=ubb-kk-" target={'_blank'} rel='noreferrer'>/collections/search?id=&#123;id&#125; (ub-kk- as example)</a></li>
-          <li><a href="/collections/search?id=ubb-kk-&page=2" target={'_blank'} rel='noreferrer'>/collections/search?id=&#123;id&#125;&page=&#123;page&#125; (ub-kk- as example)</a></li>
-          <li><a href="/events" target={'_blank'} rel='noreferrer'>/events</a></li>
-          <li><a href="/events/06432057-3664-4600-b1e7-4a752413ddc7" target={'_blank'} rel='noreferrer'>/events&#123;id&#125; (06432057-3664-4600-b1e7-4a752413ddc7 as example)</a></li>
-          <li><a href="/actors" target={'_blank'} rel='noreferrer'>/actors</a></li>
-          <li><a href="/actors/03f5c6c6-ce72-41b2-9797-034658c7950c" target={'_blank'} rel='noreferrer'>/actors&#123;id&#125; (03f5c6c6-ce72-41b2-9797-034658c7950c as example)</a></li>
-          <li><a href="/links" target={'_blank'} rel='noreferrer'>/links</a></li>
+          <h3 className='text-2xl mb-2 mt-5'>Other endpoints</h3>
+          <ul>
+            <li><a href="/collections/billedsamlingen" target={'_blank'} rel='noreferrer'>/collections/&#123;id&#125; (billedsamlingen as example)</a></li>
+            <li><a href="/collections/search?id=ubb-kk-" target={'_blank'} rel='noreferrer'>/collections/search?id=&#123;id&#125; (ub-kk- as example)</a></li>
+            <li><a href="/collections/search?id=ubb-kk-&page=2" target={'_blank'} rel='noreferrer'>/collections/search?id=&#123;id&#125;&page=&#123;page&#125; (ub-kk- as example)</a></li>
+            <li><a href="/events" target={'_blank'} rel='noreferrer'>/events</a></li>
+            <li><a href="/events/06432057-3664-4600-b1e7-4a752413ddc7" target={'_blank'} rel='noreferrer'>/events&#123;id&#125; (06432057-3664-4600-b1e7-4a752413ddc7 as example)</a></li>
+            <li><a href="/actors" target={'_blank'} rel='noreferrer'>/actors</a></li>
+            <li><a href="/actors/03f5c6c6-ce72-41b2-9797-034658c7950c" target={'_blank'} rel='noreferrer'>/actors&#123;id&#125; (03f5c6c6-ce72-41b2-9797-034658c7950c as example)</a></li>
+            <li><a href="/links" target={'_blank'} rel='noreferrer'>/links</a></li>
+          </ul>
         </div>
 
-        <h2 className='my-2 text-4xl font-black tracking-tighter'>
+        <h2 className='my-4 text-4xl font-black tracking-tighter'>
           IIIF manifest examples
         </h2>
 

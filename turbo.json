@@ -25,7 +25,8 @@
         "ES_HOST",
         "ES_APIKEY",
         "ES_PATH",
-        "ES_INDEX_SECRET"
+        "ES_INDEX_SECRET",
+        "NEXT_PUBLIC_VERCEL_URL"
       ]
     },
     "build#exh-nt": {
