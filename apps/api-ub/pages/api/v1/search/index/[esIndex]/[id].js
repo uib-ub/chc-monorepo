@@ -65,7 +65,7 @@ export default async function handler(req, res) {
           //console.log('framed: ', framed)
 
           const esResponse = await client.index({ index: esIndex, id: framed.identifier, document: framed })
-          res.status(200).json(framed)
+          return res.status(200).json(esResponse)
         } else {
           console.log(response.status, response.statusText);
         }
@@ -73,7 +73,7 @@ export default async function handler(req, res) {
       } catch (err) {
         (err) => { res.status(200).json({ message: err }) }
       } finally {
-        res.status(400).json({ message: 'Wat' })
+        return res.status(400).json({ message: 'Wat' })
       }
       break
     default:
