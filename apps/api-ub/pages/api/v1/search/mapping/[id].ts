@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(200).json(response)
       } catch (err) {
         (err: any) => {
-          res.status(400).json({ message: err })
+          return res.status(400).json({ message: err })
         }
       } finally {
         res.status(400).json({ message: "Done?" })

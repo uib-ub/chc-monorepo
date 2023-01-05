@@ -68,9 +68,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(200).json({ deleteIndex, createIndex })
       } catch (err) {
         (err: any) => { return err }
-        res.status(200).json({ message: err })
+        return res.status(200).json({ message: err })
       } finally {
-        res.status(400).json({ message: 'Woops, done' })
+        return res.status(400).json({ message: 'Woops, done' })
       }
       break
     default:
