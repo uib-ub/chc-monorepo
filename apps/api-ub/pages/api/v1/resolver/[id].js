@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   ASK { 
     GRAPH ?g { 
       VALUES ?id { "${id}" }
-      ?s  dct:identifier ?id .
+      ?s dct:identifier ?id .
     }
   }
 `
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
           res.status(404).json({ message: "ID not found in any services." })
         }
       } catch (err) {
-        err => { return err }
+        err => { throw err }
       }
 
       break

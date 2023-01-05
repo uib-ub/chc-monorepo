@@ -36,6 +36,10 @@ export default async function handler(req, res) {
         const url = `${API_URL}/items/${id}?as=rdf`
         const response = await fetch(url)
 
+        if (response.status === 404) {
+          return res.status(404).json({ message: "ID not found" })
+        }
+
         // Deal with response
         if (response.status >= 200 && response.status <= 299) {
           const result = await response.json()
@@ -64,12 +68,17 @@ export default async function handler(req, res) {
           if (framed.created) {
             framed.created = Math.floor(new Date(framed.created['@value']) / 1000)
           }
-          //console.log('framed: ', framed)
 
-          const esResponse = await client.index({ index: esIndex, id: framed.identifier, document: framed })
+          const esResponse = await client.index({ index: esIndex, id: framed.identifier, document: framed }, function (err) {
+            if (err) {
+              throw Error(err)
+            }
+          })
+
           return res.status(200).json(esResponse)
         } else {
           console.log(response.status, response.statusText);
+          throw Error
         }
       } catch (err) {
         (err) => { return res.status(200).json({ message: err }) }
