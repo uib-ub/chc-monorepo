@@ -1,4 +1,4 @@
-import { getBaseUrl } from '../constants'
+import { getBaseUrl } from '../../constants'
 
 export async function constructManifest(data, API) {
   let manifest = {
@@ -32,7 +32,7 @@ export async function constructManifest(data, API) {
         id: `${getBaseUrl()}/items/${data.identifier}`,
         type: "Dataset",
         label: {
-          en: ["Object Description in JSON format"],
+          en: ["Object description in JSON format"],
           no: ["Objekt beskrivelse i JSON format"]
         },
         format: "application/ld+json"
@@ -41,7 +41,7 @@ export async function constructManifest(data, API) {
         id: `${API}describe<${data.seeAlso}>`,
         type: "Dataset",
         label: {
-          en: ["Object Description in RDF"],
+          en: ["Object escription in RDF"],
           no: ["Objekt beskrivelse i RDF"]
         },
         format: "text/turtle"

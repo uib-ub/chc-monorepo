@@ -35,6 +35,32 @@ const nextConfig = {
         destination: '/api/v1/:path*',
       },
       {
+        source: '/items/:path*',
+        has: [
+          {
+            type: 'query',
+            key: 'as',
+            value: 'iiif',
+          },
+        ],
+        destination: '/api/v1/items/:path*/manifest',
+      },
+      {
+        source: '/items/:path*',
+        has: [
+          {
+            type: 'query',
+            key: 'as',
+            value: 'rdf',
+          },
+        ],
+        destination: '/api/v1/items/:path*/rdf',
+      },
+      {
+        source: '/items/:path*/manifest',
+        destination: '/api/v1/items/:path*/manifest',
+      },
+      {
         source: '/:path*',
         destination: '/api/v1/:path*',
       },

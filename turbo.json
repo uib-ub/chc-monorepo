@@ -21,7 +21,11 @@
       ],
       "env": [
         "MARCUS_API",
-        "SKA_API"
+        "SKA_API",
+        "ES_HOST",
+        "ES_APIKEY",
+        "ES_PATH",
+        "ES_INDEX_SECRET"
       ]
     },
     "build#exh-nt": {

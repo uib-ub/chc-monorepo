@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import 'ui/styles.css'
 import Link from 'next/link';
 import { ThemeSwitch } from './ThemeSwitch';
 import { Merriweather_Sans } from '@next/font/google'

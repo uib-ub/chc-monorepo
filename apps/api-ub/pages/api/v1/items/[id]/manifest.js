@@ -1,7 +1,7 @@
 import Cors from 'cors'
 import * as jsonld from 'jsonld'
 import { omit, sortBy } from 'lodash'
-import { constructManifest } from '../../../../../lib/getManifest/constructManifest'
+import { constructManifest } from '../../../../../lib/response/iiif/constructManifest'
 import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../../lib/constants'
 
 const manifestFrame = {
@@ -210,7 +210,6 @@ export default async function handler(req, res) {
 
       // Get the RDF for this tiem
       const response = await getObject(url, id)
-      console.log(response.status)
 
       if (response.status >= 200 && response.status <= 299) {
         const results = await response.json();
