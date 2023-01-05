@@ -133,12 +133,16 @@ export default async function handler(req, res) {
     case 'GET':
 
       // Find the service that contains data on this item
-      const checkedServices = await fetch(`${API_URL}/resolver/${id}?v=1`).then(res => res.json())
-      const url = await checkedServices.url
-      // No URL means no service found, but this is horrible error handeling
-      if (!url) res.status(404).json({ message: 'ID not found' })
+      const checkedServices = await fetch(`${API_URL}/resolver/${id}?v=1`)
 
-      const response = await getObject(id, url, format)
+      if (checkedServices.status === 404) {
+        return res.status(404).json({ message: 'ID not found' })
+      }
+
+      const service = await checkedServices.json()
+      // No URL means no service found, but this is horrible error handeling
+
+      const response = await getObject(id, service.url, format)
 
       // Deal with response
       if (response.status >= 200 && response.status <= 299) {
