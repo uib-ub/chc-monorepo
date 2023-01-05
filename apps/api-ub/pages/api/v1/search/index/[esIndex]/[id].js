@@ -38,7 +38,7 @@ export default async function handler(req, res) {
 
         // Deal with response
         if (response.status >= 200 && response.status <= 299) {
-          let result = await response.json()
+          const result = await response.json()
 
           // Frame response with label_no props instead of standard JSON-LD language objects
           const awaitFramed = jsonld.frame(result, {
@@ -51,6 +51,8 @@ export default async function handler(req, res) {
 
           // We assume none lang tags is no
           framed = JSON.parse(JSON.stringify(framed).replaceAll('_none":', '_no":'))
+
+          // Create hierarchical places data
           if (framed.spatialHierarchy?.length >= 2) {
             framed.hierarchicalPlaces = {}
             framed.hierarchicalPlaces.lvl0 = framed.spatialHierarchy[0]
@@ -65,19 +67,16 @@ export default async function handler(req, res) {
           //console.log('framed: ', framed)
 
           const esResponse = await client.index({ index: esIndex, id: framed.identifier, document: framed })
-          res.status(200).json(framed)
+          return res.status(200).json(esResponse)
         } else {
           console.log(response.status, response.statusText);
         }
-
       } catch (err) {
-        (err) => { res.status(200).json({ message: err }) }
-      } finally {
-        res.status(400).json({ message: 'Wat' })
+        (err) => { return res.status(200).json({ message: err }) }
       }
       break
     default:
-      res.setHeader('Allow', ['GET', 'POST'])
+      res.setHeader('Allow', ['POST'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }
