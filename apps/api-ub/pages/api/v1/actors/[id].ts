@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Cors from 'cors'
 import * as jsonld from 'jsonld'
-import { getTimespan } from '../../../../lib/getTimespan'
+import { getTimespan } from '../../../../lib/response/muna/EDTF'
 import { API_URL, getBaseUrl, SPARQL_PREFIXES } from '../../../../lib/constants'
 
 // Initializing the cors middleware
